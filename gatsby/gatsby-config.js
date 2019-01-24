@@ -36,7 +36,7 @@ module.exports = {
           `**/*/media`,
           `**/cp/v1/menus`
         ],
-        baseUrl: `live-cp-com-3.pantheonsite.io`,
+        baseUrl: `dev-cp-com-3.pantheonsite.io`,
         protocol: `https`,
         useACF: true
       }
