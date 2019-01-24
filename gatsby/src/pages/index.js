@@ -1,21 +1,60 @@
-import React from 'react'
-import { Link } from 'gatsby'
+import React from 'react';
+import { graphql } from 'gatsby';
 
-import Layout from '../components/layout'
-import Image from '../components/image'
-import SEO from '../components/seo'
+import Layout from '../components/layout';
+import HomeHeader from '../modules/home-header';
+import ContentTile from '../modules/content-tile';
+import PressModule from '../modules/press-module';
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+const Home = ({ data }) => {
+  const { wordpressPage: page } = data;
+  return (
+    <Layout>
+      <section className="home">
+        <HomeHeader home_header={page.acf.home_header.home_header} />
+        {page.acf.featured_content_page.map(module_content => {
+          if (module_content.__typename === 'WordPressAcf_content_tile') {
+            return <ContentTile contentTile={module_content.content_tile} key={module_content.id} />;
+          } else if (
+            module_content.__typename === 'WordPressAcf_press_module'
+          ) {
+            return <PressModule pressModule={module_content.press_module} key={module_content.id} />;
+          }
+          return null;
+        })}
+      </section>
+    </Layout>
+  );
+};
 
-export default IndexPage
+export default Home;
+
+export const query = graphql`
+  query {
+    wordpressPage(slug: { eq: "home" }) {
+      title
+      content
+      acf {
+        home_header {
+          home_header {
+            ...HomeHeaderFragment
+          }
+        }
+        featured_content_page {
+          ... on WordPressAcf_press_module {
+            id
+            press_module {
+              ...PressModuleFragment
+            }
+          }
+          ... on WordPressAcf_content_tile {
+            id
+            content_tile {
+              ...ContentTileFragment
+            }
+          }
+        }
+      }
+    }
+  }
+`;
