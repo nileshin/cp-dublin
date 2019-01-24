@@ -5,6 +5,7 @@ import Layout from '../components/layout';
 import HomeHeader from '../modules/home-header';
 import ContentTile from '../modules/content-tile';
 import PressModule from '../modules/press-module';
+import CTATiles from '../modules/cta-tiles';
 
 const Home = ({ data }) => {
   const { wordpressPage: page } = data;
@@ -22,6 +23,7 @@ const Home = ({ data }) => {
           }
           return null;
         })}
+        <CTATiles ctaTiles={page.acf.cta_tiles.cta_tiles}/>
       </section>
     </Layout>
   );
@@ -52,6 +54,11 @@ export const query = graphql`
             content_tile {
               ...ContentTileFragment
             }
+          }
+        }
+        cta_tiles {
+          cta_tiles {
+            ...CTATileFragment
           }
         }
       }

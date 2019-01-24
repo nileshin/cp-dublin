@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 
-const renderMenu = data => {
+export const defaultMenuRender = data => {
   const { menu } = data;
   return (
     <ul>
@@ -16,7 +16,8 @@ const renderMenu = data => {
 
 class Menu extends Component {
   render() {
-    const { menuName = 'main-menu', children } = this.props;
+    const { menuName = 'main-menu', render, children } = this.props;
+    const renderFunc = render || children;
     return (
       <StaticQuery
         query={graphql`
@@ -41,7 +42,7 @@ class Menu extends Component {
             allWordpressCpMenus: { edges },
           } = data;
           const menu = edges.find(m => m.node.menu_name === menuName);
-          return typeof children === 'function' ? children(menu.node) : renderMenu(menu.node);
+          return typeof render === 'function' ? renderFunc(menu.node) : defaultMenuRender(menu.node);
         }}
       />
     );

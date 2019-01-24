@@ -31,7 +31,7 @@ export const homeHeaderFragment = graphql`
     }
     image {
       alt_text
-      localFile{
+      localFile {
         childImageSharp {
           original {
             src

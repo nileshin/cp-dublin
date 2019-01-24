@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MainNav from "./mainNav";
+import MainNav from "./main-nav";
 import Footer from './footer';
 
 class Layout extends Component {
