@@ -34,6 +34,7 @@ module.exports = {
         includedRoutes: [
           `**/*/pages`,
           `**/*/media`,
+          `**/*/work`,
           `**/cp/v1/menus`
         ],
         baseUrl: `dev-cp-com-3.pantheonsite.io`,

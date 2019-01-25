@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 
 class HomeHeader extends Component {
   render() {
-    const { home_header: { headline, headline_2, supportive_copy, cta, image } } = this.props;
+    const { headline, headline_2, supportive_copy, cta, image } = this.props;
     return (
       <div>
         <h3>{headline}</h3>

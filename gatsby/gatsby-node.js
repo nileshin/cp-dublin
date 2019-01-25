@@ -44,7 +44,42 @@ exports.createPages = ({ graphql, actions }) => {
           },
         })
       })
-      resolve()
-    })
+    }).then(() => {
+      return graphql(`
+        {
+          allWordpressWpWork {
+            edges {
+              node {
+                id
+                wordpress_id
+                slug
+                status
+                type
+              }
+            }
+          }
+        }
+      `)
+    }).then(result => {
+      if (result.errors) {
+        console.error(result.errors)
+        reject(result.errors)
+      }
+
+      const workDetailTemplate = path.resolve('./src/templates/work-detail.js');
+      result.data.allWordpressWpWork.edges.forEach(({ node: page }) => {
+        if (fs.existsSync(path.resolve(`./src/pages/${page.slug}.js`))) {
+          return;
+        }
+        createPage({
+          path: `/${page.type}/${page.slug}/`,
+          component: workDetailTemplate,
+          context: {
+            id: page.id
+          }
+        });
+      })
+      resolve();
+    });
   })
 }

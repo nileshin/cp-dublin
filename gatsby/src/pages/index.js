@@ -12,14 +12,14 @@ const Home = ({ data }) => {
   return (
     <Layout>
       <section className="home">
-        <HomeHeader home_header={page.acf.home_header.home_header} />
+        <HomeHeader {...page.acf.home_header.home_header} />
         {page.acf.featured_content_page.map(module_content => {
           if (module_content.__typename === 'WordPressAcf_content_tile') {
-            return <ContentTile contentTile={module_content.content_tile} key={module_content.id} />;
+            return <ContentTile {...module_content.content_tile} key={module_content.id} />;
           } else if (
             module_content.__typename === 'WordPressAcf_press_module'
           ) {
-            return <PressModule pressModule={module_content.press_module} key={module_content.id} />;
+            return <PressModule {...module_content.press_module} key={module_content.id} />;
           }
           return null;
         })}
