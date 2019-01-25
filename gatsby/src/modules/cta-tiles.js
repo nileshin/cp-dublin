@@ -27,13 +27,7 @@ export const ctaTileFragment = graphql`
         target
       }
       image {
-        localFile {
-          childImageSharp {
-            original {
-              src
-            }
-          }
-        }
+        ...WpMediaFragment
       }
     }
     right_cta {
@@ -44,13 +38,7 @@ export const ctaTileFragment = graphql`
         target
       }
       image {
-        localFile {
-          childImageSharp {
-            original {
-              src
-            }
-          }
-        }
+        ...WpMediaFragment
       }
     }
   }

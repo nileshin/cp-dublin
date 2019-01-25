@@ -24,14 +24,7 @@ export const pressModuleFragment = graphql`
       target
     }
     image {
-      alt_text
-      localFile {
-        childImageSharp {
-          original {
-            src
-          }
-        }
-      }
+      ...WpMediaFragment
     }
   }
 `

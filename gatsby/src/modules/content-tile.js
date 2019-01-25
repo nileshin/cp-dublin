@@ -25,7 +25,7 @@ export const contentTileFragment = graphql`
       target
     }
     image {
-      alt_text
+      ...WpMediaFragment
     }
   }
 `;
