@@ -42,7 +42,7 @@ class Menu extends Component {
             allWordpressCpMenus: { edges },
           } = data;
           const menu = edges.find(m => m.node.menu_name === menuName);
-          return typeof render === 'function' ? renderFunc(menu.node) : defaultMenuRender(menu.node);
+          return typeof renderFunc === 'function' ? renderFunc(menu.node) : defaultMenuRender(menu.node);
         }}
       />
     );
