@@ -1,14 +1,28 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
+import { stripTags } from '../utils';
+import Layout from '../components/layout';
 
 class WorkDetail extends Component {
   render() {
-    const { data } = this.props
+    const {
+      data,
+      data: { wordpressWpWork: work },
+    } = this.props;
+
+    console.log(work);
     return (
-      <div>
-        Work Detail
-        <pre><code>{JSON.stringify(data, null, 1)}</code></pre>
-      </div>
+      <Layout>
+        <section className={`work-detail ${work.slug}`}>
+          Work Detail -{' '}
+          {stripTags(
+            work.acf.rich_media_header.rich_media_header.project_title
+          )}
+          <pre>
+            <code>{JSON.stringify(data, null, 1)}</code>
+          </pre>
+        </section>
+      </Layout>
     );
   }
 }
@@ -17,8 +31,9 @@ export default WorkDetail;
 
 export const query = graphql`
   query($id: String!) {
-    wordpressWpWork(id: {eq: $id}) {
+    wordpressWpWork(id: { eq: $id }) {
       title
+      slug
       acf {
         client_name
         rich_media_header {
@@ -32,7 +47,7 @@ export const query = graphql`
         }
         work_detail_content_work {
           __typename
-          ...on WordPressAcf_single_media {
+          ... on WordPressAcf_single_media {
             single_media {
               video__image
               video {
@@ -46,7 +61,7 @@ export const query = graphql`
               }
             }
           }
-          ...on WordPressAcf_traditional_carousel {
+          ... on WordPressAcf_traditional_carousel {
             traditional_carousel {
               slides {
                 video__image
@@ -62,7 +77,7 @@ export const query = graphql`
               }
             }
           }
-          ...on WordPressAcf_work_detail_intro {
+          ... on WordPressAcf_work_detail_intro {
             work_detail_intro {
               title
               body_copy
@@ -71,7 +86,7 @@ export const query = graphql`
               }
             }
           }
-          ...on WordPressAcf_stat_long_fact_row {
+          ... on WordPressAcf_stat_long_fact_row {
             stat_long_fact_row {
               statistic {
                 stat_title
@@ -89,4 +104,4 @@ export const query = graphql`
       }
     }
   }
-`
+`;

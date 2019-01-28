@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import { StaticQuery, graphql } from 'gatsby';
+import { StaticQuery, graphql, Link } from 'gatsby';
 
 export const defaultMenuRender = data => {
   const { menu } = data;
   return (
     <ul>
       {menu.map(nav_item => (
-        <li className={nav_item.classes.join(' ')} key={nav_item.ID}>
-          <a href={nav_item.url}>{nav_item.title}</a>
+        <li className={nav_item.classes.join(' ')} key={nav_item.wordpress_id}>
+          {
+            nav_item.post_object && nav_item.type !== 'custom' ? 
+            <Link to={`/${nav_item.post_object.post_name}`}>{nav_item.title}</Link> :
+            <a href={nav_item.url}>{nav_item.title}</a>
+          }
         </li>
       ))}
     </ul>
@@ -28,9 +32,14 @@ class Menu extends Component {
                   id
                   menu_name
                   menu {
+                    wordpress_id
                     title
                     url
                     classes
+                    type
+                    post_object {
+                      post_name
+                    }
                   }
                 }
               }
