@@ -39,7 +39,11 @@ module.exports = {
         ],
         baseUrl: `dev-cp-com-3.pantheonsite.io`,
         protocol: `https`,
-        useACF: true
+        useACF: true,
+        searchAndReplaceContentUrls: {
+          sourceUrl: "https://dev-cp-com-3.pantheonsite.io",
+          replacementUrl: "" // todo: swap this from loco to prod based on brach/netlify env var
+        },
       }
     }
     // this (optional) plugin enables Progressive Web App + Offline functionality

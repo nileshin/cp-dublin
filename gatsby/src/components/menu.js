@@ -9,7 +9,7 @@ export const defaultMenuRender = data => {
         <li className={nav_item.classes.join(' ')} key={nav_item.wordpress_id}>
           {
             nav_item.post_object && nav_item.type !== 'custom' ? 
-            <Link to={`/${nav_item.post_object.post_name}`}>{nav_item.title}</Link> :
+            <Link to={nav_item.url}>{nav_item.title}</Link> :
             <a href={nav_item.url}>{nav_item.title}</a>
           }
         </li>
