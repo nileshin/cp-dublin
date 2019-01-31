@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
-import { graphql, Link } from 'gatsby';
-import { stripTags } from '../utils';
+import { graphql } from 'gatsby';
 import Layout from '../components/layout';
+import Header from '../modules/header';
+import BlobVideo from '../modules/blob-video';
+import WorkTiles from '../modules/work-tiles';
+import CTATiles from '../modules/cta-tiles';
+import LogoGrid from '../modules/logo-grid';
 
 class Work extends Component {
   render() {
-    const { data: { allWordpressWpWork: { edges:work }, wordpressPage:page } } = this.props;
+    const { data: { wordpressPage: page } } = this.props;
+    const { acf } = page;
 
     return (
       <Layout>
         <section className={`work ${page.slug}`}>
-          Work Page
-          <ul>
-            {work.map(w => (
-              <li key={w.node.id}>
-                <Link to={`/work/${w.node.slug}`}>{w.node.acf.client_name} - {stripTags(w.node.acf.rich_media_header.rich_media_header.project_title)}</Link>
-              </li>
-            ))}
-          </ul>
+          <Header {...acf.header.header} />
+          <BlobVideo {...acf.blob_video.blob_video} />
+          <WorkTiles {...acf.work_tiles} />
+          <LogoGrid {...acf.logo_grid} />
+          <CTATiles {...acf.cta_tiles.cta_tiles} />
         </section>
       </Layout>
     );
@@ -32,20 +34,28 @@ export const query = graphql`
       id
       wordpress_id
       slug
-    }
-    allWordpressWpWork {
-      edges {
-        node {
-          id
-          wordpress_id
-          slug
-          acf {
-            client_name
-            rich_media_header {
-              rich_media_header {
-                project_title
-              }
-            }
+      acf {
+        header {
+          header {
+          ...HeaderFragment
+          }
+        }
+        blob_video {
+          blob_video {
+            ...BlobVideoFragment
+          }
+        }
+        work_tiles {
+         ...WorkTilesFragment 
+        }
+        logo_grid {
+          logo_grid {
+            ...LogoGridFragment
+          }
+        }
+        cta_tiles {
+          cta_tiles {
+            ...CTATileFragment
           }
         }
       }

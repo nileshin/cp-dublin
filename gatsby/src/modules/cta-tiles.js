@@ -3,12 +3,11 @@ import { graphql } from 'gatsby';
 
 class CTATiles extends Component {
   render() {
-    const { ctaTiles } = this.props;
     return (
       <div>
         CTA Tiles
         <pre>
-          <code>{JSON.stringify(ctaTiles, null, 1)}</code>
+          <code>{JSON.stringify(this.props, null, 1)}</code>
         </pre>
       </div>
     );

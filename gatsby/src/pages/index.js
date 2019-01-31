@@ -23,7 +23,7 @@ const Home = ({ data }) => {
           }
           return null;
         })}
-        <CTATiles ctaTiles={page.acf.cta_tiles.cta_tiles}/>
+        <CTATiles {...page.acf.cta_tiles.cta_tiles}/>
       </section>
     </Layout>
   );
