@@ -35,7 +35,9 @@ module.exports = {
           `**/*/pages`,
           `**/*/media`,
           `**/*/work`,
-          `**/cp/v1/menus`
+          `**/*/people`,
+          `**/cp/v1/menus`,
+          `**/cp/v1/instagram_widget`
         ],
         baseUrl: `dev-cp-com-3.pantheonsite.io`,
         protocol: `https`,
