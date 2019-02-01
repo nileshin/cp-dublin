@@ -4,6 +4,7 @@ import jQuery from 'jquery';
  * Create an anonymous function to avoid library conflicts
  */
 (function($) {
+  if (typeof window === 'undefined') return;
   /**
    * Add our plugin to the jQuery.fn object
    */
