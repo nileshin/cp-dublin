@@ -6,18 +6,11 @@ class HomeHeader extends Component {
   render() {
     const { headline, headline_2, supportive_copy, cta, image } = this.props;
     return (
-      // <div>
-      //   <h3>{headline}</h3>
-      //   <h4>{headline_2}</h4>
-      //   <p dangerouslySetInnerHTML={{__html:supportive_copy}}></p>
-      //   <a href={cta.url} target={cta.target}>{cta.title}</a>
-      //   <img src={image.localFile.childImageSharp.original.src} alt={image.alt_text} />
-      // </div>
-      <section class="home-banner page-sec">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6 order-md-2">
-              <div class="home-banner-img">
+      <section className="home-banner page-sec">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6 order-md-2">
+              <div className="home-banner-img">
                 <figure>
                   <img
                     src={image.localFile.childImageSharp.original.src}
@@ -26,17 +19,17 @@ class HomeHeader extends Component {
                 </figure>
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="home-content">
+            <div className="col-md-6">
+              <div className="home-content">
                 <h1>
                   <span>{headline}</span> {headline_2}
-                  <span class="highlight">.</span>
+                  <span className="highlight">.</span>
                 </h1>
                 <p>{supportive_copy}</p>
                 <a
                   href={cta.url}
                   title={cta.title}
-                  class="cta"
+                  className="cta"
                   target={cta.target}
                 >
                   {cta.title}
