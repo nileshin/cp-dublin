@@ -1,0 +1,36 @@
+@import '../_global/scss/vendor/bootstrap.scss';
+@import '../_global/scss/variables.scss';
+@import '../_global/scss/global.scss';
+
+.home-banner {
+  padding-top: 119px;
+  padding-bottom: 119px;
+
+  @include media-breakpoint-down(md) {
+    padding-top: 166px;
+    padding-bottom: 166px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding-top: 83px;
+    padding-bottom: 83px;
+  }
+
+  &-img {
+    @include media-breakpoint-down(md) {
+      margin-left: -30px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin-left: 0;
+      margin-bottom: 24px;
+    }
+  }
+}
+
+.home-content {
+  width: 90%;
+  @include media-breakpoint-down(sm) {
+    width: 100%;
+  }
+}

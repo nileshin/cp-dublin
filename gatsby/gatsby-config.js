@@ -15,6 +15,7 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-sass`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -37,19 +38,19 @@ module.exports = {
           `**/*/work`,
           `**/*/people`,
           `**/cp/v1/menus`,
-          `**/cp/v1/instagram_widget`
+          `**/cp/v1/instagram_widget`,
         ],
         baseUrl: `dev-cp-com-3.pantheonsite.io`,
         protocol: `https`,
         useACF: true,
         searchAndReplaceContentUrls: {
-          sourceUrl: "https://dev-cp-com-3.pantheonsite.io",
-          replacementUrl: "" // todo: swap this from loco to prod based on brach/netlify env var
+          sourceUrl: 'https://dev-cp-com-3.pantheonsite.io',
+          replacementUrl: '', // todo: swap this from loco to prod based on brach/netlify env var
         },
-      }
-    }
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',
   ],
-}
+};
