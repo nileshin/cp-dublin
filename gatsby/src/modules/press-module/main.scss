@@ -1,0 +1,18 @@
+@import '../_global/scss/vendor/bootstrap.scss';
+@import '../_global/scss/variables.scss';
+
+.press {
+  padding-top: 285px;
+  padding-bottom: 285px;
+  background-color: $white;
+
+  @include media-breakpoint-down(md) {
+    padding-top: 200px;
+    padding-bottom: 200px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding-top: 166px;
+    padding-bottom: 166px;
+  }
+}

@@ -1,13 +1,40 @@
 import React, { Component } from 'react';
-import { graphql } from 'gatsby';
+import { Link, graphql } from 'gatsby';
+import './main.scss';
 
 class PressModule extends Component {
   render() {
+    const {
+      eyebrow,
+      title,
+      cta,
+      image: {
+        localFile: {
+          childImageSharp: {
+            original: { src: pressModuleImage },
+          },
+        },
+      },
+    } = this.props;
     return (
-      <div>
-        Press Module 
-        <pre><code>{JSON.stringify(this.props, null, 1)}</code></pre>
-      </div>
+      <section
+        className="press bg-img page-sec"
+        style={{backgroundImage:`url(${pressModuleImage})`}}
+      >
+        <div className="container">
+          <div className="row">
+            <div className="col-md-10">
+              <h4 className="eyebrow">{eyebrow}</h4>
+              <h2>
+                {title.replace(/\.$/, '')}<span className="highlight">.</span>
+              </h2>
+              <Link to={cta.url} title={cta.title} className="cta">
+                {cta.title}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     );
   }
 }
@@ -27,4 +54,4 @@ export const pressModuleFragment = graphql`
       ...WpMediaFragment
     }
   }
-`
+`;

@@ -27,7 +27,7 @@ class ContentTile extends Component {
             <div className="col-md-6">
               <h4 className="eyebrow">{eyebrow}</h4>
               <h2>
-                {headline}
+                {headline.replace(/\.$/, '')}
                 <span className="highlight">.</span>
               </h2>
               <p>

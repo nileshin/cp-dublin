@@ -1,3 +1,5 @@
+const deepMap = require('deep-map');
+
 module.exports = {
   siteMetadata: {
     title: `Connelly Partners`,
@@ -57,8 +59,20 @@ module.exports = {
         useACF: true,
         searchAndReplaceContentUrls: {
           sourceUrl: 'https://dev-cp-com-3.pantheonsite.io',
-          replacementUrl: '', // todo: swap this from loco to prod based on brach/netlify env var
+          replacementUrl: '/', // todo: swap this from loco to prod based on brach/netlify env var
         },
+        normalizer: ({ entities }) => {
+          // Update CTA urls to be root relative
+          const updated = deepMap(entities, (value, key) => {
+            if (key === 'url') {
+              value = value.replace(/https?:\/\/dev-cp-com-3.pantheonsite.io/, '');
+              value = value.replace(/https?:\/\/cpcom3.lndo.site/, '');
+            }
+            return value;
+          });
+
+          return updated;
+        }
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

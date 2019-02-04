@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { graphql } from 'gatsby';
+import { Link, graphql } from 'gatsby';
 import './main.scss';
 
 class HomeHeader extends Component {
@@ -22,18 +22,18 @@ class HomeHeader extends Component {
             <div className="col-md-6">
               <div className="home-content">
                 <h1>
-                  <span>{headline}</span> {headline_2}
+                  <span>{headline}</span> {headline_2.replace(/\.$/, '')}
                   <span className="highlight">.</span>
                 </h1>
                 <p>{supportive_copy}</p>
-                <a
-                  href={cta.url}
+                <Link
+                  to={cta.url}
                   title={cta.title}
                   className="cta"
                   target={cta.target}
                 >
                   {cta.title}
-                </a>
+                </Link>
               </div>
             </div>
           </div>
