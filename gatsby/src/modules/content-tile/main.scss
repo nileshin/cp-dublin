@@ -1,0 +1,17 @@
+@import '../_global/scss/vendor/bootstrap.scss';
+@import '../_global/scss/variables.scss';
+
+.latest {
+  padding-top: 230px;
+  padding-bottom: 230px;
+
+  @include media-breakpoint-down(md) {
+    padding-top: 171px;
+    padding-bottom: 171px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding-top: 98px;
+    padding-bottom: 98px;
+  }
+}
