@@ -12,7 +12,7 @@ class WorkDetail extends Component {
 
     console.log(work);
     return (
-      <Layout>
+      <>
         <section className={`work-detail ${work.slug}`}>
           Work Detail -{' '}
           {stripTags(
@@ -22,7 +22,7 @@ class WorkDetail extends Component {
             <code>{JSON.stringify(data, null, 1)}</code>
           </pre>
         </section>
-      </Layout>
+      </>
     );
   }
 }

@@ -10,7 +10,7 @@ import CTATiles from '../modules/cta-tiles';
 const Home = ({ data }) => {
   const { wordpressPage: page } = data;
   return (
-    <Layout>
+    <>
       <section className="home">
         <HomeHeader {...page.acf.home_header.home_header} />
         {page.acf.featured_content_page.map(module_content => {
@@ -25,7 +25,7 @@ const Home = ({ data }) => {
         })}
         <CTATiles {...page.acf.cta_tiles.cta_tiles}/>
       </section>
-    </Layout>
+    </>
   );
 };
 

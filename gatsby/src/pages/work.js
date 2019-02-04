@@ -13,7 +13,7 @@ class Work extends Component {
     const { acf } = page;
 
     return (
-      <Layout>
+      <>
         <section className={`work ${page.slug}`}>
           <Header {...acf.header.header} />
           <BlobVideo {...acf.blob_video.blob_video} />
@@ -21,7 +21,7 @@ class Work extends Component {
           <LogoGrid {...acf.logo_grid} />
           <CTATiles {...acf.cta_tiles.cta_tiles} />
         </section>
-      </Layout>
+      </>
     );
   }
 }

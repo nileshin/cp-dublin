@@ -13,7 +13,7 @@ class People extends Component {
   render() {
     const { data: { wordpressPage: { acf } } } = this.props;
     return (
-      <Layout>
+      <>
         <Header {...acf.header.header} />
         <ContentModuleWithStats {...acf.content_with_stats.content_module_with_stats} />
         <SectionHeader {...acf.leadership_header.section_header} />
@@ -22,7 +22,7 @@ class People extends Component {
         <SectionHeader {...acf.people_grid_header.section_header} />
         <PeopleGrid />
         <SocialSlider />
-      </Layout>
+      </>
     );
   }
 }

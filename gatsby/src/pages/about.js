@@ -10,7 +10,7 @@ import CapabilitiesTiles from '../modules/capabilities-tiles';
 class About extends Component {
   render() {
     const { data: { wordpressPage: { acf } } } = this.props;
-    return (<Layout>
+    return (<>
       About Page
       <Header {...acf.header.header} />
       <ContentTileWithSideImage {...acf.defiantly_human_section.content_tile_w_side_image} />
@@ -18,7 +18,7 @@ class About extends Component {
       <ImageTextPairing {...acf.why_dublin_section.image_text_pairing} />
       <CapabilitiesTiles {...acf.capabilities.capabilities_tiles} />
       <CTATiles {...acf.cta_tiles.cta_tiles} />
-    </Layout>);
+    </>);
   }
 }
 
