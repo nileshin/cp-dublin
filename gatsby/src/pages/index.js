@@ -1,7 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import Layout from '../components/layout';
 import HomeHeader from '../modules/home-header';
 import ContentTile from '../modules/content-tile';
 import PressModule from '../modules/press-module';

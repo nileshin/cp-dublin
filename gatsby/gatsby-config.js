@@ -23,6 +23,12 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sass`,
     {
+      resolve: `gatsby-plugin-svgr`,
+      options: {
+        include: /_global/
+      }
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `ConnellyPartners.com`,

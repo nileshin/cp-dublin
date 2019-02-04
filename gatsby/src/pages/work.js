@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
-import Layout from '../components/layout';
 import Header from '../modules/header';
 import BlobVideo from '../modules/blob-video';
 import WorkTiles from '../modules/work-tiles';

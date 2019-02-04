@@ -5,6 +5,7 @@
   "version": "3.0.0-alpha",
   "author": "Connelly Partners <development@connellypartners.com>",
   "dependencies": {
+    "@svgr/webpack": "^4.1.0",
     "bootstrap": "^4.2.1",
     "gatsby": "^2.0.76",
     "gatsby-image": "^2.0.20",
@@ -14,6 +15,7 @@
     "gatsby-plugin-react-helmet": "^3.0.2",
     "gatsby-plugin-sass": "^2.0.8",
     "gatsby-plugin-sharp": "^2.0.14",
+    "gatsby-plugin-svgr": "^2.0.1",
     "gatsby-source-filesystem": "^2.0.8",
     "gatsby-source-wordpress": "^3.0.25",
     "gatsby-transformer-sharp": "^2.1.8",

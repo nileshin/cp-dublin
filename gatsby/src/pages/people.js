@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Layout from '../components/layout';
 import SocialSlider from '../modules/social-slider';
 import { graphql } from 'gatsby';
 import Header from '../modules/header';

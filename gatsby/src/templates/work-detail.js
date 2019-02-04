@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 import { stripTags } from '../utils';
-import Layout from '../components/layout';
 
 class WorkDetail extends Component {
   render() {

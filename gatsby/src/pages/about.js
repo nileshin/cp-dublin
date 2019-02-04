@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
-import Layout from '../components/layout';
 import Header from '../modules/header';
 import ContentTileWithSideImage from '../modules/content-tile-w-side-image';
 import ImageTextPairing from '../modules/image-text-pairing';
