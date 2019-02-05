@@ -59,7 +59,7 @@ module.exports = {
         useACF: true,
         searchAndReplaceContentUrls: {
           sourceUrl: 'https://dev-cp-com-3.pantheonsite.io',
-          replacementUrl: '/', // todo: swap this from loco to prod based on brach/netlify env var
+          replacementUrl: '', // todo: swap this from loco to prod based on brach/netlify env var
         },
         normalizer: ({ entities }) => {
           // Update CTA urls to be root relative
