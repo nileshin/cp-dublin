@@ -35,6 +35,7 @@ export const query = graphql`
     wordpressPage(slug: { eq: "home" }) {
       title
       content
+      ...YoastMetadataFragment
       acf {
         home_header {
           home_header {

@@ -23,6 +23,7 @@ export const query = graphql`
     wordpressPage(slug: { eq:"news" }) {
       id
       wordpress_id
+      ...YoastMetadataFragment
       acf {
         header {
           header {

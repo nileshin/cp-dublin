@@ -32,6 +32,7 @@ export const peopleQuery = graphql`
   query {
     wordpressPage(slug: { eq: "people" }) {
       id
+      ...YoastMetadataFragment
       acf {
         header {
           header {

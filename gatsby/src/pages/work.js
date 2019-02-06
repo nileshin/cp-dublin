@@ -33,6 +33,7 @@ export const query = graphql`
       id
       wordpress_id
       slug
+      ...YoastMetadataFragment
       acf {
         header {
           header {
