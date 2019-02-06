@@ -1,4 +1,4 @@
-const deepMap = require('deep-map');
+const wordpressNormalizer = require('./wordpress-normalizer');
 
 module.exports = {
   siteMetadata: {
@@ -47,10 +47,16 @@ module.exports = {
       resolve: `gatsby-source-wordpress`,
       options: {
         includedRoutes: [
+          `**/*/taxonomies`,
           `**/*/pages`,
           `**/*/media`,
           `**/*/work`,
           `**/*/people`,
+          `**/*/location`,
+          `**/*/posts`,
+          `**/*/categories`,
+          `**/*/jobs`,
+          `**/*/job-location`,
           `**/cp/v1/menus`,
           `**/cp/v1/instagram_widget`,
         ],
@@ -61,18 +67,7 @@ module.exports = {
           sourceUrl: 'https://dev-cp-com-3.pantheonsite.io',
           replacementUrl: '', // todo: swap this from loco to prod based on brach/netlify env var
         },
-        normalizer: ({ entities }) => {
-          // Update CTA urls to be root relative
-          const updated = deepMap(entities, (value, key) => {
-            if (key === 'url') {
-              value = value.replace(/https?:\/\/dev-cp-com-3.pantheonsite.io/, '');
-              value = value.replace(/https?:\/\/cpcom3.lndo.site/, '');
-            }
-            return value;
-          });
-
-          return updated;
-        }
+        normalizer: wordpressNormalizer
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
