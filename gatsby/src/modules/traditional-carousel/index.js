@@ -15,7 +15,20 @@ class TraditionalCarousel extends Component {
 export default TraditionalCarousel;
 
 export const traditionalCarouselFragment = graphql`
-  fragment TraditionalCarouselFragment on traditionalCarousel_5 {
+  fragment TraditionalCarouselFragment on traditionalCarousel_4 {
+    slides {
+      video__image
+      video {
+        video_embed_code
+        video_thumbnail {
+          ...WpMediaFragment
+        }
+      }
+      image {
+        ...WpMediaFragment
+      }
+    }
+  }fragment TraditionalCarouselNewsDetailFragment on traditionalCarousel_5 {
     slides {
       video__image
       video {
