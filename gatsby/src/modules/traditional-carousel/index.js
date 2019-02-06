@@ -28,18 +28,5 @@ export const traditionalCarouselFragment = graphql`
         ...WpMediaFragment
       }
     }
-  }fragment TraditionalCarouselNewsDetailFragment on traditionalCarousel_5 {
-    slides {
-      video__image
-      video {
-        video_embed_code
-        video_thumbnail {
-          ...WpMediaFragment
-        }
-      }
-      image {
-        ...WpMediaFragment
-      }
-    }
   }
 `
