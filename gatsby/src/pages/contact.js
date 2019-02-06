@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
+import SEO from '../components/seo';
 import Header from '../modules/header';
 import ContactCards from '../modules/contact-cards';
 
 class Contact extends Component {
   render() {
-    const { data: { wordpressPage: { acf: { header, contact_cards } } } } = this.props
+    const { data: { wordpressPage: page, wordpressPage: { acf: { header, contact_cards } } } } = this.props
     return (
-      <div>
+      <>
+        <SEO {...page.yoast_meta} {...page.yoast_social} />
         Contact Page
         <Header {...header.header} />
         <ContactCards {...contact_cards.contact_cards} />
         <pre>
           <code>{JSON.stringify(this.props.data, null, 1)}</code>
         </pre>
-      </div>
+      </>
     );
   }
 }

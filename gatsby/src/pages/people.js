@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SocialSlider from '../modules/social-slider';
 import { graphql } from 'gatsby';
+import SEO from '../components/seo';
 import Header from '../modules/header';
 import ContentModuleWithStats from '../modules/content-module-with-stats';
 import SectionHeader from '../modules/section-header';
@@ -10,9 +11,10 @@ import PeopleGrid from '../modules/people-grid';
 
 class People extends Component {
   render() {
-    const { data: { wordpressPage: { acf } } } = this.props;
+    const { data: { wordpressPage: page, wordpressPage: { acf } } } = this.props;
     return (
       <>
+        <SEO {...page.yoast_meta} {...page.yoast_social} />
         <Header {...acf.header.header} />
         <ContentModuleWithStats {...acf.content_with_stats.content_module_with_stats} />
         <SectionHeader {...acf.leadership_header.section_header} />

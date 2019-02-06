@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
+import SEO from '../components/seo';
 import Header from '../modules/header';
 import ContentTileWithSideImage from '../modules/content-tile-w-side-image';
 import ImageTextPairing from '../modules/image-text-pairing';
@@ -8,8 +9,9 @@ import CapabilitiesTiles from '../modules/capabilities-tiles';
 
 class About extends Component {
   render() {
-    const { data: { wordpressPage: { acf } } } = this.props;
+    const { data: { wordpressPage: page, wordpressPage: { acf } } } = this.props;
     return (<>
+      <SEO {...page.yoast_meta} {...page.yoast_social} />
       About Page
       <Header {...acf.header.header} />
       <ContentTileWithSideImage {...acf.defiantly_human_section.content_tile_w_side_image} />

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
+import SEO from '../components/seo';
 import Header from '../modules/header';
 import BlobVideo from '../modules/blob-video';
 import WorkTiles from '../modules/work-tiles';
@@ -8,11 +9,11 @@ import LogoGrid from '../modules/logo-grid';
 
 class Work extends Component {
   render() {
-    const { data: { wordpressPage: page } } = this.props;
-    const { acf } = page;
+    const { data: { wordpressPage: page, wordpressPage: { acf } } } = this.props;
 
     return (
       <>
+        <SEO {...page.yoast_meta} {...page.yoast_social} />
         <section className={`work ${page.slug}`}>
           <Header {...acf.header.header} />
           <BlobVideo {...acf.blob_video.blob_video} />
