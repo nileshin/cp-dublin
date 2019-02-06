@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link, graphql } from 'gatsby';
+import Img from 'gatsby-image';
 import './main.scss';
 
 class ContentTile extends Component {
@@ -9,19 +10,13 @@ class ContentTile extends Component {
       headline,
       supportive_text,
       cta,
-      image: {
-        localFile: {
-          childImageSharp: {
-            original: { src: contentTileImage },
-          },
-        },
-      },
+      image
     } = this.props;
     return (
       <section
         className="latest bg-dark bg-img page-sec"
-        style={{backgroundImage:`url(${contentTileImage})`}}
       >
+        <Img fluid={image.localFile.childImageSharp.fluid} className="content-tile-bg" alt={image.alt_text} style={{position: "absolute"}}/>
         <div className="container">
           <div className="row">
             <div className="col-md-6">
@@ -57,7 +52,7 @@ export const contentTileFragment = graphql`
       target
     }
     image {
-      ...WpMediaFragment
+      ...WpMediaFragmentFluid1440
     }
   }
 `;

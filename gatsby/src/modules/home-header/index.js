@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link, graphql } from 'gatsby';
+import Img from 'gatsby-image';
 import './main.scss';
 
 class HomeHeader extends Component {
@@ -12,8 +13,8 @@ class HomeHeader extends Component {
             <div className="col-md-6 order-md-2">
               <div className="home-banner-img">
                 <figure>
-                  <img
-                    src={image.localFile.childImageSharp.original.src}
+                  <Img
+                    fluid={image.localFile.childImageSharp.fluid}
                     alt="home-banner"
                   />
                 </figure>
@@ -57,7 +58,7 @@ export const homeHeaderFragment = graphql`
       target
     }
     image {
-      ...WpMediaFragment
+      ...WpMediaFragmentFluid
     }
   }
 `;

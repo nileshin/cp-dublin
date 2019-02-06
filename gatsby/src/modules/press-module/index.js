@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link, graphql } from 'gatsby';
+import Img from 'gatsby-image';
 import './main.scss';
 
 class PressModule extends Component {
@@ -8,19 +9,13 @@ class PressModule extends Component {
       eyebrow,
       title,
       cta,
-      image: {
-        localFile: {
-          childImageSharp: {
-            original: { src: pressModuleImage },
-          },
-        },
-      },
+      image
     } = this.props;
     return (
       <section
         className="press bg-img page-sec"
-        style={{backgroundImage:`url(${pressModuleImage})`}}
       >
+        <Img fluid={image.localFile.childImageSharp.fluid} className="content-tile-bg" alt={image.alt_text} style={{position: "absolute"}} />
         <div className="container">
           <div className="row">
             <div className="col-md-10">
@@ -51,7 +46,7 @@ export const pressModuleFragment = graphql`
       target
     }
     image {
-      ...WpMediaFragment
+      ...WpMediaFragmentFluid1440
     }
   }
 `;
