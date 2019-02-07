@@ -16,7 +16,6 @@ const renderTile = tile => (
           {tile.cta.title}
         </Link>
       )}
-      {/* <figure class="cta-tile__img bg-img" style={{backgroundImage:`url(${tile.image.localFile.publicURL})`}}></figure> */}
       <Img
         fluid={tile.image.localFile.childImageSharp.fluid}
         className="cta-tile__img bg-img"
