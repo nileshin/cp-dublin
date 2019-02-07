@@ -171,6 +171,9 @@ a {
     height: 2px;
     background-color: #B9B9B9;
     left: 100%;
+    transform: scaleX(1);
+    transform-origin: center left;
+    transition: transform 0.3s ease-in-out;
     @include media-breakpoint-down(sm) {
       width: 30px;
     }
@@ -193,8 +196,11 @@ a {
   &:hover,
   &:focus {
     color: $brand-secondary;
+    &:before {
+      transform: scaleX(0);
+    }
     &:after {
-      left: calc(100% + 50px);
+      left: calc(100% + 0px);
     }
   }
   &:active {

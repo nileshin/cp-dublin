@@ -1,15 +1,44 @@
 import React, { Component } from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
+import Img from 'gatsby-image';
+import './main.scss';
+
+const renderTile = tile => (
+  <div className="col-md-6">
+    <div className="cta-tile">
+      <h3>{tile.headline}</h3>
+      {tile.cta.url.indexOf('http') === 0 ? (
+        <a href={tile.cta.url} title={tile.cta.title} className="cta">
+          {tile.cta.title}
+        </a>
+      ) : (
+        <Link to={tile.cta.url} title={tile.cta.title} className="cta">
+          {tile.cta.title}
+        </Link>
+      )}
+      {/* <figure class="cta-tile__img bg-img" style={{backgroundImage:`url(${tile.image.localFile.publicURL})`}}></figure> */}
+      <Img
+        fluid={tile.image.localFile.childImageSharp.fluid}
+        className="cta-tile__img bg-img"
+        style={{position:"absolute"}}
+      />
+    </div>
+  </div>
+);
 
 class CTATiles extends Component {
   render() {
+    const { left_cta, right_cta } = this.props;
+
     return (
-      <div>
-        CTA Tiles
-        <pre>
-          <code>{JSON.stringify(this.props, null, 1)}</code>
-        </pre>
-      </div>
+      <section className="cta-tiles bg-dark">
+        <div className="container-fluid">
+          <div className="row">
+            {renderTile(left_cta)}
+            {renderTile(right_cta)}
+          </div>
+        </div>
+      </section>
     );
   }
 }
@@ -26,7 +55,10 @@ export const ctaTileFragment = graphql`
         target
       }
       image {
-        ...WpMediaFragment
+        localFile {
+          publicURL
+        }
+        ...WpMediaFragmentFluid1440
       }
     }
     right_cta {
@@ -37,7 +69,10 @@ export const ctaTileFragment = graphql`
         target
       }
       image {
-        ...WpMediaFragment
+        localFile {
+          publicURL
+        }
+        ...WpMediaFragmentFluid1440
       }
     }
   }
