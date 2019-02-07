@@ -10,7 +10,6 @@ class News extends Component {
     return (
       <>
         <SEO {...page.yoast_meta} {...page.yoast_social} />
-        News Page
         <Header {...acf.header.header} />
         <NewsListing defiantlyHumanCallout={acf.defiantly_human_call_out.defiantly_human_call_out} />
       </>

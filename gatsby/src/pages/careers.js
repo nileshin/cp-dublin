@@ -13,7 +13,6 @@ class Careers extends Component {
     return (
       <>
         <SEO {...page.yoast_meta} {...page.yoast_social} />
-        Careers Page
         <Header {...acf.header.header} />
         <QuoteBlobVideoModule {...acf.quote_blob_video_module.quote_blob_video_module} />
         <JobListings />

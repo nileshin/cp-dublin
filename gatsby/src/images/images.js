@@ -26,7 +26,7 @@ export const wpMediaFragment = graphql`
     localFile {
       childImageSharp {
         fluid {
-          ...GatsbyImageSharpFluid_withWebp_tracedSVG
+          ...GatsbyImageSharpFluid_tracedSVG
         }
       }
     }
@@ -35,8 +35,8 @@ export const wpMediaFragment = graphql`
     alt_text
     localFile {
       childImageSharp {
-        fluid(maxWidth: 1440) {
-          ...GatsbyImageSharpFluid_withWebp_tracedSVG
+        fluid(maxWidth: 1440, quality: 90) {
+          ...GatsbyImageSharpFluid_tracedSVG
         }
       }
     }

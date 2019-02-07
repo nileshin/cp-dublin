@@ -15,7 +15,7 @@ const renderFooterMenu = ({ menu }) => (
     <div className="container">
       <div className="row">
         <div className="col-md-6 col-lg-3 order-2 order-md-1 order-lg-0">
-          <a href="#" title="Connelly Partners" className="site-footer__logo">
+          <a href="/" title="Connelly Partners" className="site-footer__logo">
             <ConnellyLogo />
           </a>
         </div>
@@ -47,22 +47,22 @@ const renderFooterMenu = ({ menu }) => (
           <div className="social">
             <ul>
               <li>
-                <a href="#" title="Linkedin" target="_blank">
+                <a href="https://linkedin.com" title="Linkedin" target="_blank" rel="noopener noreferrer">
                   <LinkedinLogo />
                 </a>
               </li>
               <li>
-                <a href="#" title="Instagram" target="_blank">
+                <a href="https://instagram.com" title="Instagram" target="_blank" rel="noopener noreferrer">
                   <InstaLogo />
                 </a>
               </li>
               <li>
-                <a href="#" title="Twitter" target="_blank">
+                <a href="https://twitter.com" title="Twitter" target="_blank" rel="noopener noreferrer">
                   <TwitterLogo />
                 </a>
               </li>
               <li>
-                <a href="#" title="Facebook" target="_blank">
+                <a href="https://facebook.com" title="Facebook" target="_blank" rel="noopener noreferrer">
                   <FacebookLogo />
                 </a>
               </li>

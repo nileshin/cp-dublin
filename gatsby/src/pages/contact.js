@@ -10,7 +10,6 @@ class Contact extends Component {
     return (
       <>
         <SEO {...page.yoast_meta} {...page.yoast_social} />
-        Contact Page
         <Header {...header.header} />
         <ContactCards {...contact_cards.contact_cards} />
         <pre>
