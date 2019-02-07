@@ -23,4 +23,16 @@
     padding-top: 98px;
     padding-bottom: 98px;
   }
+
+  h2 {
+    font-size: 66px;
+    line-height: 1;
+    letter-spacing: -2.91px;
+
+    @include media-breakpoint-down(sm) {
+      font-size: 32px;
+      line-height: 0.97;
+      letter-spacing: -1.41px;
+    }
+  }
 }

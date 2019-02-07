@@ -8,6 +8,7 @@ body {
   left: 0;
   transition: left 0.3s ease-in-out;
   overflow-x: hidden;
+  font-family: $font-family-sans-serif;
 
   &.menu-open {
     left: 400px;
@@ -31,7 +32,7 @@ h1 {
   font-size: 54px;
   line-height: 1;
   font-weight: 700;
-  font-family: "Gotham A", "Gotham B", sans-serif;
+  font-family: $font-family-sans-serif-alt;
   letter-spacing: -3.08px;
   color: $brand-primary;
   margin-bottom: 41px;
@@ -56,22 +57,26 @@ h1 {
 }
 
 h2 {
-  font-size: 66px;
-  font-family: "Gotham A", "Gotham B", sans-serif;
-  line-height: 1;
-  letter-spacing: -2.91px;
+  /* font-size: 66px; */
+  font-family: $font-family-sans-serif-alt;
+  /* line-height: 1;
+  letter-spacing: -2.91px; */
   margin-bottom: 40px;
 
   @include media-breakpoint-down(sm) {
-    font-size: 32px;
+    /* font-size: 32px;
     line-height: 0.97;
-    letter-spacing: -1.41px;
+    letter-spacing: -1.41px; */
     margin-bottom: 28px;
+
+    font-size: 28px;
+    line-height: 1;
+    letter-spacing: -1.24px;
   }
 
-  /* font-size: 54px;
+  font-size: 54px;
   line-height: 1;
-  letter-spacing: -3.08px; */
+  letter-spacing: -3.08px;
 }
 
 h3 {
@@ -80,7 +85,7 @@ h3 {
 
 h4 {
   font-size: 20px;
-  font-family: "Mercury Text G2 A", "Mercury Text G2 B", serif;
+  font-family: $font-family-sans-serif;
   font-weight: 700;
   font-style: italic;
   line-height: 1.05;
@@ -97,10 +102,14 @@ h4 {
 
 h5 {
   font-size: 18px;
-  font-family: "Gotham A", "Gotham B", sans-serif;
+  font-family: $font-family-sans-serif-alt;
   line-height: 1.2;
   letter-spacing: -0.79px;
   margin-bottom: 12px;
+
+  @include media-breakpoint-down(sm) {
+    margin-bottom: 15px;
+  }
 }
 
 p {
@@ -109,7 +118,8 @@ p {
   font-size: 18px;
   line-height: 1.45;
   color: $text-alt;
-  font-family: "Mercury Text G2 A", "Mercury Text G2 B", serif;
+  font-family: $font-family-sans-serif;
+  margin-bottom: 26px;
 }
 
 a {
@@ -124,12 +134,12 @@ a {
 }
 
 .highlight {
-  color: #D6AA28;
+  color: $brand-secondary-alt;
 }
 
 .cta {
   font-size: 31px;
-  font-family: "Mercury Text G2 A", "Mercury Text G2 B", serif;
+  font-family: $font-family-sans-serif;
   letter-spacing: -1.57px;
   font-weight: 700;
   font-style: italic;
@@ -195,6 +205,11 @@ a {
     }
   }
 
+  path {
+    fill: currentColor;
+    transition: fill 0.3s ease-in-out;
+  }
+
   .bg-dark & {
     color: $white;
     opacity: 0.8;
@@ -222,26 +237,15 @@ a {
 
 .container {
   @include media-breakpoint-up(md) {
-    max-width: 544px;
+    max-width: 565px;
   }
   @include media-breakpoint-up(lg) {
-    max-width: 960px;
+    max-width: 810px;
   }
   @include media-breakpoint-up(xl) {
-    max-width: 1165px;
-  }
-  @include media-breakpoint-up(sm) {
-    width: 100%;
-  }
-  width: calc(100% - 63px);
-}
-
-.page-sec {
-  padding-left: 105px;
-  @include media-breakpoint-down(md) {
-    padding-left: 0;
+    max-width: 1045px;
   }
   @include media-breakpoint-down(sm) {
-    padding-left: 0;
+    width: calc(100% - 75px);
   }
 }
