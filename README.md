@@ -29,9 +29,15 @@ This repo includes a `gatsby/` folder with the front-end source files.
 
 If the backend code needs to be updated. Clone it from pantheon into this folder (just to keep both parts of the site together). The folders `cms/` and `wordpress/` are gitignored if you want to use those. You can still use `lando` in the subfolder as well to use a local copy of Wordpress as the source during dev.
 
+Additionally `frontend-templates` is gitignored for pulling down front end code created by Webbymonks.
+
+## Wordpress
+
+All of the custom site functions for Wordpress (custom post types, etc.) is handled by plugins. There is no custom theme code. (TODO: replace default theme with a custom "theme" that is simply a redirect to cp.com/Netlify). Most custom stuff is handled in `cp-plugin`. ACF and Yoast API output is handled by those plugins (except for the `cp_meta` field for getting open graph info).
+
 ## Gatsby Config
 
-TBD
+No custom config for Gatsby other than setting `.env`, see "Reading data" below
 
 ## Branch Config
 
@@ -41,4 +47,6 @@ Additionally, other branches will be built into their own Branch Deploys on Netl
 
 ## Reading data
 
-Currently the site reads from the dev Pantheon site (https://dev-cp-com-3.pantheonsite.io). This should be updated with Environment Variables set in Netlify to determine which environment to build from.
+The site reads from a Pantheon Wordpress install matching the `BRANCH` environment variable, defaulting to `dev` if none is found. To set the Pantheon environment you are reading from, create `.env` in `/gastby` and set `BRANCH=[your env name here]` (see `.env.example`)
+
+NB: This value will be replaced with the name of your branch when you deploy to netlify. If you deploy on a branch that isn't dev,test, or master (live), be sure to create a Pantheon multidev environment that matches your branch name.
