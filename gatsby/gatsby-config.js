@@ -1,22 +1,8 @@
 const wordpressNormalizer = require('./wordpress-normalizer');
-require('dotenv').config();
+const branch_info = require('./pantheon-branchname');
 
-const branch_name = (() => {
-  const branch_name = process.env.BRANCH;
-  if (!branch_name) {
-    console.log('no branch found, defaulting to dev');
-    return 'dev';
-  }
-  if (branch_name === 'master') {
-    console.log('deploying master, setting to live');
-    return 'live';
-  }
-  return branch_name;
-})();
 
-const pantheon_environment_url = `${branch_name}-cp-com-3.pantheonsite.io`;
-
-console.log(`Building from Pantheon env: ${pantheon_environment_url}`);
+console.log(`Building from Pantheon env: ${branch_info.pantheon_environment_url}`);
 
 module.exports = {
   siteMetadata: {
@@ -78,11 +64,11 @@ module.exports = {
           `**/cp/v1/menus`,
           `**/cp/v1/instagram_widget`,
         ],
-        baseUrl: pantheon_environment_url,
+        baseUrl: branch_info.pantheon_environment_url,
         protocol: `https`,
         useACF: true,
         searchAndReplaceContentUrls: {
-          sourceUrl: `https://${pantheon_environment_url}`,
+          sourceUrl: `https://${branch_info.pantheon_environment_url}`,
           replacementUrl: '', // todo: swap this from loco to prod based on brach/netlify env var
         },
         normalizer: wordpressNormalizer,
