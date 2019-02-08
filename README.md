@@ -10,12 +10,18 @@ Wordpress (Pantheon) + [Gatsby](https://gatsbyjs.org) powered statically generat
 4. `cd gatsby`
 5. Install (globally) the Gatsby CLI: `npm install -g gatsby-cli`
 6. Install npm dependencies: `npm install`
-7. run `gatsby develop`
-8. After the site builds, `http://localhost:8000` should be available to view the site.
+7. add `./gatsby/.env` and update it with:
+
+    BRANCH=dev
+
+Replace `dev` with whatever environment on pantheon you want to read from
+
+8. run `gatsby develop`
+9. After the site builds, `http://localhost:8000` should be available to view the site.
   - `https://localhost:8000/__graphql` will have a GraphiQL application to test queries
-9. Make changes, and push to GitLab
-10. Netlify will build changes to a Branch Deploy
-11. Make a pull request to merge branches, Netlify will also build a preview branch for that pull request.
+10. Make changes, and push to GitLab
+11. Netlify will build changes to a Branch Deploy
+12. Make a pull request to merge branches, Netlify will also build a preview branch for that pull request.
 
 ## Folder Setup (Recommended)
 

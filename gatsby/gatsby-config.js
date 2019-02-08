@@ -1,6 +1,17 @@
 const wordpressNormalizer = require('./wordpress-normalizer');
+require('dotenv').config();
 
-const pantheon_environment_url = `${branch_name}-cp-com-3.pantheonsite.io`;
+const branch_name = (() => {
+  const branch_name = process.env.BRANCH;
+  if (!branch_name) return 'dev';
+  if (branch_name === 'master') return 'live';
+})();
+
+const pantheon_environment_url = `${
+  branch_name
+}-cp-com-3.pantheonsite.io`;
+
+console.log(`Building from Pantheon env: ${pantheon_environment_url}`);
 
 module.exports = {
   siteMetadata: {
@@ -20,8 +31,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-layout`,
       options: {
-        component: require.resolve(`./src/components/layout.js`)
-      }
+        component: require.resolve(`./src/components/layout.js`),
+      },
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
@@ -29,8 +40,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-svgr`,
       options: {
-        include: /_global/
-      }
+        include: /_global/,
+      },
     },
     {
       resolve: `gatsby-plugin-manifest`,
@@ -69,7 +80,7 @@ module.exports = {
           sourceUrl: `https://${pantheon_environment_url}`,
           replacementUrl: '', // todo: swap this from loco to prod based on brach/netlify env var
         },
-        normalizer: wordpressNormalizer
+        normalizer: wordpressNormalizer,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
