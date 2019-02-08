@@ -1,5 +1,7 @@
 const wordpressNormalizer = require('./wordpress-normalizer');
 
+const pantheon_environment_url = `${branch_name}-cp-com-3.pantheonsite.io`;
+
 module.exports = {
   siteMetadata: {
     title: `Connelly Partners`,
@@ -60,11 +62,11 @@ module.exports = {
           `**/cp/v1/menus`,
           `**/cp/v1/instagram_widget`,
         ],
-        baseUrl: `dev-cp-com-3.pantheonsite.io`,
+        baseUrl: pantheon_environment_url,
         protocol: `https`,
         useACF: true,
         searchAndReplaceContentUrls: {
-          sourceUrl: 'https://dev-cp-com-3.pantheonsite.io',
+          sourceUrl: `https://${pantheon_environment_url}`,
           replacementUrl: '', // todo: swap this from loco to prod based on brach/netlify env var
         },
         normalizer: wordpressNormalizer
