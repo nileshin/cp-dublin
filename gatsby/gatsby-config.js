@@ -3,13 +3,17 @@ require('dotenv').config();
 
 const branch_name = (() => {
   const branch_name = process.env.BRANCH;
-  if (!branch_name) return 'dev';
-  if (branch_name === 'master') return 'live';
+  if (!branch_name) {
+    console.log('no branch found, defaulting to dev');
+    return 'dev';
+  }
+  if (branch_name === 'master') {
+    console.log('deploying master, setting to live');
+    return 'live';
+  }
 })();
 
-const pantheon_environment_url = `${
-  branch_name
-}-cp-com-3.pantheonsite.io`;
+const pantheon_environment_url = `${branch_name}-cp-com-3.pantheonsite.io`;
 
 console.log(`Building from Pantheon env: ${pantheon_environment_url}`);
 
