@@ -79,6 +79,30 @@ exports.createPages = ({ graphql, actions }) => {
           }
         });
       })
+    }).then(() => {
+      return graphql(`
+        {
+          allWordpressPost {
+            edges {
+              node {
+                id
+                slug
+              }
+            }
+          }
+        }
+      `)
+    }).then(result => {
+      const newsDetailTemplate = path.resolve('./src/templates/news-detail.js');
+      result.data.allWordpressPost.edges.forEach(({node: page}) => {
+        createPage({
+          path: `/news/${page.slug}`,
+          component: newsDetailTemplate,
+          context: {
+            id: page.id
+          }
+        })
+      });
       resolve();
     });
   })
