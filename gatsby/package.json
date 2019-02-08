@@ -10,6 +10,7 @@
     "deep-map": "^2.0.0",
     "dotenv": "^6.2.0",
     "gatsby": "^2.0.76",
+    "gatsby-cli": "^2.4.9",
     "gatsby-image": "^2.0.29",
     "gatsby-plugin-manifest": "^2.0.9",
     "gatsby-plugin-offline": "^2.0.16",
@@ -17,6 +18,7 @@
     "gatsby-plugin-sass": "^2.0.8",
     "gatsby-plugin-sharp": "^2.0.14",
     "gatsby-plugin-svgr": "^2.0.1",
+    "gatsby-plugin-layout": "^1.0.12",
     "gatsby-source-filesystem": "^2.0.8",
     "gatsby-source-wordpress": "^3.0.25",
     "gatsby-transformer-sharp": "^2.1.8",
@@ -40,7 +42,6 @@
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
   },
   "devDependencies": {
-    "gatsby-plugin-layout": "^1.0.12",
     "prettier": "^1.15.2"
   },
   "repository": {
