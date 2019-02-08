@@ -1,13 +1,49 @@
 import React, { Component } from 'react';
+import Img from 'gatsby-image';
 import { graphql } from 'gatsby';
+import './main.scss';
+
+import { ReactComponent as BostonFlag} from '../_global/images/boston-flag.svg';
+import { ReactComponent as DublinFlag} from '../_global/images/dublin-flag.svg';
 
 class ImageTextPairing extends Component {
   render() {
+    const { headline, supportive_text, image, flag, orientation } = this.props;
     return (
-      <div>
-        Image Text Pairing
-        <pre><code>{JSON.stringify(this.props, null, 1)}</code></pre>
-      </div>
+      <section className="content-alt">
+        <pre className="hidden"><code>{JSON.stringify(this.props, null, 1)}</code></pre>
+        <div className={`content-alt__wrap ${orientation}`}>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6 content-alt__img">
+                <figure>
+                  <Img
+                    fluid={image.localFile.childImageSharp.fluid}
+                    alt="home-banner"
+                  />
+                </figure>
+              </div>
+              <div className="col-md-6">
+                <div className="content-alt__text">
+                <h2>
+                    <span dangerouslySetInnerHTML={{
+                        __html: headline,
+                    }}/>
+                    {flag === 'us' ? (
+                      <BostonFlag className="flag" />
+                    ) : (
+                      <DublinFlag className="flag" />
+                    )}
+                    </h2>
+                    <div dangerouslySetInnerHTML={{
+                      __html: supportive_text,
+                    }}/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     );
   }
 }
@@ -20,7 +56,7 @@ export const imageTextPairingFragment = graphql`
     flag
     supportive_text
     image {
-      ...WpMediaFragment
+      ...WpMediaFragmentFluid1440
     }
   }
   fragment ImageTextPairingDublinFragment on imageTextPairing_12 {
@@ -28,7 +64,7 @@ export const imageTextPairingFragment = graphql`
     flag
     supportive_text
     image {
-      ...WpMediaFragment
+      ...WpMediaFragmentFluid1440
     }
   }
 `;

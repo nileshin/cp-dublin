@@ -14,8 +14,8 @@ class About extends Component {
       <SEO {...page.yoast_meta} {...page.yoast_social} />
       <Header {...acf.header.header} />
       <ContentTileWithSideImage {...acf.defiantly_human_section.content_tile_w_side_image} />
-      <ImageTextPairing {...acf.why_boston_section.image_text_pairing} />
-      <ImageTextPairing {...acf.why_dublin_section.image_text_pairing} />
+      <ImageTextPairing {...acf.why_boston_section.image_text_pairing} orientation="left" />
+      <ImageTextPairing {...acf.why_dublin_section.image_text_pairing} orientation="right" />
       <CapabilitiesTiles {...acf.capabilities.capabilities_tiles} />
       <CTATiles {...acf.cta_tiles.cta_tiles} />
     </>);
