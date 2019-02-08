@@ -76,9 +76,7 @@ class MainNav extends Component {
   }
   render() {
     return (
-      <nav>
-        <Menu menuName="main-menu" render={mainNavRender} />
-      </nav>
+      <Menu menuName="main-menu" render={mainNavRender} />
     );
   }
 }

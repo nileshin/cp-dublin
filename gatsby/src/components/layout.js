@@ -7,9 +7,7 @@ class Layout extends Component {
   render() {
     return (
       <>
-        <header>
-          <MainNav />
-        </header>
+        <MainNav />
         <main>{this.props.children}</main>
         <Footer />
       </>
