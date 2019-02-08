@@ -11,7 +11,6 @@ class ImageTextPairing extends Component {
     const { headline, supportive_text, image, flag, orientation } = this.props;
     return (
       <section className="content-alt">
-        <pre className="hidden"><code>{JSON.stringify(this.props, null, 1)}</code></pre>
         <div className={`content-alt__wrap ${orientation}`}>
           <div className="container">
             <div className="row">
@@ -19,7 +18,7 @@ class ImageTextPairing extends Component {
                 <figure>
                   <Img
                     fluid={image.localFile.childImageSharp.fluid}
-                    alt="home-banner"
+                    alt={image.alt_text}
                   />
                 </figure>
               </div>
