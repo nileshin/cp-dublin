@@ -11,6 +11,7 @@ const branch_name = (() => {
     console.log('deploying master, setting to live');
     return 'live';
   }
+  return branch_name;
 })();
 
 const pantheon_environment_url = `${branch_name}-cp-com-3.pantheonsite.io`;
