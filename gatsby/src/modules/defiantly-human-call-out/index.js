@@ -1,31 +1,29 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 
-class ContentTile extends Component {
+class DefiantlyHumanCallOut extends Component {
   render() {
     return (
       <div>
-        Content Tile Module
+        Defiantly Human Call Out
         <pre><code>{JSON.stringify(this.props, null, 1)}</code></pre>
       </div>
     );
   }
 }
 
-export default ContentTile;
+export default DefiantlyHumanCallOut;
 
-export const contentTileFragment = graphql`
-  fragment ContentTileFragment on contentTile_2 {
-    eyebrow
+export const defiantlyHumanCallOutFragment = graphql`
+  fragment DefiantlyHumanCallOutFragment on defiantlyHumanCallOut_8 {
     headline
-    supportive_text
     cta {
       title
       url
       target
     }
     image {
-      alt_text
+      ...WpMediaFragment
     }
   }
-`;
+`

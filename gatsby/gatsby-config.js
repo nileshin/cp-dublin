@@ -1,3 +1,9 @@
+const wordpressNormalizer = require('./wordpress-normalizer');
+const branch_info = require('./pantheon-branchname');
+
+
+console.log(`Building from Pantheon env: ${branch_info.pantheon_environment_url}`);
+
 module.exports = {
   siteMetadata: {
     title: `Connelly Partners`,
@@ -13,8 +19,21 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    {
+      resolve: `gatsby-plugin-layout`,
+      options: {
+        component: require.resolve(`./src/components/layout.js`),
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-sass`,
+    {
+      resolve: `gatsby-plugin-svgr`,
+      options: {
+        include: /_global/,
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -32,17 +51,31 @@ module.exports = {
       resolve: `gatsby-source-wordpress`,
       options: {
         includedRoutes: [
+          `**/*/taxonomies`,
           `**/*/pages`,
           `**/*/media`,
-          `**/cp/v1/menus`
+          `**/*/work`,
+          `**/*/people`,
+          `**/*/location`,
+          `**/*/posts`,
+          `**/*/categories`,
+          `**/*/jobs`,
+          `**/*/job-location`,
+          `**/cp/v1/menus`,
+          `**/cp/v1/instagram_widget`,
         ],
-        baseUrl: `test-cp-com-3.pantheonsite.io`,
+        baseUrl: branch_info.pantheon_environment_url,
         protocol: `https`,
-        useACF: true
-      }
-    }
+        useACF: true,
+        searchAndReplaceContentUrls: {
+          sourceUrl: `https://${branch_info.pantheon_environment_url}`,
+          replacementUrl: '', // todo: swap this from loco to prod based on brach/netlify env var
+        },
+        normalizer: wordpressNormalizer,
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',
   ],
-}
+};

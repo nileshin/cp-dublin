@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
-import MainNav from "./mainNav";
-import Footer from './footer';
+import MainNav from '../modules/main-nav';
+import Footer from '../modules/footer';
+import '../modules/_global/scss/global.scss';
 
 class Layout extends Component {
   render() {
     return (
       <>
-        <header>
-          <MainNav />
-        </header>
-        <main>
-          {this.props.children}
-        </main>
+        <MainNav />
+        <main>{this.props.children}</main>
         <Footer />
       </>
     );
