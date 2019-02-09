@@ -3,7 +3,7 @@ import Img from 'gatsby-image';
 import { graphql } from 'gatsby';
 
 import './main.scss';
-import './main.js';
+//import './main.js';
 
 import { ReactComponent as Hamburger} from '../_global/images/hamburger-close.svg';
 import { ReactComponent as DownloadIcon} from '../_global/images/icon-dwnld.svg';
