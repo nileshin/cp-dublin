@@ -19,6 +19,11 @@ export const contentTileWithSideImageFragment = graphql`
     eyebrow
     headline
     supportive_text
+    cta {
+      title
+      url
+      target
+    }
     image {
       ...WpMediaFragment
     }

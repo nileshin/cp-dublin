@@ -1,10 +1,36 @@
 import React, { Component } from 'react';
-import { StaticQuery, graphql } from 'gatsby';
+import { StaticQuery, graphql, Link } from 'gatsby';
 
 const newsListingRender = props => {
+  const { allWordpressPost: { edges: posts } } = props;
   return (
     <div>
       News listing
+      <ul>
+        {posts.map(post => {
+          const filter_type =
+            post.node.categories && post.node.categories[0].slug;
+
+          if (filter_type === 'article') {
+            return (
+              <li key={post.node.id}>
+                <Link to={`/news/${post.node.slug}`} dangerouslySetInnerHTML={{__html:post.node.title}}/>
+              </li>
+            );
+          } else if (filter_type === 'external') {
+            return (
+              <li key={post.node.id}>
+                <a
+                  href={post.node.acf.external_link.url}
+                  target={post.node.acf.external_link.target}
+                  dangerouslySetInnerHTML={{__html:post.node.title}}
+                />
+              </li>
+            );
+          }
+          return null;
+        })}
+      </ul>
       <pre>
         <code>{JSON.stringify(props, null, 1)}</code>
       </pre>
@@ -24,6 +50,7 @@ class NewsListing extends Component {
                   id
                   wordpress_id
                   title
+                  slug
                   categories {
                     slug
                   }
@@ -34,24 +61,13 @@ class NewsListing extends Component {
                       target
                     }
                     date
-                    article_content_post {
-                      __typename
-                      ... on WordPressAcf_rte {
-                        rte_copy
-                      }
-                      ... on WordPressAcf_traditional_carousel {
-                        traditional_carousel {
-                          ...TraditionalCarouselFragment
-                        }
-                      }
-                    }
                   }
                 }
               }
             }
           }
         `}
-        render={data => newsListingRender({...data, ...this.props})}
+        render={data => newsListingRender({ ...data, ...this.props })}
       />
     );
   }
