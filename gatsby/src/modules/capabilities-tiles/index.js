@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
-import $ from 'jquery';
+
 import './main.scss';
 import './main.js';
 
@@ -27,7 +27,7 @@ class CapabilitiesTiles extends Component {
           </div>
 
           <div className="col-6">
-            <a href={services_and_capabilities_pdf.url.localFile.publicURL} title="Download Capabilities PDF" className="btn-pdf" target="_blank">Download Capabilities PDF <DownloadIcon className="svg-convert icn" alt="download" /></a>
+            <a href={services_and_capabilities_pdf.url.localFile.publicURL} title="Download Capabilities PDF" className="btn-pdf" target="_blank" rel="noopener noreferrer">Download Capabilities PDF <DownloadIcon className="svg-convert icn" alt="download" /></a>
           </div>
            
           <div className="capabilities col-12">

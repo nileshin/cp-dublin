@@ -3,11 +3,9 @@ import $ from 'jquery';
 (function($) {
 if (typeof window === 'undefined') return;
 
-
-    
+var popTarget;
 $.fn.instancitePopup  = function(){
-    var popTarget, targetData;
-
+   
     $(document).on('click', '.pop-up__btn', function (e) {
         e.preventDefault();
         if ($(this).is('[data-href]')) {
@@ -15,7 +13,7 @@ $.fn.instancitePopup  = function(){
         } else {
             popTarget = $(this).attr("href");
         }
-        targetData = $(popTarget)[0].outerHTML;
+
         $(popTarget).wrap("<span class='pop-up__placeholder'></span>")
         $(popTarget).prependTo(".pop-up__content");
         $(".pop-up__content > *").addClass("popWrap");
