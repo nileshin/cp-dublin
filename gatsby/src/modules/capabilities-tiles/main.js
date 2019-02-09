@@ -1,32 +1,12 @@
 import $ from 'jquery';
 
 (function($) {
+if (typeof window === 'undefined') return;
 
-var popTarget, targetData;
+
     
-$(document).ready(function() {
-    openPopup();
-
-    $(document).keydown(function (e) {
-        if (e.keyCode === 27) {
-            closePopup();
-        }
-    });
-    
-    $('body').on('click touchstart', function (e) {
-        if ($(".pop-up").is(":visible")) {
-            if ($(e.target).closest(".popWrap").length === 0) {
-            closePopup();
-            }
-        }
-    });
-
-    $(".close").click(function() {
-        closePopup();
-    });
-});
-
-function openPopup() {
+$.fn.instancitePopup  = function(){
+    var popTarget, targetData;
 
     $(document).on('click', '.pop-up__btn', function (e) {
         e.preventDefault();
@@ -42,7 +22,25 @@ function openPopup() {
         $(".pop-up").fadeIn();
         $("body").addClass("popOpen");
     });
-}
+
+    $(document).keydown(function (e) {
+        if (e.keyCode === 27) {
+            closePopup();
+        }
+    });
+
+    $('body').on('click touchstart', function (e) {
+        if ($(".pop-up").is(":visible")) {
+            if ($(e.target).closest(".popWrap").length === 0) {
+            closePopup();
+            }
+        }
+    });
+
+    $(".close").click(function() {
+        closePopup();
+    });
+};
 
 function closePopup() {
     if ($(".pop-up").is(":visible")) {
@@ -55,4 +53,6 @@ function closePopup() {
         });
     }
 }
+
+$.fn.instancitePopup();
 })($);
