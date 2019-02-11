@@ -47,7 +47,7 @@ class TraditionalCarousel extends Component {
                         critical={true}
                       />
                       <button className="play-button" onClick={this.toggleVideo}><PlayButton /></button>
-                      <div className="video-container" onClick={this.toggleVideo}>{slide.video.video_embed_code}</div>
+                      <div className="video-container" onClick={this.toggleVideo} dangerouslySetInnerHTML={{__html:slide.video.video_embed_code}}/>
                     </>
                   ) : (
                     <Img
