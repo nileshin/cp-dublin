@@ -27,14 +27,26 @@ class HomeHeader extends Component {
                   <span className="highlight">.</span>
                 </h1>
                 <p>{supportive_copy}</p>
-                <Link
-                  to={cta.url}
-                  title={cta.title}
-                  className="cta"
-                  target={cta.target}
-                >
-                  {cta.title}
-                </Link>
+                {cta &&
+                  (cta.url.search(/https?:\/\//) >= 0 ? (
+                    <a
+                      href={cta.url}
+                      target={cta.target}
+                      title={cta.title}
+                      clasName="cta"
+                    >
+                      {cta.title}
+                    </a>
+                  ) : (
+                    <Link
+                      to={cta.url}
+                      title={cta.title}
+                      className="cta"
+                      target={cta.target}
+                    >
+                      {cta.title}
+                    </Link>
+                  ))}
               </div>
             </div>
           </div>
