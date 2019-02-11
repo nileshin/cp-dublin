@@ -1,24 +1,16 @@
 [Settings]
 
-[build]
-  command = "echo 'default build'"
 [build.environment]
-  PANTHEON_ENV = "live"
+  environment = { PANTHEON_ENV = "live" }
 
 # dev environment settings
 [context.dev]
-  command = "echo 'dev branch'"
-[context.dev.environment]
-  PANTHEON_ENV = "dev"
+  environment = { PANTHEON_ENV = "dev" }
 
 # test environment settings
 [context.test]
-  command = "echo 'test branch'"
-[context.test.environment]
-  PANTHEON_ENV = "test"
+  environment = { PANTHEON_ENV = "test" }
 
 # master environment settings
 [context.production]
-  command = "echo 'master branch'"
-[context.production.environment]
-  PANTHEON_ENV = "live"
+  environment = { PANTHEON_ENV = "live" }
