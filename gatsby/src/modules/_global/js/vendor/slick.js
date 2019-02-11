@@ -17,6 +17,7 @@
  */
 /* global window, document, define, jQuery, setInterval, clearInterval */
 ;(function(factory) {
+    if (typeof window === 'undefined') return;
   'use strict';
   if (typeof define === 'function' && define.amd) {
       define(['jquery'], factory);
