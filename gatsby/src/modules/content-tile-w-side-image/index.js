@@ -27,7 +27,7 @@ class ContentTileWithSideImage extends Component {
                 {cta && (
                   cta.url.search(/https?:\/\//) >= 0 ?
                   <a href={cta.url} title={cta.title} target={cta.target} className="cta">
-                    <NewTabIcon className="icn" />
+                    {cta.target === "_blank" && <NewTabIcon className="icn" />}
                     {cta.title}
                   </a> :
                   <Link to={cta.url} title={cta.title} className="cta">{cta.title}</Link>
