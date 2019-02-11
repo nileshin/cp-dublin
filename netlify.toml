@@ -1,8 +1,9 @@
 [Settings]
 
 [build]
+  command = "npm run build"
   environment = { PANTHEON_ENV = "live" }
-  functions = "gatsby/functions"
+  functions = "gatsby/functions/dist"
 
 # dev environment settings
 [context.dev]
