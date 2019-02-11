@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 
 class ContactCards extends Component {
+  state = {
+    weather: {
+      boston: null,
+      dublin: null
+    }
+  }
+  componentDidMount() {
+    
+  }
   render() {
     return (
       <div>

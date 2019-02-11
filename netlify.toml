@@ -2,6 +2,7 @@
 
 [build]
   environment = { PANTHEON_ENV = "live" }
+  functions = "./functions"
 
 # dev environment settings
 [context.dev]
