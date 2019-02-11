@@ -18,8 +18,14 @@ class TraditionalCarousel extends Component {
       //useTransform: false,
       slidesToScroll: 1,
       draggable: false,
-      swipe: false,
+      swipe: false
     });
+  }
+  shouldComponentUpdate(nextProps) {
+    return JSON.stringify(this.props) !== JSON.stringify(nextProps);
+  }
+  toggleVideo = e => {
+    $(e.currentTarget).parent().find('.video-container').toggleClass('video-active');
   }
   render() {
     const { slides } = this.props;
@@ -39,17 +45,15 @@ class TraditionalCarousel extends Component {
                         }
                         alt={slide.video.video_thumbnail.alt_text}
                         critical={true}
-                        fadeIn={false}
                       />
-                      <button className="play-button"><PlayButton /></button>
-                      <div className={`video-container ${slide.videoActivated && 'video-active'}`}>{slide.video.video_embed_code}</div>
+                      <button className="play-button" onClick={this.toggleVideo}><PlayButton /></button>
+                      <div className="video-container" onClick={this.toggleVideo}>{slide.video.video_embed_code}</div>
                     </>
                   ) : (
                     <Img
                       fluid={slide.image.localFile.childImageSharp.fluid}
                       alt={slide.image.alt_text}
                       critical={true}
-                      fadeIn={false}
                     />
                   )}
                 </figure>
