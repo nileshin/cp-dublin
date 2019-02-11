@@ -2,42 +2,69 @@ import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 import axios from 'axios';
 
+import { ReactComponent as BrokenClouds } from '../_global/images/weather_icons/BrokenClouds.svg';
+import { ReactComponent as ClearSky } from '../_global/images/weather_icons/ClearSky.svg';
+import { ReactComponent as FewClouds } from '../_global/images/weather_icons/FewClouds.svg';
+import { ReactComponent as Mist } from '../_global/images/weather_icons/Mist.svg';
+import { ReactComponent as Rain } from '../_global/images/weather_icons/Rain.svg';
+import { ReactComponent as ScatteredClouds } from '../_global/images/weather_icons/ScattredClouds.svg';
+import { ReactComponent as ShowerRain } from '../_global/images/weather_icons/ShowerRain.svg';
+import { ReactComponent as Snow } from '../_global/images/weather_icons/Snow.svg';
+import { ReactComponent as Thunderstorm } from '../_global/images/weather_icons/Thunderstorm.svg';
+
+const WEATHER_ICONS = {
+  '04': BrokenClouds,
+  '01': ClearSky,
+  '02': FewClouds,
+  '50': Mist,
+  '10': Rain,
+  '03': ScatteredClouds,
+  '09': ShowerRain,
+  '13': Snow,
+  '11': Thunderstorm,
+};
+
 class ContactCards extends Component {
   state = {
-    weather: {
+    cityData: {
       boston: null,
       dublin: null,
     },
   };
   componentDidMount() {
     axios
-      .get('/.netlify/functions/getWeather')
+      .get('/.netlify/functions/getCityData')
       .then(response => {
-        console.log(response);
-        this.setState(state => ({
-          ...state,
-          weather: {
-            boston: response.data.bostonData,
-            dublin: response.data.dublinData,
-          },
-        }));
+        this.setState(state => {
+          return {
+            ...state,
+            cityData: {
+              boston: response.data.bostonData,
+              dublin: response.data.dublinData
+            },
+          };
+        });
       })
       .catch(error => {
         console.error(error);
       });
   }
-  renderWeather = cityName => {
-    if (this.state.weather[cityName]) {
-      const city = this.state.weather[cityName];
+  renderCityData = cityName => {
+    if (this.state.cityData[cityName]) {
+      const city = this.state.cityData[cityName];
+      const Icon = WEATHER_ICONS[city.condition.icon];
       return (
-        <pre><code>
-          {cityName} - {city.temp} {city.condition.condition}({city.condition.icon})
-          </code></pre>
-      )
+        <pre>
+          <code>
+            {cityName} - {city.temp} {city.condition.condition}(
+            {Icon && <Icon />}) - ({city.time})
+          </code>
+        </pre>
+      );
     }
 
     return null;
-  }
+  };
   render() {
     return (
       <div>
@@ -45,8 +72,8 @@ class ContactCards extends Component {
         <pre>
           <code>{JSON.stringify(this.props, null, 1)}</code>
         </pre>
-        {this.renderWeather('boston')}
-        {this.renderWeather('dublin')}
+        {this.renderCityData('boston')}
+        {this.renderCityData('dublin')}
       </div>
     );
   }
