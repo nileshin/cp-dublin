@@ -1,14 +1,27 @@
+const proxy = require("http-proxy-middleware")
 const wordpressNormalizer = require('./wordpress-normalizer');
 const branch_info = require('./pantheon-branchname');
 
 
 console.log(`Building from Pantheon env: ${branch_info.pantheon_environment_url}`);
 
+
 module.exports = {
   siteMetadata: {
     title: `Connelly Partners`,
     description: `An Integrated Agency`,
     author: `@connellyagency`,
+  },
+  developMiddleware: app => {
+    app.use(
+      "/.netlify/functions/",
+      proxy({
+        target: "http://localhost:9000",
+        pathRewrite: {
+          "/.netlify/functions/": "",
+        },
+      })
+    )
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
