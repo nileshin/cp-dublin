@@ -19,6 +19,10 @@ $.fn.instancitePopup  = function(){
         $(".pop-up__content > *").addClass("popWrap");
         $(".pop-up").fadeIn();
         $("body").addClass("popOpen");
+
+        $(".close").click(function() {
+            closePopup();
+        });
     });
 
     $(document).keydown(function (e) {
@@ -34,10 +38,6 @@ $.fn.instancitePopup  = function(){
             }
         }
     });
-
-    $(".close").click(function() {
-        closePopup();
-    });
 };
 
 function closePopup() {
@@ -46,7 +46,7 @@ function closePopup() {
             $("body").removeClass("popOpen");
             $(".pop-up__content > *").removeClass("popWrap");
             $(popTarget).appendTo(".pop-up__placeholder");
-            $(popTarget).unwrap();
+            // $(popTarget).unwrap();
             $(".pop-up__content").html("");
         });
     }
