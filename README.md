@@ -12,7 +12,7 @@ Wordpress (Pantheon) + [Gatsby](https://gatsbyjs.org) powered statically generat
 6. Install npm dependencies: `npm install`
 7. add `./gatsby/.env` and update it with:
 
-    BRANCH=dev
+    PANTHEON_ENV=dev
 
 Replace `dev` with whatever environment on pantheon you want to read from
 
@@ -47,6 +47,6 @@ Additionally, other branches will be built into their own Branch Deploys on Netl
 
 ## Reading data
 
-The site reads from a Pantheon Wordpress install matching the `BRANCH` environment variable, defaulting to `dev` if none is found. To set the Pantheon environment you are reading from, create `.env` in `/gastby` and set `BRANCH=[your env name here]` (see `.env.example`)
+The site reads from a Pantheon Wordpress install matching the `BRANCH` environment variable, defaulting to `dev` if none is found. To set the Pantheon environment you are reading from, create `.env` in `/gastby` and set `PANTHEON_ENV=[your env name here]` (see `.env.example`)
 
 NB: This value will be replaced with the name of your branch when you deploy to netlify. If you deploy on a branch that isn't dev,test, or master (live), be sure to create a Pantheon multidev environment that matches your branch name.
