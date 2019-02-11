@@ -1,6 +1,6 @@
 [Settings]
 
-[build.environment]
+[build]
   environment = { PANTHEON_ENV = "live" }
 
 # dev environment settings
