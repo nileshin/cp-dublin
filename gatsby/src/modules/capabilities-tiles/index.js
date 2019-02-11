@@ -15,31 +15,40 @@ class CapabilitiesTiles extends Component {
   };
   activateCapability = e => {
     const target = e.currentTarget;
-    this.setState(state => ({
-      ...state,
-      activeCapabilityIndex: target.dataset.capabilityIndex
-    }), () => {
-      if (document) {
-        document.body.classList.add('popOpen');
+    this.setState(
+      state => ({
+        ...state,
+        activeCapabilityIndex: target.dataset.capabilityIndex,
+      }),
+      () => {
+        if (document) {
+          document.body.classList.add('popOpen');
+        }
+        this.setState(state => ({ ...state, popupOpen: true }));
       }
-      this.setState(state =>({...state, popupOpen:true}))
-    });
-  }
+    );
+  };
   closeActiveCapability = () => {
-    this.setState(state =>({
-      ...state,
-      popupOpen: false
-    }), () => {
-      if (document) {
-        document.body.classList.remove('popOpen');
+    this.setState(
+      state => ({
+        ...state,
+        popupOpen: false,
+      }),
+      () => {
+        if (document) {
+          document.body.classList.remove('popOpen');
+        }
+        this.setState(state => ({ ...state, activateCapabilityIndex: null }));
       }
-      this.setState(state =>({...state, activateCapabilityIndex: null}))
-    });
-  }
+    );
+  };
   componentDidMount() {
     if (document) {
       document.body.addEventListener('click', e => {
-        if (e.target.classList.contains('pop-up') || e.target.classList.contains('pop-up__wrap')) {
+        if (
+          e.target.classList.contains('pop-up') ||
+          e.target.classList.contains('pop-up__wrap')
+        ) {
           this.closeActiveCapability();
           return;
         }
@@ -101,36 +110,37 @@ class CapabilitiesTiles extends Component {
             </div>
           </div>
         </div>
-          <div className={`pop-up ${popupOpen && 'active'}`}>
-            <div className="pop-up__wrap">
-              <div className="pop-up__content container">
-                <div
-                  className="capabilities__details pop-up__target popWrap"
-                  id={'capabilities__details-' + (activeCapIdx || -1)}
-                >
-                  <span className="close" onClick={this.closeActiveCapability}>
-                    <Hamburger className="flag" alt="open/close menu" />
-                  </span>
-                  <figure
-                    className="bg-img"
-                    style={{
-                      backgroundImage:
-                        'url(' +
-                        (activeCap && activeCap.image.localFile.childImageSharp.fluid.src) +
-                        ')',
-                    }}
-                  />
-                  <blockquote>
-                    <p>{activeCap && activeCap.leadership_quote}</p>
-                    <cite>
-                      <small>{activeCap && activeCap.leadership_title}:</small>{' '}
-                      {activeCap && activeCap.leadership_name}
-                    </cite>
-                  </blockquote>
-                </div>
+        <div className={`pop-up ${popupOpen && 'active'}`}>
+          <div className="pop-up__wrap">
+            <div className="pop-up__content container">
+              <div
+                className="capabilities__details pop-up__target popWrap"
+                id={'capabilities__details-' + (activeCapIdx || -1)}
+              >
+                <span className="close" onClick={this.closeActiveCapability}>
+                  <Hamburger className="flag" alt="open/close menu" />
+                </span>
+                <figure
+                  className="bg-img"
+                  style={{
+                    backgroundImage:
+                      'url(' +
+                      (activeCap &&
+                        activeCap.image.localFile.childImageSharp.fluid.src) +
+                      ')',
+                  }}
+                />
+                <blockquote>
+                  <p>{activeCap && activeCap.leadership_quote}</p>
+                  <cite>
+                    <small>{activeCap && activeCap.leadership_title}:</small>{' '}
+                    {activeCap && activeCap.leadership_name}
+                  </cite>
+                </blockquote>
               </div>
             </div>
           </div>
+        </div>
       </section>
     );
   }
