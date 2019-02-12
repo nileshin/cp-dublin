@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
-import { stripTags } from '../utils';
 import SEO from '../components/seo';
 import SingleMedia from '../modules/single-media';
 import TraditionalCarousel from '../modules/traditional-carousel';
 import WorkDetailIntro from '../modules/work-detail-intro';
 import StatLongFactRow from '../modules/stat-long-fact-row';
+import RichMediaHeader from '../modules/rich-media-header';
 
 class WorkDetail extends Component {
   render() {
@@ -17,12 +17,9 @@ class WorkDetail extends Component {
     return (
       <>
         <SEO {...work.yoast_meta} {...work.yoast_social} />
+        
         <section className={`work-detail ${work.slug}`}>
-          Work Detail -{' '}
-          {stripTags(
-            work.acf.rich_media_header.rich_media_header.project_title
-          )}
-          <hr/>
+          <RichMediaHeader {...work.acf.rich_media_header.rich_media_header} />
           {
             work.acf.work_detail_content_work.map((module_content, i) => {
               switch(module_content.__typename) {
@@ -55,19 +52,14 @@ export default WorkDetail;
 export const query = graphql`
   query($id: String!) {
     wordpressWpWork(id: { eq: $id }) {
+      id
       title
       slug
       ...YoastMetadataFragmentWork
       acf {
         client_name
         rich_media_header {
-          rich_media_header {
-            lightdark_mode
-            project_title
-            image {
-              ...WpMediaFragment
-            }
-          }
+          ...RichMediaHeaderFragment
         }
         work_detail_content_work {
           __typename
