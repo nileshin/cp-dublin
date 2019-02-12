@@ -21,7 +21,7 @@ class WorkDetailIntro extends Component {
           <div className="row">
             <div className="col-md-6">
               <div className="intro-work__content">
-                <h1 dangerouslySetInnerHTML={{
+                <h2 dangerouslySetInnerHTML={{
                   __html: title,
                 }}/>
                 <div dangerouslySetInnerHTML={{

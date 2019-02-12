@@ -37,10 +37,6 @@ class WorkDetail extends Component {
               }
             })
           }
-          <hr/>
-          <pre>
-            <code>{JSON.stringify(data, null, 1)}</code>
-          </pre>
         </section>
       </>
     );

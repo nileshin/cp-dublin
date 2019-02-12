@@ -5,27 +5,43 @@ import './main.scss';
 
 class PressModule extends Component {
   render() {
-    const {
-      eyebrow,
-      title,
-      cta,
-      image
-    } = this.props;
+    const { eyebrow, title, cta, image } = this.props;
     return (
-      <section
-        className="press bg-img page-sec"
-      >
-        <Img fluid={image.localFile.childImageSharp.fluid} className="content-tile-bg" alt={image.alt_text} style={{position: "absolute"}} />
+      <section className="press bg-img page-sec">
+        <Img
+          fluid={image.localFile.childImageSharp.fluid}
+          className="content-tile-bg"
+          alt={image.alt_text}
+          style={{ position: 'absolute' }}
+        />
         <div className="container">
           <div className="row">
             <div className="col-md-10">
               <h4 className="eyebrow">{eyebrow}</h4>
               <h2>
-                {title.replace(/\.$/, '')}<span className="highlight">.</span>
+                {title.replace(/\.$/, '')}
+                <span className="highlight">.</span>
               </h2>
-              <Link to={cta.url} title={cta.title} className="cta">
-                {cta.title}
-              </Link>
+              {cta &&
+                (cta.url.search(/https?:\/\//) >= 0 ? (
+                  <a
+                    href={cta.url}
+                    title={cta.title}
+                    target={cta.target}
+                    className="cta"
+                  >
+                    {cta.title}
+                  </a>
+                ) : (
+                  <Link
+                    to={cta.url}
+                    title={cta.title}
+                    className="cta"
+                    target={cta.target}
+                  >
+                    {cta.title}
+                  </Link>
+                ))}
             </div>
           </div>
         </div>

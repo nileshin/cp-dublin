@@ -1,0 +1,18 @@
+[Settings]
+
+[build]
+  command = "npm run build"
+  environment = { PANTHEON_ENV = "live" }
+  functions = "gatsby/functions/dist"
+
+# dev environment settings
+[context.dev]
+  environment = { PANTHEON_ENV = "dev" }
+
+# test environment settings
+[context.test]
+  environment = { PANTHEON_ENV = "test" }
+
+# master environment settings
+[context.production]
+  environment = { PANTHEON_ENV = "live" }

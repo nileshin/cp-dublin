@@ -32,7 +32,7 @@ class StatLongFactRow extends Component {
             <div className="col-7 col-md-8">
 
             {fact.fact_content.map((fact_row, index) => 
-              <article className="fact">
+              <article className="fact" key={index}>
                 <h3 className="fact__title">
                   {fact_row.fact_text}
                 </h3>

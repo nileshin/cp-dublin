@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const branch_name = (() => {
-  const branch_name = process.env.BRANCH;
+  const branch_name = process.env.PANTHEON_ENV;
   if (!branch_name) {
     console.log('no branch found, defaulting to dev');
     return 'dev';

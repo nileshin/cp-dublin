@@ -1,0 +1,20 @@
+ul.juicer-feed {
+  h1.referral {
+    display: none;
+  }
+
+  // undoing traditional carousel styles
+  .slick {
+    &-next, &-prev {
+      &:before {
+        border: none;
+      }
+    }
+    &-prev {
+      right: auto;
+    }
+    &-next{
+      left: auto;
+    }
+  }
+}
