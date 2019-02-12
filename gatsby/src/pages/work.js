@@ -18,7 +18,7 @@ class Work extends Component {
           <Header {...acf.header.header} />
           <BlobVideo {...acf.blob_video.blob_video} />
           <WorkTiles {...acf.work_tiles} />
-          <LogoGrid {...acf.logo_grid} />
+          <LogoGrid {...acf.logo_grid.logo_grid} />
           <CTATiles {...acf.cta_tiles.cta_tiles} />
         </section>
       </>
