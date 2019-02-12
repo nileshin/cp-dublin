@@ -30,7 +30,7 @@ class LogoGrid extends Component {
 
 export default LogoGrid;
 
-// NB: need to also get publicURL because svg's aren't processed by ImageSharp. If we have an .svg in ext, just use that url
+// NB: need to get publicURL because svg's aren't processed by ImageSharp.
 export const logoGridFragment = graphql`
   fragment LogoGridFragment on logoGrid_8 {
     logos {
