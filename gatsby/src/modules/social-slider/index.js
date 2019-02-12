@@ -1,29 +1,15 @@
 import React, { Component } from 'react';
-import { StaticQuery, graphql } from 'gatsby';
+import JuicerFeed from 'react-juicer-feed';
+import './main.scss'
+
 
 class SocialSlider extends Component {
   render() {
     return (
-      <StaticQuery
-        query={graphql`
-          query {
-            wordpressCpInstagramWidget(
-              sidebar_name: { eq: "cp-instagram-widget" }
-            ) {
-              html
-            }
-          }
-        `}
-        render={data => {
-          return (
-            <div
-              dangerouslySetInnerHTML={{
-                __html: data.wordpressCpInstagramWidget.html,
-              }}
-            />
-          );
-        }}
-      />
+      <>
+      <JuicerFeed feedId="cpinsta" />
+      <div className="home-banner" />
+      </>
     );
   }
 }

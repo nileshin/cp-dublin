@@ -75,7 +75,6 @@ module.exports = {
           `**/*/jobs`,
           `**/*/job-location`,
           `**/cp/v1/menus`,
-          `**/cp/v1/instagram_widget`,
         ],
         baseUrl: branch_info.pantheon_environment_url,
         protocol: `https`,
