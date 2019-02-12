@@ -3,6 +3,7 @@
 
 .stat {
   padding: 75px 0;
+  background-color: #fafafa;
 
   .container {
     @include media-breakpoint-down(sm) {

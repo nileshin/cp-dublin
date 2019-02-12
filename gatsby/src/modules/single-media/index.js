@@ -4,7 +4,7 @@ import { graphql } from 'gatsby';
 class SingleMedia extends Component {
   render() {
     return (
-      <div style={{border:"solid 1px red"}}>
+      <div>
         Single Media
         <pre><code>{JSON.stringify(this.props, null, 1)}</code></pre>
       </div>

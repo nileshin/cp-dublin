@@ -18,11 +18,7 @@ class WorkDetail extends Component {
       <>
         <SEO {...work.yoast_meta} {...work.yoast_social} />
         <section className={`work-detail ${work.slug}`}>
-          Work Detail -{' '}
-          {stripTags(
-            work.acf.rich_media_header.rich_media_header.project_title
-          )}
-          <hr/>
+          <section style={{minHeight: "990px", backgroundColor:"#ADD8E6"}}>Rich Media Header</section>
           {
             work.acf.work_detail_content_work.map((module_content, i) => {
               switch(module_content.__typename) {
@@ -40,10 +36,6 @@ class WorkDetail extends Component {
               }
             })
           }
-          <hr/>
-          <pre>
-            <code>{JSON.stringify(data, null, 1)}</code>
-          </pre>
         </section>
       </>
     );
