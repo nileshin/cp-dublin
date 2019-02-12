@@ -194,6 +194,15 @@
       cursor: pointer;
       float: right;
     }
+
+    & + div {
+      font-family: $font-family-sans-serif-alt;
+      br {
+        content:' ';
+        display: block;
+        margin-bottom: 10px;
+      }
+    }
   }
 
   &__details {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Img from 'gatsby-image';
 import { graphql } from 'gatsby';
-// import { nominalTypeHack } from 'prop-types';
 
 import './main.scss'
 
@@ -9,7 +8,7 @@ class RichMediaHeader extends Component {
   render() {
     const {lightdark_mode, project_title, image} = this.props;
     return (  
-    <section className="banner-full bg-cover">
+    <section className={`banner-full bg-cover ${!lightdark_mode && 'dark-mode'}`}>
       <div style={{ display: 'none' }}>
         LeadershipDetailCarousel
         <pre><code>{JSON.stringify(this.props, null, 1)}</code></pre>
