@@ -6,6 +6,23 @@
   -webkit-font-smoothing: antialiased;
 }
 
+.cta:before {
+  transform-origin: left center;
+  transform: scaleX(1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.cta {
+  &:hover, &:focus {
+    &:before {
+      transform: scaleX(0);
+    }
+    &:after {
+      left: 100% !important; //override below styles
+    }
+  }
+}
+
 // WebbyMonks global.scss below
 
 body {
@@ -204,6 +221,8 @@ a {
     height: 2px;
     background-color: $white-alt;
     left: 100%;
+    transform: scaleX(1);
+    transition: transform 0.3s ease-in-out;
     @include media-breakpoint-down(sm) {
       width: 30px;
     }
