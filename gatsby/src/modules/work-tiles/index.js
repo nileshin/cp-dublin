@@ -29,7 +29,9 @@ const WORK_FILTERS = {
 
 const renderTiles = filteredList => {
   return filteredList.work_tiles.tiles.map((tile, index) => {
-    const { project_title, client_name } = tile.override_fields;
+    let { project_title, client_name } = tile.override_fields || {};
+    if (!project_title) project_title = tile.acf.rich_media_header.rich_media_header.project_title;
+    if (!client_name) client_name = tile.acf.client_name;
     const { post_type, post_name:slug } = tile.work_piece
     const direction = index % 2 === 0 ? 'left' : 'right';
     const angleType = index % 4 === 0 || index % 4 === 1 ? 'connected' : 'reverse';
