@@ -7,7 +7,7 @@ import './main.scss'
 
 class RichMediaHeader extends Component {
   render() {
-    const {lightdark_mode, project_title, image} = this.props;
+    const {lightdark_mode, project_title, image, client_name} = this.props;
     return (  
     <section className="banner-full bg-cover">
       <div style={{ display: 'none' }}>
@@ -18,7 +18,7 @@ class RichMediaHeader extends Component {
         <div className="row">
           <div className="col-md-12 col-lg-6">
             <div className="banner-full__content">
-              <small className="small-head">Four Seasons Hotels and Resorts</small>
+              <small className="small-head">{client_name}</small>
               <h1 dangerouslySetInnerHTML={{
                   __html: project_title,
                 }}/>
@@ -43,6 +43,7 @@ export const RichMediaHeaderFragment = graphql`
     rich_media_header {
       lightdark_mode
       project_title
+      client_name
       image {
         ...WpMediaFragmentFluid1440
       }
