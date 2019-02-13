@@ -8,6 +8,7 @@ $white               : #fafafa;
 $white-alt           : #b9b9b9;
 $black               : #0a0a0a;
 $text-alt            : #919191;
+$red                 : #D56126;
 
 //== Colors
 
@@ -126,3 +127,44 @@ $blockquote-font-size    : 1em;
 //== Grid
 
 $grid-float-breakpoint : 992px;
+
+/**
+ * ----------------------------------------
+ * animation pulsate
+ * ----------------------------------------
+ */
+
+@-webkit-keyframes pulsate {
+  0% {
+    -webkit-transform: scale(0.2);
+            transform: scale(0.2);
+    opacity: 1;
+  }
+  80% {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(2);
+            transform: scale(2);
+    opacity: 0;
+  }
+}
+@keyframes pulsate {
+  0% {
+    -webkit-transform: scale(0.2);
+            transform: scale(0.2);
+    opacity: 1;
+  }
+  80% {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(2);
+            transform: scale(2);
+    opacity: 0;
+  }
+}

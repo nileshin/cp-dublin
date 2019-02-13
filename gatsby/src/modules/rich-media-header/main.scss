@@ -35,6 +35,12 @@
       letter-spacing: -1.68px;
     }
   }
+  
+  &.dark-mode {
+    h1 {
+      color: $white;
+    }
+  }
 
   &__content {
     > :last-child {
