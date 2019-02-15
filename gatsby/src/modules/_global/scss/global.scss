@@ -51,7 +51,9 @@ body {
   color: $white;
 }
 
-img { max-width: 100%; }
+img {
+  max-width: 100%;
+}
 
 h1 {
   font-size: 54px;
@@ -169,6 +171,64 @@ p {
   margin-bottom: 26px;
 }
 
+blockquote {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.07142857;
+  font-family: $font-family-sans-serif-alt;
+  letter-spacing: -1.36px;
+
+  p {
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    font-family: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+  }
+}
+
+cite {
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: -0.5px;
+  display: table;
+  color: $text-alt;
+  font-family: $font-family-sans-serif;
+
+  @include media-breakpoint-down(sm) {
+    line-height: 1;
+  }
+
+  small {
+    font-size: 12px;
+    line-height: 1.33333333;
+    font-style: normal;
+    font-family: $font-family-sans-serif-alt;
+    letter-spacing: -0.34px;
+    font-weight: 400;
+    margin-left: 12px;
+    display: inline-block;
+
+    @include media-breakpoint-down(sm) {
+      display: table;
+      margin-left: 0;
+      font-size: 11px;
+      line-height: 1.1;
+    }
+  }
+}
+
+address {
+  font-size: 22px;
+  line-height: 1.36363636;
+  margin-bottom: 21px;
+
+  a {
+    display: table;
+  }
+}
+
 a {
   color: $brand-secondary;
   text-decoration: none;
@@ -176,10 +236,12 @@ a {
   transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out, border-color 0.25s ease-in-out, opacity 0.25s ease-in-out, visibility 0.25s ease-in-out, -webkit-transform 0.25s ease-in-out;
   transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out, border-color 0.25s ease-in-out, transform 0.25s ease-in-out, opacity 0.25s ease-in-out, visibility 0.25s ease-in-out;
   transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out, border-color 0.25s ease-in-out, transform 0.25s ease-in-out, opacity 0.25s ease-in-out, visibility 0.25s ease-in-out, -webkit-transform 0.25s ease-in-out;
+
   &:hover,
   &:focus {
     outline: 0;
     text-decoration: none;
+    color: inherit;
   }
 }
 
@@ -221,12 +283,12 @@ a {
     height: 2px;
     background-color: $white-alt;
     left: 100%;
-    transform: scaleX(1);
-    transition: transform 0.3s ease-in-out;
+
     @include media-breakpoint-down(sm) {
       width: 30px;
     }
   }
+
   &:after {
     content: '';
     width: 8px;
@@ -238,6 +300,7 @@ a {
     transition: left 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
     transition: left 0.3s ease-in-out, transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
     transition: left 0.3s ease-in-out, transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+
     @include media-breakpoint-down(sm) {
       width: 5px;
       height: 5px;
@@ -248,6 +311,7 @@ a {
   &:hover,
   &:focus {
     color: $brand-secondary;
+
     &:after {
       left: calc(100% + 50px);
 
@@ -256,10 +320,11 @@ a {
       }
     }
   }
+
   &:active {
     &:after {
       -webkit-transform: scale(2);
-              transform: scale(2);
+      transform: scale(2);
       opacity: 0;
       visibility: hidden;
     }
@@ -287,12 +352,15 @@ a {
     background-repeat: no-repeat;
     background-position: center center;
   }
+
   &-dark {
     color: $white;
+
     p {
       color: inherit;
     }
   }
+
   &-cover {
     position: relative;
     z-index: 1;
@@ -305,13 +373,18 @@ a {
       width: calc(100% + 2px);
       height: calc(100% + 2px);
       -webkit-transform: translate(-50%, -50%);
-              transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
       z-index: -1;
       max-width: calc(100% + 2px);
       -o-object-fit: cover;
-         object-fit: cover;
+      object-fit: cover;
     }
   }
+}
+
+.cover {
+  -o-object-fit: cover;
+  object-fit: cover;
 }
 
 .eyebrow {
@@ -338,22 +411,122 @@ a {
   }
 }
 
+.stop {
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+
+  .started & {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/*
+ *   Slider Buttons
+ */
+.slick {
+
+  &-slide {
+    >div {
+      display: flex;
+    }
+  }
+
+  &-arrow {
+    position: absolute;
+    bottom: 60%;
+    width: 80px;
+    height: 80px;
+    border: 0;
+    background-color: $brand-secondary-alt;
+    font-size: 0;
+    cursor: pointer;
+    z-index: 1;
+    transition: background-color 0.3s ease-in-out;
+
+    @include media-breakpoint-down(sm) {
+      width: 56px;
+      height: 40px;
+      bottom: 0;
+    }
+
+    &:before {
+      content: '';
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 8.5px 10px 8.5px 0;
+      border-color: transparent $white transparent transparent;
+      transition: border-color 0.3s ease-in-out;
+
+      @include media-breakpoint-down(sm) {
+        border-width: 4.5px 5px 4.5px 0;
+      }
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $brand-primary;
+      outline: 0;
+    }
+  }
+
+  &-next {
+    left: 86%;
+
+    @include media-breakpoint-down(sm) {
+      left: auto;
+      right: 0;
+    }
+
+    &:before {
+      border-width: 8.5px 0 8.5px 10px;
+      border-color: transparent transparent transparent $white;
+
+      @include media-breakpoint-down(sm) {
+        border-width: 4.5px 0 4.5px 5px;
+      }
+    }
+  }
+
+  &-prev {
+    right: 86%;
+
+    @include media-breakpoint-down(sm) {
+      right: 56px;
+    }
+  }
+}
 
 .container {
   padding-right: 12.5px;
   padding-left: 12.5px;
 
   @include media-breakpoint-up(md) {
-    max-width: 565px;
+    max-width: 585px;
   }
+
   @include media-breakpoint-up(lg) {
     max-width: 810px;
   }
+
   @include media-breakpoint-up(xl) {
     max-width: 1060px;
   }
+
+  @media (min-width: 1200px) and (max-width: 1250px) {
+    max-width: 1030px;
+  }
+
   @include media-breakpoint-down(sm) {
     width: calc(100% - 75px);
+    max-width: 100%;
   }
 }
 

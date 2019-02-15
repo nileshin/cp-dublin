@@ -11,6 +11,14 @@
   .slick-track {
     display: flex;
     align-items: flex-end;
+
+    &:before, &:after {
+      display: none;
+    }
+  }
+
+  .slick-slide {
+    height: auto;
   }
 
   &__item {
@@ -25,6 +33,8 @@
 
     .slick-current & {
       padding-bottom: 56.25%;
+      transition: padding-bottom 0.5s ease;
+      //transition-delay: 0.4s;
 
       @include media-breakpoint-down(sm) {
         padding-bottom: 70.65%;
@@ -40,116 +50,116 @@
       margin: 0;
     }
 
-    .play-button {
-      display: block;
+    iframe, video {
       position: absolute;
       top: 50%;
       left: 50%;
+      border: 0;
       transform: translate(-50%, -50%);
-      cursor: pointer;
-      appearance: none;
-      border: none;
-      background: none;
-      outline: none;
-    }
-
-    .video-container {
-      display: flex;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      width: auto;
+      height: auto;
+      opacity: 0;
       visibility: hidden;
-      pointer-events: none;
-      align-items: center;
+      transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      min-width: 100%;
+      min-height: 100%;
     }
 
-    .slick-current & {
-      .video-container.video-active {
-        pointer-events: all;
-        visibility: visible;
+    .cover {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      transform: translate(-50%, -50%);
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    }
 
-        iframe {
-          width: 100%;
-          height: 100%;
+    .play {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background-color: $white;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -45px;
+      margin-left: -45px;
+      z-index: 1;
+
+      @include media-breakpoint-down(sm) {
+        width: 45px;
+        height: 45px;
+        margin-top: -22.5px;
+        margin-left: -22.5px;
+      }
+
+      &:before {
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 16px 0 16px 26px;
+        border-color: transparent transparent transparent $brand-secondary-alt;
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -10px;
+        margin-top: -16px;
+
+        @include media-breakpoint-down(sm) {
+          border-width: 10px 0 10px 15px;
+          margin-left: -6px;
+          margin-top: -10px;
+        }
+
+      }
+
+      &:after {
+        content: '';
+        width: 110px;
+        height: 110px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background-color: $white;
+        opacity: 0.3;
+        margin-left: -55px;
+        margin-top: -55px;
+        border-radius: 50%;
+        z-index: -1;
+        transition: transform 0.5s ease-in-out;
+        pointer-events: none;
+
+        @include media-breakpoint-down(sm) {
+          width: 55px;
+          height: 55px;
+          margin-top: -27.5px;
+          margin-left: -27.5px;
+        }
+      }
+
+      &:hover, &:focus {
+        &:after {
+          transform: scale(0);
+          animation: pulsate 2s ease-in-out infinite both;
         }
       }
     }
-  }
-}
 
-.slick {
-
-  &-slide {
-    >div {
-      display: flex;
-    }
-  }
-
-  &-arrow {
-    position: absolute;
-    bottom: 60%;
-    width: 80px;
-    height: 80px;
-    border: 0;
-    background-color: $brand-secondary-alt;
-    font-size: 0;
-    cursor: pointer;
-    z-index: 1;
-    transition: background-color 0.3s ease-in-out;
-
-    @include media-breakpoint-down(sm) {
-      width: 56px;
-      height: 40px;
-      bottom: 0;
-    }
-
-    &:before {
-      content: '';
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 8.5px 10px 8.5px 0;
-      border-color: transparent $white transparent transparent;
-      transition: border-color 0.3s ease-in-out;
-
-      @include media-breakpoint-down(sm) {
-        border-width: 4.5px 5px 4.5px 0;
+    &.started {
+      .cover {
+        opacity: 0;
+        visibility: visible;
       }
-    }
-
-    &:hover,
-    &:focus {
-      background-color: $brand-primary;
-      outline: 0;
-    }
-  }
-
-  &-next {
-    left: 86%;
-
-    @include media-breakpoint-down(sm) {
-      left: auto;
-      right: 0;
-    }
-
-    &:before {
-      border-width: 8.5px 0 8.5px 10px;
-      border-color: transparent transparent transparent $white;
-
-      @include media-breakpoint-down(sm) {
-        border-width: 4.5px 0 4.5px 5px;
+      iframe, video {
+        opacity: 1;
+        visibility: visible;
+        z-index: 1;
       }
     }
   }
 
-  &-prev {
-    right: 86%;
-
-    @include media-breakpoint-down(sm) {
-      right: 56px;
-    }
-
-  }
 }
