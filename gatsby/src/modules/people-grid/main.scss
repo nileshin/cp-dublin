@@ -20,6 +20,19 @@
     text-align: center;
     min-height: 193px;
     margin-bottom: 31px;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+    transform: translate3d(0, 0px, 0);
+    opacity: 1;
+
+    &.exiting, &.exited {
+      opacity: 0;
+      transform: translate3d(0, 20px, 0);
+    }
+
+    &.entering, &.entered {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
 
     @include media-breakpoint-down(lg) {
       min-height: 150px;
