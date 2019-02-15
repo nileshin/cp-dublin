@@ -31,7 +31,7 @@ const addJobLocations = entities => {
 }
 
 const addLocations = entities => {
-  return addTaxonomy(entities, 'location', 'people');
+  return addTaxonomy(entities, 'department', 'people');
 }
 
 const normalizers = [filterUrls, addJobLocations, addLocations];
