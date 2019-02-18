@@ -16,3 +16,6 @@
 # master environment settings
 [context.production]
   environment = { PANTHEON_ENV = "live" }
+
+[context."people-grid-transitions"]
+  environment = { PANTHEON_ENV = "dev" }
