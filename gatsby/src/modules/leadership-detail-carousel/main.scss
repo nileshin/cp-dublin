@@ -139,25 +139,37 @@
 .slider-leader {
   border: 30px solid $white-alt;
   position: relative;
-  overflow: hidden;
+  transition: height 0.2s ease-in-out;
+  min-height: 800px;
 
   .slick-arrow {
-    bottom: auto;
-    margin-top: -20px;
+    top: 590px;
+    height: 48px;
+    height: 66px;
   }
 
   .slick-next {
-    right: -30px;
+    left: -30px;
   }
   .slick-prev {
-    right: 26px;
+    left: -30px;
+    transform: translate(-100%, 0);
   }
 
   &__item {
-    display: none;
+    transition: opacity 0.3s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
 
-    &.active {
-      display: block;
+    &.entering,
+    &.entered {
+      opacity: 1;
+    }
+
+    &.exiting,
+    &.exited {
+      opacity: 0;
     }
   }
 }

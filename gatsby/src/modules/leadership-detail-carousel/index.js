@@ -1,22 +1,69 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 import { slugify } from '../../utils';
+import { Transition } from 'react-transition-group';
 import './main.scss';
+
+const ANIMATION_TIME = 300;
 
 class LeadershipDetailCarousel extends Component {
   constructor(props) {
     super(props);
+    this.sliderLeader = React.createRef();
     this.state = {
       activeLeader: this.props.leadership_slides[0].name,
     };
   }
+  componentDidMount() {
+    if (typeof window === 'undefined') return;
+    this.updateSliderLeaderHeight(this.state.activeLeader);
+  }
+  componentDidUpdate() {
+    if (typeof window === 'undefined') return;
+    if (!this.state.activeLeader) return;
+    this.updateSliderLeaderHeight(this.state.activeLeader);
+  }
+  updateSliderLeaderHeight = activeLeader => {
+    const activeSlide = this.sliderLeader.current.querySelector(
+      `div[data-name="${activeLeader}"]`
+    );
+    const activeSlideHeight = activeSlide.offsetHeight;
+    this.sliderLeader.current.style.height = `${activeSlideHeight + 30}px`;
+  };
   changeSlide = e => {
+    e.preventDefault && e.preventDefault();
+    const newName = e.target ? e.target.getAttribute('title') : e.slideName;
+    this.setState(
+      state => ({
+        ...state,
+        activeLeader: null,
+      }),
+      () => {
+        setTimeout(() => {
+          this.setState(state => ({
+            ...state,
+            activeLeader: newName,
+          }));
+        }, ANIMATION_TIME);
+      }
+    );
+  };
+  advanceSlide = e => {
     e.preventDefault();
-    const newName = e.target.getAttribute('title');
-    this.setState(state => ({
-      ...state,
-      activeLeader: newName,
-    }));
+    const direction =
+      e.target.getAttribute('class').indexOf('prev') >= 0 ? -1 : 1;
+
+    const currentIndex = this.props.leadership_slides.findIndex(
+      slide => slide.name === this.state.activeLeader
+    );
+
+    let newIndex = currentIndex + direction;
+    if (newIndex < 0) newIndex = this.props.leadership_slides.length - 1;
+    if (newIndex >= this.props.leadership_slides.length) newIndex = 0;
+
+    this.changeSlide({
+      slideName: this.props.leadership_slides[newIndex].name,
+    });
   };
   render() {
     const { leadership_slides: slides } = this.props;
@@ -44,40 +91,72 @@ class LeadershipDetailCarousel extends Component {
               </ul>
             </div>
             <div className="col-md-8 offset-md-1 leader-details-column">
-              <div className="slider-leader">
+              <div className="slider-leader" ref={this.sliderLeader}>
+                <button
+                  className="slick-prev slick-arrow"
+                  aria-label="Previous"
+                  type="button"
+                  onClick={this.advanceSlide}
+                >
+                  Previous
+                </button>
                 {slides.map(slide => {
                   const image =
                     slide.image.localFile.childImageSharp.original.src;
                   return (
-                    <div
-                      className={`slider-leader__item ${
-                        activeLeader === slide.name ? 'active' : ''
-                      }`}
+                    <Transition
+                      in={slide.name === activeLeader}
+                      timeout={ANIMATION_TIME}
                       key={slide.name}
                     >
-                      <figure className="leader-img bg-cover bg-dark">
-                        <img src={image} alt={slide.name} className="cover" />
-                        <figcaption>
-                          <h2
-                            dangerouslySetInnerHTML={{
-                              __html: slide.name.trim().replace(/\s+/, '<br/>'),
-                            }}
-                          />
-                        </figcaption>
-                      </figure>
-                      <div className="leader-details">
-                        <small className="title">{slide.title}</small>
-                        <blockquote>
-                          <p>{slide.quote}</p>
-                        </blockquote>
-                        <div
-                          dangerouslySetInnerHTML={{ __html: slide.body_copy }}
-                        />
-                        <small className="tenure">{slide.tenure}</small>
-                      </div>
-                    </div>
+                      {slideState => {
+                        return (
+                          <div
+                            className={`slider-leader__item ${slideState}`}
+                            data-name={slide.name}
+                          >
+                            <figure className="leader-img bg-cover bg-dark">
+                              <img
+                                src={image}
+                                alt={slide.name}
+                                className="cover"
+                              />
+                              <figcaption>
+                                <h2
+                                  dangerouslySetInnerHTML={{
+                                    __html: slide.name
+                                      .trim()
+                                      .replace(/\s+/, '<br/>'),
+                                  }}
+                                />
+                              </figcaption>
+                            </figure>
+                            <div className="leader-details">
+                              <small className="title">{slide.title}</small>
+                              <blockquote>
+                                <p>{slide.quote}</p>
+                              </blockquote>
+                              <div
+                                dangerouslySetInnerHTML={{
+                                  __html: slide.body_copy,
+                                }}
+                              />
+                              <small className="tenure">{slide.tenure}</small>
+                            </div>
+                          </div>
+                        );
+                      }}
+                    </Transition>
                   );
                 })}
+                <button
+                  className="slick-next slick-arrow"
+                  aria-label="Next"
+                  type="button"
+                  onClick={this.advanceSlide}
+                >
+                  Next
+                </button>
               </div>
             </div>
           </div>
