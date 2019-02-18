@@ -5,13 +5,13 @@ export const htmlentities = {
    *
    * @param {String} str String with unescaped HTML characters
    **/
-  encode : function(str) {
+  encode: function(str) {
     var buf = [];
-    
-    for (var i=str.length-1;i>=0;i--) {
+
+    for (var i = str.length - 1; i >= 0; i--) {
       buf.unshift(['&#', str[i].charCodeAt(), ';'].join(''));
     }
-    
+
     return buf.join('');
   },
   /**
@@ -19,13 +19,17 @@ export const htmlentities = {
    *
    * @param {String} str htmlSet entities
    **/
-  decode : function(str) {
+  decode: function(str) {
     return str.replace(/&#(\d+);/g, function(match, dec) {
       return String.fromCharCode(dec);
     });
-  }
+  },
 };
 
 export const stripTags = s => {
-  return htmlentities.decode(s.replace(/<[^>]+>/g, ""));
-}
+  return htmlentities.decode(s.replace(/<[^>]+>/g, ''));
+};
+
+export const slugify = s => {
+  return s.toLowerCase().replace(/\s+/, '-');
+};
