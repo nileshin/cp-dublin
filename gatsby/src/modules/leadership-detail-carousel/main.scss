@@ -146,6 +146,7 @@
     top: 590px;
     height: 48px;
     height: 66px;
+    z-index: 2;
   }
 
   .slick-next {
@@ -153,7 +154,32 @@
   }
   .slick-prev {
     left: -30px;
-    transform: translate(-100%, 0);
+    transform: translateX(-100%);
+  }
+
+  @include media-breakpoint-down(md) {
+    .slick-arrow {
+      top: 572px;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    .slick-arrow {
+      top: 196px;
+      width: 56px;
+      height: 40px;
+    }
+
+    .slick-next,
+    .slick-prev {
+      left: auto;
+      right: -30px;
+      transform: translateY(-50%);
+    }
+
+    .slick-prev {
+      transform: translate(-100%, -50%);
+    }
   }
 
   &__item {

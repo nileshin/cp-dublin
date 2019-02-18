@@ -6,7 +6,7 @@ import './main.scss';
 import $ from 'jquery';
 import '../_global/js/vendor/menu';
 
-import { ReactComponent as ConnellyLogo} from '../_global/images/logo.svg';
+import ConnellyLogo from '../_global/images/logo.svg';
 import { ReactComponent as LinkedinLogo } from '../_global/images/social-linkedin.svg';
 import { ReactComponent as InstaLogo } from '../_global/images/social-ig.svg';
 import { ReactComponent as TwitterLogo } from '../_global/images/social-twitter.svg';
@@ -18,7 +18,7 @@ const mainNavRender = data => {
     <header className="site-header">
       <div className="logo">
         <Link to="/" title="Connelly Partners">
-          <ConnellyLogo />
+          <img src={ConnellyLogo} alt="Connelly Partners" />
         </Link>
       </div>
       <nav className="main-navigation">
@@ -43,22 +43,42 @@ const mainNavRender = data => {
         <span className="follow">Follow us</span>
         <ul>
           <li>
-            <a href="http://linkedin.com" title="Linkedin" target="_blank" rel="noopener noreferrer">
+            <a
+              href="http://linkedin.com"
+              title="Linkedin"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <LinkedinLogo />
             </a>
           </li>
           <li>
-            <a href="http://instagram.com" title="Instagram" target="_blank" rel="noopener noreferrer">
+            <a
+              href="http://instagram.com"
+              title="Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <InstaLogo />
             </a>
           </li>
           <li>
-            <a href="http://twitter.com" title="Twitter" target="_blank" rel="noopener noreferrer">
+            <a
+              href="http://twitter.com"
+              title="Twitter"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <TwitterLogo />
             </a>
           </li>
           <li>
-            <a href="http://facebook.com" title="Facebook" target="_blank" rel="noopener noreferrer">
+            <a
+              href="http://facebook.com"
+              title="Facebook"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FacebookLogo />
             </a>
           </li>
@@ -75,9 +95,7 @@ class MainNav extends Component {
     });
   }
   render() {
-    return (
-      <Menu menuName="main-menu" render={mainNavRender} />
-    );
+    return <Menu menuName="main-menu" render={mainNavRender} />;
   }
 }
 
