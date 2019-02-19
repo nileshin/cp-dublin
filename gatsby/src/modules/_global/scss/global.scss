@@ -78,7 +78,7 @@ h1 {
     margin-bottom: 28px;
   }
 
-  span {
+  span:not(.headline-2):not(.highlight) {
     color: $text-alt;
   }
 }

@@ -1,4 +1,4 @@
-@import "../_global/scss/vendor/bootstrap-mixins.scss";
+@import '../_global/scss/vendor/bootstrap-mixins.scss';
 @import '../_global/scss/variables.scss';
 
 .home-banner {
@@ -28,6 +28,49 @@
       margin-bottom: 24px;
       position: static;
       width: 100%;
+    }
+  }
+
+  h1, p, .cta {
+    transform: translate3d(0, 20px, 0);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  p, .cta {
+    opacity: 0;
+    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  }
+
+  h1 span {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+    &.headline-2,
+    &.highlight {
+      transition-delay: 0.1s;
+    }
+  }
+
+  p {
+    transition-delay: 0.15s;
+  }
+
+  .cta {
+    transition-delay: 0.19s;
+  }
+
+  .home-content {
+    &.entering,
+    &.entered {
+      h1,
+      p,
+      .cta {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+      h1 span {
+        opacity: 1;
+      }
     }
   }
 }
