@@ -33,3 +33,16 @@ export const stripTags = s => {
 export const slugify = s => {
   return s.toLowerCase().replace(/\s+/, '-');
 };
+
+
+// Check for passive event listeners
+// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Improving_scrolling_performance_with_passive_listeners
+let passiveIfSupportedComputed = false;
+(() => {
+  if (typeof window === 'undefined') return;
+  try {
+    // eslint-disable-next-line
+    window.addEventListener("test", null, Object.defineProperty({}, "passive", { get: function() { passiveIfSupportedComputed = { passive: true }; } }));
+  } catch(err) {}
+})();
+export const passiveIfSupported = passiveIfSupportedComputed;

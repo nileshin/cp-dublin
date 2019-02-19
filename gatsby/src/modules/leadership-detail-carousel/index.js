@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
-import { slugify } from '../../utils';
+import { slugify, passiveIfSupported } from '../../utils';
 import { Transition } from 'react-transition-group';
+import debounce from 'lodash.debounce';
 import './main.scss';
 
 const ANIMATION_TIME = 300;
@@ -17,6 +18,12 @@ class LeadershipDetailCarousel extends Component {
   componentDidMount() {
     if (typeof window === 'undefined') return;
     this.updateSliderLeaderHeight(this.state.activeLeader);
+
+    window.addEventListener('resize', this.updateButtonStyle, passiveIfSupported);
+    this.updateButtonStyle();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateButtonStyle);
   }
   componentDidUpdate() {
     if (typeof window === 'undefined') return;
@@ -65,9 +72,23 @@ class LeadershipDetailCarousel extends Component {
       slideName: this.props.leadership_slides[newIndex].name,
     });
   };
+  getButtonStyle = () => {
+    if (typeof window === 'undefined') return {};
+
+    if (window.innerWidth < 768 && this.sliderLeader.current) {
+      const currentImage = this.sliderLeader.current.querySelector('.slider-leader__item.entered img.cover');
+      if (currentImage) {
+        return { top:`${currentImage.height}px` }
+      }
+    }
+
+    return {};
+  }
+  updateButtonStyle = debounce(() => { this.forceUpdate(); }, 150, {leading: true});
   render() {
     const { leadership_slides: slides } = this.props;
     const { activeLeader } = this.state;
+    const buttonStyle = this.getButtonStyle();
     return (
       <section className="leaders">
         <div className="container">
@@ -97,6 +118,7 @@ class LeadershipDetailCarousel extends Component {
                   aria-label="Previous"
                   type="button"
                   onClick={this.advanceSlide}
+                  style={buttonStyle}
                 >
                   Previous
                 </button>
@@ -155,6 +177,7 @@ class LeadershipDetailCarousel extends Component {
                   aria-label="Next"
                   type="button"
                   onClick={this.advanceSlide}
+                  style={buttonStyle}
                 >
                   Next
                 </button>

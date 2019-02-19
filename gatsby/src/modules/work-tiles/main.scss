@@ -43,14 +43,14 @@
       .work-tile__details {
         &:before {
           transform: none;
-          right: 0;
+          right: calc(100% - 125px);
         }
       }
       &.right {
         .work-tile__details {
           &:before {
             right: auto;
-            left: 0;
+            left: calc(100% - 125px);
           }
         }
       }
@@ -76,15 +76,11 @@
       .cta {
         color: $brand-secondary;
         &:after {
-          left: 100%;
+          left: calc(100% + 50px);
 
           @include media-breakpoint-down(sm) {
-            left: 100%
+            left: calc(100% + 30px);
           }
-        }
-
-        &:before {
-          transform: scaleX(0);
         }
       }
     }
@@ -260,5 +256,17 @@
       color: $brand-primary;
       border-color: currentColor;
     }
+  }
+}
+
+.content-blob {
+  display: flex;
+  .container {
+    min-height: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: auto;
+    padding: 100px 0;
   }
 }
