@@ -140,6 +140,7 @@ class LeadershipDetailCarousel extends Component {
                                 dangerouslySetInnerHTML={{
                                   __html: slide.body_copy,
                                 }}
+                                className="body-copy"
                               />
                               <small className="tenure">{slide.tenure}</small>
                             </div>

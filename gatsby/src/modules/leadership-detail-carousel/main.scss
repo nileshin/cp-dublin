@@ -188,9 +188,39 @@
     top: 0;
     left: 0;
 
+    figcaption h2, .leader-details > * {
+      transform: translate3d(20px, 0, 0);
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      transition-delay: 0.1s;
+      opacity: 0;
+    }
+
+    .leader-details {
+      & > * {
+        transform: translate3d(0, 30px, 0);
+      }
+      .title {
+        transition-delay: 0.14s;
+      }
+      blockquote {
+        transition-delay: 0.18s;
+      }
+      .body-copy {
+        transition-delay: 0.22s;
+      }
+      .tenure {
+        transition-delay: 0.26s;
+      }
+    }
+
     &.entering,
     &.entered {
       opacity: 1;
+
+      figcaption h2, .leader-details .title, .leader-details blockquote, .leader-details .body-copy, .leader-details .tenure {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+      }
     }
 
     &.exiting,
