@@ -13,8 +13,10 @@ import './main.scss';
 const parseVideoEmbed = (video_embed_code, slideClass) => {
   return parse(video_embed_code, {
     replace: domNode => {
-      if (!domNode.attribs.class) domNode.attribs.class = "";
-      domNode.attribs.class = (domNode.attribs.class + " embed-player slide-media").trim();
+      if (!domNode.attribs.class) domNode.attribs.class = '';
+      domNode.attribs.class = (
+        domNode.attribs.class + ' embed-player slide-media'
+      ).trim();
       if (domNode.attribs.src) {
         const joiner = domNode.attribs.src.indexOf('?') ? '&' : '?';
         if (slideClass === 'slider__youtube') {
@@ -24,9 +26,9 @@ const parseVideoEmbed = (video_embed_code, slideClass) => {
         }
       }
       return domToReact(domNode);
-    }
-  })
-}
+    },
+  });
+};
 
 class TraditionalCarousel extends Component {
   constructor(props) {
@@ -42,7 +44,7 @@ class TraditionalCarousel extends Component {
       dots: false,
       slidesToScroll: 1,
       draggable: false,
-      swipe: false
+      swipe: false,
     });
     this.calcSlideHeight();
     window.addEventListener('resize', this.onResize);
@@ -50,13 +52,15 @@ class TraditionalCarousel extends Component {
   componentWillUnmount() {
     window.removeEventListener('resize', this.onResize);
   }
-  onResize() {
+  onResize = () => {
     this.calcSlideHeight();
     clearTimeout(this.resizeFinished);
     this.resizeFinished = setTimeout(() => this.calcSlideHeight(), 950);
-  }
+  };
   calcSlideHeight() {
-    const currentSlide = this.slider.current.querySelector('.slick-current .slider__item');
+    const currentSlide = this.slider.current.querySelector(
+      '.slick-current .slider__item'
+    );
     if (currentSlide) {
       const slideHeight = currentSlide.offsetHeight;
       const track = this.slider.current.querySelector('.slick-track');
@@ -77,24 +81,45 @@ class TraditionalCarousel extends Component {
           {slides.map((slide, i) => {
             let slideClass = 'slider__img';
             if (slide.video__image) {
-              slideClass = slide.video.video_embed_code.search(/youtu\.?be/) ? 'slider__youtube' :
-              slide.video.video_embed_code.indexOf('vimeo') ? 'slider__vimeo' : ""
+              slideClass = slide.video.video_embed_code.search(/youtu\.?be/)
+                ? 'slider__youtube'
+                : slide.video.video_embed_code.indexOf('vimeo')
+                ? 'slider__vimeo'
+                : '';
             }
             return (
               <div className={`slider__item ${slideClass}`} key={i}>
-                {
-                  slide.video__image ? (
-                    <>
-                      <img src={slide.video.video_thumbnail.localFile.childImageSharp.fluid.src} alt={slide.video.video_thumbnail.alt_text} data-critical={true} className="cover" />
-                      {/* eslint-disable-next-line */}
-                      <a href="#" title="Play" className="play" onClick={this.noop}></a>
-                      {parseVideoEmbed(slide.video.video_embed_code, slideClass)}
-                      <span className="stop"><HamburgerClose /></span>
-                    </>
-                  ) : (
-                    <img src={slide.image.localFile.childImageSharp.fluid.src} alt={slide.image.alt_text} data-critical={true} className="cover" />
-                  )
-                }
+                {slide.video__image ? (
+                  <>
+                    <img
+                      src={
+                        slide.video.video_thumbnail.localFile.childImageSharp
+                          .fluid.src
+                      }
+                      alt={slide.video.video_thumbnail.alt_text}
+                      data-critical={true}
+                      className="cover"
+                    />
+                    {/* eslint-disable-next-line */}
+                    <a
+                      href="#"
+                      title="Play"
+                      className="play"
+                      onClick={this.noop}
+                    />
+                    {parseVideoEmbed(slide.video.video_embed_code, slideClass)}
+                    <span className="stop">
+                      <HamburgerClose />
+                    </span>
+                  </>
+                ) : (
+                  <img
+                    src={slide.image.localFile.childImageSharp.fluid.src}
+                    alt={slide.image.alt_text}
+                    data-critical={true}
+                    className="cover"
+                  />
+                )}
               </div>
             );
           })}
