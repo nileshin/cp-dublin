@@ -28,7 +28,7 @@ const SEO = ({
       },
       {
         property: `og:image`,
-        content: og_image,
+        content: og_image && og_image.localFile ? og_image.localFile.publicURL : og_image,
       },
       {
         property: `og:description`,
@@ -36,24 +36,24 @@ const SEO = ({
       },
       {
         property: `og:type`,
-        content: 'website'
+        content: 'website',
       },
       {
         name: `twitter:card`,
-        content: `summary`
+        content: `summary`,
       },
       {
-        name:`twitter:title`,
-        content: tw_title
+        name: `twitter:title`,
+        content: tw_title,
       },
       {
-        name:`twitter:image`,
-        content: tw_image
+        name: `twitter:image`,
+        content: tw_image && tw_image.localFile ? tw_image.localFiles.publicURL : tw_image,
       },
       {
-        name:`twitter:description`,
-        content: tw_description
-      }
+        name: `twitter:description`,
+        content: tw_description,
+      },
     ],
   };
   helmetData.meta = helmetData.meta.filter(m => m && m.content);
@@ -73,10 +73,18 @@ export const yoastMetadataFragment = graphql`
       yoast_social {
         og_title: yoast_wpseo_opengraph_title
         og_description: yoast_wpseo_opengraph_description
-        og_image: yoast_wpseo_opengraph_image
+        og_image: yoast_wpseo_opengraph_image {
+          localFile {
+            publicURL
+          }
+        }
         tw_title: yoast_wpseo_twitter_title
         tw_description: yoast_wpseo_twitter_description
-        tw_image: yoast_wpseo_twitter_image
+        tw_image: yoast_wpseo_twitter_image {
+          localFile {
+            publicURL
+          }
+        }
       }
     }
   }

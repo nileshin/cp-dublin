@@ -16,11 +16,20 @@ const renderTile = tile => (
           {tile.cta.title}
         </Link>
       )}
-      <Img
-        fluid={tile.image.localFile.childImageSharp.fluid}
-        className="cta-tile__img bg-img"
-        style={{position:"absolute"}}
-      />
+      {tile.image && tile.image.localFile ? (
+        <Img
+          fluid={tile.image && tile.image.localFile.childImageSharp.fluid}
+          className="cta-tile__img bg-img"
+          style={{ position: 'absolute' }}
+        />
+      ) : (
+        <img
+          src={tile.image}
+          className="cta-tile__img bg-img"
+          style={{ position: 'absolute' }}
+          alt=""
+        />
+      )}
     </div>
   </div>
 );
