@@ -56,6 +56,14 @@
       }
     }
 
+    .cta {
+      &:before {
+        transition: transform 0.2s ease-in-out;
+        transform: scaleX(1);
+        transform-origin: center left;
+      }
+    }
+
     &:hover,
     &:focus {
       color: $brand-primary;
@@ -75,11 +83,14 @@
       } */
       .cta {
         color: $brand-secondary;
+        &:before {
+          transform: scaleX(0);
+        }
         &:after {
-          left: calc(100% + 50px);
+          left: 100%;
 
           @include media-breakpoint-down(sm) {
-            left: calc(100% + 30px);
+            left: 100%;
           }
         }
       }
