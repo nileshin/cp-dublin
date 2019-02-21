@@ -38,7 +38,7 @@ class JobListingsDisplay extends Component {
                   ...state,
                   transitioning: false,
                 }));
-              }, 1);
+              }, 50);
             }
           );
         }, ANIMATION_TIME);
