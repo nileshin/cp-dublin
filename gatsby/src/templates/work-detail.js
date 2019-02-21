@@ -6,6 +6,7 @@ import TraditionalCarousel from '../modules/traditional-carousel';
 import WorkDetailIntro from '../modules/work-detail-intro';
 import StatLongFactRow from '../modules/stat-long-fact-row';
 import RichMediaHeader from '../modules/rich-media-header';
+import StatRow from '../modules/stat-row';
 
 class WorkDetail extends Component {
   render() {
@@ -52,6 +53,11 @@ class WorkDetail extends Component {
                     key={module_content.id}
                   />
                 );
+              }
+              case 'WordPressAcf_stat_row': {
+                return (
+                  <StatRow {...module_content.stat_row} key={module_content.id} />
+                )
               }
               default: {
                 return (
@@ -106,6 +112,12 @@ export const query = graphql`
             id
             stat_long_fact_row {
               ...StatLongFactRowFragment
+            }
+          }
+          ...on WordPressAcf_stat_row {
+            id
+            stat_row {
+              ...StatRowFragmentWorkDetail
             }
           }
         }
