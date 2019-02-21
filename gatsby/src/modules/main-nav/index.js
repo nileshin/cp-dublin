@@ -12,8 +12,18 @@ import { ReactComponent as InstaLogo } from '../_global/images/social-ig.svg';
 import { ReactComponent as TwitterLogo } from '../_global/images/social-twitter.svg';
 import { ReactComponent as FacebookLogo } from '../_global/images/social-fb.svg';
 
-const mainNavRender = data => {
-  const { menu } = data;
+const SOCIAL_LOGOS = {
+  instagram: InstaLogo,
+  twitter: TwitterLogo,
+  facebook: FacebookLogo,
+  linkedin: LinkedinLogo
+}
+
+const mainNavRender = (menuData, optionsData) => {
+  const { menu } = menuData;
+  const [ node ] = optionsData;
+  const { node:{options} } = node;
+  
   return (
     <header className="site-header">
       <div className="logo">
@@ -42,46 +52,18 @@ const mainNavRender = data => {
       <div className="social">
         <span className="follow">Follow us</span>
         <ul>
-          <li>
-            <a
-              href="http://linkedin.com"
-              title="Linkedin"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <LinkedinLogo />
-            </a>
-          </li>
-          <li>
-            <a
-              href="http://instagram.com"
-              title="Instagram"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <InstaLogo />
-            </a>
-          </li>
-          <li>
-            <a
-              href="http://twitter.com"
-              title="Twitter"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <TwitterLogo />
-            </a>
-          </li>
-          <li>
-            <a
-              href="http://facebook.com"
-              title="Facebook"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FacebookLogo />
-            </a>
-          </li>
+          {
+            options.social_menu.map(({social_media_network:network, link}) => {
+              const NetworkLogo = SOCIAL_LOGOS[network]
+              return (
+                <li key={network}>
+                  <a href={link.url} title={network} target={link.target || "_blank"} rel="noopener noreferrer">
+                    {NetworkLogo ? <NetworkLogo /> : network}
+                  </a>
+                </li>
+              )
+            }) 
+          }
         </ul>
       </div>
     </header>

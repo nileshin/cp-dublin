@@ -21,7 +21,7 @@ class HomeHeader extends Component {
     }, 300);
   }
   render() {
-    const { headline, headline_2, supportive_copy, cta, image } = this.props;
+    const { headline, headline_2, supportive_copy, cta, image, center_content } = this.props;
     const { headerActivated } = this.state;
     return (
       <section className="home-banner page-sec">
@@ -37,19 +37,18 @@ class HomeHeader extends Component {
                 </figure>
               </div>
             </div>
-            <div className="col-md-6">
-              <Transition
-                in={headerActivated}
-                timeout={ANIMATION_TIME}
-              >
+            <div className="col-md-6" style={{alignSelf:center_content ? 'center' : 'inherit'}}>
+              <Transition in={headerActivated} timeout={ANIMATION_TIME}>
                 {headerState => (
                   <div className={`home-content ${headerState}`}>
                     <h1>
-                      <span>{headline}</span>{' '}
-                      <span className="headline-2">
-                        {headline_2.replace(/\.$/, '')}
-                        <span className="highlight">.</span>
-                      </span>
+                      {headline && <span>{headline}</span>}{' '}
+                      {headline_2 && (
+                        <span className="headline-2">
+                          {headline_2.replace(/\.$/, '')}
+                          <span className="highlight">.</span>
+                        </span>
+                      )}
                     </h1>
                     <p>{supportive_copy}</p>
                     {cta &&
@@ -87,8 +86,20 @@ export default HomeHeader;
 
 // this fragment works within the `acf` object on a post
 export const homeHeaderFragment = graphql`
-  fragment HomeHeaderFragment on homeHeader_8 {
+  fragment HomeHeaderFragment on homeHeader_10 {
     headline
+    headline_2
+    supportive_copy
+    cta {
+      title
+      url
+      target
+    }
+    image {
+      ...WpMediaFragmentFluid
+    }
+  }
+  fragment HomeHeaderFragmentNotFound on homeHeader_12 {
     headline_2
     supportive_copy
     cta {

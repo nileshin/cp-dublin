@@ -44,14 +44,31 @@ class Menu extends Component {
                 }
               }
             }
+            allWordpressAcfOptions {
+              edges {
+                node {
+                  options {
+                    social_menu {
+                      social_media_network
+                      link {
+                        title
+                        url
+                        target
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         `}
         render={data => {
           const {
             allWordpressCpMenus: { edges },
+            allWordpressAcfOptions: { edges:options }
           } = data;
           const menu = edges.find(m => m.node.menu_name === menuName);
-          return typeof renderFunc === 'function' ? renderFunc(menu.node) : defaultMenuRender(menu.node);
+          return typeof renderFunc === 'function' ? renderFunc(menu.node, options) : defaultMenuRender(menu.node, options);
         }}
       />
     );
