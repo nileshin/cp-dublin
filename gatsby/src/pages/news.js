@@ -11,7 +11,7 @@ class News extends Component {
       <>
         <SEO {...page.yoast_meta} {...page.yoast_social} />
         <Header {...acf.header.header} />
-        <NewsListing defiantlyHumanCallout={acf.defiantly_human_call_out.defiantly_human_call_out} />
+        <NewsListing defiantlyHumanCallout={acf.defiantly_human_call_out.defiantly_human_call_out} newsletterCapture={acf.newsletter_capture.newsletter_capture} />
       </>
     );
   }
@@ -34,6 +34,11 @@ export const query = graphql`
         defiantly_human_call_out {
           defiantly_human_call_out {
             ...DefiantlyHumanCallOutFragment
+          }
+        }
+        newsletter_capture {
+          newsletter_capture {
+            ...NewsletterCaptureFragment
           }
         }
       }

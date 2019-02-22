@@ -103,7 +103,7 @@
 .news {
 
   padding-top: 63px;
-  padding-bottom: 20px;
+  padding-bottom: 0;
   overflow: hidden;
 
   @include media-breakpoint-down(sm) {

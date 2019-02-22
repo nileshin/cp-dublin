@@ -5,50 +5,7 @@ import DefiantlyHumanCallOut from '../defiantly-human-call-out';
 import './main.scss';
 
 import { ReactComponent as NewTabIcon } from '../_global/images/icon-new-tab.svg';
-
-class NewsListingDisplayBase extends Component {
-  render() {
-    const {
-      allWordpressPost: { edges: posts },
-    } = this.props;
-    return (
-      <div>
-        News listing
-        <ul>
-          {posts.map(post => {
-            const filter_type =
-              post.node.categories && post.node.categories[0].slug;
-
-            if (filter_type === 'article') {
-              return (
-                <li key={post.node.id}>
-                  <Link
-                    to={`/news/${post.node.slug}`}
-                    dangerouslySetInnerHTML={{ __html: post.node.title }}
-                  />
-                </li>
-              );
-            } else if (filter_type === 'external') {
-              return (
-                <li key={post.node.id}>
-                  <a
-                    href={post.node.acf.external_link.url}
-                    target={post.node.acf.external_link.target}
-                    dangerouslySetInnerHTML={{ __html: post.node.title }}
-                  />
-                </li>
-              );
-            }
-            return null;
-          })}
-        </ul>
-        <pre>
-          <code>{JSON.stringify(this.props, null, 1)}</code>
-        </pre>
-      </div>
-    );
-  }
-}
+import NewsletterCapture from '../newsletter-capture';
 
 const renderPost = ({ node: post }) => {
   const filterType = post.categories && post.categories[0].slug;
@@ -133,6 +90,7 @@ class NewsListingDisplay extends Component {
               );
             })}
             {posts.length < 4 && <DefiantlyHumanCallOut {...this.props.defiantlyHumanCallout} />}
+            <NewsletterCapture {...this.props.newsletterCapture} />
           </div>
         </div>
       </section>
