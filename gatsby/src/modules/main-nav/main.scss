@@ -128,7 +128,7 @@
     }
 
     > a {
-      transition: color 0.3s ease-in-out, padding 0.3s ease-in-out;
+      transition: color 0.2s ease-in-out, padding 0.2s ease-out;
       position: relative;
       &:hover,
       &:focus {
@@ -150,7 +150,7 @@
         background-color: $text-alt;
         width: 0;
         margin: auto;
-        transition: width 0.3s ease-in-out;
+        transition: width 0.2s ease-out;
       }
     }
   }
