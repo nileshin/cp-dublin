@@ -342,7 +342,9 @@
       background-color: #b9b9b9;
       content: '';
       transform: scaleY(1);
-      transition: transform 0.2s ease-in-out;
+      transform-origin: top center;
+
+      transition: transform 0.2s 0.2s ease-in-out;
 
       @include media-breakpoint-down(sm) {
         height: 30px;
@@ -373,9 +375,11 @@
 
   &.overlapping {
     ul:before {
+      transition-delay: 0s;
       transform: scaleY(0);
     }
     ul {
+      transition-delay: 0.1s;
       transform: translate3d(0, -10.7vh, 0);
     }
   }

@@ -69,6 +69,7 @@ class MainNavDisplay extends Component {
 
     const { footerOverlap, footerHeight } = this.state;
     const socialStyle = footerOverlap ? {
+      transitionDelay: '0.1s',
       transform:`translate3d(0, -${footerHeight - (window.innerHeight * 0.107)}px, 0)`
     } : {};
     
