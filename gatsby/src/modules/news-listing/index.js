@@ -8,27 +8,40 @@ import { ReactComponent as NewTabIcon } from '../_global/images/icon-new-tab.svg
 import NewsletterCapture from '../newsletter-capture';
 
 const renderPost = ({ node: post }) => {
-  const filterType = post.categories && post.categories[0].slug;
+  const filterType = post.acf.internal_external;
   const colWidth = post.acf.featured ? 8 : filterType === 'external' ? 4 : 6;
   const postClassName = post.acf.featured ? 'featured' : '';
+  const url = filterType === 'external' ? post.acf.external_link : `/news/${post.slug}`
   return (
     <div className={`col-md-${colWidth}`} key={post.id}>
       <article className={postClassName}>
         <h4 className="eyebrow">News</h4>
         <h3>
-          <a
-            href="#"
-            title={htmlentities.decode(post.title)}
-            dangerouslySetInnerHTML={{ __html: post.title }}
-          />
+          {
+            filterType === 'external' ? (
+              <a
+                href={url}
+                title={htmlentities.decode(post.title)}
+                dangerouslySetInnerHTML={{ __html: post.title }}
+                target="_blank"
+                rel="noopener noreferrer"
+              />
+            ) : (
+              <Link to={url} title={htmlentities.decode(post.title)} dangerouslySetInnerHTML={{__html:post.title}} />
+            )
+          }
         </h3>
         <div className="news-link">
-          <a href="#" title="">
-            {filterType === 'external' && (
-              <NewTabIcon className="icn" viewBox="0 0 18 18" />
-            )}
-            <span> {post.acf.source}</span>
-          </a>
+          {
+            filterType === 'external' ? (
+              <a href={url} title="" target="_blank" rel="noopener noreferrer">
+                <NewTabIcon className="icn" viewBox="0 0 18 18" />
+                <span>{post.acf.source}</span>
+              </a>
+            ) : (
+              <p>{post.excerpt}</p>
+            )
+          }
           <time dateTime={post.acf.date}>{formatDate(post.acf.date)}</time>
         </div>
       </article>
@@ -109,15 +122,13 @@ class NewsListing extends Component {
                   title
                   slug
                   type
+                  excerpt
                   categories {
                     slug
                   }
                   acf {
-                    external_link {
-                      title
-                      url
-                      target
-                    }
+                    internal_external
+                    external_link
                     date
                     source
                     featured

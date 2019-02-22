@@ -21,11 +21,6 @@ export const query = graphql`
       wordpress_id
       slug
       acf {
-        external_link {
-          title
-          url
-          target
-        }
         date
         article_content_post {
           __typename
