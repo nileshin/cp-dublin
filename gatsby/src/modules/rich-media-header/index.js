@@ -25,11 +25,13 @@ class RichMediaHeader extends Component {
             </div>
           </div>
         </div>
-        <Img
-          fluid={image.localFile.childImageSharp.fluid}
-          alt={image.alt_text}
-          className="cover"
-        />
+        {image && image.localFile ? (
+          <Img
+            fluid={image.localFile.childImageSharp.fluid}
+            alt={image.alt_text}
+            className="cover"
+          />
+        ) : null}
       </section>
     );
   }
