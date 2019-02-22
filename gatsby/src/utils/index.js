@@ -34,6 +34,25 @@ export const slugify = s => {
   return s.toLowerCase().replace(/\s+/, '-');
 };
 
+export const formatDate = date_obj => {
+  let date = date_obj;
+  if (typeof date_obj === 'string') {
+    date = new Date(date_obj)
+  }
+  var monthNames = [
+    "January", "February", "March",
+    "April", "May", "June", "July",
+    "August", "September", "October",
+    "November", "December"
+  ];
+
+  var day = date.getDate();
+  var monthIndex = date.getMonth();
+  var year = date.getFullYear();
+
+  return monthNames[monthIndex] + ' ' + day + ', ' + year;
+}
+
 
 // Check for passive event listeners
 // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Improving_scrolling_performance_with_passive_listeners
