@@ -82,12 +82,7 @@ class NewsListingDisplay extends Component {
           <div className="row news-row">
             {featuredPost && renderPost(featuredPost)}
             {posts.map((post, i) => {
-              return (
-                <>
-                  {i === 4 && <DefiantlyHumanCallOut />}
-                  {renderPost(post)}
-                </>
-              );
+              return renderPost(post);
             })}
             {posts.length < 4 && <DefiantlyHumanCallOut {...this.props.defiantlyHumanCallout} />}
             <NewsletterCapture {...this.props.newsletterCapture} />
