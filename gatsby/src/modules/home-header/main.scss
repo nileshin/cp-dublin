@@ -49,6 +49,10 @@
     &.highlight {
       transition-delay: 0.1s;
     }
+
+    &.headline-2 {
+      color: $brand-primary;
+    }
   }
 
   p {
