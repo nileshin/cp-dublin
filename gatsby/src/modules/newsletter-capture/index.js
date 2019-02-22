@@ -7,7 +7,7 @@ const MAILCHIMP_URL =
 
 class NewsletterCapture extends Component {
   render() {
-    const { title, placeholder_copy, cta_copy, copy, image } = this.props;
+    const { title, placeholder_copy, cta_copy, copy } = this.props;
     return (
       <section className="newsletter bg-dark row full-bleed-parent">
         <div className="col-12 full-width">
@@ -66,8 +66,5 @@ export const newsletterCaptureFragment = graphql`
     placeholder_copy
     cta_copy
     copy
-    image {
-      ...WpMediaFragmentFluid
-    }
   }
 `;

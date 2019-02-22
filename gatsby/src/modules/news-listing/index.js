@@ -39,7 +39,7 @@ const renderPost = ({ node: post }) => {
                 <span>{post.acf.source}</span>
               </a>
             ) : (
-              <p>{post.excerpt}</p>
+              <p className="news-description">{post.acf.description}</p>
             )
           }
           <time dateTime={post.acf.date}>{formatDate(post.acf.date)}</time>
@@ -132,6 +132,7 @@ class NewsListing extends Component {
                     date
                     source
                     featured
+                    description
                   }
                 }
               }
