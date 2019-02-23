@@ -43,16 +43,24 @@
       .work-tile__details {
         &:before {
           transform: none;
-          right: 0;
+          right: calc(100% - 125px);
         }
       }
       &.right {
         .work-tile__details {
           &:before {
             right: auto;
-            left: 0;
+            left: calc(100% - 125px);
           }
         }
+      }
+    }
+
+    .cta {
+      &:before {
+        transition: transform 0.2s ease-in-out;
+        transform: scaleX(1);
+        transform-origin: center left;
       }
     }
 
@@ -75,16 +83,15 @@
       } */
       .cta {
         color: $brand-secondary;
+        &:before {
+          transform: scaleX(0);
+        }
         &:after {
           left: 100%;
 
           @include media-breakpoint-down(sm) {
-            left: 100%
+            left: 100%;
           }
-        }
-
-        &:before {
-          transform: scaleX(0);
         }
       }
     }
@@ -260,5 +267,17 @@
       color: $brand-primary;
       border-color: currentColor;
     }
+  }
+}
+
+.content-blob {
+  display: flex;
+  .container {
+    min-height: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: auto;
+    padding: 100px 0;
   }
 }

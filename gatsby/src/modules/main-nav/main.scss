@@ -1,11 +1,12 @@
-@import "../_global/scss/vendor/bootstrap-mixins.scss";
+@import '../_global/scss/vendor/bootstrap-mixins.scss';
 @import '../_global/scss/variables.scss';
+
 .site-header {
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
-  z-index: 10;
+  z-index: 8;
   width: 95px;
   display: flex;
   flex-direction: column;
@@ -19,8 +20,8 @@
   @include media-breakpoint-down(sm) {
     width: 53px;
     height: 106px;
-    // position: absolute;
-    // height: 100vh;
+    /* position: absolute;
+    height: 100vh; */
   }
 
   .menu-open & {
@@ -40,12 +41,16 @@
     left: 0;
     right: -15px;
     z-index: -1;
+
+    @include media-breakpoint-down(sm) {
+      display: none;
+    }
   }
 }
 
 .logo {
-  width: 95px;
-  height: 95px;
+  min-width: 95px;
+  min-height: 95px;
   padding: 20px;
   display: flex;
   align-items: center;
@@ -78,7 +83,6 @@
   transition: transform 0.3s ease-in-out;
 
   @include media-breakpoint-down(sm) {
-    // width: calc(100vw - 43px);
     width: 100vw;
     padding-left: 20px;
     height: 100vh;
@@ -102,10 +106,10 @@
   padding: 20px 0;
   max-height: 100%;
 
-  // @include media-breakpoint-down(sm) {
-  //   left: 50%;
-  //   transform: translate(-50%, -50%);
-  // }
+  /* @include media-breakpoint-down(sm) {
+    left: 50%;
+    transform: translate(-50%, -50%);
+  } */
 
   > li {
     font-size: 42px;
@@ -124,7 +128,7 @@
     }
 
     > a {
-      transition: color 0.3s ease-in-out, padding 0.3s ease-in-out;
+      transition: color 0.2s ease-in-out, padding 0.2s ease-out;
       position: relative;
       &:hover,
       &:focus {
@@ -146,7 +150,7 @@
         background-color: $text-alt;
         width: 0;
         margin: auto;
-        transition: width 0.3s ease-in-out;
+        transition: width 0.2s ease-out;
       }
     }
   }
@@ -186,7 +190,7 @@
       opacity: 1;
       left: 0;
       transform: rotate(0deg);
-      transition: .25s ease-in-out;
+      transition: 0.25s ease-in-out;
 
       &:last-of-type {
         margin-bottom: 0;
@@ -206,7 +210,6 @@
     }
 
     &.active {
-
       background-image: url(../_global/images/hamburger-close.svg);
 
       @include media-breakpoint-down(sm) {
@@ -228,22 +231,22 @@
       }
     }
 
-    // &:before {
-    //   content: '';
-    //   position: absolute;
-    //   top: -95px;
-    //   height: 100vh;
-    //   width: 100%;
-    //   background-color: $white;
-    //   z-index: -1;
-    //   opacity: 0;
-    //   transition: opacity 0.3s ease-in-out;
-    //   pointer-events: none;
+    /* &:before {
+      content: '';
+      position: absolute;
+      top: -95px;
+      height: 100vh;
+      width: 100%;
+      background-color: $white;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+      pointer-events: none;
 
-    //   @include media-breakpoint-down(sm) {
-    //     display: none;
-    //   }
-    // }
+      @include media-breakpoint-down(sm) {
+        display: none;
+      }
+    } */
 
     &.hover {
       &:before {
@@ -294,6 +297,7 @@
 
 .social {
   margin-top: auto;
+  transition: transform 0.2s ease-in-out;
 
   @include media-breakpoint-down(sm) {
     .site-header & {
@@ -324,6 +328,8 @@
     list-style-type: none;
     text-align: center;
     position: relative;
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.2s ease-in-out;
 
     &:before {
       position: absolute;
@@ -333,8 +339,12 @@
       margin: auto;
       width: 2px;
       height: 10.7vh;
-      background-color: #B9B9B9;
+      background-color: #b9b9b9;
       content: '';
+      transform: scaleY(1);
+      transform-origin: top center;
+
+      transition: transform 0.2s 0.2s ease-in-out;
 
       @include media-breakpoint-down(sm) {
         height: 30px;
@@ -350,14 +360,27 @@
     }
 
     a {
+      color: $text-alt;
+
+      &:hover,
+      &:focus {
+        color: $brand-secondary-alt;
+      }
       path {
+        fill: currentColor;
         transition: fill 0.3s ease-in-out;
       }
-      &:hover, &:focus {
-        path {
-          fill: $brand-secondary-alt;
-        }
-      }
+    }
+  }
+
+  &.overlapping {
+    ul:before {
+      transition-delay: 0s;
+      transform: scaleY(0);
+    }
+    ul {
+      transition-delay: 0.1s;
+      transform: translate3d(0, -10.7vh, 0);
     }
   }
 }

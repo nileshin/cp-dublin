@@ -1,18 +1,8 @@
 import React, { Component } from 'react';
 import { graphql, Link } from 'gatsby';
+import { passiveIfSupported } from '../../utils';
 import './main.scss';
 
-
-// Check for passive event listeners
-// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Improving_scrolling_performance_with_passive_listeners
-let passiveIfSupported = false;
-(() => {
-  if (typeof window === 'undefined') return;
-  try {
-    // eslint-disable-next-line
-    window.addEventListener("test", null, Object.defineProperty({}, "passive", { get: function() { passiveIfSupported = { passive: true }; } }));
-  } catch(err) {}
-})();
 
 // finding a node's ancestor of a certain class
 // https://stackoverflow.com/questions/22119673/find-the-closest-ancestor-element-that-has-a-specific-class
@@ -22,7 +12,7 @@ function findAncestor (el, cls) {
 }
 
 const WORK_FILTERS = {
-  FEATURED: 'featured',
+  ALL: 'all',
   BOSTON: 'boston',
   DUBLIN: 'dublin',
 };
@@ -57,11 +47,14 @@ const renderTiles = filteredList => {
 // NB: This module represents all work, and will handle filtering as well.
 class WorkTiles extends Component {
   state = {
-    currentFilter: WORK_FILTERS.FEATURED,
+    currentFilter: WORK_FILTERS.ALL,
   };
   componentDidMount() {
     if (typeof window === 'undefined') return;
     window.addEventListener('scroll', this.handleScroll, passiveIfSupported)
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
   }
   handleScroll = e => {
     if (typeof window === 'undefined') return;
@@ -88,7 +81,8 @@ class WorkTiles extends Component {
     }))
   }
   render() {
-    const currentList = this.props.filtered_tiles.find(list => list.filter_name.toLowerCase() === this.state.currentFilter.toLowerCase());
+    const currentFilter = this.state.currentFilter.toLowerCase() === 'all' ? 'featured' : this.state.currentFilter.toLowerCase();
+    const currentList = this.props.filtered_tiles.find(list => list.filter_name.toLowerCase() === currentFilter);
     return (
       <>
         <section className="work filter-wrap">

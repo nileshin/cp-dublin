@@ -5,13 +5,13 @@ export const htmlentities = {
    *
    * @param {String} str String with unescaped HTML characters
    **/
-  encode : function(str) {
+  encode: function(str) {
     var buf = [];
-    
-    for (var i=str.length-1;i>=0;i--) {
+
+    for (var i = str.length - 1; i >= 0; i--) {
       buf.unshift(['&#', str[i].charCodeAt(), ';'].join(''));
     }
-    
+
     return buf.join('');
   },
   /**
@@ -19,13 +19,49 @@ export const htmlentities = {
    *
    * @param {String} str htmlSet entities
    **/
-  decode : function(str) {
+  decode: function(str) {
     return str.replace(/&#(\d+);/g, function(match, dec) {
       return String.fromCharCode(dec);
     });
-  }
+  },
 };
 
 export const stripTags = s => {
-  return htmlentities.decode(s.replace(/<[^>]+>/g, ""));
+  return htmlentities.decode(s.replace(/<[^>]+>/g, ''));
+};
+
+export const slugify = s => {
+  return s.toLowerCase().replace(/\s+/, '-');
+};
+
+export const formatDate = date_obj => {
+  let date = date_obj;
+  if (typeof date_obj === 'string') {
+    date = new Date(date_obj)
+  }
+  var monthNames = [
+    "January", "February", "March",
+    "April", "May", "June", "July",
+    "August", "September", "October",
+    "November", "December"
+  ];
+
+  var day = date.getDate();
+  var monthIndex = date.getMonth();
+  var year = date.getFullYear();
+
+  return monthNames[monthIndex] + ' ' + day + ', ' + year;
 }
+
+
+// Check for passive event listeners
+// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Improving_scrolling_performance_with_passive_listeners
+let passiveIfSupportedComputed = false;
+(() => {
+  if (typeof window === 'undefined') return;
+  try {
+    // eslint-disable-next-line
+    window.addEventListener("test", null, Object.defineProperty({}, "passive", { get: function() { passiveIfSupportedComputed = { passive: true }; } }));
+  } catch(err) {}
+})();
+export const passiveIfSupported = passiveIfSupportedComputed;

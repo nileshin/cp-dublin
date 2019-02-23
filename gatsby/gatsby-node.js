@@ -87,6 +87,9 @@ exports.createPages = ({ graphql, actions }) => {
               node {
                 id
                 slug
+                acf {
+                  internal_external
+                }
               }
             }
           }
@@ -95,6 +98,7 @@ exports.createPages = ({ graphql, actions }) => {
     }).then(result => {
       const newsDetailTemplate = path.resolve('./src/templates/news-detail.js');
       result.data.allWordpressPost.edges.forEach(({node: page}) => {
+        if (page.acf.internal_external !== 'internal') return;
         createPage({
           path: `/news/${page.slug}`,
           component: newsDetailTemplate,

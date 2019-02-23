@@ -69,7 +69,7 @@ module.exports = {
           `**/*/media`,
           `**/*/work`,
           `**/*/people`,
-          `**/*/location`,
+          `**/*/department`,
           `**/*/posts`,
           `**/*/categories`,
           `**/*/jobs`,
