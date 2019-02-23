@@ -36,7 +36,8 @@
     "react-dom": "^16.6.3",
     "react-helmet": "^5.2.0",
     "react-juicer-feed": "0.0.2-alpha",
-    "react-transition-group": "^2.5.3"
+    "react-transition-group": "^2.5.3",
+    "react-youtube": "^7.9.0"
   },
   "keywords": [
     "gatsby"

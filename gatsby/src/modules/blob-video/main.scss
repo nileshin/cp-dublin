@@ -1,0 +1,249 @@
+@import "../_global/scss/vendor/bootstrap-mixins.scss";
+@import '../_global/scss/variables.scss';
+
+
+.content-blob {
+  display: flex;
+  // WARNING ADDED THIS LINE WHICH WAS NOT PRESENT IN THE MONKS SCSS
+  position: relative;
+
+  .container {
+    min-height: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: auto;
+
+    @include media-breakpoint-down(sm) {
+      min-height: auto;
+      padding-top: 120px;
+      padding-bottom: 380px;
+    }
+  }
+
+  blockquote {
+    font-size: 36px;
+    line-height: 1.05555556;
+    letter-spacing: -1.72px;
+    margin-bottom: 50px;
+
+    @include media-breakpoint-down(md) {
+      font-size: 28px;
+      line-height: 1.08;
+    }
+
+    p {
+      margin-bottom: 10px;
+
+      @include media-breakpoint-down(sm) {
+        margin-bottom: 18px;
+      }
+    }
+  }
+}
+
+.blob {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  height: 800px;
+  width: 537px;
+  overflow: hidden;
+  transform: translateY(-50%);
+  transition: width 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+  z-index: 1;
+
+  @include media-breakpoint-down(lg) {
+    height: 678px;
+    width: 450px;
+  }
+
+  @include media-breakpoint-down(md) {
+    width: 279px;
+    height: 800px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    top: auto;
+    bottom: 0;
+    transform: none;
+    height: 334px;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-image: url(/global/images/oval.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    z-index: -1;
+    width: 531px;
+    transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+
+    @include media-breakpoint-down(lg) {
+      width: 450px;
+    }
+
+    @include media-breakpoint-down(md) {
+      width: 279px;
+      background-image: url(/global/images/oval_t.svg);
+    }
+
+    @include media-breakpoint-down(sm) {
+      width: 279px;
+      background-image: url(/global/images/oval_m.svg);
+    }
+  }
+
+  .cover {
+    position: absolute;
+    top: 1px;
+    right: 0;
+    width: calc(100% - 1px);
+    height: calc(100% - 1px);
+    transform: none;
+    z-index: -2;
+  }
+
+  &.vid-active {
+    border-radius: 0;
+    width: 100%;
+
+    .stop {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    iframe {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    &-shape,
+    &:before {
+      opacity: 0;
+      transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    }
+  }
+
+  &-shape {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+
+  iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 0;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    pointer-events: none;
+  }
+
+  .stop {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    visibility: hidden;
+    opacity: 0;
+    cursor: pointer;
+    transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+
+    @include media-breakpoint-down(sm) {
+      width: 25px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.vid-thumb {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: $white;
+  position: absolute;
+  top: 50%;
+  margin-top: -45px;
+  left: 80px;
+  cursor: pointer;
+  transition: left 0.3s ease-in-out, margin-left 0.3s ease-in-out;
+
+  @include media-breakpoint-down(sm) {
+    width: 64px;
+    height: 64px;
+    margin-top: 0;
+    top: 89px;
+    left: 89px;
+  }
+
+  .vid-active & {
+    left: 50%;
+    margin-left: -45px;
+  }
+
+  &:before {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 16px 0 16px 26px;
+    border-color: transparent transparent transparent $brand-secondary-alt;
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -10px;
+    margin-top: -16px;
+
+    @include media-breakpoint-down(sm) {
+      border-width: 10px 0 10px 15px;
+      margin-left: -6px;
+      margin-top: -10px;
+    }
+
+  }
+
+  &:after {
+    content: '';
+    width: 110px;
+    height: 110px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: $white;
+    opacity: 0.3;
+    margin-left: -55px;
+    margin-top: -55px;
+    border-radius: 50%;
+    z-index: -1;
+    transition: transform 0.5s ease-in-out;
+    pointer-events: none;
+
+    @include media-breakpoint-down(sm) {
+      width: 78px;
+      height: 78px;
+      margin-left: -39px;
+      margin-top: -39px;
+    }
+  }
+
+  &:hover,
+  &:focus {
+    &:after {
+      transform: scale(0);
+      animation: pulsate 2s ease-in-out infinite both;
+    }
+  }
+}
