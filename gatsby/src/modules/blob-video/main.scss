@@ -4,8 +4,6 @@
 
 .content-blob {
   display: flex;
-  // WARNING ADDED THIS LINE WHICH WAS NOT PRESENT IN THE MONKS SCSS
-  position: relative;
 
   .container {
     min-height: 800px;
@@ -47,7 +45,7 @@
   top: 50%;
   right: 0;
   height: 800px;
-  width: 537px;
+  width: 531px;
   overflow: hidden;
   transform: translateY(-50%);
   transition: width 0.3s ease-in-out, border-radius 0.3s ease-in-out;
