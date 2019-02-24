@@ -20,13 +20,15 @@ class QuoteBlobVideoModule extends Component {
             <p>{quote}</p>
             <cite>{author} <small>{author_title}</small></cite>
           </blockquote>
-          <div>
-            {supportive_copy}
-          </div>
+          <div
+                dangerouslySetInnerHTML={{
+                  __html: supportive_copy,
+                }}
+              />
         </div>
         <div className="blob yt-v">
           <img src={thumbnail.localFile.childImageSharp.fluid.src} alt="video image" className="cover" />
-          <iframe width="460" height="315" data-src={video_embed_code} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe width="460" height="315" data-src={video_embed_code} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
           <div className="vid-thumb"></div>
           <span className="stop">
             <Hamburger alt="stop" />

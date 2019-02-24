@@ -2,8 +2,17 @@
 @import '../_global/scss/variables.scss';
 
 
+//::WARNING::
+//EW I have made changes to the below scss code from the original monks template to increase browser support. (lines 11, 13-15)
+
+
 .content-blob {
   display: flex;
+  position: relative; 
+
+  @include media-breakpoint-down(sm) {
+    padding-bottom: 180px;
+  }
 
   .container {
     min-height: 800px;
@@ -74,7 +83,7 @@
     top: 0;
     left: 0;
     bottom: 0;
-    background-image: url(/global/images/oval.svg);
+    background-image: url(../_global/images/oval.svg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
@@ -88,12 +97,12 @@
 
     @include media-breakpoint-down(md) {
       width: 279px;
-      background-image: url(/global/images/oval_t.svg);
+      background-image: url(../_global/images/oval_t.svg);
     }
 
     @include media-breakpoint-down(sm) {
       width: 279px;
-      background-image: url(/global/images/oval_m.svg);
+      background-image: url(../_global/images/oval_m.svg);
     }
   }
 

@@ -34,7 +34,11 @@ class BlobVideo extends Component {
                     __html: headline,
                   }}
                 />
-              <p>{supportive_text}</p>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: supportive_text,
+                }}
+              />
             </div>
             <div className="blob yt-v">
               
