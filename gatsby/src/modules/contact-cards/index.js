@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
+import { stripTags } from '../../utils';
 import axios from 'axios';
+import './main.scss';
 
+import { ReactComponent as NewTabIcon } from '../_global/images/icon-new-tab.svg';
+import { ReactComponent as DownloadIcon } from '../_global/images/icon-dwnld.svg';
 import { ReactComponent as BrokenClouds } from '../_global/images/weather_icons/BrokenClouds.svg';
 import { ReactComponent as ClearSky } from '../_global/images/weather_icons/ClearSky.svg';
 import { ReactComponent as FewClouds } from '../_global/images/weather_icons/FewClouds.svg';
@@ -40,7 +44,7 @@ class ContactCards extends Component {
             ...state,
             cityData: {
               boston: response.data.bostonData,
-              dublin: response.data.dublinData
+              dublin: response.data.dublinData,
             },
           };
         });
@@ -53,28 +57,139 @@ class ContactCards extends Component {
     if (this.state.cityData[cityName]) {
       const city = this.state.cityData[cityName];
       const Icon = WEATHER_ICONS[city.condition.icon];
+      const time = (() => {
+        const parts = city.time.split(' ');
+        return (
+          <>
+            {parts[0]}
+            <small>{parts[1]}</small>
+          </>
+        );
+      })();
+
       return (
-        <pre>
-          <code>
-            {cityName} - {city.temp} {city.condition.condition}(
-            {Icon && <Icon />}) - ({city.time})
-          </code>
-        </pre>
+        <>
+          <li className="contact__time">{time}</li>
+          <li className="contact__weather">
+            {Icon && (
+              <Icon
+                className="icn"
+                alt={city.condition.condition || 'weather'}
+                viewBox="0 0 24 24"
+              />
+            )}
+            {Math.floor(city.temp)}
+            <span dangerouslySetInnerHTML={{ __html: '&deg;' }} />
+          </li>
+        </>
       );
     }
 
     return null;
   };
   render() {
+    const { contact_cards_repeater: cards } = this.props;
     return (
-      <div>
-        Contact Cards
-        <pre>
-          <code>{JSON.stringify(this.props, null, 1)}</code>
-        </pre>
-        {this.renderCityData('boston')}
-        {this.renderCityData('dublin')}
-      </div>
+      <>
+        <section className="contact">
+          <div className="container">
+            <div className="row">
+              {cards.map(card => {
+                return (
+                  <div className="col-lg-6" key={card.location}>
+                    <div className="contact__card">
+                      <div className="contact__details">
+                        <span className="eyebrow">{card.eyebrow}</span>
+                        <h2>{card.location}</h2>
+                        <address>
+                          <span
+                            dangerouslySetInnerHTML={{ __html: card.address }}
+                          />
+                          <a
+                            href={`tel:${card.phone.replace(/[^0-9+]/g, '')}`}
+                            title="Call us"
+                          >
+                            {card.phone}
+                          </a>
+                        </address>
+                        <a
+                          href={card.google_maps_link || `https://www.google.com/maps/place/${stripTags(card.address)}`}
+                          title="Get Directions"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="map-link"
+                        >
+                          Get Directions{' '}
+                          <NewTabIcon
+                            className="icn"
+                            alt="open map in a new tab"
+                            viewBox="0 0 18 18"
+                          />
+                        </a>
+                      </div>
+                      <ul className="contact__card-info">
+                        {this.renderCityData(card.location.toLowerCase())}
+                        <li className="contact__download">
+                          <a
+                            href={card.capabilities_pdf.url.localFile.publicURL}
+                            title="Download factsheet"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Download Factsheet{' '}
+                            <DownloadIcon alt="download" className="icn" />
+                          </a>
+                        </li>
+                      </ul>
+                      <div className="contact-brief">
+                        <div className="contact-brief__text">
+                          <h3 className="alt">Want to brief us?</h3>
+                        </div>
+                        <div className="contact-brief__img">
+                          <img
+                            src={
+                              card.contact_info.image &&
+                              card.contact_info.image.localFile &&
+                              card.contact_info.image.localFile.childImageSharp
+                                .original.src
+                            }
+                            alt={card.contact_info.name}
+                          />
+                        </div>
+                        <div className="contact-brief__info">
+                          <ul>
+                            <li>
+                              <strong>{card.contact_info.name}</strong>
+                            </li>
+                            <li>{card.contact_info.title}</li>
+                          </ul>
+                          <a
+                            href={`mailto:${card.contact_info.email}`}
+                            title="Mail us"
+                          >
+                            {card.contact_info.email}
+                          </a>
+                        </div>
+                      </div>
+                      <div className="contact__download resp">
+                        <a
+                          href={card.capabilities_pdf.url.localFile.publicURL}
+                          title="Download factsheet"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Download factsheet.{' '}
+                          <DownloadIcon className="icn" alt="download" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      </>
     );
   }
 }
@@ -87,6 +202,7 @@ export const contactCardsFragment = graphql`
       eyebrow
       location
       address
+      google_maps_link
       phone
       capabilities_pdf {
         url {
