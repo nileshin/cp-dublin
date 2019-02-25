@@ -62,6 +62,19 @@
             width: 18px;
           }
         }
+
+        // &.contact__time, &.contact__weather {
+        //   transform: scaleX(1);
+        //   transform-origin: center left;
+        //   transition: transform 0.2s ease-in-out;
+        //   &.inactive {
+        //     transform: scaleX(0);
+        //   }
+        //   &.contact__weather {
+        //     transition-delay: 0.17s;
+        //   }
+        // }
+
         &.contact__download {
           background-color: $brand-secondary;
           flex: 1;

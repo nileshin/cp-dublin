@@ -69,8 +69,8 @@ class ContactCards extends Component {
 
       return (
         <>
-          <li className="contact__time">{time}</li>
-          <li className="contact__weather">
+          <li className="contact__time" key={`time__${cityName}`}>{time}</li>
+          <li className="contact__weather" key={`weather__${cityName}`}>
             {Icon && (
               <Icon
                 className="icn"
@@ -89,8 +89,8 @@ class ContactCards extends Component {
     // Function code: /gatsby/functions/getCityData.js
     return (
       <>
-        <li className="contact__time"></li>
-        <li className="contact__weather"></li>
+        <li className="contact__time inactive" key={`time__${cityName}`}></li>
+        <li className="contact__weather inactive" key={`weather__${cityName}`}></li>
       </>
     );
   };
