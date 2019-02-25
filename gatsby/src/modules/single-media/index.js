@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
-import sliderVideo, { parseVideoEmebd } from '../../utils/video';
+import sliderVideo, { parseVideoEmbed } from '../../utils/video';
 import closeImg from '../_global/images/hamburger-close.svg';
 import './main.scss';
 
@@ -29,7 +29,7 @@ class SingleMedia extends Component {
                   <>
                     <img src={video.video_thumbnail && video.video_thumbnail.localFile && video.video_thumbnail.localFile.childImageSharp.original.src} alt={image && image.alt_text} className="cover" />
                     <a href="javascript:void(0)" title="Play" className="play"></a>
-                    <span dangerouslySetInnerHTML={{__html:video.video_embed_code}}></span>
+                    {parseVideoEmbed(video.video_embed_code)}
                     <span className="stop"><img src={closeImg} alt="stop" /></span>
                   </>
                 ) : (

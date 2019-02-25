@@ -21,8 +21,6 @@ function playPauseVideo(slick, control) {
   player = currentSlide.find("iframe").get(0);
   startTime = currentSlide.data("video-start");
 
-  console.log({slick:slick.attr('class'), slideType, currentSlide:currentSlide.attr('class')})
-
   if (slideType === "slider__vimeo") {
     switch (control) {
       case "play":
