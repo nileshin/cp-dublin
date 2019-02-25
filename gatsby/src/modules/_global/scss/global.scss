@@ -232,19 +232,24 @@ blockquote {
   }
 }
 
-cite {
+cite, .quote-name {
   font-size: 15px;
   line-height: 1.6;
   letter-spacing: -0.5px;
-  display: table;
+  display: inline-block;
   color: $text-alt;
   font-family: $font-family-sans-serif;
+  margin-top: 25px;
 
   @include media-breakpoint-down(sm) {
     line-height: 1;
   }
 
-  small {
+  & + .quote-title {
+    margin-top: 25px;
+  }
+
+  small, & + .quote-title {
     font-size: 12px;
     line-height: 1.33333333;
     font-style: normal;

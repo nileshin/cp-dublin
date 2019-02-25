@@ -16,7 +16,7 @@ class WorkDetail extends Component {
 
     return (
       <>
-        <SEO {...work.yoast_meta} {...work.yoast_social} />
+        <SEO {...work.yoast_meta} {...work.cp_meta.yoast_social} />
 
         <section className={`work-detail ${work.slug}`}>
           <RichMediaHeader {...work.acf.rich_media_header.rich_media_header} />
