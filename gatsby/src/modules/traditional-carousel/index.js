@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
-import parse from 'html-react-parser';
-import domToReact from 'html-react-parser/lib/dom-to-react';
-import sliderVideo from './video';
+import sliderVideo, { parseVideoEmbed } from '../../utils/video';
 
 import $ from 'jquery';
 import '../_global/js/vendor/slick';
@@ -10,25 +8,7 @@ import { ReactComponent as HamburgerClose } from '../_global/images/hamburger-cl
 
 import './main.scss';
 
-const parseVideoEmbed = (video_embed_code, slideClass) => {
-  return parse(video_embed_code, {
-    replace: domNode => {
-      if (!domNode.attribs.class) domNode.attribs.class = '';
-      domNode.attribs.class = (
-        domNode.attribs.class + ' embed-player slide-media'
-      ).trim();
-      if (domNode.attribs.src) {
-        const joiner = domNode.attribs.src.indexOf('?') ? '&' : '?';
-        if (slideClass === 'slider__youtube') {
-          domNode.attribs.src += `${joiner}enablejsapi=1&controls=0showinfo=0`;
-        } else if (slideClass === 'slider_vimeo') {
-          domNode.attribs.src += `${joiner}api=1&byline=0&portrait=0&title=0&autoplay=0`;
-        }
-      }
-      return domToReact(domNode);
-    },
-  });
-};
+
 
 class TraditionalCarousel extends Component {
   constructor(props) {
