@@ -18,8 +18,8 @@ class SingleMedia extends Component {
   }
   noop = e => e.preventDefault();
   render() {
-    const { video__image, video, image } = this.props;
-    const mediaType = !video__image ? 'slider__img' : video.video_embed_code.indexOf('vimeo') ? 'slider__vimeo' : video.video_embed_code.search(/youtu\.?be/) ? 'slider__youtube' : '';
+    const { video__image, video, video:{ video_embed_code = "", video_thumbnail = {} }, image } = this.props;
+    const mediaType = !video__image ? 'slider__img' : video_embed_code.indexOf('vimeo') ? 'slider__vimeo' : video_embed_code.search(/youtu\.?be/) ? 'slider__youtube' : '';
     return (
       <section className="media slider-full" ref={this.sliderWrapper}>
         <div className="container">
@@ -28,10 +28,10 @@ class SingleMedia extends Component {
               {
                 video__image ? (
                   <>
-                    <img src={video.video_thumbnail && video.video_thumbnail.localFile && video.video_thumbnail.localFile.childImageSharp.original.src} alt={image && image.alt_text} className="cover" />
+                    <img src={video_thumbnail.localFile && video_thumbnail.localFile.childImageSharp.original.src} alt={image && image.alt_text} className="cover" />
                     {/* eslint-disable-next-line */}
                     <a href="#play-video" title="Play" className="play" onClick={this.noop} />
-                    {parseVideoEmbed(video.video_embed_code, mediaType)}
+                    {parseVideoEmbed(video_embed_code, mediaType)}
                     <span className="stop"><img src={closeImg} alt="stop" /></span>
                   </>
                 ) : (
