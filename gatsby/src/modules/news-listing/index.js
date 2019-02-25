@@ -8,46 +8,72 @@ import { ReactComponent as NewTabIcon } from '../_global/images/icon-new-tab.svg
 import NewsletterCapture from '../newsletter-capture';
 import { Transition } from 'react-transition-group';
 
-const renderPost = ({ node: post }) => {
+const renderPost = ({ node: post }, i = 0, state = {}) => {
   const filterType = post.acf.internal_external;
   const colWidth = post.acf.featured ? 8 : filterType === 'external' ? 4 : 6;
   const postClassName = post.acf.featured ? 'featured' : '';
   const url =
     filterType === 'external' ? post.acf.external_link : `/news/${post.slug}`;
+  const pageStartIndex = ((state.page - 1) * state.postsPerPage) - 4;
+  const postStyle = {
+    transitionDelay: `${i > pageStartIndex ? 0.03 * (i - pageStartIndex) : 0}s`,
+  };
   return (
-    <div className={`col-md-${colWidth}`} key={post.id}>
-      <article className={postClassName}>
-        <h4 className="eyebrow">News</h4>
-        <h3>
-          {filterType === 'external' ? (
-            <a
-              href={url}
-              title={htmlentities.decode(post.title)}
-              dangerouslySetInnerHTML={{ __html: post.title }}
-              target="_blank"
-              rel="noopener noreferrer"
-            />
-          ) : (
-            <Link
-              to={url}
-              title={htmlentities.decode(post.title)}
-              dangerouslySetInnerHTML={{ __html: post.title }}
-            />
-          )}
-        </h3>
-        <div className="news-link">
-          {filterType === 'external' ? (
-            <a href={url} title="" target="_blank" rel="noopener noreferrer">
-              <NewTabIcon className="icn" viewBox="0 0 18 18" />
-              <span>{post.acf.source}</span>
-            </a>
-          ) : (
-            <p className="news-description">{post.acf.description}</p>
-          )}
-          <time dateTime={post.acf.date}>{formatDate(post.acf.date)}</time>
-        </div>
-      </article>
-    </div>
+    <Transition
+      in={!state.transitioning}
+      timeout={ANIMATION_TIME}
+      appear={true}
+      key={post.id}
+      onEnter={node => node.scrollTop}
+    >
+      {postState => {
+        return (
+          <div
+            className={`col-md-${colWidth} news-post ${postState}`}
+            style={postStyle}
+          >
+            <article className={postClassName}>
+              <h4 className="eyebrow">News</h4>
+              <h3>
+                {filterType === 'external' ? (
+                  <a
+                    href={url}
+                    title={htmlentities.decode(post.title)}
+                    dangerouslySetInnerHTML={{ __html: post.title }}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  />
+                ) : (
+                  <Link
+                    to={url}
+                    title={htmlentities.decode(post.title)}
+                    dangerouslySetInnerHTML={{ __html: post.title }}
+                  />
+                )}
+              </h3>
+              <div className="news-link">
+                {filterType === 'external' ? (
+                  <a
+                    href={url}
+                    title=""
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <NewTabIcon className="icn" viewBox="0 0 18 18" />
+                    <span>{post.acf.source}</span>
+                  </a>
+                ) : (
+                  <p className="news-description">{post.acf.description}</p>
+                )}
+                <time dateTime={post.acf.date}>
+                  {formatDate(post.acf.date)}
+                </time>
+              </div>
+            </article>
+          </div>
+        );
+      }}
+    </Transition>
   );
 };
 
@@ -133,6 +159,7 @@ class NewsListingDisplay extends Component {
       currentFilter,
       postsPerPage,
       page,
+      transitioning,
     } = this.state;
     const filteredPosts = unfilteredPosts.filter(({ node: post }) => {
       if (currentFilter === NEWS_FILTER.ALL) return true;
@@ -175,11 +202,11 @@ class NewsListingDisplay extends Component {
               renderPost(featuredPost)}
             {posts
               .slice(0, currentFilter === NEWS_FILTER.ALL ? 3 : 4)
-              .map(renderPost)}
+              .map((post, i) => renderPost(post, i, this.state))}
             <DefiantlyHumanCallOut {...this.props.defiantlyHumanCallout} />
             {posts
               .slice(currentFilter === NEWS_FILTER.ALL ? 3 : 4)
-              .map(renderPost)}
+              .map((post, i) => renderPost(post, i, this.state))}
             {hasNextPage && (
               <div className="col-md-2 filter-load">
                 <a
