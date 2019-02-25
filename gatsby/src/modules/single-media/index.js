@@ -18,7 +18,7 @@ class SingleMedia extends Component {
   }
   noop = e => e.preventDefault();
   render() {
-    const { video__image, video, video:{ video_embed_code = "", video_thumbnail = {} }, image } = this.props;
+    const { video__image, video:{ video_embed_code = "", video_thumbnail = {} }, image } = this.props;
     const mediaType = !video__image ? 'slider__img' : video_embed_code.indexOf('vimeo') ? 'slider__vimeo' : video_embed_code.search(/youtu\.?be/) ? 'slider__youtube' : '';
     return (
       <section className="media slider-full" ref={this.sliderWrapper}>

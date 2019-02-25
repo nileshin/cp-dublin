@@ -160,8 +160,7 @@ class NewsListingDisplay extends Component {
       featuredPost,
       currentFilter,
       postsPerPage,
-      page,
-      transitioning,
+      page
     } = this.state;
     const filteredPosts = unfilteredPosts.filter(({ node: post }) => {
       if (currentFilter === NEWS_FILTER.ALL) return true;
