@@ -1,25 +1,12 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
-import YouTube from 'react-youtube';
 import './main.scss';
+import './main.js';
 
 class BlobVideo extends Component {
-  state = {
-    player: {},
-    playing: false,
-  };
   render() {
-    const { eyebrow, headline, supportive_text, video_thumbnail} = this.props;
-    const opts = {
-      height: '315',
-      width: '640',
-      playerVars: {
-        autoplay: 1,
-        enablejsapi: 1,
-        rel: 0,
-        mute: 1
-      }
-    };
+    const { eyebrow, headline, supportive_text, video_thumbnail, video_embed_code} = this.props;
+
     return (
         <section className="content-blob">
           <div style={{display: "none"}}>
@@ -42,26 +29,18 @@ class BlobVideo extends Component {
             </div>
             <div className="blob yt-v">
               
-              <img src={video_thumbnail.localFile.childImageSharp.fluid.src} alt="video image" className="cover" />
-
-              <YouTube
-                videoId="2g811Eo7K8U"
-                opts={opts}
-                onReady={this._onReady}
+              <img src={video_thumbnail.localFile.childImageSharp.fluid.src} alt="video thumb" className="cover" />
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: video_embed_code ,
+                }}
               />
-
-              {/* <iframe title="meh" width="460" height="315" data-src="https://www.youtube.com/embed/9xwazD5SyVg?autoplay=1&enablejsapi=1&rel=0&mute=1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
               <div className="vid-thumb"></div>
               <span className="stop"><img src="../global/images/hamburger-close.svg" alt="" /></span>
             </div>
           </div>
         </section>
     );
-  }
-  _onReady(event) {
-    console.log(event.target);
-    //this.state.player = event.target;
-    event.target.pauseVideo();
   }
 }
 
