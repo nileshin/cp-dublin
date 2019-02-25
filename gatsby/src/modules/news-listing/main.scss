@@ -285,6 +285,17 @@
     .svg-convert {
       transform: scaleX(-1);
     }
+
+    .load-more-text {
+      transform: scale(0.9);
+    }
+  
+    .load-more-icon {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
   }
 }
 
