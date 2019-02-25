@@ -73,10 +73,10 @@ class TraditionalCarousel extends Component {
                   <>
                     <img
                       src={
-                        slide.video.video_thumbnail.localFile.childImageSharp
+                        slide.video.video_thumbnail && slide.video.video_thumbnail.localFile.childImageSharp
                           .fluid.src
                       }
-                      alt={slide.video.video_thumbnail.alt_text}
+                      alt={slide.video.video_thumbnail && slide.video.video_thumbnail.alt_text}
                       data-critical={true}
                       className="cover"
                     />
@@ -94,8 +94,8 @@ class TraditionalCarousel extends Component {
                   </>
                 ) : (
                   <img
-                    src={slide.image.localFile.childImageSharp.fluid.src}
-                    alt={slide.image.alt_text}
+                    src={slide.image && slide.image.localFile && slide.image.localFile.childImageSharp.fluid.src}
+                    alt={slide.image && slide.image.alt_text}
                     data-critical={true}
                     className="cover"
                   />
