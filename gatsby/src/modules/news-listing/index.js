@@ -116,6 +116,8 @@ class NewsListingDisplay extends Component {
 
     const newFilter = e.target.dataset.filterName;
 
+    if (newFilter === this.state.currentFilter) return;
+
     if (Object.values(NEWS_FILTER).findIndex(f => f === newFilter) < 0) {
       console.warn(`Cannot switch to filter ${newFilter}`);
       return;
