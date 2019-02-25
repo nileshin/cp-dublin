@@ -109,10 +109,10 @@ export const parseVideoEmbed = (video_embed_code, slideClass) => {
         domNode.attribs.class + ' embed-player slide-media'
       ).trim();
       if (domNode.attribs.src) {
-        const joiner = domNode.attribs.src.indexOf('?') ? '&' : '?';
+        const joiner = domNode.attribs.src.indexOf('?') > 0 ? '&' : '?';
         if (slideClass === 'slider__youtube') {
           domNode.attribs.src += `${joiner}enablejsapi=1&controls=0showinfo=0`;
-        } else if (slideClass === 'slider_vimeo') {
+        } else if (slideClass === 'slider_vimeo' || slideClass === 'slider__vimeo') {
           domNode.attribs.src += `${joiner}api=1&byline=0&portrait=0&title=0&autoplay=0`;
         }
       }

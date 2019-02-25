@@ -29,7 +29,7 @@ class SingleMedia extends Component {
                   <>
                     <img src={video.video_thumbnail && video.video_thumbnail.localFile && video.video_thumbnail.localFile.childImageSharp.original.src} alt={image && image.alt_text} className="cover" />
                     <a href="javascript:void(0)" title="Play" className="play"></a>
-                    {parseVideoEmbed(video.video_embed_code)}
+                    {parseVideoEmbed(video.video_embed_code, mediaType)}
                     <span className="stop"><img src={closeImg} alt="stop" /></span>
                   </>
                 ) : (
