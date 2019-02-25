@@ -19,7 +19,7 @@ class People extends Component {
         <ContentModuleWithStats {...acf.content_with_stats.content_module_with_stats} />
         <SectionHeader {...acf.leadership_header.section_header} />
         <LeadershipDetailCarousel {...acf.leadership_detail_carousel.leadership_detail_carousel} />
-        <StatRow {...acf.stat_row.stat_row} options={{blob: true, colors: true}} />
+        <StatRow {...acf.stat_row.stat_row} options={{hasBlob: true, hasColors: true}} />
         <SectionHeader {...acf.people_grid_header.section_header} />
         <PeopleGrid />
         <SocialSlider />
