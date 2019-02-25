@@ -85,7 +85,14 @@ class ContactCards extends Component {
       );
     }
 
-    return null;
+    // Oops, no data yet. The function needs to churn a bit.
+    // Function code: /gatsby/functions/getCityData.js
+    return (
+      <>
+        <li className="contact__time"></li>
+        <li className="contact__weather"></li>
+      </>
+    );
   };
   render() {
     const { contact_cards_repeater: cards } = this.props;
