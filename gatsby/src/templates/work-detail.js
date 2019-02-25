@@ -20,7 +20,7 @@ class WorkDetail extends Component {
 
         <section className={`work-detail ${work.slug}`}>
           <RichMediaHeader {...work.acf.rich_media_header.rich_media_header} />
-          {work.acf.work_detail_content_work.map((module_content, i) => {
+          {work.acf.work_detail_content_work && work.acf.work_detail_content_work.map((module_content, i) => {
             switch (module_content.__typename) {
               case 'WordPressAcf_single_media': {
                 return (
