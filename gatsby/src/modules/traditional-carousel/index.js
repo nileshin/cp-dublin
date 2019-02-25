@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 import sliderVideo, { parseVideoEmbed } from '../../utils/video';
+import get from 'lodash.get';
 
 import $ from 'jquery';
 import '../_global/js/vendor/slick';
@@ -60,10 +61,11 @@ class TraditionalCarousel extends Component {
         <div className="slider" ref={this.slider}>
           {slides.map((slide, i) => {
             let slideClass = 'slider__img';
+            const video_embed_code = get(slide, 'video.video_embed_code') || '';
             if (slide.video__image) {
-              slideClass = slide.video.video_embed_code.search(/youtu\.?be/)
+              slideClass = video_embed_code.search(/youtu\.?be/)
                 ? 'slider__youtube'
-                : slide.video.video_embed_code.indexOf('vimeo')
+                : video_embed_code.indexOf('vimeo')
                 ? 'slider__vimeo'
                 : '';
             }
@@ -72,11 +74,8 @@ class TraditionalCarousel extends Component {
                 {slide.video__image ? (
                   <>
                     <img
-                      src={
-                        slide.video.video_thumbnail && slide.video.video_thumbnail.localFile.childImageSharp
-                          .fluid.src
-                      }
-                      alt={slide.video.video_thumbnail && slide.video.video_thumbnail.alt_text}
+                      src={get(slide, 'video.video_thumbnail.localFile.childImageSharp.fluid.src') || ''}
+                      alt={get(slide, 'video.video_thumbnail.alt_text') || ''}
                       data-critical={true}
                       className="cover"
                     />
@@ -87,14 +86,14 @@ class TraditionalCarousel extends Component {
                       className="play"
                       onClick={this.noop}
                     />
-                    {parseVideoEmbed(slide.video.video_embed_code, slideClass)}
+                    {parseVideoEmbed(get(slide, 'video.video_embed_code') || '', slideClass)}
                     <span className="stop">
                       <HamburgerClose />
                     </span>
                   </>
                 ) : (
                   <img
-                    src={slide.image && slide.image.localFile && slide.image.localFile.childImageSharp.fluid.src}
+                    src={get(slide, 'image.localFile.childImageSharp.fluid.src') || ''}
                     alt={slide.image && slide.image.alt_text}
                     data-critical={true}
                     className="cover"

@@ -40,7 +40,6 @@ class NewsDetail extends Component {
               <div className="col-12">
                 <div className="news-content">
                   {article_content.map(content => {
-                    console.log(content);
                     switch (content.__typename) {
                       case 'WordPressAcf_rte': {
                         return (

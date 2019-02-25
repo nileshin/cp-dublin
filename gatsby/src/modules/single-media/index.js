@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
+import get from 'lodash.get';
 import sliderVideo, { parseVideoEmbed } from '../../utils/video';
 import closeImg from '../_global/images/hamburger-close.svg';
 import './main.scss';
@@ -19,9 +20,8 @@ class SingleMedia extends Component {
   noop = e => e.preventDefault();
   render() {
     const { video__image, image } = this.props;
-    let { video: { video_embed_code, video_thumbnail } } = this.props;
-    if (!video_embed_code) video_embed_code = "";
-    if (!video_thumbnail) video_thumbnail = {};
+    const video_embed_code = get(this.props, 'video.video_embed_code') || '';
+
     const mediaType = !video__image ? 'slider__img' : video_embed_code.indexOf('vimeo') ? 'slider__vimeo' : video_embed_code.search(/youtu\.?be/) ? 'slider__youtube' : '';
     return (
       <section className="media slider-full" ref={this.sliderWrapper}>
@@ -31,7 +31,7 @@ class SingleMedia extends Component {
               {
                 video__image ? (
                   <>
-                    <img src={video_thumbnail.localFile && video_thumbnail.localFile.childImageSharp.original.src} alt={image && image.alt_text} className="cover" />
+                    <img src={get(this.props, 'video.video_thumbnail.localFile.childImageSharp.original.src') || ''} alt={get(this.props, 'video.video_thumbnail.alt_text') || ''} className="cover" />
                     {/* eslint-disable-next-line */}
                     <a href="#play-video" title="Play" className="play" onClick={this.noop} />
                     {parseVideoEmbed(video_embed_code, mediaType)}
@@ -39,7 +39,7 @@ class SingleMedia extends Component {
                   </>
                 ) : (
                   <>
-                    <img src={image && image.localFile && image.localFile.childImageSharp.original.src} alt={image && image.alt_text} className="cover" />
+                    <img src={get(image, 'localFile.childImageSharp.original.src')} alt={image && image.alt_text} className="cover" />
                   </>
                 )
               }
