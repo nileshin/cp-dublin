@@ -16,6 +16,7 @@ class SingleMedia extends Component {
       sliderVideo(this.sliderWrapper.current);
     }
   }
+  noop = e => e.preventDefault();
   render() {
     const { video__image, video, image } = this.props;
     const mediaType = !video__image ? 'slider__img' : video.video_embed_code.indexOf('vimeo') ? 'slider__vimeo' : video.video_embed_code.search(/youtu\.?be/) ? 'slider__youtube' : '';
@@ -28,7 +29,8 @@ class SingleMedia extends Component {
                 video__image ? (
                   <>
                     <img src={video.video_thumbnail && video.video_thumbnail.localFile && video.video_thumbnail.localFile.childImageSharp.original.src} alt={image && image.alt_text} className="cover" />
-                    <a href="javascript:void(0)" title="Play" className="play"></a>
+                    {/* eslint-disable-next-line */}
+                    <a href="#play-video" title="Play" className="play" onClick={this.noop} />
                     {parseVideoEmbed(video.video_embed_code, mediaType)}
                     <span className="stop"><img src={closeImg} alt="stop" /></span>
                   </>
