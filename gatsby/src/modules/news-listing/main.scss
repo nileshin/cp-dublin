@@ -163,6 +163,22 @@
       }
     }
 
+    .news-post {
+      opacity: 0;
+      transform: translate3d(0, 50px, 0);
+      transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+
+      &.exiting, &.exited {
+        opacity: 0;
+        transform: translate3d(0, 50px, 0);
+      }
+
+      &.entering, &.entered {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+      }
+    }
+
     article {
       border-top: 1px solid $white-alt;
       padding-top: 50px;
@@ -284,6 +300,17 @@
 
     .svg-convert {
       transform: scaleX(-1);
+    }
+
+    .load-more-text {
+      transform: scale(0.9);
+    }
+  
+    .load-more-icon {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
     }
   }
 }

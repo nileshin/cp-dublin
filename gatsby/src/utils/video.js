@@ -1,4 +1,6 @@
 import $ from 'jquery';
+import parse from 'html-react-parser';
+import domToReact from 'html-react-parser/lib/dom-to-react';
 
 // POST commands to YouTube or Vimeo API
 function postMessageToPlayer(player, command) {
@@ -78,22 +80,43 @@ function playPauseVideo(slick, control) {
   }
 }
 
-export default function(slideWrapper) {
-  slideWrapper.on("beforeChange", function (event, slick) {
+export default function(slideWrapperElem) {
+  $(slideWrapperElem).on("beforeChange", function (event, slick) {
     slick = $(slick.$slider);
     slick.find(".slider__item").removeClass("started");
     $(".play").fadeIn();
     playPauseVideo(slick, "pause");
   });
-  $("body").on("click", ".play", function() {
-    var slick = $(".slider");
-    playPauseVideo(slick,"play");
+  $(slideWrapperElem).on("click", ".play", function() {
+    $('.slider-full .stop, .slider .stop').click();
+    const ancestor = $(this).closest('.slider-full, .slider')
+    playPauseVideo(ancestor,"play");
     $(this).fadeOut();
   });
-  $("body").on("click", ".stop", function() {
-    var slick = $(".slider");
-    slick.find(".slider__item").removeClass("started");
+  $(slideWrapperElem).on("click", ".stop", function() {
+    const ancestor = $(this).closest('.slider-full, .slider');
+    ancestor.find(".slider__item").removeClass("started");
     $(".play").fadeIn();
-    playPauseVideo(slick, "pause");
+    playPauseVideo(ancestor, "pause");
   });
 }
+
+export const parseVideoEmbed = (video_embed_code, slideClass) => {
+  return parse(video_embed_code, {
+    replace: domNode => {
+      if (!domNode.attribs.class) domNode.attribs.class = '';
+      domNode.attribs.class = (
+        domNode.attribs.class + ' embed-player slide-media'
+      ).trim();
+      if (domNode.attribs.src) {
+        const joiner = domNode.attribs.src.indexOf('?') > 0 ? '&' : '?';
+        if (slideClass === 'slider__youtube') {
+          domNode.attribs.src += `${joiner}enablejsapi=1&controls=0showinfo=0`;
+        } else if (slideClass === 'slider_vimeo' || slideClass === 'slider__vimeo') {
+          domNode.attribs.src += `${joiner}api=1&byline=0&portrait=0&title=0&autoplay=0`;
+        }
+      }
+      return domToReact(domNode);
+    },
+  });
+};

@@ -9,7 +9,7 @@
         <polygon id="path-5" points="0.00042 0.354 6.13767 0.354 6.13767 4.2347 0.00042 4.2347"></polygon>
     </defs>
     <g id="Icon/Weather/Mist" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <rect fill="#F2F2F2" x="0" y="0" width="24" height="24"></rect>
+        <rect fill="transparent" x="0" y="0" width="24" height="24"></rect>
         <g id="Group-28" transform="translate(2.000000, 4.000000)">
             <g id="Group-8" transform="translate(13.650000, 0.646500)">
                 <g id="Group-3">

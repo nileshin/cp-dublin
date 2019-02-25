@@ -94,7 +94,8 @@
       }
     }
 
-    &.blob {
+    &.has-blob {
+      position: static;
       .container:before {
         display: block;
 
@@ -104,7 +105,7 @@
       }
     }
 
-    &.colors {
+    &.has-colors {
       .stat__content {
         .lg-text {
           color: $brand-secondary;

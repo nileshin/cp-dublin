@@ -12,9 +12,6 @@ class Contact extends Component {
         <SEO {...page.yoast_meta} {...page.yoast_social} />
         <Header {...header.header} />
         <ContactCards {...contact_cards.contact_cards} />
-        <pre>
-          <code>{JSON.stringify(this.props.data, null, 1)}</code>
-        </pre>
       </>
     );
   }

@@ -11,12 +11,6 @@ class WorkDetailIntro extends Component {
 
     return (
       <section className="intro-work">
-        <div style={{ display: 'none', border: 'solid 1px #bada55' }}>
-          Work Detail Intro
-          <pre>
-            <code>{JSON.stringify(this.props, null, 1)}</code>
-          </pre>
-        </div>
         <div className="container">
           <div className="row">
             <div className="col-md-6">

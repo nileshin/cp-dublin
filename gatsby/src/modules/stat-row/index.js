@@ -5,9 +5,9 @@ import './main.scss';
 
 class StatRow extends Component {
   render() {
-    const { stats, options:{blob, colors} = {} } = this.props;
+    const { stats, options:{hasBlob, hasColors} = {} } = this.props;
     return (
-      <section className={`stat stat-alt ${blob ? 'blob' : ''} ${colors ? 'colors' : ''}`}>
+      <section className={`stat stat-alt ${hasBlob ? 'has-blob' : ''} ${hasColors ? 'has-colors' : ''}`}>
         <div className="container">
           <div className="row stat__head">
             {stats.map(({ stat_title }) => {
