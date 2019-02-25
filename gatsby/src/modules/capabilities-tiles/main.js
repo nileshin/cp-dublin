@@ -3,6 +3,7 @@ import $ from 'jquery';
 (function($) {
 if (typeof window === 'undefined') return;
 
+
 var popTarget;
 $.fn.instancitePopup  = function(){
    

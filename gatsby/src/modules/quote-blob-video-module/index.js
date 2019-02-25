@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 
 import { ReactComponent as Hamburger } from '../_global/images/hamburger-close.svg';
-
+import './main.js';
 
 class QuoteBlobVideoModule extends Component {
   render() {
@@ -27,8 +27,12 @@ class QuoteBlobVideoModule extends Component {
               />
         </div>
         <div className="blob yt-v">
-          <img src={thumbnail.localFile.childImageSharp.fluid.src} alt="video image" className="cover" />
-          <iframe width="460" height="315" data-src={video_embed_code} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+          <img src={thumbnail.localFile.childImageSharp.fluid.src} alt="video thumb" className="cover" />
+          <div
+            dangerouslySetInnerHTML={{
+              __html: video_embed_code ,
+            }}
+          />          
           <div className="vid-thumb"></div>
           <span className="stop">
             <Hamburger alt="stop" />
