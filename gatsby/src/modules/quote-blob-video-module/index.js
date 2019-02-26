@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 
 import { ReactComponent as Hamburger } from '../_global/images/hamburger-close.svg';
-import './main.js';
+//import './main.js';
 
 class QuoteBlobVideoModule extends Component {
   render() {

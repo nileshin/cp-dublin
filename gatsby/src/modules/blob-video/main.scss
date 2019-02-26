@@ -130,6 +130,9 @@
       opacity: 1;
       pointer-events: all;
     }
+    .vid-thumb{
+      display: none;
+    }
 
     &-shape,
     &:before {
