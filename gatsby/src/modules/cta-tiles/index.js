@@ -3,10 +3,14 @@ import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 import './main.scss';
 
-const renderTile = tile => (
+const renderTile = (tile, htmlTitles) => (
   <div className="col-md-6">
     <div className="cta-tile">
-      <h3>{tile.headline}</h3>
+      {htmlTitles ? (
+        <h3 dangerouslySetInnerHTML={{ __html: tile.headline }} />
+      ) : (
+        <h3>{tile.headline}</h3>
+      )}
       {tile.cta.url.indexOf('http') === 0 ? (
         <a href={tile.cta.url} title={tile.cta.title} className="cta">
           {tile.cta.title}
@@ -36,14 +40,14 @@ const renderTile = tile => (
 
 class CTATiles extends Component {
   render() {
-    const { left_cta, right_cta } = this.props;
+    const { left_cta, right_cta, htmlTitles } = this.props;
 
     return (
       <section className="cta-tiles bg-dark">
         <div className="container-fluid">
           <div className="row">
-            {renderTile(left_cta)}
-            {renderTile(right_cta)}
+            {renderTile(left_cta, htmlTitles)}
+            {renderTile(right_cta, htmlTitles)}
           </div>
         </div>
       </section>

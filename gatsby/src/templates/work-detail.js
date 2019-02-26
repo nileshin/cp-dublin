@@ -7,12 +7,37 @@ import WorkDetailIntro from '../modules/work-detail-intro';
 import StatLongFactRow from '../modules/stat-long-fact-row';
 import RichMediaHeader from '../modules/rich-media-header';
 import StatRow from '../modules/stat-row';
+import get from 'lodash.get';
+import CTATiles from '../modules/cta-tiles';
+
+const getCtaProps = (work, cta_title) => {
+  if (!work) return {};
+
+  return {
+    headline: work.title,
+    cta: {
+      title: cta_title,
+      url: `/work/${work.slug}`,
+      target: ''
+    },
+    image: get(work, 'acf.rich_media_header.rich_media_header.image')
+  }
+}
 
 class WorkDetail extends Component {
   render() {
     const {
-      data: { wordpressWpWork: work },
+      data: { wordpressWpWork: work, allWordpressWpWork: allWork },
     } = this.props;
+
+    const workIndex = allWork.edges.findIndex(({ node:w }) => w.id === work.id);
+    const prevWork = workIndex > 0 ? allWork.edges[workIndex-1].node : allWork.edges[allWork.edges.length - 1].node;
+    const nextWork = workIndex < allWork.edges.length - 1 ? allWork.edges[workIndex+1].node : allWork.edges[0].node;
+
+    const cta_tiles_props = {
+      left_cta: getCtaProps(prevWork, 'Previous'),
+      right_cta: getCtaProps(nextWork, 'Next')
+    }
 
     return (
       <>
@@ -68,6 +93,7 @@ class WorkDetail extends Component {
               }
             }
           })}
+          <CTATiles {...cta_tiles_props} htmlTitles />
         </section>
       </>
     );
@@ -118,6 +144,27 @@ export const query = graphql`
             id
             stat_row {
               ...StatRowFragmentWorkDetail
+            }
+          }
+        }
+      }
+    }
+    allWordpressWpWork {
+      edges {
+        node {
+          id
+          title
+          slug
+          acf {
+            rich_media_header {
+              rich_media_header {
+                image {
+                  localFile {
+                    publicURL
+                  }
+                  ...WpMediaFragmentFluid1440
+                }
+              }
             }
           }
         }
