@@ -117,11 +117,25 @@ export const traditionalCarouselFragment = graphql`
       video {
         video_embed_code
         video_thumbnail {
-          ...WpMediaFragmentFluid
+          alt_text
+          localFile {
+            childImageSharp {
+              fluid(quality:100) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
         }
       }
       image {
-        ...WpMediaFragmentFluid
+        alt_text
+        localFile {
+          childImageSharp {
+            fluid(quality:100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
       }
     }
   }
