@@ -12,6 +12,9 @@
   }
 
   .container {
+    width: 100%;
+    max-width: calc(100% - 200px);
+
     @include media-breakpoint-down(lg) {
       max-width: calc(100% - 50px);
     }
@@ -102,6 +105,8 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  max-width: 600px;
+  margin: 0 auto;
 
   @include media-breakpoint-down(sm) {
     flex-direction: column;
