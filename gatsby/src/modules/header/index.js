@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import './main.scss';
+import get from 'lodash.get';
 
 class Header extends Component {
   render() {
@@ -9,7 +10,7 @@ class Header extends Component {
     return (
       <section className="page-banner bg-img">
         <Img
-          fluid={image.localFile.childImageSharp.fluid}
+          fluid={get(image, 'localFile.childImageSharp.fluid')}
           className="header-bg-img"
           style={{ position: 'absolute' }}
         />
