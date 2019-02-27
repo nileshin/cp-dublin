@@ -4,6 +4,7 @@ import Img from 'gatsby-image';
 import Transition from 'react-transition-group/Transition';
 import load_more from '../_global/images/load-more.svg';
 import shuffle from 'lodash.shuffle';
+import get from 'lodash.get';
 import './main.scss';
 
 const PEOPLE_FILTERS = {
@@ -154,8 +155,7 @@ class PeopleGrid extends Component {
                               <figure>
                                 <Img
                                   fluid={
-                                    person.featured_media.localFile
-                                      .childImageSharp.fluid
+                                    get(person, 'featured_media.localFile.childImageSharp.fluid') || person.acf.name
                                   }
                                   alt={person.acf.name}
                                   fadeIn={true}
