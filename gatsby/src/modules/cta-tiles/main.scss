@@ -95,6 +95,17 @@
       margin-bottom: 0;
     }
 
+    &:hover {
+      .cta {
+        &:before {
+          transform: scaleX(0);
+        }
+        &:after {
+          left: 100%;
+        }
+      }
+    }
+
     &__img {
       margin: 0;
       position: absolute;
