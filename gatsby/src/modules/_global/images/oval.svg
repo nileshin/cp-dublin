@@ -18,7 +18,7 @@
                 <g id="Video-Teaser" transform="translate(909.000000, 0.000000)">
                     <g id="BlobVideo">
                         <mask id="mask-2">
-                            <rect x="0" y="0" width="531" height="800" fill="#fafafa" />
+                            <rect x="0" y="0" width="531" height="800" fill="#fff" />
                             <use xlink:href="#path-1" fill="black"></use>
                         </mask>
                         <g id="Oval">
