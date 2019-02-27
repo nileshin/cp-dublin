@@ -12,8 +12,8 @@
   margin-top: 45px;
 
   @include media-breakpoint-down(sm) {
-    width: calc(100% + 100px);
-    margin-left: -50px;
+    width: 100vw;
+    margin-left: -72.5px; //60px nav + 12.5px container padding
   }
 
   &__item {

@@ -14,7 +14,7 @@ class Work extends Component {
     return (
       <>
         <SEO {...page.yoast_meta} {...page.yoast_social} />
-        <section className={`work ${page.slug}`}>
+        <section className={`work-landing page-${page.slug}`}>
           <Header {...acf.header.header} />
           <BlobVideo {...acf.blob_video.blob_video} />
           <WorkTiles {...acf.work_tiles} />

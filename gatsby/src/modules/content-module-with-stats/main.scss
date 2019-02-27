@@ -45,8 +45,14 @@
         flex-wrap: wrap;
         justify-content: space-between;
         align-items: flex-end;
-        min-width: calc(100% + 32px);
-        margin-left: -16px;
+        // min-width: calc(100% + 32px);
+        // margin-left: -16px;
+        max-width: 100%;
+      }
+
+      @include media-breakpoint-down(xs) {
+        min-width: calc(100% + 65px);
+        margin-left: -32px;
       }
     }
 
