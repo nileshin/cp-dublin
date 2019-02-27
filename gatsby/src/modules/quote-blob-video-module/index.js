@@ -38,6 +38,7 @@ class QuoteBlobVideoModule extends Component {
     
   }
   extractVideoSRC(embed){
+    // eslint-disable-next-line
     this.MediaObj = embed.match(/https:\/\/[A-Za-z0-9\.\/]*/g)[0];   
   }
 
