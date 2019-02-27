@@ -23,6 +23,7 @@
     "gatsby-source-filesystem": "^2.0.20",
     "gatsby-source-wordpress": "^3.0.35",
     "gatsby-transformer-sharp": "^2.1.8",
+    "get-video-id": "^3.1.0",
     "html-react-parser": "^0.6.1",
     "http-proxy-middleware": "^0.19.1",
     "jquery": "^3.3.1",
@@ -37,7 +38,9 @@
     "react-dom": "^16.6.3",
     "react-helmet": "^5.2.0",
     "react-juicer-feed": "0.0.2-alpha",
+    "react-player": "^1.9.3",
     "react-transition-group": "^2.5.3",
+    "react-vimeo": "^2.0.0",
     "react-youtube": "^7.9.0"
   },
   "keywords": [
