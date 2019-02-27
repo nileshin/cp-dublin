@@ -139,6 +139,8 @@ class PeopleGrid extends Component {
                       if (transitioning) return '0s';
                       return i >= pageStartIndex ? `${ANIMATION_DELAY_FACTOR * (i-pageStartIndex)}s` : `0s`;
                     })();
+                    const photo = get(person, 'featured_media.localFile.childImageSharp.fluid');
+                    const alt_photo = get(person, 'acf.alternate_photo.localFile.childImageSharp.fluid');
                     return (
                       <Transition
                         in={!transitioning}
@@ -153,14 +155,16 @@ class PeopleGrid extends Component {
                               style={{transitionDelay}}
                             >
                               <figure>
-                                <Img
-                                  fluid={
-                                    get(person, 'featured_media.localFile.childImageSharp.fluid') || person.acf.name
-                                  }
+                                {
+                                  photo &&  (
+                                    <Img
+                                  fluid={photo}
                                   alt={person.acf.name}
                                   fadeIn={true}
                                   critical={true}
                                 />
+                                  )
+                                }
                               </figure>
                               <div className="people-list__details">
                                 <h5>{person.acf.name}</h5>
@@ -168,6 +172,14 @@ class PeopleGrid extends Component {
                                   {person.acf.title}
                                 </small>
                               </div>
+                              <figure className="alternate">
+                                  {
+                                    alt_photo && (
+                                      <Img fluid={alt_photo} alt={person.acf.name + '_hover'} critical={true} />
+                                    )
+                                  }
+                                  
+                              </figure>
                             </div>
                           );
                         }}
@@ -210,6 +222,15 @@ const PeopleGridWrapper = () => (
               acf {
                 name
                 title
+                alternate_photo {
+                  localFile {
+                    childImageSharp {
+                      fluid {
+                        ...GatsbyImageSharpFluid_noBase64
+                      }
+                    }
+                  }
+                }
               }
               featured_media {
                 localFile {
