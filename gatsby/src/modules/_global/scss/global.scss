@@ -73,6 +73,11 @@ body {
     width: calc(100% - 120px);
     max-width: 100%;
   }
+
+  @include media-breakpoint-down(xs) {
+    width: calc(100% - 100px)
+  }
+
 }
 
 .row {

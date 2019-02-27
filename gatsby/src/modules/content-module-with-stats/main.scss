@@ -29,6 +29,12 @@
       line-height: 1.05;
       letter-spacing: -1.99px;
     }
+
+    @include media-breakpoint-down(sm) {
+      font-size: 28px;
+      line-height: 1;
+      letter-spacing: -1.24px;
+    }
   }
 
   &-stats {

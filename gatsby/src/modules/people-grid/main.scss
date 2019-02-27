@@ -119,6 +119,16 @@
   list-style-type: none;
   margin: 0;
 
+  @include media-breakpoint-down(xs) {
+    width: calc(100vw - 60px);
+    margin-left: -30px;
+    justify-content: space-between;
+
+    li {
+      margin-right: 0;
+    }
+  } 
+
   li {
     font-size: 22px;
     line-height: 1.19;
