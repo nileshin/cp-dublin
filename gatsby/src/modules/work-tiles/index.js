@@ -13,7 +13,7 @@ function findAncestor (el, cls) {
 }
 
 const WORK_FILTERS = {
-  ALL: 'all',
+  FEATURED: 'featured',
   BOSTON: 'boston',
   DUBLIN: 'dublin',
 };
@@ -48,7 +48,7 @@ const renderTiles = filteredList => {
 // NB: This module represents all work, and will handle filtering as well.
 class WorkTiles extends Component {
   state = {
-    currentFilter: WORK_FILTERS.ALL,
+    currentFilter: WORK_FILTERS.FEATURED,
   };
   componentDidMount() {
     if (typeof window === 'undefined') return;
@@ -89,13 +89,13 @@ class WorkTiles extends Component {
         <section className="work filter-wrap">
           <div className="container work-header">
             <div className="row">
-              <div className="col-md-6">
+              <div className="col-md-4">
                 <h2 className="alt">
                   The <br />
                   Work
                 </h2>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-8">
                 <ul className="filter">
                   {Object.values(WORK_FILTERS).map(value => (
                     <li key={value}>
