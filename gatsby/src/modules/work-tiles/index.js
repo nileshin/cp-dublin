@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { graphql, Link } from 'gatsby';
 import { passiveIfSupported } from '../../utils';
 import './main.scss';
+import get from 'lodash.get';
 
 
 // finding a node's ancestor of a certain class
@@ -20,9 +21,9 @@ const WORK_FILTERS = {
 const renderTiles = filteredList => {
   return filteredList.work_tiles.tiles.map((tile, index) => {
     let { project_title, client_name } = tile.override_fields || {};
-    if (!project_title) project_title = tile.acf.rich_media_header.rich_media_header.project_title;
-    if (!client_name) client_name = tile.acf.client_name;
-    const { post_type, post_name:slug } = tile.work_piece
+    if (!project_title) project_title = get(tile, 'acf.rich_media_header.rich_media_header.project_title') || '';
+    if (!client_name) client_name = get(tile, 'acf.client_name') || '';
+    const { post_type, post_name:slug } = tile.work_piece || {}
     const direction = index % 2 === 0 ? 'left' : 'right';
     const angleType = index % 4 === 0 || index % 4 === 1 ? 'connected' : 'reverse';
     return (
@@ -30,7 +31,7 @@ const renderTiles = filteredList => {
         <div className="container">
           <div className="row">
             <figure className="work-tile__img col-6">
-              <img src={tile.image.localFile.childImageSharp.original.src} alt="" className="cover" />
+              <img src={get(tile, 'image.localFile.childImageSharp.original.src')} alt="" className="cover" />
             </figure>
             <div className="work-tile__details col-6">
               <span className="work-tile__client">{client_name}</span>

@@ -275,6 +275,16 @@
       padding: 100px 8.5% 76px;
       margin: 0;
 
+      cite {
+        font-family: $font-family-sans-serif;
+        color: white;
+
+        small {
+          font-family: $font-family-sans-serif;
+          margin-left: 0;
+        }
+      }
+
       @include media-breakpoint-down(md) {
         padding: 36px 16.3% 28px;
       }

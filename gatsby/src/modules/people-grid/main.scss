@@ -70,6 +70,9 @@
     }
 
     .title {
+      font-weight: 300;
+      font-style: normal;
+
       @include media-breakpoint-down(sm) {
         font-size: 11px;
         line-height: 1.09090909;
