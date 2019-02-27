@@ -35,7 +35,7 @@ class SocialSlider extends Component {
           <link href="https://assets.juicer.io/embed.css" media="all" rel="stylesheet" type="text/css" />
         </Helmet>
         <div className="container"><h2 className="alt">Social<br/>Feed</h2></div>
-        <div className="juicer-container" ref={this.juicerContainer}>
+        <div className="juicer-container container" ref={this.juicerContainer}>
           <ul className="juicer-feed" data-feed-id="cpinsta" data-slick={JSON.stringify(this.slickOptions)}></ul>
         </div>
       </div>
