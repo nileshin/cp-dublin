@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
-import YouTube from 'react-youtube';
-import Vimeo from 'react-vimeo';
-import { ReactComponent as Hamburger } from '../_global/images/hamburger-close.svg';
 
+import ReactPlayer from 'react-player'
+
+import { ReactComponent as Hamburger } from '../_global/images/hamburger-close.svg';
+import $ from 'jquery';
 import './main.scss';
-import './main.js';
 
 class BlobVideo extends Component {
   constructor(props) {
@@ -13,21 +13,47 @@ class BlobVideo extends Component {
     this.state = {
       playing: false
     };
+    this.MediaObj = {};
     this.stage = React.createRef();
     this.player = React.createRef();
   }; 
+  componentDidMount() {
+    this.calcAspectRatio();
+    window.addEventListener('resize', this.onResize);
+  }
+  onResize = () => {
+    this.calcAspectRatio();
+    clearTimeout(this.resizeFinished);
+    this.resizeFinished = setTimeout(() => this.calcAspectRatio(), 950);
+  };
+  calcAspectRatio() {
+    const getHeight = (window.innerWidth * 1080) / 1920;
+    const getWidth = (1920 * window.innerHeight) / 1080;
+    if (getHeight < window.innerHeight) {
+      $(".blob iframe, .blob .react-player").width(getWidth);
+      $(".blob iframe, .blob .react-player").height(window.innerHeight);
+    } else {
+      $(".blob iframe, .blob .react-player").width(window.innerWidth);
+      $(".blob iframe, .blob .react-player").height(getHeight);
+    }
+    
+  }
+  extractVideoSRC(embed){
+    this.MediaObj = embed.match(/https:\/\/[A-Za-z0-9\.\/]*/g)[0];   
+  }
 
   render() {
     const { eyebrow, headline, supportive_text, video_thumbnail, video_embed_code} = this.props;
     const youtubeOpts = {
       playerVars: {
-        autoplay: 1,
+        autoplay: 0,
         enablejsapi:1,
         rel:0,
-        mute:1,
+        mute:0,
       }
     };
-
+    const vimeoOpts = {};
+    this.extractVideoSRC(video_embed_code);
     return (
       <section className="content-blob">
         <div style={{display: "none"}}>
@@ -52,18 +78,17 @@ class BlobVideo extends Component {
             
             <img src={video_thumbnail.localFile.childImageSharp.fluid.src} alt="video thumb" className="cover" />
             
-            {video_embed_code.search(/youtu\.?be/)? (
-              <YouTube
-                videoId="2g811Eo7K8U"
-                opts={youtubeOpts}
-                onReady={this.YT_onReady}
-                onStateChange={this.YT_onStateChange}
-                ref={this.player}
-              />
-            
-            ):(
-              <Vimeo videoId="2g811Eo7e8U" ref={this.player}/>
-            )}
+            <ReactPlayer
+              url={this.MediaObj}
+              playing={this.state.playing}
+              className='react-player'
+              config={{
+                youtube: youtubeOpts,
+                vimeo: vimeoOpts
+              }}
+              onPlay={this._onPlay}
+              onEnded={this._onEnded}
+            />
 
             <div className="vid-thumb" onClick={this._beginPlaying}></div>
             <span className="stop" onClick={this._stopPlaying} ><Hamburger alt=""/></span>
@@ -73,32 +98,28 @@ class BlobVideo extends Component {
     );
   }
   _beginPlaying = event => {
-    console.log("_beginPlaying");
+    this.calcAspectRatio();
     this.setState(state => ({
       ...state,
       playing: true
-    }));
-    this.player.current.internalPlayer.playVideo()
+    }));   
   }
 
   _stopPlaying = event => {
-    console.log("_stopPlaying");
     this.setState(state => ({
       ...state,
       playing: false
     }));
-    this.player.current.internalPlayer.pauseVideo()
   }
-
-  YT_onReady = event => {
-    console.log("_onReady");
-    event.target.pauseVideo(); //works 
+  _onPlay = event => {
+    console.log("playing")
   }
-  YT_onStateChange = event => {
-    console.log("_onStateChange ", this.state);
+  _onEnded = event => {
+    this.setState(state => ({
+      ...state,
+      playing: false
+    }));
   }
-
-
 }
 
 export default BlobVideo;

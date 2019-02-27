@@ -104,6 +104,8 @@
       width: 279px;
       background-image: url(../_global/images/oval_m.svg);
     }
+
+    
   }
 
   .cover {
@@ -123,6 +125,10 @@
     .stop {
       visibility: visible;
       opacity: 1;
+    }
+
+    div.react-player{
+      display: block;
     }
 
     iframe {
@@ -147,6 +153,10 @@
     right: 0;
     width: 100%;
     transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+
+  div.react-player{
+    display: none;
   }
 
   iframe {
