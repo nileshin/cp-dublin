@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 import YouTube from 'react-youtube';
+import Vimeo from 'react-vimeo';
 import { ReactComponent as Hamburger } from '../_global/images/hamburger-close.svg';
 
 import './main.scss';
@@ -10,14 +11,15 @@ class BlobVideo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      playing: false,
+      playing: false
     };
     this.stage = React.createRef();
     this.player = React.createRef();
   }; 
+
   render() {
     const { eyebrow, headline, supportive_text, video_thumbnail, video_embed_code} = this.props;
-    const opts = {
+    const youtubeOpts = {
       playerVars: {
         autoplay: 1,
         enablejsapi:1,
@@ -25,6 +27,7 @@ class BlobVideo extends Component {
         mute:1,
       }
     };
+
     return (
       <section className="content-blob">
         <div style={{display: "none"}}>
@@ -49,13 +52,18 @@ class BlobVideo extends Component {
             
             <img src={video_thumbnail.localFile.childImageSharp.fluid.src} alt="video thumb" className="cover" />
             
-            <YouTube
-              videoId="2g811Eo7K8U"
-              opts={opts}
-              onReady={this._onReady}
-              onStateChange={this._onStateChange}
-              ref={this.player}
-            />
+            {video_embed_code.search(/youtu\.?be/)? (
+              <YouTube
+                videoId="2g811Eo7K8U"
+                opts={youtubeOpts}
+                onReady={this.YT_onReady}
+                onStateChange={this.YT_onStateChange}
+                ref={this.player}
+              />
+            
+            ):(
+              <Vimeo videoId="2g811Eo7e8U" ref={this.player}/>
+            )}
 
             <div className="vid-thumb" onClick={this._beginPlaying}></div>
             <span className="stop" onClick={this._stopPlaying} ><Hamburger alt=""/></span>
@@ -82,13 +90,14 @@ class BlobVideo extends Component {
     this.player.current.internalPlayer.pauseVideo()
   }
 
-  _onReady = event => {
+  YT_onReady = event => {
     console.log("_onReady");
     event.target.pauseVideo(); //works 
   }
-  _onStateChange = event => {
+  YT_onStateChange = event => {
     console.log("_onStateChange ", this.state);
   }
+
 
 }
 
