@@ -35,6 +35,11 @@ exports.createPages = ({ graphql, actions }) => {
       result.data.allWordpressPage.edges.forEach(({ node: page }) => {
         if (fs.existsSync(path.resolve(`./src/pages/${page.slug}.js`))) {
           return;
+        } if (page.slug === 'home') {
+          // The slug for the homepage is "home", which doesn't match "index"
+          // So we need this special check
+          // All other page slugs / ${page}.js names should match as a rule.
+          return;
         }
         createPage({
           path: `/${page.slug}/`,
