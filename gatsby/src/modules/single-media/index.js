@@ -31,7 +31,7 @@ class SingleMedia extends Component {
               {
                 video__image ? (
                   <>
-                    <img src={get(this.props, 'video.video_thumbnail.localFile.childImageSharp.original.src') || ''} alt={get(this.props, 'video.video_thumbnail.alt_text') || ''} className="cover" />
+                    <img src={get(this.props, 'video.video_thumbnail.localFile.childImageSharp.fluid.src')} alt={get(this.props, 'video.video_thumbnail.alt_text')} className="cover" />
                     {/* eslint-disable-next-line */}
                     <a href="#play-video" title="Play" className="play" onClick={this.noop} />
                     {parseVideoEmbed(video_embed_code, mediaType)}
@@ -39,7 +39,7 @@ class SingleMedia extends Component {
                   </>
                 ) : (
                   <>
-                    <img src={get(image, 'localFile.childImageSharp.original.src')} alt={image && image.alt_text} className="cover" />
+                    <img src={get(image, 'localFile.childImageSharp.fluid.src')} alt={image && image.alt_text} className="cover" />
                   </>
                 )
               }
@@ -59,11 +59,25 @@ export const singleMediaFragment = graphql`
     video {
       video_embed_code
       video_thumbnail {
-        ...WpMediaFragment
+        alt_text
+        localFile {
+          childImageSharp {
+            fluid(quality:100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
       }
     }
     image {
-      ...WpMediaFragment
+      alt_text
+      localFile {
+        childImageSharp {
+          fluid(quality:100) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   }
 `;
