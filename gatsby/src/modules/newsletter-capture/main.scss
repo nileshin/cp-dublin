@@ -16,7 +16,7 @@
 
   .container {
     @include media-breakpoint-down(md) {
-      max-width: 595px;
+      max-width: 795px;
     }
     @include media-breakpoint-down(sm) {
       max-width: 100%;

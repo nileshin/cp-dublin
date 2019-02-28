@@ -11,7 +11,9 @@ class BlobVideo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      playing: false
+      playing: false,
+      videoReady: false,
+      volume: 0
     };
     this.MediaObj = {};
     this.stage = React.createRef();
@@ -47,13 +49,23 @@ class BlobVideo extends Component {
     const { eyebrow, headline, supportive_text, video_thumbnail, video_embed_code} = this.props;
     const youtubeOpts = {
       playerVars: {
-        autoplay: 0,
+        autoplay: 1,
+        controls: 0,
         enablejsapi:1,
+        modestbranding: 1,
         rel:0,
-        mute:0,
+        showinfo:0
+      },
+      embedOptions:{
+        wmode: 'transparent',
+        showinfo:0
       }
     };
-    const vimeoOpts = {};
+    const vimeoOpts = {
+      playerOptions:{
+        background: 1
+      }
+    };
     this.extractVideoSRC(video_embed_code);
     return (
       <section className="content-blob">
@@ -77,18 +89,20 @@ class BlobVideo extends Component {
           </div>
           <div className={ this.state.playing ? "blob yt-v vid-active" : "blob yt-v" } ref={this.stage}>
             
-            <img src={video_thumbnail.localFile.childImageSharp.fluid.src} alt="video thumb" className="cover" />
+            {/* <img src={video_thumbnail.localFile.childImageSharp.fluid.src} alt="video thumb" className="cover" /> */}
             
             <ReactPlayer
               url={this.MediaObj}
-              playing={this.state.playing}
+              // playing={this.state.playing}
               className='react-player'
               config={{
                 youtube: youtubeOpts,
                 vimeo: vimeoOpts
               }}
+              volume={this.state.volume}
               onPlay={this._onPlay}
               onEnded={this._onEnded}
+              onReady={this._onReady}
             />
 
             <div className="vid-thumb" onClick={this._beginPlaying}></div>
@@ -99,18 +113,27 @@ class BlobVideo extends Component {
     );
   }
   _beginPlaying = event => {
-    this.calcAspectRatio();
     this.setState(state => ({
       ...state,
-      playing: true
+      playing: true,
+      volume: 1
     }));   
   }
 
   _stopPlaying = event => {
     this.setState(state => ({
       ...state,
-      playing: false
+      playing: false,
+      volume: 0
     }));
+  }
+  _onReady= event => {
+    this.calcAspectRatio();
+    this.setState(state => ({
+      ...state,
+      videoReady: true
+    }));
+    console.log("playing")
   }
   _onPlay = event => {
     console.log("playing")
