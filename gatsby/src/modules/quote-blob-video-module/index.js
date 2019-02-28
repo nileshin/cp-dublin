@@ -156,8 +156,5 @@ export const quoteBlobVideoModuleFragment = graphql`
     author
     author_title
     supportive_copy
-    thumbnail {
-      ...WpMediaFragmentFluid1440
-    }
   }
 `

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 import './main.scss';
+import get from 'lodash.get';
 
 class LogoGrid extends Component {
   render() {
@@ -15,7 +16,7 @@ class LogoGrid extends Component {
                 logos.map((logo, i) => (
                   <li className="client" key={i}>
                     <figure>
-                      <img src={logo.url.localFile.publicURL} alt={logo.alt} />
+                      <img src={get(logo, 'url.localFile.publicURL') || ''} alt={logo.alt} />
                     </figure>
                   </li>
                 ))
