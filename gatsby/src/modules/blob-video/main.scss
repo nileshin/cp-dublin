@@ -14,6 +14,8 @@
     padding-bottom: 180px;
   }
 
+  
+
   .container {
     min-height: 800px;
     display: flex;
@@ -87,7 +89,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
-    z-index: -1;
+    z-index: 5;
     width: 531px;
     transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
 
@@ -121,6 +123,7 @@
   &.vid-active {
     border-radius: 0;
     width: 100%;
+    margin-left:0;
 
     .stop {
       visibility: visible;
@@ -156,7 +159,6 @@
   }
 
   div.react-player{
-    display: none;
   }
 
   iframe {
@@ -165,8 +167,6 @@
     left: 50%;
     border: 0;
     transform: translate(-50%, -50%);
-    visibility: hidden;
-    opacity: 0;
     transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
     pointer-events: none;
   }
@@ -200,6 +200,7 @@
   left: 80px;
   cursor: pointer;
   transition: left 0.3s ease-in-out, margin-left 0.3s ease-in-out;
+  z-index: 5;
 
   @include media-breakpoint-down(sm) {
     width: 64px;
