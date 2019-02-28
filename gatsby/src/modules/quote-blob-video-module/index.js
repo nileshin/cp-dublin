@@ -45,7 +45,7 @@ class QuoteBlobVideoModule extends Component {
   }
 
   render() {
-    const { video_embed_code, eyebrow, quote,  author, author_title, supportive_copy, thumbnail} = this.props;
+    const { video_embed_code, eyebrow, quote,  author, author_title, supportive_copy} = this.props;
     const youtubeOpts = {
       playerVars: {
         autoplay: 1,

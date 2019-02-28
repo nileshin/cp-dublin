@@ -46,7 +46,7 @@ class BlobVideo extends Component {
   }
 
   render() {
-    const { eyebrow, headline, supportive_text, video_thumbnail, video_embed_code} = this.props;
+    const { eyebrow, headline, supportive_text, video_embed_code} = this.props;
     const youtubeOpts = {
       playerVars: {
         autoplay: 1,
@@ -154,8 +154,5 @@ export const blobVideoFragment = graphql`
     eyebrow
     headline
     supportive_text
-    video_thumbnail {
-      ...WpMediaFragmentFluid1440
-    }
   }
 `;
