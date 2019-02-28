@@ -11,6 +11,7 @@ class QuoteBlobVideoModule extends Component {
     super(props);
     this.state = {
       playing: false,
+      videoReady: false,
       volume: 0
     };
     this.MediaObj = {};
