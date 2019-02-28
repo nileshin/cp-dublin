@@ -13,7 +13,7 @@
     }
 
     .container {
-      @include media-breakpoint-down(sm) {
+      @include media-breakpoint-down(xs) {
         width: 100%;
         padding-right: 15px;
         padding-left: 15px;

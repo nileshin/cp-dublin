@@ -1,67 +1,47 @@
+
+
 @import "../_global/scss/vendor/bootstrap-mixins.scss";
 @import '../_global/scss/variables.scss';
 
 .juicer-container {
-  padding: 0;
-  
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-down(xs) {
     width: 100vw;
     max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  ul {
+    min-width: 100vw;
+    display: block;
+    margin: 0 0 0 auto !important;
+
+    &.juicer-feed .feed-item {
+      width:240px !important;
+    }
+
+    .j-text {
+      display:grid;
+      grid-template-rows: 0fr 4fr 1fr;
+      color: #fafafa;
+      background-color:rgba(58, 58, 58, 0.9) !important;
+
+      .j-meta {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .j-message p {
+        color: #fafafa !important;
+      }
+    }
+
+    .slick-arrow {
+      display: none !important;
+    }
   }
 }
 
-ul.juicer-feed {
-  width: 100vw;
-
-  @include media-breakpoint-up(md) {
-    max-width: calc(100vw - ((100vw - 565px)/2));
-  }
-  @include media-breakpoint-up(lg) {
-    max-width: calc(100vw - ((100vw - 810px)/2));
-  }
-  @include media-breakpoint-up(xl) {
-    max-width: calc(100vw - ((100vw - 1060px)/2));
-  }
-
-  h1.referral {
-    display: none;
-  }
-
-  // undoing traditional carousel styles
-  .slick {
-    &-next, &-prev {
-      &:before {
-        border: none;
-      }
-    }
-    &-prev {
-      right: auto;
-    }
-    &-next{
-      left: auto;
-    }
-  }
-
-  .feed-item {
-    width: 250px !important;
-    background: transparent;
-
-    @include media-breakpoint-up(md) {
-      width: 200px !important;
-    }
-    @include media-breakpoint-up(lg) {
-      width: 200px !important;
-    }
-    @include media-breakpoint-up(xl) {
-      width: 250px !important
-    }
-    @include media-breakpoint-down(sm) {
-      width: 125px !important;
-    }
-  }
-
-  img.j-content-image {
-    width: auto !important;
-    margin: 0 5px;
-  }
+.social-slider {
+  margin-bottom: 130px;
 }
