@@ -212,3 +212,16 @@ $grid-float-breakpoint : 992px;
   	font-family: 'object-fit: #{$fit}';
   }
 }
+
+/* 
+This is a mix-in to apply animation styles to elements that transition
+ex. @include transition(all,2s,ease-out);
+*/
+
+@mixin transition($what: all, $time: 0.2s, $how: ease-in-out) {
+  -webkit-transition: $what $time $how;
+  -moz-transition:    $what $time $how;
+  -ms-transition:     $what $time $how;
+  -o-transition:      $what $time $how;
+  transition:         $what $time $how;
+}

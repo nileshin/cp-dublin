@@ -13,13 +13,13 @@ class NewsletterCapture extends Component {
         <div className="col-12 full-width">
           <div className="container">
             <div className="row">
-              <div className="col-md-5 col-lg-8">
+              <div className="col">
                 <div className="newsletter__detail">
                   <h2>{title}</h2>
                   <p>{copy}</p>
                 </div>
               </div>
-              <div className="col-md-7 col-lg-4">
+              <div className="col-md-auto">
                 <form
                   id="newsletter-form"
                   className="newsletter-form"
