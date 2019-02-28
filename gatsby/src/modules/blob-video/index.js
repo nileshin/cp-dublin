@@ -46,7 +46,7 @@ class BlobVideo extends Component {
   }
 
   render() {
-    const { eyebrow, headline, supportive_text, video_thumbnail, video_embed_code} = this.props;
+    const { eyebrow, headline, supportive_text, video_embed_code} = this.props;
     const youtubeOpts = {
       playerVars: {
         autoplay: 1,
@@ -88,9 +88,7 @@ class BlobVideo extends Component {
             />
           </div>
           <div className={ this.state.playing ? "blob yt-v vid-active" : "blob yt-v" } ref={this.stage}>
-            
-            {/* <img src={video_thumbnail.localFile.childImageSharp.fluid.src} alt="video thumb" className="cover" /> */}
-            
+                        
             <ReactPlayer
               url={this.MediaObj}
               // playing={this.state.playing}
@@ -103,6 +101,7 @@ class BlobVideo extends Component {
               onPlay={this._onPlay}
               onEnded={this._onEnded}
               onReady={this._onReady}
+              loop='true'
             />
 
             <div className="vid-thumb" onClick={this._beginPlaying}></div>
@@ -154,8 +153,5 @@ export const blobVideoFragment = graphql`
     eyebrow
     headline
     supportive_text
-    video_thumbnail {
-      ...WpMediaFragmentFluid1440
-    }
   }
 `;
