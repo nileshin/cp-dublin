@@ -257,9 +257,9 @@
     justify-content: space-between;
 
     li {
-      margin-right: 0;
+      margin-right: 10px;
     }
-  } 
+  }
 
   a {
     color: $text-alt;
@@ -277,6 +277,17 @@
       color: $brand-primary;
       border-color: currentColor;
     }
+  }
+}
+
+.work .filter {
+  @include media-breakpoint-down(xs) {
+    width: calc(100vw);
+    max-width: 265px;
+    margin: 0 auto;
+    margin-top: 25px;
+    justify-content: space-between;
+    transform: translateX(-10px);
   }
 }
 
