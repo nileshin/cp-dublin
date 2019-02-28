@@ -14,7 +14,7 @@ class DefiantlyHumanCallOut extends Component {
               <h3>
                 <a href={cta.url} title={headline} target={cta.target}>{headline}</a>
               </h3>
-              <a href={cta.url} className="cta">
+              <a href={cta.url} className="cta" target={cta.target}>
                 <NewTabIcon className="icn" />{' '}
                 {cta.title}
               </a>
