@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import HomeHeader from '../modules/home-header';
 import { graphql } from 'gatsby';
+import SEO from '../components/seo';
 
 class NotFound extends Component {
   render() {
@@ -18,6 +19,7 @@ class NotFound extends Component {
     
     return (
       <>
+        <SEO title='404' />
         <HomeHeader {...home_header} center_content={true} />
       </>
     );
