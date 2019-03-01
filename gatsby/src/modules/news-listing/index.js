@@ -209,7 +209,7 @@ class NewsListingDisplay extends Component {
               .slice(currentFilter === NEWS_FILTER.ALL ? 3 : 4)
               .map((post, i) => renderPost(post, i, this.state))}
             {hasNextPage && (
-              <div className="col-md-2 filter-load">
+              <div className="col-md-4 filter-load">
                 <a
                   href="#load-more"
                   className="load-more"
