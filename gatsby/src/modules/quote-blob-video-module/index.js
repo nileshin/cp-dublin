@@ -86,12 +86,9 @@ class QuoteBlobVideoModule extends Component {
               />
         </div>
         <div className={ this.state.playing ? "blob yt-v vid-active" : "blob yt-v" } ref={this.stage}>
-
-          {/* <img src={thumbnail.localFile.childImageSharp.fluid.src} alt="video thumb" className="cover" /> */}
             
           <ReactPlayer
               url={this.MediaObj}
-              // playing={this.state.playing}
               className='react-player'
               config={{
                 youtube: youtubeOpts,
@@ -102,6 +99,7 @@ class QuoteBlobVideoModule extends Component {
               onEnded={this._onEnded}
               onReady={this._onReady}
               ref={this.player}
+              loop='true'
             />
 
           <div className="vid-thumb" onClick={this._beginPlaying}></div>
