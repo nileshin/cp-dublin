@@ -19,3 +19,15 @@
 
 [context."people-grid-transitions"]
   environment = { PANTHEON_ENV = "dev" }
+
+[context.swashington]
+  environment = { PANTHEON_ENV = "dev" }
+
+[context.mlee]
+  environment = { PANTHEON_ENV = "dev" }
+
+[context.ewebster]
+  environment = { PANTHEON_ENV = "dev" }
+
+[content."grid-update"]
+  environment = { PANTHEON_ENV = "dev" }
