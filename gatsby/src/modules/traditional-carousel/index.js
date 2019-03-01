@@ -18,7 +18,7 @@ class TraditionalCarousel extends Component {
   }
   componentDidMount() {
     sliderVideo($('.slider-full'));
-    $('.slider').slick({
+    $(this.slider.current).slick({
       centerMode: true,
       centerPadding: '14%',
       slidesToShow: 1,
