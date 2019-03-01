@@ -13,7 +13,7 @@ function findAncestor (el, cls) {
 }
 
 const WORK_FILTERS = {
-  ALL: 'all',
+  ALL: 'featured',
   BOSTON: 'boston',
   DUBLIN: 'dublin',
 };
@@ -89,13 +89,13 @@ class WorkTiles extends Component {
         <section className="work filter-wrap">
           <div className="container work-header">
             <div className="row">
-              <div className="col-md-6">
+              <div className="col-md-5">
                 <h2 className="alt">
                   The <br />
                   Work
                 </h2>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-7">
                 <ul className="filter">
                   {Object.values(WORK_FILTERS).map(value => (
                     <li key={value}>
