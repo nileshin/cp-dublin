@@ -7,28 +7,49 @@ import './main.scss';
 const ANIMATION_TIME = 200;
 
 class HomeHeader extends Component {
-  state = {
-    headerActivated: false,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      headerActivated: false,
+      offset: 0
+    }
+
+    this.homeImg = React.createRef();
+    this.headline = React.createRef();
+  }
   componentDidMount() {
     if (typeof window === 'undefined') return;
+
+    this.setState(state => ({
+      ...state,
+      offset:(() => {
+        if (!this.homeImg.current || !this.headline.current) return state.offset;
+        return (this.homeImg.current.clientHeight/2) - (this.headline.current.clientHeight/2);
+      })()
+    }))
 
     setTimeout(() => {
       this.setState(state => ({
         ...state,
         headerActivated: true,
       }));
-    }, 300);
+    }, 5000);
   }
   render() {
     const { headline, headline_2, supportive_copy, cta, image, center_content } = this.props;
-    const { headerActivated } = this.state;
+    const { headerActivated, offset } = this.state;
+    const headlineStyle = headerActivated ? {} : {
+      transform: `translate3d(0, ${offset}px, 0)`,
+      transition: 'transform 0s linear'
+    }
+    console.log(headlineStyle, offset);
     return (
       <section className="home-banner page-sec">
         <div className="container">
           <div className="row">
             <div className="col-md-6 order-md-2">
-              <div className="home-banner-img">
+              <div className="home-banner-img" ref={this.homeImg}>
                 <figure>
                   <Img
                     fluid={image.localFile.childImageSharp.fluid}
@@ -41,7 +62,7 @@ class HomeHeader extends Component {
               <Transition in={headerActivated} timeout={ANIMATION_TIME}>
                 {headerState => (
                   <div className={`home-content ${headerState}`}>
-                    <h1>
+                    <h1 style={headlineStyle} ref={this.headline}>
                       {headline && <span>{headline}</span>}{' '}
                       {headline_2 && (
                         <span className="headline-2">
