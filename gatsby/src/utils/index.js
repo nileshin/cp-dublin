@@ -37,13 +37,21 @@ export const slugify = s => {
 export const formatDate = date_obj => {
   let date = date_obj;
   if (typeof date_obj === 'string') {
-    date = new Date(date_obj)
+    date = new Date(date_obj);
   }
   var monthNames = [
-    "January", "February", "March",
-    "April", "May", "June", "July",
-    "August", "September", "October",
-    "November", "December"
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ];
 
   var day = date.getDate();
@@ -51,8 +59,7 @@ export const formatDate = date_obj => {
   var year = date.getFullYear();
 
   return monthNames[monthIndex] + ' ' + day + ', ' + year;
-}
-
+};
 
 // Check for passive event listeners
 // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Improving_scrolling_performance_with_passive_listeners
@@ -61,7 +68,27 @@ let passiveIfSupportedComputed = false;
   if (typeof window === 'undefined') return;
   try {
     // eslint-disable-next-line
-    window.addEventListener("test", null, Object.defineProperty({}, "passive", { get: function() { passiveIfSupportedComputed = { passive: true }; } }));
-  } catch(err) {}
+    window.addEventListener(
+      'test',
+      null,
+      Object.defineProperty({}, 'passive', {
+        get: function() {
+          passiveIfSupportedComputed = { passive: true };
+        },
+      })
+    );
+  } catch (err) {}
 })();
 export const passiveIfSupported = passiveIfSupportedComputed;
+
+export const stringExcerpt = (str, count) => {
+  const rawSubstring = str.substring(0, count);
+  const reverseIndex = Array.from(rawSubstring)
+    .reverse()
+    .join('')
+    .search(/\s+/);
+  const lastIndex = rawSubstring.length - reverseIndex;
+  let final = rawSubstring.substring(0, lastIndex);
+  if (final.length < str.length) final += '…';
+  return final;
+};
