@@ -11,7 +11,7 @@ const Home = ({ data }) => {
   const { wordpressPage: page } = data;
   return (
     <>
-      <SEO {...page.yoast_meta} {...page.yoast_social} />
+      <SEO {...page.yoast_meta} {...page.cp_meta.yoast_social} />
       <section className="home">
         <HomeHeader {...page.acf.home_header.home_header} />
         {page.acf.featured_content_page.map(module_content => {
