@@ -1,9 +1,9 @@
-@import "../_global/scss/vendor/bootstrap-mixins.scss";
+@import '../_global/scss/vendor/bootstrap-mixins.scss';
 @import '../_global/scss/variables.scss';
 
 .people {
   padding-top: 30px;
-  margin-bottom: 100px;
+  margin-bottom: 80px;
 }
 
 .people-list {
@@ -26,12 +26,14 @@
     opacity: 1;
     position: relative;
 
-    &.exiting, &.exited {
+    &.exiting,
+    &.exited {
       opacity: 0;
       transform: translate3d(0, 20px, 0);
     }
 
-    &.entering, &.entered {
+    &.entering,
+    &.entered {
       opacity: 1;
       transform: translate3d(0, 0, 0);
     }
@@ -127,7 +129,7 @@
     li {
       margin-right: 0;
     }
-  } 
+  }
 
   li {
     font-size: 22px;
@@ -184,7 +186,8 @@
   position: relative;
   z-index: 1;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     color: $white;
 
     path {
