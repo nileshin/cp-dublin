@@ -3,6 +3,7 @@ import { Link, graphql } from 'gatsby';
 import { Transition } from 'react-transition-group';
 import Img from 'gatsby-image';
 import './main.scss';
+import get from 'lodash.get';
 
 const ANIMATION_TIME = 200;
 
@@ -66,7 +67,7 @@ class HomeHeader extends Component {
               <div className="home-banner-img" ref={this.homeImg}>
                 <figure>
                   <Img
-                    fluid={image.localFile.childImageSharp.fluid}
+                    fluid={get(image, 'localFile.childImageSharp.fluid')}
                     alt="home-banner"
                   />
                 </figure>
