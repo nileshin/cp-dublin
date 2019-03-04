@@ -18,11 +18,11 @@ const getCtaProps = (work, cta_title) => {
     cta: {
       title: cta_title,
       url: `/work/${work.slug}`,
-      target: ''
+      target: '',
     },
-    image: get(work, 'acf.rich_media_header.rich_media_header.image')
-  }
-}
+    image: get(work, 'acf.rich_media_header.rich_media_header.image'),
+  };
+};
 
 class WorkDetail extends Component {
   render() {
@@ -30,14 +30,22 @@ class WorkDetail extends Component {
       data: { wordpressWpWork: work, allWordpressWpWork: allWork },
     } = this.props;
 
-    const workIndex = allWork.edges.findIndex(({ node:w }) => w.id === work.id);
-    const prevWork = workIndex > 0 ? allWork.edges[workIndex-1].node : allWork.edges[allWork.edges.length - 1].node;
-    const nextWork = workIndex < allWork.edges.length - 1 ? allWork.edges[workIndex+1].node : allWork.edges[0].node;
+    const workIndex = allWork.edges.findIndex(
+      ({ node: w }) => w.id === work.id
+    );
+    const prevWork =
+      workIndex > 0
+        ? allWork.edges[workIndex - 1].node
+        : allWork.edges[allWork.edges.length - 1].node;
+    const nextWork =
+      workIndex < allWork.edges.length - 1
+        ? allWork.edges[workIndex + 1].node
+        : allWork.edges[0].node;
 
     const cta_tiles_props = {
       left_cta: getCtaProps(prevWork, 'Previous'),
-      right_cta: getCtaProps(nextWork, 'Next')
-    }
+      right_cta: getCtaProps(nextWork, 'Next'),
+    };
 
     return (
       <>
@@ -45,54 +53,76 @@ class WorkDetail extends Component {
 
         <section className={`work-detail ${work.slug}`}>
           <RichMediaHeader {...work.acf.rich_media_header.rich_media_header} />
-          {work.acf.work_detail_content_work && work.acf.work_detail_content_work.map((module_content, i) => {
-            switch (module_content.__typename) {
-              case 'WordPressAcf_single_media': {
-                return (
-                  <SingleMedia
-                    {...module_content.single_media}
-                    key={module_content.id}
-                  />
-                );
+          {work.acf.work_detail_content_work &&
+            work.acf.work_detail_content_work.map((module_content, i) => {
+              switch (module_content.__typename) {
+                case 'WordPressAcf_single_media': {
+                  return (
+                    <SingleMedia
+                      {...module_content.single_media}
+                      key={module_content.id}
+                    />
+                  );
+                }
+                case 'WordPressAcf_traditional_carousel': {
+                  return (
+                    <TraditionalCarousel
+                      {...module_content.traditional_carousel}
+                      key={module_content.id}
+                    />
+                  );
+                }
+                case 'WordPressAcf_work_detail_intro': {
+                  return (
+                    <WorkDetailIntro
+                      {...module_content.work_detail_intro}
+                      key={module_content.id}
+                    />
+                  );
+                }
+                case 'WordPressAcf_stat_long_fact_row': {
+                  return (
+                    <StatLongFactRow
+                      {...module_content.stat_long_fact_row}
+                      key={module_content.id}
+                    />
+                  );
+                }
+                case 'WordPressAcf_stat_row': {
+                  return (
+                    <StatRow
+                      {...module_content.stat_row}
+                      key={module_content.id}
+                    />
+                  );
+                }
+                case 'WordPressAcf_rte': {
+                  return (
+                    <section
+                      className="work-detail-rte"
+                      key={module_content.id}
+                      style={{ padding: '110px 0' }}
+                    >
+                      <div className="container">
+                        <div
+                          className="rte-body"
+                          dangerouslySetInnerHTML={{
+                            __html: module_content.rte_body,
+                          }}
+                        />
+                      </div>
+                    </section>
+                  );
+                }
+                default: {
+                  return (
+                    <pre key={i}>
+                      <code>{JSON.stringify(module_content, null, 1)}</code>
+                    </pre>
+                  );
+                }
               }
-              case 'WordPressAcf_traditional_carousel': {
-                return (
-                  <TraditionalCarousel
-                    {...module_content.traditional_carousel}
-                    key={module_content.id}
-                  />
-                );
-              }
-              case 'WordPressAcf_work_detail_intro': {
-                return (
-                  <WorkDetailIntro
-                    {...module_content.work_detail_intro}
-                    key={module_content.id}
-                  />
-                );
-              }
-              case 'WordPressAcf_stat_long_fact_row': {
-                return (
-                  <StatLongFactRow
-                    {...module_content.stat_long_fact_row}
-                    key={module_content.id}
-                  />
-                );
-              }
-              case 'WordPressAcf_stat_row': {
-                return (
-                  <StatRow {...module_content.stat_row} key={module_content.id} />
-                )
-              }
-              default: {
-                return (
-                  <pre key={i}>
-                    <code>{JSON.stringify(module_content, null, 1)}</code>
-                  </pre>
-                );
-              }
-            }
-          })}
+            })}
           <CTATiles {...cta_tiles_props} htmlTitles />
         </section>
       </>
@@ -140,11 +170,15 @@ export const query = graphql`
               ...StatLongFactRowFragment
             }
           }
-          ...on WordPressAcf_stat_row {
+          ... on WordPressAcf_stat_row {
             id
             stat_row {
               ...StatRowFragmentWorkDetail
             }
+          }
+          ... on WordPressAcf_rte {
+            id
+            rte_body
           }
         }
       }
