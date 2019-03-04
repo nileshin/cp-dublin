@@ -12,7 +12,7 @@ class Careers extends Component {
     } = this.props;
     return (
       <>
-        <SEO {...page.yoast_meta} {...page.yoast_social} />
+        <SEO {...page.yoast_meta} {...page.cp_meta.yoast_social} />
         <Header {...acf.header.header} />
         <QuoteBlobVideoModule {...acf.quote_blob_video_module.quote_blob_video_module} />
         <JobListings />

@@ -14,7 +14,7 @@ class People extends Component {
     const { data: { wordpressPage: page, wordpressPage: { acf } } } = this.props;
     return (
       <>
-        <SEO {...page.yoast_meta} {...page.yoast_social} />
+        <SEO {...page.yoast_meta} {...page.cp_meta.yoast_social} />
         <Header {...acf.header.header} />
         <ContentModuleWithStats {...acf.content_with_stats.content_module_with_stats} />
         <SectionHeader {...acf.leadership_header.section_header} />

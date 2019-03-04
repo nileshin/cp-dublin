@@ -11,7 +11,7 @@ class About extends Component {
   render() {
     const { data: { wordpressPage: page, wordpressPage: { acf } } } = this.props;
     return (<>
-      <SEO {...page.yoast_meta} {...page.yoast_social} />
+      <SEO {...page.yoast_meta} {...page.cp_meta.yoast_social} />
       <Header {...acf.header.header} />
       <ContentTileWithSideImage {...acf.defiantly_human_section.content_tile_w_side_image} />
       <ImageTextPairing {...acf.why_boston_section.image_text_pairing} orientation="right" />

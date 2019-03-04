@@ -48,7 +48,7 @@ const SEO = ({
       },
       {
         name: `twitter:image`,
-        content: tw_image && tw_image.localFile ? tw_image.localFiles.publicURL : tw_image,
+        content: tw_image && tw_image.localFiles && tw_image.localFiles.publicURL ? tw_image.localFiles.publicURL : tw_image,
       },
       {
         name: `twitter:description`,

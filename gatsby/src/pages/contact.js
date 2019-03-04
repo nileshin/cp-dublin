@@ -9,7 +9,7 @@ class Contact extends Component {
     const { data: { wordpressPage: page, wordpressPage: { acf: { header, contact_cards } } } } = this.props
     return (
       <>
-        <SEO {...page.yoast_meta} {...page.yoast_social} />
+        <SEO {...page.yoast_meta} {...page.cp_meta.yoast_social} />
         <Header {...header.header} />
         <ContactCards {...contact_cards.contact_cards} />
       </>
