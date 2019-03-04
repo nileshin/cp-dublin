@@ -11,7 +11,7 @@ class HomeHeader extends Component {
     super(props);
 
     this.state = {
-      headerActivated: false,
+      headerActivated: props.suppress_animations,
       offset: 0,
     };
 
@@ -48,14 +48,16 @@ class HomeHeader extends Component {
       cta,
       image,
       center_content,
+      suppress_animations,
     } = this.props;
     const { headerActivated, offset } = this.state;
-    const headlineStyle = headerActivated
-      ? {}
-      : {
-          transform: `translate3d(0, ${offset}px, 0)`,
-          transition: 'transform 0s linear',
-        };
+    const headlineStyle =
+      headerActivated || suppress_animations
+        ? {}
+        : {
+            transform: `translate3d(0, ${offset}px, 0)`,
+            transition: 'transform 0s linear',
+          };
     return (
       <section className="home-banner page-sec">
         <div className="container">

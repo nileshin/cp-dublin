@@ -12,13 +12,19 @@ class NotFound extends Component {
     const [node] = edges;
     const {
       node: {
-        options: { not_found_content: { home_header } },
+        options: {
+          not_found_content: { home_header },
+        },
       },
     } = node;
-    
+
     return (
       <>
-        <HomeHeader {...home_header} center_content={true} />
+        <HomeHeader
+          {...home_header}
+          center_content={true}
+          suppress_animations
+        />
       </>
     );
   }
