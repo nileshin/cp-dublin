@@ -67,11 +67,11 @@ let passiveIfSupportedComputed = false;
 (() => {
   if (typeof window === 'undefined') return;
   try {
-    // eslint-disable-next-line
     window.addEventListener(
       'test',
       null,
       Object.defineProperty({}, 'passive', {
+        // eslint-disable-next-line
         get: function() {
           passiveIfSupportedComputed = { passive: true };
         },
