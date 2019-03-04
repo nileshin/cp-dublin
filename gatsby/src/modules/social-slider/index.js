@@ -9,37 +9,57 @@ class SocialSlider extends Component {
     this.juicerContainer = React.createRef();
   }
   componentDidMount() {
+    this.loadJuicer();
+  }
+  loadJuicer() {
     if (typeof window === 'undefined') return;
 
     const script = document.createElement('script');
-    script.src = "https://assets.juicer.io/embed.js";
+    script.src = 'https://assets.juicer.io/embed.js';
 
-    if (this.juicerContainer.current) {
-      this.juicerContainer.current.appendChild(script);
-    } else {
-      document.body.appendChild(script);
-    }
+    // if (this.juicerContainer.current) {
+    //   this.juicerContainer.current.appendChild(script);
+    // } else {
+    document.body.appendChild(script);
+    // }
+    const evt = document.createEvent('Event');
+    evt.initEvent('load', false, false);
+    window.dispatchEvent(evt);
   }
   slickOptions = {
     slidesToShow: 5,
     slidesToScroll: 1,
     centerMode: false,
     infinite: false,
-    variableWidth: true
-  }
+    variableWidth: true,
+  };
   render() {
     return (
       <div className="social-slider">
         <Helmet>
-          <script src="https://assets.juicer.io/embed.js" type="text/javascript"></script>
-          <link href="https://assets.juicer.io/embed.css" media="all" rel="stylesheet" type="text/css" />
+          <link
+            href="https://assets.juicer.io/embed.css"
+            media="all"
+            rel="stylesheet"
+            type="text/css"
+          />
         </Helmet>
-        <div className="container"><h2 className="alt">Social<br/>Feed</h2></div>
+        <div className="container">
+          <h2 className="alt">
+            Social
+            <br />
+            Feed
+          </h2>
+        </div>
         <div className="juicer-container container" ref={this.juicerContainer}>
-          <ul className="juicer-feed" data-feed-id="cpinsta" data-slick={JSON.stringify(this.slickOptions)}></ul>
+          <ul
+            className="juicer-feed"
+            data-feed-id="cpinsta"
+            data-slick={JSON.stringify(this.slickOptions)}
+          />
         </div>
       </div>
-    )
+    );
   }
 }
 
