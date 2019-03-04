@@ -1,7 +1,6 @@
 @import '../_global/scss/vendor/bootstrap-mixins.scss';
 @import '../_global/scss/variables.scss';
 
-
 .newsletter {
   background-color: transparent;
   padding-top: 56px;
@@ -35,7 +34,11 @@
     right: 0;
     width: 50%;
     height: 100%;
-    background: linear-gradient(to right bottom, $brand-secondary-alt 50%, transparent 50%);
+    background: linear-gradient(
+      to right bottom,
+      $brand-secondary-alt 50%,
+      transparent 50%
+    );
     transform: scaleX(-1) scaleY(-1);
 
     @include media-breakpoint-down(md) {
@@ -45,7 +48,11 @@
     }
 
     @include media-breakpoint-down(sm) {
-      background: linear-gradient(to right bottom, $brand-secondary 50%, transparent 50%);
+      background: linear-gradient(
+        to right bottom,
+        $brand-secondary 50%,
+        transparent 50%
+      );
       width: 100%;
     }
   }
@@ -55,6 +62,7 @@
   }
 
   &__detail {
+    transform: translateY(-10px);
 
     @include media-breakpoint-down(sm) {
       margin-bottom: 22px;
@@ -83,13 +91,13 @@
     position: relative;
   }
 
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  input[type="password"],
-  input[type="search"],
-  input[type="url"],
-  input[type="date"],
+  input[type='text'],
+  input[type='email'],
+  input[type='tel'],
+  input[type='password'],
+  input[type='search'],
+  input[type='url'],
+  input[type='date'],
   textarea,
   select {
     color: $brand-primary;
@@ -108,7 +116,8 @@
     background-color: $white;
     margin-bottom: 0;
     border-radius: 36.5px;
-    -webkit-transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    -webkit-transition: border-color 0.3s ease-in-out,
+      background-color 0.3s ease-in-out;
     transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-tap-highlight-color: transparent;
@@ -146,7 +155,8 @@
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       outline: 0;
       background-color: $brand-primary;
     }
