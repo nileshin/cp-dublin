@@ -56,7 +56,6 @@ class HomeHeader extends Component {
           transform: `translate3d(0, ${offset}px, 0)`,
           transition: 'transform 0s linear',
         };
-    console.log(headlineStyle, offset);
     return (
       <section className="home-banner page-sec">
         <div className="container">
