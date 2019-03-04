@@ -12,8 +12,8 @@ class HomeHeader extends Component {
 
     this.state = {
       headerActivated: false,
-      offset: 0
-    }
+      offset: 0,
+    };
 
     this.homeImg = React.createRef();
     this.headline = React.createRef();
@@ -23,26 +23,39 @@ class HomeHeader extends Component {
 
     this.setState(state => ({
       ...state,
-      offset:(() => {
-        if (!this.homeImg.current || !this.headline.current) return state.offset;
-        return (this.homeImg.current.clientHeight/2) - (this.headline.current.clientHeight/2);
-      })()
-    }))
+      offset: (() => {
+        if (!this.homeImg.current || !this.headline.current)
+          return state.offset;
+        return (
+          this.homeImg.current.clientHeight / 2 -
+          this.headline.current.clientHeight / 2
+        );
+      })(),
+    }));
 
     setTimeout(() => {
       this.setState(state => ({
         ...state,
         headerActivated: true,
       }));
-    }, 5000);
+    }, 4000);
   }
   render() {
-    const { headline, headline_2, supportive_copy, cta, image, center_content } = this.props;
+    const {
+      headline,
+      headline_2,
+      supportive_copy,
+      cta,
+      image,
+      center_content,
+    } = this.props;
     const { headerActivated, offset } = this.state;
-    const headlineStyle = headerActivated ? {} : {
-      transform: `translate3d(0, ${offset}px, 0)`,
-      transition: 'transform 0s linear'
-    }
+    const headlineStyle = headerActivated
+      ? {}
+      : {
+          transform: `translate3d(0, ${offset}px, 0)`,
+          transition: 'transform 0s linear',
+        };
     console.log(headlineStyle, offset);
     return (
       <section className="home-banner page-sec">
@@ -58,7 +71,10 @@ class HomeHeader extends Component {
                 </figure>
               </div>
             </div>
-            <div className="col-md-6" style={{alignSelf:center_content ? 'center' : 'inherit'}}>
+            <div
+              className="col-md-6"
+              style={{ alignSelf: center_content ? 'center' : 'inherit' }}
+            >
               <Transition in={headerActivated} timeout={ANIMATION_TIME}>
                 {headerState => (
                   <div className={`home-content ${headerState}`}>
