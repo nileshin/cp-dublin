@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 import { slugify, passiveIfSupported } from '../../utils';
 import { Transition } from 'react-transition-group';
 import debounce from 'lodash.debounce';
+import get from 'lodash.get';
 import './main.scss';
 
 const ANIMATION_TIME = 300;
@@ -124,7 +125,7 @@ class LeadershipDetailCarousel extends Component {
                 </button>
                 {slides.map(slide => {
                   const image =
-                    slide.image.localFile.childImageSharp.original.src;
+                    get(slide, 'image.localFile.childImageSharp.original.src');
                   return (
                     <Transition
                       in={slide.name === activeLeader}
