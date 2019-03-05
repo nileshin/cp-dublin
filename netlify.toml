@@ -21,7 +21,7 @@
   environment = { PANTHEON_ENV = "dev" }
 
 [context.swashington]
-  environment = { PANTHEON_ENV = "swashington" }
+  environment = { PANTHEON_ENV = "dev" }
 
 [context.mlee]
   environment = { PANTHEON_ENV = "dev" }

@@ -3,9 +3,11 @@ const branch_info = require('./pantheon-branchname');
 
 const filterUrls = entities => {
   const regex = new RegExp(`https?:\/\/${branch_info.pantheon_environment_url}`);
+  const regex_netlify = new RegExp(`https?:\/\/(?:.+--)?${branch_info.netlify_url}`);
   return deepMap(entities, (value, key) => {
     if (key === 'url') {
       value = value.replace(regex, '');
+      value = value.replace(regex_netlify, '');
       value = value.replace(/https?:\/\/cpcom3.lndo.site/, '');
     }
     return value;
