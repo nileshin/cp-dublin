@@ -13,6 +13,7 @@
     "gatsby": "^2.1.4",
     "gatsby-cli": "^2.4.9",
     "gatsby-image": "^2.0.29",
+    "gatsby-plugin-google-tagmanager": "^2.0.9",
     "gatsby-plugin-layout": "^1.0.12",
     "gatsby-plugin-manifest": "^2.0.9",
     "gatsby-plugin-offline": "^2.0.16",
