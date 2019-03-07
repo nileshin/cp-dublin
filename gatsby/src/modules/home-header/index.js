@@ -139,6 +139,7 @@ export const homeHeaderFragment = graphql`
     }
   }
   fragment HomeHeaderFragmentNotFound on homeHeader_12 {
+    headline
     headline_2
     supportive_copy
     cta {
