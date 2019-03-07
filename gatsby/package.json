@@ -50,6 +50,7 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build && netlify-lambda build functions",
+    "build:lando": "USE_LANDO=true gatsby build",
     "develop": "gatsby develop",
     "start": "npm run develop",
     "format": "prettier --write \"src/**/*.js\"",

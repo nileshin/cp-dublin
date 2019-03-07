@@ -1,10 +1,22 @@
-const proxy = require("http-proxy-middleware")
+const proxy = require('http-proxy-middleware');
 const wordpressNormalizer = require('./wordpress-normalizer');
 const branch_info = require('./pantheon-branchname');
+require('dotenv').config();
 
+if (process.env.USE_LANDO) {
+  console.log(
+    `Building from local lando: ${branch_info.lando_environment_url}`
+  );
+} else {
+  console.log(
+    `Building from Pantheon env: ${branch_info.pantheon_environment_url}`
+  );
+}
 
-console.log(`Building from Pantheon env: ${branch_info.pantheon_environment_url}`);
-
+const wordpressURL = process.env.USE_LANDO
+  ? branch_info.lando_environment_url
+  : branch_info.pantheon_environment_url;
+const wordpressProtocol = process.env.USE_LANDO ? 'http' : 'https';
 
 module.exports = {
   siteMetadata: {
@@ -14,14 +26,14 @@ module.exports = {
   },
   developMiddleware: app => {
     app.use(
-      "/.netlify/functions/",
+      '/.netlify/functions/',
       proxy({
-        target: "http://localhost:9000",
+        target: 'http://localhost:9000',
         pathRewrite: {
-          "/.netlify/functions/": "",
+          '/.netlify/functions/': '',
         },
       })
-    )
+    );
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -76,22 +88,23 @@ module.exports = {
           `**/*/job-location`,
           `**/cp/v1/menus`,
         ],
-        baseUrl: branch_info.pantheon_environment_url,
-        protocol: `https`,
+        baseUrl: wordpressURL,
+        protocol: wordpressProtocol,
         useACF: true,
         searchAndReplaceContentUrls: {
-          sourceUrl: `https://${branch_info.pantheon_environment_url}`,
+          sourceUrl: `${wordpressProtocol}://${wordpressURL}`,
           replacementUrl: '', // todo: swap this from loco to prod based on brach/netlify env var
         },
         normalizer: wordpressNormalizer,
       },
-    },{
+    },
+    {
       resolve: `gatsby-plugin-google-tagmanager`,
       options: {
-        id: "GTM-PSXGPJ5",
-        includeInDevelopment: false
-      }
-    }
+        id: 'GTM-PSXGPJ5',
+        includeInDevelopment: false,
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',

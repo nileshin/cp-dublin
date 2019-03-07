@@ -31,6 +31,7 @@ const getWeather = data => {
 
 exports.handler = async (event, context) => {
   let bostonData, dublinData;
+  const startTime = new Date();
   return fetch(BOSTON_API_URL)
     .then(response => response.json())
     .then(data => {
@@ -43,22 +44,32 @@ exports.handler = async (event, context) => {
     .then(data => {
       dublinData = getWeather(data);
     })
-    .then(() => fetch(BOSTON_TIME))
-    .then(response => response.json())
+    // .then(() => fetch(BOSTON_TIME))
+    // .then(response => response.json())
+    // .then(data => {
+    //   const time = moment(data.currentDateTime).tz('America/New_York').format('hh:mm a');
+    //   bostonData.time = time
+    // })
+    // .then(() => fetch(DUBLIN_TIME))
+    // .then(response => response.json())
     .then(data => {
-      const time = moment(data.currentDateTime).tz('America/New_York').format('hh:mm a');
-      bostonData.time = time
-    })
-    .then(() => fetch(DUBLIN_TIME))
-    .then(response => response.json())
-    .then(data => {
-      const time = moment(data.currentDateTime).tz('Europe/Dublin').format('hh:mm a');
-      dublinData.time = time
+      // const time = moment(data.currentDateTime).tz('Europe/Dublin').format('hh:mm a');
+      // dublinData.time = time
+
+      const bostonTime = moment(new Date(new Date().toUTCString())).tz('America/New_York').format('hh:mm a');
+      const dublinTime = moment(new Date(new Date().toUTCString())).tz('Europe/Dublin').format('hh:mm a');
+
+      bostonData.time = bostonTime;
+      dublinData.time = dublinTime;
+
+      const endTime = new Date();
       return {
         statusCode: 200,
         body: JSON.stringify({
           bostonData,
           dublinData,
+          startTime,
+          endTime
         }),
       };
     })

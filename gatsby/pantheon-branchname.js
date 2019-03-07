@@ -19,5 +19,6 @@ const netlify_url = `cp-com-3.netlify.com`;
 module.exports = {
   branch_name,
   pantheon_environment_url,
-  netlify_url
+  netlify_url,
+  lando_environment_url: 'cpcom3.lndo.site'
 }

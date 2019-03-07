@@ -45,7 +45,21 @@ const addTenure = entities => {
   })
 }
 
-const normalizers = [filterUrls, addJobLocations, addLocations, addTenure];
+const fixSeoImages = entities => {
+  return deepMap(entities, (value, key) => {
+    if (key === 'og_image' || key === 'tw_image') {
+      value = {
+        localFile: {
+          publicURL: value
+        }
+      }
+    }
+
+    return value;
+  })
+}
+
+const normalizers = [filterUrls, addJobLocations, addLocations, addTenure, fixSeoImages];
 
 module.exports = ({ entities }) => {
   console.log('');
