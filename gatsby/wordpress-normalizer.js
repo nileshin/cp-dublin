@@ -45,21 +45,6 @@ const addTenure = entities => {
   })
 }
 
-const addTenureBasic = entities => {
-  return entities.map(e => {
-    if (e && e.__type === 'wordpress__PAGE' && e.slug === 'people') {
-      if (e.acf && e.acf.leadership_detail_carousel && e.acf.leadership_detail_carousel.leadership_detail_carousel) {
-        const slides = e.acf.leadership_detail_carousel.leadership_detail_carousel.leadership_slides;
-        slides.forEach(s => {
-          console.log(`\t Setting tenure for ${s.name} - ${JSON.stringify(s.tenure)}`)
-          s.tenure = s.tenure || "";
-        })
-      }
-    }
-    return e;
-  })
-}
-
 const normalizers = [filterUrls, addJobLocations, addLocations, addTenure];
 
 module.exports = ({ entities }) => {
