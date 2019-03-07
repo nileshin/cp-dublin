@@ -488,6 +488,7 @@ a {
   margin-top: -45px;
   margin-left: -45px;
   z-index: 1;
+  transition: opacity 0.3s ease-in-out;
 
   @include media-breakpoint-down(sm) {
     width: 45px;
@@ -549,6 +550,11 @@ a {
       //transform: scale(0);
       animation: pulsate 2s ease-in infinite backwards;
     }
+  }
+
+  &.deactivated {
+    opacity: 0;
+    pointer-events: none;
   }
 }
 

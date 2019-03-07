@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
-import sliderVideo, { parseVideoEmbed } from '../../utils/video';
+// import sliderVideo, { parseVideoEmbed } from '../../utils/video';
+import ReactPlayer from 'react-player';
 import get from 'lodash.get';
 
 import $ from 'jquery';
@@ -9,15 +10,55 @@ import { ReactComponent as HamburgerClose } from '../_global/images/hamburger-cl
 
 import './main.scss';
 
+const extractVideoSRC = (embed) => {
+  if (!embed) return null;
+  // eslint-disable-next-line
+  return embed.match(/https:\/\/[A-Za-z0-9\.\/]*/g)[0];
+}
 
+const vimeo = {
+  playerOptions: {
+    //background: 1
+  }
+}
+
+class VideoSlide extends Component {
+  state = {
+    playing: false
+  }
+  onPlay = () => {
+    this.setState(state => ({
+      ...state,
+      playing: true
+    }));
+  }
+  onStop = () => {
+    this.setState(state => ({
+      ...state,
+      playing: false
+    }))
+  }
+  render() {
+    return (<ReactPlayer 
+      url={this.props.url}
+      className="react-player"
+      config={{vimeo}}
+      playing={this.state.playing}
+      volume={1}
+    />)
+  }
+}
 
 class TraditionalCarousel extends Component {
   constructor(props) {
     super(props);
     this.slider = React.createRef();
+    this.MediaObj = props.slides.map(s => extractVideoSRC(get(s, 'video.video_embed_code')));
+    this.reactPlayers = props.slides.map(s => null)
   }
   componentDidMount() {
-    sliderVideo($('.slider-full'));
+    // sliderVideo($('.slider-full'));
+    if (typeof window === 'undefined') return;
     $(this.slider.current).slick({
       centerMode: true,
       centerPadding: '14%',
@@ -29,6 +70,7 @@ class TraditionalCarousel extends Component {
     });
     this.calcSlideHeight();
     window.addEventListener('resize', this.onResize);
+    Array.from(this.slider.current.querySelectorAll('.slick-arrow')).forEach(el => el.addEventListener('click', this.onStopClicked));
   }
   componentWillUnmount() {
     window.removeEventListener('resize', this.onResize);
@@ -54,6 +96,32 @@ class TraditionalCarousel extends Component {
     return JSON.stringify(this.props) !== JSON.stringify(nextProps);
   }
   noop = e => e.preventDefault();
+  onPlayClicked = e => {
+    e.preventDefault();
+
+    if (typeof window === 'undefined') return;
+    const allStop = document.querySelectorAll('.stop');
+    Array.from(allStop).forEach(s => s.click());
+
+    const idx = +e.target.dataset.videoIndex;
+    this.reactPlayers[idx].onPlay();
+
+    const slides = this.slider.current.querySelectorAll('.slider__item');
+    Array.from(slides).forEach((s, i) => {
+      if (+s.dataset.videoIndex === idx) {
+        s.classList.add('started');
+      } else {
+        s.classList.remove('started');
+      }
+    })
+  }
+  onStopClicked = e => {
+    e.preventDefault();
+    this.reactPlayers.forEach(rp => {
+      rp.onStop && rp.onStop();
+    });
+    Array.from(this.slider.current.querySelectorAll('.slider__item')).forEach(s => s.classList.remove('started'));
+  }
   render() {
     const { slides } = this.props;
     return (
@@ -70,7 +138,7 @@ class TraditionalCarousel extends Component {
                 : '';
             }
             return (
-              <div className={`slider__item ${slideClass}`} key={i}>
+              <div className={`slider__item ${slideClass}`} data-video-index={i} key={i}>
                 {slide.video__image ? (
                   <>
                     <img
@@ -84,10 +152,11 @@ class TraditionalCarousel extends Component {
                       href="#"
                       title="Play"
                       className="play"
-                      onClick={this.noop}
+                      data-video-index={i}
+                      onClick={this.onPlayClicked}
                     />
-                    {parseVideoEmbed(get(slide, 'video.video_embed_code') || '', slideClass)}
-                    <span className="stop">
+                    <VideoSlide url={this.MediaObj[i]} ref={e => this.reactPlayers[i] = e} />
+                    <span className="stop" onClick={this.onStopClicked} data-video-index={i}>
                       <HamburgerClose />
                     </span>
                   </>
