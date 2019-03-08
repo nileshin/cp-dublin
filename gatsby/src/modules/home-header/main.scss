@@ -59,6 +59,11 @@
     }
   }
 
+  h1.no-anim span {
+    opacity: 1 !important;
+    animation: none;
+  }
+
   p {
     transition-delay: 0.15s;
   }

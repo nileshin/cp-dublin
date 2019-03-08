@@ -80,7 +80,11 @@ class HomeHeader extends Component {
               <Transition in={headerActivated} timeout={ANIMATION_TIME}>
                 {headerState => (
                   <div className={`home-content ${headerState}`}>
-                    <h1 style={headlineStyle} ref={this.headline}>
+                    <h1
+                      className={suppress_animations ? 'no-anim' : ''}
+                      style={headlineStyle}
+                      ref={this.headline}
+                    >
                       {headline && <span>{headline}</span>}{' '}
                       {headline_2 && (
                         <span className="headline-2">
