@@ -1,9 +1,8 @@
-@import "../_global/scss/vendor/slick.scss";
-@import "../_global/scss/vendor/bootstrap-mixins.scss";
+@import '../_global/scss/vendor/slick.scss';
+@import '../_global/scss/vendor/bootstrap-mixins.scss';
 @import '../_global/scss/variables.scss';
 
 .slider {
-
   @include media-breakpoint-down(sm) {
     padding-bottom: 26px;
   }
@@ -12,13 +11,22 @@
     display: flex;
     align-items: flex-end;
 
-    &:before, &:after {
+    &:before,
+    &:after {
       display: none;
     }
   }
 
   .slick-slide {
     height: auto;
+  }
+
+  .slick-prev {
+    right: 80%;
+  }
+
+  .slick-next {
+    left: 80%;
   }
 
   &__item {
@@ -50,7 +58,8 @@
       margin: 0;
     }
 
-    iframe, video {
+    iframe,
+    video {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -156,14 +165,14 @@
         opacity: 0;
         visibility: visible;
       }
-      iframe, video {
+      iframe,
+      video {
         opacity: 1;
         visibility: visible;
         z-index: 1;
       }
     }
   }
-
 }
 
 .react-player {

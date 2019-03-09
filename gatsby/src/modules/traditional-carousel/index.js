@@ -10,42 +10,44 @@ import { ReactComponent as HamburgerClose } from '../_global/images/hamburger-cl
 
 import './main.scss';
 
-const extractVideoSRC = (embed) => {
+const extractVideoSRC = embed => {
   if (!embed) return null;
   // eslint-disable-next-line
   return embed.match(/https:\/\/[A-Za-z0-9\.\/]*/g)[0];
-}
+};
 
 const vimeo = {
   playerOptions: {
     //background: 1
-  }
-}
+  },
+};
 
 class VideoSlide extends Component {
   state = {
-    playing: false
-  }
+    playing: false,
+  };
   onPlay = () => {
     this.setState(state => ({
       ...state,
-      playing: true
+      playing: true,
     }));
-  }
+  };
   onStop = () => {
     this.setState(state => ({
       ...state,
-      playing: false
-    }))
-  }
+      playing: false,
+    }));
+  };
   render() {
-    return (<ReactPlayer 
-      url={this.props.url}
-      className="react-player"
-      config={{vimeo}}
-      playing={this.state.playing}
-      volume={1}
-    />)
+    return (
+      <ReactPlayer
+        url={this.props.url}
+        className="react-player"
+        config={{ vimeo }}
+        playing={this.state.playing}
+        volume={1}
+      />
+    );
   }
 }
 
@@ -53,24 +55,29 @@ class TraditionalCarousel extends Component {
   constructor(props) {
     super(props);
     this.slider = React.createRef();
-    this.MediaObj = props.slides.map(s => extractVideoSRC(get(s, 'video.video_embed_code')));
-    this.reactPlayers = props.slides.map(s => null)
+    this.MediaObj = props.slides.map(s =>
+      extractVideoSRC(get(s, 'video.video_embed_code'))
+    );
+    this.reactPlayers = props.slides.map(s => null);
   }
   componentDidMount() {
     // sliderVideo($('.slider-full'));
     if (typeof window === 'undefined') return;
     $(this.slider.current).slick({
       centerMode: true,
-      centerPadding: '14%',
+      centerPadding: `20%`,
       slidesToShow: 1,
       dots: false,
       slidesToScroll: 1,
       draggable: false,
       swipe: false,
+      infinite: false,
     });
     this.calcSlideHeight();
     window.addEventListener('resize', this.onResize);
-    Array.from(this.slider.current.querySelectorAll('.slick-arrow')).forEach(el => el.addEventListener('click', this.onStopClicked));
+    Array.from(this.slider.current.querySelectorAll('.slick-arrow')).forEach(
+      el => el.addEventListener('click', this.onStopClicked)
+    );
   }
   componentWillUnmount() {
     window.removeEventListener('resize', this.onResize);
@@ -113,15 +120,17 @@ class TraditionalCarousel extends Component {
       } else {
         s.classList.remove('started');
       }
-    })
-  }
+    });
+  };
   onStopClicked = e => {
     e.preventDefault();
     this.reactPlayers.forEach(rp => {
       rp.onStop && rp.onStop();
     });
-    Array.from(this.slider.current.querySelectorAll('.slider__item')).forEach(s => s.classList.remove('started'));
-  }
+    Array.from(this.slider.current.querySelectorAll('.slider__item')).forEach(
+      s => s.classList.remove('started')
+    );
+  };
   render() {
     const { slides } = this.props;
     return (
@@ -138,11 +147,20 @@ class TraditionalCarousel extends Component {
                 : '';
             }
             return (
-              <div className={`slider__item ${slideClass}`} data-video-index={i} key={i}>
+              <div
+                className={`slider__item ${slideClass}`}
+                data-video-index={i}
+                key={i}
+              >
                 {slide.video__image ? (
                   <>
                     <img
-                      src={get(slide, 'video.video_thumbnail.localFile.childImageSharp.fluid.src') || ''}
+                      src={
+                        get(
+                          slide,
+                          'video.video_thumbnail.localFile.childImageSharp.fluid.src'
+                        ) || ''
+                      }
                       alt={get(slide, 'video.video_thumbnail.alt_text') || ''}
                       data-critical={true}
                       className="cover"
@@ -155,14 +173,24 @@ class TraditionalCarousel extends Component {
                       data-video-index={i}
                       onClick={this.onPlayClicked}
                     />
-                    <VideoSlide url={this.MediaObj[i]} ref={e => this.reactPlayers[i] = e} />
-                    <span className="stop" onClick={this.onStopClicked} data-video-index={i}>
+                    <VideoSlide
+                      url={this.MediaObj[i]}
+                      ref={e => (this.reactPlayers[i] = e)}
+                    />
+                    <span
+                      className="stop"
+                      onClick={this.onStopClicked}
+                      data-video-index={i}
+                    >
                       <HamburgerClose />
                     </span>
                   </>
                 ) : (
                   <img
-                    src={get(slide, 'image.localFile.childImageSharp.fluid.src') || ''}
+                    src={
+                      get(slide, 'image.localFile.childImageSharp.fluid.src') ||
+                      ''
+                    }
                     alt={slide.image && slide.image.alt_text}
                     data-critical={true}
                     className="cover"
@@ -189,7 +217,7 @@ export const traditionalCarouselFragment = graphql`
           alt_text
           localFile {
             childImageSharp {
-              fluid(quality:100) {
+              fluid(quality: 100) {
                 ...GatsbyImageSharpFluid
               }
             }
@@ -200,7 +228,7 @@ export const traditionalCarouselFragment = graphql`
         alt_text
         localFile {
           childImageSharp {
-            fluid(quality:100) {
+            fluid(quality: 100) {
               ...GatsbyImageSharpFluid
             }
           }
