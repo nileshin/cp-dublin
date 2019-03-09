@@ -1,4 +1,4 @@
-@import "../_global/scss/vendor/bootstrap-mixins.scss";
+@import '../_global/scss/vendor/bootstrap-mixins.scss';
 @import '../_global/scss/variables.scss';
 
 .content-alt {
@@ -29,6 +29,7 @@
       width: 120px;
       height: 4px;
       margin-bottom: 27px;
+      display: block;
     }
   }
 
@@ -37,7 +38,6 @@
   }
 
   &__wrap {
-
     margin-bottom: 93px;
 
     @include media-breakpoint-down(md) {
@@ -68,7 +68,6 @@
   }
 
   &__text {
-
     .right & {
       padding: 65px 0;
 
@@ -118,7 +117,6 @@
     }
 
     .left & {
-
       @include media-breakpoint-down(sm) {
         margin-bottom: 52px;
       }
@@ -135,7 +133,6 @@
           margin-right: auto;
         }
       }
-
     }
 
     figure {
