@@ -1,7 +1,7 @@
 @import 'vendor/bootstrap.scss';
 @import 'variables';
 
-*{
+* {
   -webkit-font-smoothing: antialiased;
 }
 
@@ -12,7 +12,8 @@
 }
 
 .cta {
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     &:before {
       transform: scaleX(0);
     }
@@ -74,9 +75,8 @@ body {
   }
 
   @include media-breakpoint-down(xs) {
-    width: calc(100% - 100px)
+    width: calc(100% - 100px);
   }
-
 }
 
 .row {
@@ -84,7 +84,76 @@ body {
   margin-left: -12.5px;
 }
 
-.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col, .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, .col-xl-auto {
+.col-1,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9,
+.col-10,
+.col-11,
+.col-12,
+.col,
+.col-auto,
+.col-sm-1,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-sm,
+.col-sm-auto,
+.col-md-1,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-md,
+.col-md-auto,
+.col-lg-1,
+.col-lg-2,
+.col-lg-3,
+.col-lg-4,
+.col-lg-5,
+.col-lg-6,
+.col-lg-7,
+.col-lg-8,
+.col-lg-9,
+.col-lg-10,
+.col-lg-11,
+.col-lg-12,
+.col-lg,
+.col-lg-auto,
+.col-xl-1,
+.col-xl-2,
+.col-xl-3,
+.col-xl-4,
+.col-xl-5,
+.col-xl-6,
+.col-xl-7,
+.col-xl-8,
+.col-xl-9,
+.col-xl-10,
+.col-xl-11,
+.col-xl-12,
+.col-xl,
+.col-xl-auto {
   padding-right: 12.5px;
   padding-left: 12.5px;
 }
@@ -236,7 +305,8 @@ blockquote {
   }
 }
 
-cite, .quote-name {
+cite,
+.quote-name {
   font-size: 15px;
   line-height: 1.6;
   letter-spacing: -0.5px;
@@ -253,15 +323,19 @@ cite, .quote-name {
     margin-top: 25px;
   }
 
-  small, & + .quote-title {
+  small,
+  & + .quote-title {
     font-size: 12px;
     line-height: 1.33333333;
     font-style: normal;
     font-family: $font-family-sans-serif-alt;
     letter-spacing: -0.34px;
     font-weight: 400;
-    margin-left: 12px;
     display: inline-block;
+
+    &.quote-title {
+      margin-left: 12px;
+    }
 
     @include media-breakpoint-down(sm) {
       display: table;
@@ -285,10 +359,20 @@ address {
 a {
   color: $brand-secondary;
   text-decoration: none;
-  -webkit-transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out, border-color 0.25s ease-in-out, opacity 0.25s ease-in-out, visibility 0.25s ease-in-out, -webkit-transform 0.25s ease-in-out;
-  transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out, border-color 0.25s ease-in-out, opacity 0.25s ease-in-out, visibility 0.25s ease-in-out, -webkit-transform 0.25s ease-in-out;
-  transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out, border-color 0.25s ease-in-out, transform 0.25s ease-in-out, opacity 0.25s ease-in-out, visibility 0.25s ease-in-out;
-  transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out, border-color 0.25s ease-in-out, transform 0.25s ease-in-out, opacity 0.25s ease-in-out, visibility 0.25s ease-in-out, -webkit-transform 0.25s ease-in-out;
+  -webkit-transition: color 0.25s ease-in-out,
+    background-color 0.25s ease-in-out, border-color 0.25s ease-in-out,
+    opacity 0.25s ease-in-out, visibility 0.25s ease-in-out,
+    -webkit-transform 0.25s ease-in-out;
+  transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
+    border-color 0.25s ease-in-out, opacity 0.25s ease-in-out,
+    visibility 0.25s ease-in-out, -webkit-transform 0.25s ease-in-out;
+  transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
+    border-color 0.25s ease-in-out, transform 0.25s ease-in-out,
+    opacity 0.25s ease-in-out, visibility 0.25s ease-in-out;
+  transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
+    border-color 0.25s ease-in-out, transform 0.25s ease-in-out,
+    opacity 0.25s ease-in-out, visibility 0.25s ease-in-out,
+    -webkit-transform 0.25s ease-in-out;
 
   &:hover,
   &:focus {
@@ -349,10 +433,15 @@ a {
     border-radius: 50%;
     background-color: $brand-secondary-alt;
     left: calc(100% + 60px);
-    -webkit-transition: left 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
-    transition: left 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
-    transition: left 0.3s ease-in-out, transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-    transition: left 0.3s ease-in-out, transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+    -webkit-transition: left 0.3s ease-in-out, opacity 0.3s ease-in-out,
+      visibility 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+    transition: left 0.3s ease-in-out, opacity 0.3s ease-in-out,
+      visibility 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+    transition: left 0.3s ease-in-out, transform 0.3s ease-in-out,
+      opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    transition: left 0.3s ease-in-out, transform 0.3s ease-in-out,
+      opacity 0.3s ease-in-out, visibility 0.3s ease-in-out,
+      -webkit-transform 0.3s ease-in-out;
 
     @include media-breakpoint-down(sm) {
       width: 5px;
@@ -515,7 +604,6 @@ a {
       margin-left: -6px;
       margin-top: -10px;
     }
-
   }
 
   &:after {
@@ -578,9 +666,8 @@ a {
  *   Slider Buttons
  */
 .slick {
-
   &-slide {
-    >div {
+    > div {
       display: flex;
     }
   }
@@ -654,7 +741,6 @@ a {
 }
 
 .custom-btn {
-
   display: flex;
   justify-content: flex-end;
 
@@ -698,6 +784,6 @@ a {
     }
   }
 
-  &.custom-btn__prev{}
-
+  &.custom-btn__prev {
+  }
 }
