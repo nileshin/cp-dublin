@@ -7,6 +7,10 @@
     padding-bottom: 26px;
   }
 
+  &-full {
+    padding-bottom: 75px;
+  }
+
   .slick-track {
     display: flex;
     align-items: flex-end;
@@ -19,14 +23,6 @@
 
   .slick-slide {
     height: auto;
-  }
-
-  .slick-prev {
-    right: 80%;
-  }
-
-  .slick-next {
-    left: 80%;
   }
 
   &__item {

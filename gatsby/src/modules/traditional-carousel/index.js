@@ -111,7 +111,7 @@ class TraditionalCarousel extends Component {
     Array.from(allStop).forEach(s => s.click());
 
     const idx = +e.target.dataset.videoIndex;
-    this.reactPlayers[idx].onPlay();
+    this.reactPlayers[idx] && this.reactPlayers[idx].onPlay();
 
     const slides = this.slider.current.querySelectorAll('.slider__item');
     Array.from(slides).forEach((s, i) => {
@@ -125,7 +125,7 @@ class TraditionalCarousel extends Component {
   onStopClicked = e => {
     e.preventDefault();
     this.reactPlayers.forEach(rp => {
-      rp.onStop && rp.onStop();
+      rp && rp.onStop();
     });
     Array.from(this.slider.current.querySelectorAll('.slider__item')).forEach(
       s => s.classList.remove('started')

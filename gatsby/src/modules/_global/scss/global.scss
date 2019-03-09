@@ -714,7 +714,7 @@ a {
   }
 
   &-next {
-    left: 86%;
+    left: 80%;
 
     @include media-breakpoint-down(sm) {
       left: auto;
@@ -732,7 +732,7 @@ a {
   }
 
   &-prev {
-    right: 86%;
+    right: 80%;
 
     @include media-breakpoint-down(sm) {
       right: 56px;
