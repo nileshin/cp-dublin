@@ -34,12 +34,17 @@ class HomeHeader extends Component {
       })(),
     }));
 
-    setTimeout(() => {
+    this.loadinTimeout = setTimeout(() => {
       this.setState(state => ({
         ...state,
         headerActivated: true,
       }));
     }, 4000);
+  }
+  componentWillUnmount() {
+    if (typeof window !== 'undefined' && this.loadinTimeout) {
+      clearTimeout(this.loadinTimeout);
+    }
   }
   render() {
     const {

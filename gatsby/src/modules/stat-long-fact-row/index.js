@@ -62,7 +62,7 @@ class StatLongFactRow extends Component {
                           title={fact_row.fact_link.title}
                         >
                           {fact_row.fact_link.target === '_blank' && (
-                            <NewTabIcon className="icn" />
+                            <NewTabIcon className="icn" viewBox="0 0 18 18" />
                           )}
                           {fact_row.fact_link.title}
                         </a>
