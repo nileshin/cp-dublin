@@ -9,7 +9,7 @@ const BOSTON_ID = '4951305';
 const BOSTON_API_URL = `http://api.openweathermap.org/data/2.5/weather?id=${BOSTON_ID}&APPID=${OWM_API_KEY}&units=imperial`;
 const DUBLIN_API_URL = `http://api.openweathermap.org/data/2.5/weather?id=${DUBLIN_ID}&APPID=${OWM_API_KEY}&units=metric`;
 
-const getWeather = data => {
+const getWeather = (data, unit) => {
   const temp = data.main.temp;
   const condition = (() => {
     if (!data.weather.length) return null;
@@ -22,6 +22,7 @@ const getWeather = data => {
 
   return {
     temp,
+    unit,
     condition,
   };
 };
@@ -32,18 +33,22 @@ exports.handler = async (event, context) => {
   return fetch(BOSTON_API_URL)
     .then(response => response.json())
     .then(data => {
-      bostonData = getWeather(data);
+      bostonData = getWeather(data, 'F');
     })
     .then(() => {
       return fetch(DUBLIN_API_URL);
     })
     .then(response => response.json())
     .then(data => {
-      dublinData = getWeather(data);
+      dublinData = getWeather(data, 'C');
     })
     .then(() => {
-      const bostonTime = moment(new Date(new Date().toUTCString())).tz('America/New_York').format('hh:mm a');
-      const dublinTime = moment(new Date(new Date().toUTCString())).tz('Europe/Dublin').format('hh:mm a');
+      const bostonTime = moment(new Date(new Date().toUTCString()))
+        .tz('America/New_York')
+        .format('hh:mm a');
+      const dublinTime = moment(new Date(new Date().toUTCString()))
+        .tz('Europe/Dublin')
+        .format('hh:mm a');
 
       bostonData.time = bostonTime;
       dublinData.time = dublinTime;
@@ -55,7 +60,7 @@ exports.handler = async (event, context) => {
           bostonData,
           dublinData,
           startTime,
-          endTime
+          endTime,
         }),
       };
     })

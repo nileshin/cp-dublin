@@ -6,6 +6,7 @@ import './main.scss';
 
 import { ReactComponent as NewTabIcon } from '../_global/images/icon-new-tab.svg';
 import { ReactComponent as DownloadIcon } from '../_global/images/icon-dwnld.svg';
+import { ReactComponent as LoadingIcon } from '../_global/images/loading.svg';
 import { ReactComponent as BrokenClouds } from '../_global/images/weather_icons/BrokenClouds.svg';
 import { ReactComponent as ClearSky } from '../_global/images/weather_icons/ClearSky.svg';
 import { ReactComponent as FewClouds } from '../_global/images/weather_icons/FewClouds.svg';
@@ -69,7 +70,9 @@ class ContactCards extends Component {
 
       return (
         <>
-          <li className="contact__time" key={`time__${cityName}`}>{time}</li>
+          <li className="contact__time" key={`time__${cityName}`}>
+            {time}
+          </li>
           <li className="contact__weather" key={`weather__${cityName}`}>
             {Icon && (
               <Icon
@@ -80,6 +83,7 @@ class ContactCards extends Component {
             )}
             {Math.floor(city.temp)}
             <span dangerouslySetInnerHTML={{ __html: '&deg;' }} />
+            {city.unit}
           </li>
         </>
       );
@@ -89,8 +93,12 @@ class ContactCards extends Component {
     // Function code: /gatsby/functions/getCityData.js
     return (
       <>
-        <li className="contact__time inactive" key={`time__${cityName}`}></li>
-        <li className="contact__weather inactive" key={`weather__${cityName}`}></li>
+        <li className="contact__time inactive" key={`time__${cityName}`}>
+          <LoadingIcon viewBox="0 0 100 100" />
+        </li>
+        <li className="contact__weather inactive" key={`weather__${cityName}`}>
+          <LoadingIcon viewBox="0 0 100 100" />
+        </li>
       </>
     );
   };
@@ -120,7 +128,12 @@ class ContactCards extends Component {
                           </a>
                         </address>
                         <a
-                          href={card.google_maps_link || `https://www.google.com/maps/place/${stripTags(card.address)}`}
+                          href={
+                            card.google_maps_link ||
+                            `https://www.google.com/maps/place/${stripTags(
+                              card.address
+                            )}`
+                          }
                           title="Get Directions"
                           target="_blank"
                           rel="noopener noreferrer"
