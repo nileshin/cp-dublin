@@ -21,7 +21,7 @@ const getCtaProps = (work, cta_title) => {
       url: `/work/${work.slug}`,
       target: '',
     },
-    image: get(work, 'acf.rich_media_header.rich_media_header.image'),
+    image: get(work, 'acf.prevnext_image'),
   };
 };
 
@@ -190,15 +190,11 @@ export const query = graphql`
           title
           slug
           acf {
-            rich_media_header {
-              rich_media_header {
-                image {
-                  localFile {
-                    publicURL
-                  }
-                  ...WpMediaFragmentFluid1440
-                }
+            prevnext_image {
+              localFile {
+                publicURL
               }
+              ...WpMediaFragmentFluid1440
             }
           }
         }
