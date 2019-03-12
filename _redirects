@@ -1,0 +1,12 @@
+# Redirects!
+# enter the old URL, then some whitespace, then the new URL
+#    optionally, add whitespace + HTTP code at the end to redirect with a certain code (301 is default, 200 will do a pass-through, 404 for custom Not Found page)
+# trailing slashes are ignored, don't use this file to trim them (unless you want an infinite redirect loop). Netlify's dashboard has a setting for pretty URLs
+# More info: https://www.netlify.com/docs/redirects/
+
+
+# Redirects for the launch version of the pdf
+/work/gortons-trusted-know                              /work/gortons-seafood
+/work/make-my-hawaii-four-seasons                       /work/four-seasons-hotels-and-resorts-make-my-hawaii
+/work/samsonite-work-not-work                           /work
+/work/new-england-aquarium-life-according-to-fur-seals  /work
