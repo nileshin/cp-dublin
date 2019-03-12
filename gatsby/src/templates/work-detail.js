@@ -191,10 +191,15 @@ export const query = graphql`
           slug
           acf {
             prevnext_image {
+              alt_text
               localFile {
                 publicURL
+                childImageSharp {
+                  fluid(maxWidth: 1440, quality: 100) {
+                    ...GatsbyImageSharpFluid_tracedSVG
+                  }
+                }
               }
-              ...WpMediaFragmentFluid1440
             }
           }
         }
