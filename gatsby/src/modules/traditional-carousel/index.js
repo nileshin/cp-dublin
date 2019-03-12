@@ -71,7 +71,7 @@ class TraditionalCarousel extends Component {
       slidesToScroll: 1,
       draggable: false,
       swipe: false,
-      infinite: false,
+      infinite: true,
     });
     this.calcSlideHeight();
     window.addEventListener('resize', this.onResize);
