@@ -9,6 +9,7 @@ import RichMediaHeader from '../modules/rich-media-header';
 import StatRow from '../modules/stat-row';
 import get from 'lodash.get';
 import CTATiles from '../modules/cta-tiles';
+import './work-detail.scss';
 
 const getCtaProps = (work, cta_title) => {
   if (!work) return {};
@@ -101,7 +102,6 @@ class WorkDetail extends Component {
                     <section
                       className="work-detail-rte"
                       key={module_content.id}
-                      style={{ padding: '110px 0' }}
                     >
                       <div className="container">
                         <div
