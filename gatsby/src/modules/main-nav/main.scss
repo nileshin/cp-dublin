@@ -1,9 +1,6 @@
 @import '../_global/scss/vendor/bootstrap-mixins.scss';
 @import '../_global/scss/variables.scss';
 
-$nav_width: (95px * .75);
-$nav_padding: $nav_width * (20/95);
-
 .site-header {
   position: fixed;
   top: 0;
@@ -15,7 +12,6 @@ $nav_padding: $nav_width * (20/95);
   flex-direction: column;
   background-color: transparent;
   transition: background-color 0.3s ease-in-out, left 0.3s ease-in-out;
-  max-height: 100vh;
 
   &:hover {
     background-color: transparentize($white, 0.2);

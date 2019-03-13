@@ -35,7 +35,7 @@ body {
   background-color: $white;
 
   &.menu-open {
-    left: 400px;
+    left: $nav_width * (400/95);
     overflow: hidden;
 
     @include media-breakpoint-down(sm) {

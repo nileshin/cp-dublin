@@ -225,3 +225,6 @@ ex. @include transition(all,2s,ease-out);
   -o-transition:      $what $time $how;
   transition:         $what $time $how;
 }
+
+$nav_width: (95px * .75);
+$nav_padding: $nav_width * (20/95);
