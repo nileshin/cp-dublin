@@ -15,7 +15,7 @@ class StatRow extends Component {
         <div className="container stat-row-container">
           {stats.map(({ stat_title }, i) => {
             return (
-              <div className="row stat__head" data-stat-index={i}>
+              <div className="row stat__head" data-stat-index={i} key={stat_title}>
                 <div className="col-6 col-md-4" key={slugify(stat_title)}>
                   <h3
                     className="stat__title"
@@ -28,7 +28,7 @@ class StatRow extends Component {
 
           {stats.map(({ stat_number }, i) => {
             return (
-              <div className="row stat__content" data-stat-index={i}>
+              <div className="row stat__content" data-stat-index={i} key={stat_number}>
                 <div className="col-6 col-md-4" key={slugify(stat_number)}>
                   <span className="lg-text">{stat_number}</span>
                 </div>

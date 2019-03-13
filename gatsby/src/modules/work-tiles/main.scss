@@ -39,6 +39,16 @@
     display: block;
     color: $brand-primary;
 
+    &.left {
+      .work-tile__details > * {
+        transform: translateX(20px);
+
+        @include media-breakpoint-down(sm) {
+          transform: translateX(0);
+        }
+      }
+    }
+
     &.visible {
       .work-tile__details {
         &:before {
