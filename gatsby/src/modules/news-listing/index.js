@@ -94,6 +94,11 @@ class NewsListingDisplay extends Component {
     postsPerPage: 8,
     transitioning: false,
   };
+  postDateCutoff = (() => {
+    const cutoff = new Date();
+    cutoff.setFullYear(cutoff.getFullYear() - 2);
+    return cutoff;
+  })();
   componentDidMount() {
     const {
       allWordpressPost: { edges: posts },
@@ -163,6 +168,10 @@ class NewsListingDisplay extends Component {
       page
     } = this.state;
     const filteredPosts = unfilteredPosts.filter(({ node: post }) => {
+      if (post.acf.date && new Date(post.acf.date) < this.postDateCutoff) {
+        return false;
+      }
+
       if (currentFilter === NEWS_FILTER.ALL) return true;
       if (
         currentFilter === NEWS_FILTER.NEWS &&
