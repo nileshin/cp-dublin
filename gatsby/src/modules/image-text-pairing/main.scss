@@ -88,6 +88,10 @@
       max-width: 62.5%;
       top: 2px;
 
+      .content-img {
+        max-width: 100%;
+      }
+
       @media (max-width: 1450px) {
         max-width: 61%;
       }

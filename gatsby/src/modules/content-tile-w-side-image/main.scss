@@ -65,6 +65,13 @@
     max-width: 67.6%;
     z-index: -1;
 
+    .content-img {
+      max-width: 100%;
+      img {
+        max-width: 100%;
+      }
+    }
+
     @media (max-width: 1366px) {
       max-width: 56.8%;
       left: 50%;
