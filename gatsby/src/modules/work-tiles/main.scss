@@ -275,7 +275,7 @@
 
     &.active {
       color: $brand-primary;
-      border-color: currentColor;
+      border-color: $brand-secondary-alt; //currentColor;
     }
   }
 }
