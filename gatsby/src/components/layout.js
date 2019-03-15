@@ -2,9 +2,19 @@ import React, { Component } from 'react';
 import MainNav from '../modules/main-nav';
 import Footer from '../modules/footer';
 import Helmet from 'react-helmet';
+import objectFitImages from 'object-fit-images';
 import '../modules/_global/scss/global.scss';
 
 class Layout extends Component {
+  componentDidMount() {
+    if (typeof window === 'undefined') return;
+
+    if (typeof objectFitImages === 'function') {
+      objectFitImages();
+    } else {
+      console.log('objectFitImages is not a function', objectFitImages);
+    }
+  }
   render() {
     return (
       <>
