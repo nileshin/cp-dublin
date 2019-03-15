@@ -3,9 +3,11 @@ const branch_info = require('./pantheon-branchname');
 
 const filterUrls = entities => {
   const regex = new RegExp(`https?:\/\/${branch_info.pantheon_environment_url}`);
+  const regex_netlify = new RegExp(`https?:\/\/(?:.+--)?${branch_info.netlify_url}`);
   return deepMap(entities, (value, key) => {
     if (key === 'url') {
       value = value.replace(regex, '');
+      value = value.replace(regex_netlify, '');
       value = value.replace(/https?:\/\/cpcom3.lndo.site/, '');
     }
     return value;
@@ -34,7 +36,30 @@ const addLocations = entities => {
   return addTaxonomy(entities, 'department', 'people');
 }
 
-const normalizers = [filterUrls, addJobLocations, addLocations];
+const addTenure = entities => {
+  return deepMap(entities, (value, key) => {
+    if (key === 'tenure') {
+      value = value || "";
+    }
+    return value;
+  })
+}
+
+const fixSeoImages = entities => {
+  return deepMap(entities, (value, key) => {
+    if (key === 'og_image' || key === 'tw_image') {
+      value = {
+        localFile: {
+          publicURL: value
+        }
+      }
+    }
+
+    return value;
+  })
+}
+
+const normalizers = [filterUrls, addJobLocations, addLocations, addTenure, fixSeoImages];
 
 module.exports = ({ entities }) => {
   console.log('');

@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import { Transition } from 'react-transition-group';
 import './main.scss';
+import debounce from 'lodash.debounce';
 
 import { ReactComponent as NewTabIcon } from '../_global/images/icon-new-tab.svg';
+import { stringExcerpt } from '../../utils';
 
 const DEFAULT_URL_TITLE = 'Apply Now';
 const ANIMATION_TIME = 400;
@@ -12,6 +14,7 @@ class JobListingsDisplay extends Component {
   state = {
     currentFilter: 'boston',
     transitioning: false,
+    screen_size: 'sm',
   };
   updateFilter = e => {
     e.preventDefault();
@@ -45,17 +48,45 @@ class JobListingsDisplay extends Component {
       }
     );
   };
+  updateScreenSize = () => {
+    if (typeof window === 'undefined') return;
+
+    const width = window.innerWidth;
+    const screen_size = (() => {
+      if (width > 1112) return 'lg';
+      if (width > 768) return 'md';
+      return 'sm';
+    })();
+
+    this.setState(state => ({
+      ...state,
+      screen_size,
+    }));
+  };
+  componentDidMount() {
+    if (typeof window === 'undefined') return;
+
+    window.addEventListener('resize', debounce(this.updateScreenSize, 100));
+    this.updateScreenSize();
+  }
   render() {
     const {
       allWordpressWpJobs: { edges: jobs },
       allWordpressWpJobLocation: { edges: locations },
     } = this.props;
-    const { currentFilter, transitioning } = this.state;
+    const { currentFilter, transitioning, screen_size } = this.state;
     const filteredJobs = jobs.filter(
       ({ node: job }) =>
         Array.isArray(job.job_location) &&
         job.job_location[0].slug === currentFilter
     );
+
+    // these values come from CP30-42
+    const description_cutoffs = {
+      sm: 161, // 0-768
+      md: 243, // 769-1112
+      lg: 332, // 1113+
+    };
 
     return (
       <section className="jobs">
@@ -118,7 +149,14 @@ class JobListingsDisplay extends Component {
                           </p>
                         </div>
                         <div className="col-md-8 job__overview">
-                          <p dangerouslySetInnerHTML={{__html:description}} />
+                          <p
+                            dangerouslySetInnerHTML={{
+                              __html: stringExcerpt(
+                                description,
+                                description_cutoffs[screen_size]
+                              ),
+                            }}
+                          />
                         </div>
                         <div className="col-12">
                           <a

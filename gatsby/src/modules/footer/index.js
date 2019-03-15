@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Menu from '../../components/menu';
+
 import { Link } from 'gatsby';
 import './main.scss';
 
@@ -22,7 +23,6 @@ const renderFooterMenu = ({ menu }, optionsData) => {
   const {
     node: { options },
   } = node;
-
   return (
     <footer className="site-footer">
       <div className="container">

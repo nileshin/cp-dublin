@@ -4,6 +4,7 @@ import TraditionalCarousel from '../modules/traditional-carousel';
 import { formatDate } from '../utils';
 import SEO from '../components/seo';
 import './news-detail.scss';
+import CTATiles from '../modules/cta-tiles';
 
 import { ReactComponent as BackArrowIcon } from '../modules/_global/images/icon-arrow.svg';
 
@@ -15,7 +16,7 @@ class NewsDetail extends Component {
           title,
           yoast_meta,
           cp_meta,
-          acf: { date, article_content_post: article_content },
+          acf: { date, article_content_post: article_content, cta_tiles },
         },
       },
     } = this.props;
@@ -75,6 +76,7 @@ class NewsDetail extends Component {
             </div>
           </div>
         </section>
+        {cta_tiles ? <CTATiles {...cta_tiles.cta_tiles} /> : null}
       </>
     );
   }
@@ -101,6 +103,11 @@ export const query = graphql`
             traditional_carousel {
               ...TraditionalCarouselFragment
             }
+          }
+        }
+        cta_tiles {
+          cta_tiles {
+            ...CTATileFragmentNewsDetail
           }
         }
       }

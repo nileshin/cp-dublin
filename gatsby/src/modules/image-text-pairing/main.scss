@@ -1,8 +1,14 @@
-@import "../_global/scss/vendor/bootstrap-mixins.scss";
+@import '../_global/scss/vendor/bootstrap-mixins.scss';
 @import '../_global/scss/variables.scss';
 
 .content-alt {
   padding: 101px 0 171px;
+  &:nth-of-type(2) {
+    padding-bottom: 60px;
+  }
+  &:nth-of-type(3) {
+    padding-top: 0;
+  }
 
   @include media-breakpoint-down(lg) {
     padding-top: 71px;
@@ -29,6 +35,7 @@
       width: 120px;
       height: 4px;
       margin-bottom: 27px;
+      display: block;
     }
   }
 
@@ -37,7 +44,6 @@
   }
 
   &__wrap {
-
     margin-bottom: 93px;
 
     @include media-breakpoint-down(md) {
@@ -68,7 +74,6 @@
   }
 
   &__text {
-
     .right & {
       padding: 65px 0;
 
@@ -88,6 +93,10 @@
       left: 53.5%;
       max-width: 62.5%;
       top: 2px;
+
+      .content-img {
+        max-width: 100%;
+      }
 
       @media (max-width: 1450px) {
         max-width: 61%;
@@ -118,7 +127,6 @@
     }
 
     .left & {
-
       @include media-breakpoint-down(sm) {
         margin-bottom: 52px;
       }
@@ -135,7 +143,6 @@
           margin-right: auto;
         }
       }
-
     }
 
     figure {

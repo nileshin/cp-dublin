@@ -63,7 +63,37 @@ class CTATiles extends Component {
 export default CTATiles;
 
 export const ctaTileFragment = graphql`
-  fragment CTATileFragment on ctaTiles_8 {
+  fragment CTATileFragment on ctaTiles_16 {
+    left_cta {
+      headline
+      cta {
+        title
+        url
+        target
+      }
+      image {
+        localFile {
+          publicURL
+        }
+        ...WpMediaFragmentFluid1440
+      }
+    }
+    right_cta {
+      headline
+      cta {
+        title
+        url
+        target
+      }
+      image {
+        localFile {
+          publicURL
+        }
+        ...WpMediaFragmentFluid1440
+      }
+    }
+  }
+  fragment CTATileFragmentNewsDetail on ctaTiles_14 {
     left_cta {
       headline
       cta {

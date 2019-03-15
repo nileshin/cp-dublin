@@ -23,6 +23,8 @@ Replace `dev` with whatever environment on pantheon you want to read from
 11. Netlify will build changes to a Branch Deploy
 12. Make a pull request to merge branches, Netlify will also build a preview branch for that pull request.
 
+Note that you can include `[skip ci]` in the commit message to `git push` without triggering an update. [More info here](https://www.netlify.com/docs/continuous-deployment/#skipping-a-deploy)
+
 ## Folder Setup (Recommended)
 
 This repo includes a `gatsby/` folder with the front-end source files.

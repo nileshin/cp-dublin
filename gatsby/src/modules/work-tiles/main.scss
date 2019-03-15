@@ -39,6 +39,16 @@
     display: block;
     color: $brand-primary;
 
+    &.left {
+      .work-tile__details > * {
+        transform: translateX(20px);
+
+        @include media-breakpoint-down(sm) {
+          transform: translateX(0);
+        }
+      }
+    }
+
     &.visible {
       .work-tile__details {
         &:before {
@@ -257,9 +267,9 @@
     justify-content: space-between;
 
     li {
-      margin-right: 0;
+      margin-right: 10px;
     }
-  } 
+  }
 
   a {
     color: $text-alt;
@@ -275,8 +285,19 @@
 
     &.active {
       color: $brand-primary;
-      border-color: currentColor;
+      border-color: $brand-secondary-alt; //currentColor;
     }
+  }
+}
+
+.work .filter {
+  @include media-breakpoint-down(xs) {
+    width: calc(100vw);
+    max-width: 265px;
+    margin: 0 auto;
+    margin-top: 25px;
+    justify-content: space-between;
+    transform: translateX(-10px);
   }
 }
 

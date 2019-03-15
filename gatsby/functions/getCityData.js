@@ -9,10 +9,7 @@ const BOSTON_ID = '4951305';
 const BOSTON_API_URL = `http://api.openweathermap.org/data/2.5/weather?id=${BOSTON_ID}&APPID=${OWM_API_KEY}&units=imperial`;
 const DUBLIN_API_URL = `http://api.openweathermap.org/data/2.5/weather?id=${DUBLIN_ID}&APPID=${OWM_API_KEY}&units=metric`;
 
-const BOSTON_TIME = 'http://worldclockapi.com/api/json/est/now';
-const DUBLIN_TIME = 'http://worldclockapi.com/api/json/gmt/now';
-
-const getWeather = data => {
+const getWeather = (data, unit) => {
   const temp = data.main.temp;
   const condition = (() => {
     if (!data.weather.length) return null;
@@ -25,40 +22,45 @@ const getWeather = data => {
 
   return {
     temp,
+    unit,
     condition,
   };
 };
 
 exports.handler = async (event, context) => {
   let bostonData, dublinData;
+  const startTime = new Date();
   return fetch(BOSTON_API_URL)
     .then(response => response.json())
     .then(data => {
-      bostonData = getWeather(data);
+      bostonData = getWeather(data, 'F');
     })
     .then(() => {
       return fetch(DUBLIN_API_URL);
     })
     .then(response => response.json())
     .then(data => {
-      dublinData = getWeather(data);
+      dublinData = getWeather(data, 'C');
     })
-    .then(() => fetch(BOSTON_TIME))
-    .then(response => response.json())
-    .then(data => {
-      const time = moment(data.currentDateTime).tz('America/New_York').format('hh:mm a');
-      bostonData.time = time
-    })
-    .then(() => fetch(DUBLIN_TIME))
-    .then(response => response.json())
-    .then(data => {
-      const time = moment(data.currentDateTime).tz('Europe/Dublin').format('hh:mm a');
-      dublinData.time = time
+    .then(() => {
+      const bostonTime = moment(new Date(new Date().toUTCString()))
+        .tz('America/New_York')
+        .format('hh:mm a');
+      const dublinTime = moment(new Date(new Date().toUTCString()))
+        .tz('Europe/Dublin')
+        .format('hh:mm a');
+
+      bostonData.time = bostonTime;
+      dublinData.time = dublinTime;
+
+      const endTime = new Date();
       return {
         statusCode: 200,
         body: JSON.stringify({
           bostonData,
           dublinData,
+          startTime,
+          endTime,
         }),
       };
     })

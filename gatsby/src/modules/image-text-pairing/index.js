@@ -3,8 +3,8 @@ import Img from 'gatsby-image';
 import { graphql } from 'gatsby';
 import './main.scss';
 
-import { ReactComponent as BostonFlag} from '../_global/images/boston-flag.svg';
-import { ReactComponent as DublinFlag} from '../_global/images/dublin-flag.svg';
+import { ReactComponent as BostonFlag } from '../_global/images/boston-flag.svg';
+import { ReactComponent as DublinFlag } from '../_global/images/dublin-flag.svg';
 
 class ImageTextPairing extends Component {
   render() {
@@ -24,19 +24,23 @@ class ImageTextPairing extends Component {
               </div>
               <div className="col-md-6">
                 <div className="content-alt__text">
-                <h2>
-                    <span dangerouslySetInnerHTML={{
+                  <h2>
+                    <span
+                      dangerouslySetInnerHTML={{
                         __html: headline,
-                    }}/>
+                      }}
+                    />
                     {flag === 'us' ? (
-                      <BostonFlag className="flag" />
+                      <BostonFlag className="flag" viewBox="0 0 198 4" />
                     ) : (
-                      <DublinFlag className="flag" />
+                      <DublinFlag className="flag" viewBox="0 0 198 4" />
                     )}
-                    </h2>
-                    <div dangerouslySetInnerHTML={{
+                  </h2>
+                  <div
+                    dangerouslySetInnerHTML={{
                       __html: supportive_text,
-                    }}/>
+                    }}
+                  />
                 </div>
               </div>
             </div>
