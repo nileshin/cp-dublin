@@ -81,9 +81,8 @@ class ContactCards extends Component {
                 viewBox="0 0 24 24"
               />
             )}
-            {Math.floor(city.temp)}
-            <span dangerouslySetInnerHTML={{ __html: '&deg;' }} />
-            {city.unit}
+            <span dangerouslySetInnerHTML={{ __html: `${Math.floor(city.temp)}&deg;` }} />
+            <span className="unit">{city.unit}</span>
           </li>
         </>
       );

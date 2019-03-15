@@ -78,6 +78,13 @@
           .icn {
             width: 18px;
           }
+          .unit {
+            font-size: 0.7em;
+            vertical-align: top;
+            padding-left: 2px;
+            display: inline-block;
+            transform: translateY(0.18em);
+          }
         }
 
         // &.contact__time, &.contact__weather {

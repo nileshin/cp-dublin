@@ -36,7 +36,7 @@ class ContentTileWithSideImage extends Component {
               <div className="col-md-6 intro-work__img">
                 <figure>
                   <Img
-                    fixed={image.localFile.childImageSharp.fixed}
+                    fluid={image.localFile.childImageSharp.fluid}
                     alt={image.alt_text}
                   />
                 </figure>
@@ -64,8 +64,8 @@ export const contentTileWithSideImageFragment = graphql`
     image {
       localFile {
         childImageSharp {
-          fixed(width: 675, height: 675) {
-            ...GatsbyImageSharpFixed
+          fluid(quality: 100) {
+            ...GatsbyImageSharpFluid_tracedSVG
           }
         }
       }
