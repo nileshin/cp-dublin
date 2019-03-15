@@ -299,7 +299,8 @@ $icon_height: $nav_width * (31/95);
 
 .social {
   margin-top: auto;
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  opacity: 1;
   position: relative;
 
   @include media-breakpoint-down(sm) {
@@ -393,6 +394,11 @@ $icon_height: $nav_width * (31/95);
     ul {
       transition-delay: 0.1s;
       transform: translate3d(0, -10.7vh, 0);
+    }
+
+    @media screen and (max-height:645px) {
+      opacity: 0;
+      pointer-events: none;
     }
   }
 }
