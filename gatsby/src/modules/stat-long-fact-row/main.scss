@@ -48,6 +48,7 @@
   }
 
   .container.stat-fact-row-container {
+    /* autoprefixer grid: no-autoplace */
     display: grid;
     grid-template-columns: 4fr 8fr;
     grid-template-rows: auto;
@@ -58,26 +59,33 @@
     }
 
     .stat-title {
+      /* autoprefixer grid: no-autoplace */
       grid-row: 1;
-      grid-column: 1 / 2;
+      grid-column: 1;
+      -ms-grid-row-align: end;
     }
 
     .fact-title {
+      /* autoprefixer grid: no-autoplace */
       grid-row: 1;
-      grid-column: 2 / -1;
+      grid-column: 2;
+      -ms-grid-row-align: end;
     }
 
     .stat-content {
+      /* autoprefixer grid: no-autoplace */
       grid-row: 2;
-      grid-column: 1 / 2
+      grid-column: 1
     }
 
     .fact-content {
+      /* autoprefixer grid: no-autoplace */
       grid-row: 2;
-      grid-column: 2 / -1;
+      grid-column: 2;
     }
 
     @include media-breakpoint-down(xs) {
+      /* autoprefixer grid: no-autoplace */
       grid-template-columns: 1fr;
 
       .stat-content, .fact-content {
@@ -85,21 +93,25 @@
       }
 
       .stat-title {
+        /* autoprefixer grid: no-autoplace */
         grid-row: 1;
         grid-column: 1;
       }
 
       .fact-title {
+        /* autoprefixer grid: no-autoplace */
         grid-row: 3;
         grid-column: 1;
       }
   
       .stat-content {
+        /* autoprefixer grid: no-autoplace */
         grid-row: 2;
         grid-column: 1
       }
   
       .fact-content {
+        /* autoprefixer grid: no-autoplace */
         grid-row: 4;
         grid-column: 1;
       }

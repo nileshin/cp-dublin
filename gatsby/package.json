@@ -5,6 +5,7 @@
   "version": "3.0.0-alpha",
   "author": "Connelly Partners <development@connellypartners.com>",
   "dependencies": {
+    "@babel/polyfill": "^7.2.5",
     "@svgr/webpack": "^4.1.0",
     "axios": "^0.18.0",
     "bootstrap": "^4.2.1",
@@ -34,6 +35,7 @@
     "moment-timezone": "^0.5.23",
     "netlify-lambda": "^1.3.3",
     "node-sass": "^4.11.0",
+    "object-fit-images": "^3.2.4",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-cookie-consent": "^2.2.2",
@@ -68,5 +70,10 @@
   },
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
-  }
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "ie 11"
+  ]
 }
