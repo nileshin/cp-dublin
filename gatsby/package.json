@@ -5,6 +5,7 @@
   "version": "3.0.0-alpha",
   "author": "Connelly Partners <development@connellypartners.com>",
   "dependencies": {
+    "@babel/polyfill": "^7.2.5",
     "@svgr/webpack": "^4.1.0",
     "axios": "^0.18.0",
     "bootstrap": "^4.2.1",

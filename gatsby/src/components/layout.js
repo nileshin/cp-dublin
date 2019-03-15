@@ -10,6 +10,7 @@ class Layout extends Component {
       <>
         <Helmet>
           <link rel="stylesheet" type="text/css" href="https://cloud.typography.com/6014912/7241012/css/fonts.css" />
+          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.22.0/polyfill.js"></script>
         </Helmet>
         <MainNav />
         <main>{this.props.children}</main>
