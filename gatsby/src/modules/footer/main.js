@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import cookieconsent from 'cookieconsent';
+import cookieconsent from 'react-cookie-consent';
 
 (function($) {
     // if (typeof window !== 'undefined' && window.addEventListener) {
