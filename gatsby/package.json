@@ -70,5 +70,10 @@
   },
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
-  }
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "ie 11"
+  ]
 }

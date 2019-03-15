@@ -54,6 +54,7 @@
       z-index: 1;
 
       &.stat-row-container {
+        /* autoprefixer grid: no-autoplace */
         display: grid;
         grid-column-gap: 20px;
         grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
@@ -61,15 +62,18 @@
         .stat__head,
         .stat__content {
           &[data-stat-index="0"] {
-            grid-column: 1 / 2;
+            grid-column: 1;
+            -ms-grid-column: 1;
           }
 
           &[data-stat-index="1"] {
-            grid-column: 2 / 3;
+            grid-column: 2;
+            -ms-grid-column: 3;
           }
 
           &[data-stat-index="2"] {
-            grid-column: 3 / -1;
+            grid-column: 3;
+            -ms-grid-column: 5;
           }
           & > * {
             width: 100%;
@@ -80,29 +84,36 @@
 
         .stat__head {
           grid-row: 1;
+          -ms-grid-row: 1;
         }
 
         .stat__content {
           grid-row: 2;
+          -ms-grid-row: 2;
         }
 
         @include media-breakpoint-down(xs) {
-          grid-template-rows: repeat(6, 1fr);
+          /* autoprefixer grid: no-autoplace */
+          grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
           grid-template-columns: 1fr;
 
           .stat__head, .stat__content {
             grid-column: 1 !important;
+            -ms-grid-column: 1 !important;
           }
 
           .stat__head {
             &[data-stat-index="0"] {
-              grid-row: 1 / 2;
+              grid-row: 1;
+              -ms-grid-row: 1;
             }
             &[data-stat-index="1"] {
-              grid-row: 3 / 4;
+              grid-row: 3;
+              -ms-grid-row: 3;
             }
             &[data-stat-index="2"] {
-              grid-row: 5 / 6;
+              grid-row: 5;
+              -ms-grid-row: 5;
             }
           }
           
@@ -110,13 +121,16 @@
             margin-bottom: 20px;
             
             &[data-stat-index="0"] {
-              grid-row: 2 / 3;
+              grid-row: 2;
+              -ms-grid-row: 2;
             }
             &[data-stat-index="1"] {
-              grid-row: 4 / 5;
+              grid-row: 4;
+              -ms-grid-row: 4;
             }
             &[data-stat-index="2"] {
-              grid-row: 6 / -1;
+              grid-row: 6;
+              -ms-grid-row: 6;
             }
           }
         }
@@ -180,7 +194,7 @@
           color: $brand-secondary;
         }
 
-        > [class^='col-']:nth-of-type(3n) {
+        &:nth-of-type(3n) {
           .lg-text {
             color: $red;
           }

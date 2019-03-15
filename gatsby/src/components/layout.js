@@ -23,7 +23,7 @@ class Layout extends Component {
           <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.22.0/polyfill.js"></script>
         </Helmet>
         <MainNav />
-        <main>{this.props.children}</main>
+        <div role="main">{this.props.children}</div>
         <Footer />
       </>
     );

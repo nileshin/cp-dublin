@@ -1,6 +1,7 @@
 const proxy = require('http-proxy-middleware');
 const wordpressNormalizer = require('./wordpress-normalizer');
 const branch_info = require('./pantheon-branchname');
+const autoprefixer = require('autoprefixer');
 require('dotenv').config();
 
 if (process.env.USE_LANDO) {
@@ -52,7 +53,14 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    `gatsby-plugin-sass`,
+    {
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        postCssPlugins: [
+          autoprefixer({ browsers: ['last 2 versions', '> 1%', 'ie 11'], grid:true }),
+        ],
+      },
+    },
     {
       resolve: `gatsby-plugin-svgr`,
       options: {
