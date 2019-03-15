@@ -300,6 +300,7 @@ $icon_height: $nav_width * (31/95);
 .social {
   margin-top: auto;
   transition: transform 0.2s ease-in-out;
+  position: relative;
 
   @include media-breakpoint-down(sm) {
     .site-header & {
@@ -307,15 +308,15 @@ $icon_height: $nav_width * (31/95);
     }
   }
 
-  @media screen and (max-height:767.98px) {
+  @media screen and (max-height:500px) {
     .site-header & {
       display: none;
     }
   }
 
   .follow {
-    transform: rotate(-90deg) translateY(-15%);
-    display: table;
+    transform: rotate(-90deg) translateY(-15%) translateX(50%);
+    // display: table;
     font-size: 16px;
     font-weight: 700;
     font-family: $font-family-sans-serif-alt;
@@ -324,6 +325,9 @@ $icon_height: $nav_width * (31/95);
     line-height: 1;
     height: 16px;
     width: 78px;
+    position: absolute;
+    top: 0;
+    left: 0;
 
     @include media-breakpoint-down(sm) {
       margin: 0 0 0 -13px;
@@ -332,7 +336,7 @@ $icon_height: $nav_width * (31/95);
 
   ul {
     padding: 0;
-    margin: 19vh 0 4.8vh;
+    margin: 15vh 0 4.8vh;
     list-style-type: none;
     text-align: center;
     position: relative;
@@ -346,7 +350,7 @@ $icon_height: $nav_width * (31/95);
       right: 0;
       margin: auto;
       width: 2px;
-      height: 10.7vh;
+      height: calc(15vh - 46px);
       background-color: #b9b9b9;
       content: '';
       transform: scaleY(1);
