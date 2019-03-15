@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import Menu from '../../components/menu';
+
 import { Link } from 'gatsby';
 import './main.scss';
-import './cookieconsent.scss';
-//import './main.js';
-
 
 import { ReactComponent as ConnellyLogo } from '../_global/images/logo-footer.svg';
 import { ReactComponent as DHLogo } from '../_global/images/DH.svg';
