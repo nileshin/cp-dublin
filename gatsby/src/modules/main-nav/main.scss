@@ -309,7 +309,7 @@ $icon_height: $nav_width * (31/95);
     }
   }
 
-  @media screen and (max-height:500px) {
+  @media screen and (max-height: 500px) {
     .site-header & {
       display: none;
     }
@@ -396,7 +396,7 @@ $icon_height: $nav_width * (31/95);
       transform: translate3d(0, -10.7vh, 0);
     }
 
-    @media screen and (max-height:645px) {
+    @media screen and (max-height: 700px) {
       opacity: 0;
       pointer-events: none;
     }
