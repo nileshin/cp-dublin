@@ -10,7 +10,7 @@ class ContentTile extends Component {
       <section className="latest bg-dark bg-img page-sec">
         <Img
           fluid={image.localFile.childImageSharp.fluid}
-          className="content-tile-bg"
+          className="content-tile-bg cover"
           alt={image.alt_text}
           style={{ position: 'absolute' }}
         />
