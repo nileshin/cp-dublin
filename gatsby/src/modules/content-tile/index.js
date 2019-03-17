@@ -16,7 +16,7 @@ class ContentTile extends Component {
         />
         <div className="container">
           <div className="row">
-            <div className="col-10 col-md-6">
+            <div className="col-8 col-md-6">
               <h4 className="eyebrow">{eyebrow}</h4>
               <h2>
                 {headline.trim().replace(/\.$/, '')}
