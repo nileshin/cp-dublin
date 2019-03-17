@@ -226,6 +226,10 @@
 
     &.popWrap {
       display: flex;
+
+      @include media-breakpoint-down(md) {
+        display: block;
+      }
     }
 
     p {
