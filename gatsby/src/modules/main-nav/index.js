@@ -17,8 +17,8 @@ const SOCIAL_LOGOS = {
   instagram: InstaLogo,
   twitter: TwitterLogo,
   facebook: FacebookLogo,
-  linkedin: LinkedinLogo
-}
+  linkedin: LinkedinLogo,
+};
 
 class MainNavDisplay extends Component {
   constructor(props) {
@@ -26,8 +26,8 @@ class MainNavDisplay extends Component {
     this.state = {
       footerOverlap: false,
       footerHeight: 0,
-      windowHeight: 0
-    }
+      windowHeight: 0,
+    };
   }
   componentDidMount() {
     if (typeof window === 'undefined') return;
@@ -48,31 +48,36 @@ class MainNavDisplay extends Component {
     const footerRect = footer.getBoundingClientRect();
 
     if (footerRect.top < window.innerHeight) {
-      this.setState(state =>({
+      this.setState(state => ({
         ...state,
         footerOverlap: true,
         footerHeight: footerRect.height,
-        windowHeight: window.innerHeight
-      }))
+        windowHeight: window.innerHeight,
+      }));
     } else {
       this.setState(state => ({
         ...state,
         footerOverlap: false,
-        footerHeight: 0
+        footerHeight: 0,
       }));
     }
-  }
+  };
   render() {
     const { menu } = this.props.menuData;
-    const [ node ] = this.props.optionsData;
-    const { node:{options} } = node;
+    const [node] = this.props.optionsData;
+    const {
+      node: { options },
+    } = node;
 
     const { footerOverlap, footerHeight } = this.state;
-    const socialStyle = footerOverlap ? {
-      transitionDelay: '0.1s',
-      transform:`translate3d(0, -${footerHeight - (window.innerHeight * 0.107)}px, 0)`
-    } : {};
-    
+    const socialStyle = footerOverlap
+      ? {
+          transitionDelay: '0.1s',
+          transform: `translate3d(0, -${footerHeight -
+            window.innerHeight * 0.15}px, 0)`,
+        }
+      : {};
+
     return (
       <header className="site-header">
         <div className="logo">
@@ -98,21 +103,29 @@ class MainNavDisplay extends Component {
             ))}
           </ul>
         </nav>
-        <div className={`social ${footerOverlap ? 'overlapping' : ''}`} style={socialStyle}>
+        <div
+          className={`social ${footerOverlap ? 'overlapping' : ''}`}
+          style={socialStyle}
+        >
           <span className="follow">Follow us</span>
           <ul>
-            {
-              options.social_menu.map(({social_media_network:network, link}) => {
-                const NetworkLogo = SOCIAL_LOGOS[network]
+            {options.social_menu.map(
+              ({ social_media_network: network, link }) => {
+                const NetworkLogo = SOCIAL_LOGOS[network];
                 return (
                   <li key={network}>
-                    <a href={link.url} title={network} target={link.target || "_blank"} rel="noopener noreferrer">
+                    <a
+                      href={link.url}
+                      title={network}
+                      target={link.target || '_blank'}
+                      rel="noopener noreferrer"
+                    >
                       {NetworkLogo ? <NetworkLogo /> : network}
                     </a>
                   </li>
-                )
-              }) 
-            }
+                );
+              }
+            )}
           </ul>
         </div>
       </header>
@@ -120,7 +133,9 @@ class MainNavDisplay extends Component {
   }
 }
 
-const mainNavRender = (menuData, optionsData) => <MainNavDisplay menuData={menuData} optionsData={optionsData} />
+const mainNavRender = (menuData, optionsData) => (
+  <MainNavDisplay menuData={menuData} optionsData={optionsData} />
+);
 
 class MainNav extends Component {
   componentDidMount() {

@@ -73,7 +73,7 @@ class QuoteBlobVideoModule extends Component {
     };
     this.extractVideoSRC(video_embed_code);
     return (
-      <section className="content-blob">
+      <section className="content-blob quote-blob">
         {/* <div>
         Quote Blob Video Module
         <pre><code>{JSON.stringify(this.props, null, 1)}</code></pre>

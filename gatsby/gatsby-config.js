@@ -24,6 +24,7 @@ module.exports = {
     title: `Connelly Partners`,
     description: `An Integrated Agency`,
     author: `@connellyagency`,
+    siteUrl: `https://www.connellypartners.com`
   },
   developMiddleware: app => {
     app.use(
@@ -113,6 +114,7 @@ module.exports = {
         includeInDevelopment: false,
       },
     },
+    `gatsby-plugin-sitemap`
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',

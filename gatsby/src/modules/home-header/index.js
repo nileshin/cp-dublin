@@ -65,15 +65,19 @@ class HomeHeader extends Component {
             transition: 'transform 0s linear',
           };
     return (
+      
       <section className="home-banner page-sec">
         <div className="container">
+
           <div className="row">
             <div className="col-md-6 order-md-2">
               <div className="home-banner-img" ref={this.homeImg}>
+                
                 <figure>
                   <Img
                     fluid={get(image, 'localFile.childImageSharp.fluid')}
                     alt="home-banner"
+                    style={{ maxWidth: image.media_details.width}}
                   />
                 </figure>
               </div>
@@ -144,7 +148,18 @@ export const homeHeaderFragment = graphql`
       target
     }
     image {
-      ...WpMediaFragmentFluid
+      alt_text
+      media_details {
+        width
+        height
+      }
+      localFile {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid_tracedSVG
+          }
+        }
+      }
     }
   }
   fragment HomeHeaderFragmentNotFound on homeHeader_12 {
@@ -157,7 +172,18 @@ export const homeHeaderFragment = graphql`
       target
     }
     image {
-      ...WpMediaFragmentFluid
+      alt_text
+      media_details {
+        width
+        height
+      }
+      localFile {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid_tracedSVG
+          }
+        }
+      }
     }
   }
 `;

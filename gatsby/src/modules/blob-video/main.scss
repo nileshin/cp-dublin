@@ -1,20 +1,12 @@
-@import "../_global/scss/vendor/bootstrap-mixins.scss";
+@import '../_global/scss/vendor/bootstrap-mixins.scss';
 @import '../_global/scss/variables.scss';
-
 
 //::WARNING::
 //EW I have made changes to the below scss code from the original monks template to increase browser support. (lines 11, 13-15)
 
-
 .content-blob {
   display: flex;
-  position: relative; 
-
-  @include media-breakpoint-down(sm) {
-    padding-bottom: 180px;
-  }
-
-  
+  position: relative;
 
   .container {
     min-height: 800px;
@@ -26,7 +18,21 @@
     @include media-breakpoint-down(sm) {
       min-height: auto;
       padding-top: 120px;
-      padding-bottom: 380px;
+      padding-bottom: 180px;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding-bottom: 210px;
+
+    .container {
+      min-height: 500px;
+    }
+
+    &.quote-blob {
+      .container {
+        min-height: 801px;
+      }
     }
   }
 
@@ -106,8 +112,6 @@
       width: 279px;
       background-image: url(../_global/images/oval_m.svg);
     }
-
-    
   }
 
   .cover {
@@ -123,18 +127,18 @@
   &.vid-active {
     border-radius: 0;
     width: 100%;
-    margin-left:0;
+    margin-left: 0;
 
     .stop {
       visibility: visible;
       opacity: 1;
     }
 
-    div.react-player{
+    div.react-player {
       display: block;
       position: absolute;
-      top:0;
-      left:0;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
     }
@@ -144,7 +148,7 @@
       opacity: 1;
       pointer-events: all;
     }
-    .vid-thumb{
+    .vid-thumb {
       display: none;
     }
 
@@ -163,7 +167,7 @@
     transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
   }
 
-  div.react-player{
+  div.react-player {
   }
 
   iframe {
@@ -238,7 +242,6 @@
       margin-left: -6px;
       margin-top: -10px;
     }
-
   }
 
   &:after {
