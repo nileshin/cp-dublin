@@ -91,24 +91,17 @@
     .right & {
       position: absolute;
       left: 53.5%;
-      max-width: 62.5%;
+      max-width: 55%;
       top: 2px;
 
       .content-img {
         max-width: 100%;
       }
 
-      @media (max-width: 1450px) {
-        max-width: 61%;
-      }
-
-      @media (max-width: 1366px) {
-        max-width: 53%;
-      }
-
       @include media-breakpoint-down(lg) {
         top: 50%;
         transform: translateY(-50%);
+        max-width: 59%
       }
 
       @include media-breakpoint-down(md) {
