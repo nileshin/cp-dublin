@@ -30,6 +30,13 @@
       width: 100%;
     }
   }
+  .container{
+    .text{
+      display: flex;
+      align-items: center;
+    }
+  }
+  
 
   h1,
   p,
@@ -73,6 +80,7 @@
   }
 
   .home-content {
+
     &.entering,
     &.entered {
       h1,
