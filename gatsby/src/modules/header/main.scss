@@ -35,17 +35,17 @@
   }
 
   h1 {
-    font-size: 170px;
+    font-size: 18vw;
     letter-spacing: -8.62px;
     line-height: 1.2;
     color: $white;
     text-align: center;
-    margin-bottom: -53px;
+    margin-bottom: -5vw;
+    white-space: nowrap;
 
     @include media-breakpoint-down(sm) {
-      font-size: 58px;
       letter-spacing: -2.94px;
-      margin-bottom: -18px;
+      margin-bottom: -5vw;
     }
   }
 }
