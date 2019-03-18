@@ -76,6 +76,16 @@
     &:hover {
       figure.alternate {
         opacity: 1;
+
+        &.zoom {
+          .alt-container {
+            overflow:hidden;
+          }
+          img {
+            transition: transform 5s ease-in-out !important;
+            transform: scale(10);
+          }
+        }
       }
     }
 
