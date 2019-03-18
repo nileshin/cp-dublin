@@ -40,16 +40,16 @@
     line-height: 1.2;
     color: $white;
     text-align: center;
-    margin-bottom: -5vw;
+    margin-bottom: -5.6vw;
     white-space: nowrap;
 
     @include media-breakpoint-down(sm) {
       letter-spacing: -2.94px;
-      margin-bottom: -5vw;
+      margin-bottom: -5.6vw;
     }
     @include media-breakpoint-up(lg) {
       font-size: 170px;
-      margin-bottom: -50px;
+      margin-bottom: -52px;
     }
   }
 }
