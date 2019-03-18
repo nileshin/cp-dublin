@@ -47,5 +47,9 @@
       letter-spacing: -2.94px;
       margin-bottom: -5vw;
     }
+    @include media-breakpoint-up(lg) {
+      font-size: 170px;
+      margin-bottom: -50px;
+    }
   }
 }
