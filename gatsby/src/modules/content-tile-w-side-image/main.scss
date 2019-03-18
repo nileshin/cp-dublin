@@ -60,32 +60,34 @@
 
   .intro-work__img {
     position: absolute;
-    top: -73px;
-    left: 51.6%;
+    top: 47px;
+    left: 55%;
     max-width: 67.6%;
     z-index: -1;
 
     .content-img {
       max-width: 100%;
       img {
-        max-width: 100%;
+        max-width: 80%;
       }
     }
 
     @media (max-width: 1366px) {
       max-width: 56.8%;
-      left: 50%;
-      top: -43px;
+      left: 55%;
+      top: 100px;
     }
 
     @include media-breakpoint-down(lg) {
       max-width: 60%;
-      top: -15px;
+      top: 65px;
+      left: 55%;
     }
 
     @include media-breakpoint-down(md) {
-      max-width: 65.9%;
-      top: 50%;
+      max-width: 100%;
+      top: 243px;
+      left: 61%;
       transform: translateY(-50%);
     }
 
