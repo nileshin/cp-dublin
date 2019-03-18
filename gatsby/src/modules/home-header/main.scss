@@ -2,7 +2,7 @@
 @import '../_global/scss/variables.scss';
 
 .home-banner {
-  padding-top: 119px;
+  padding-top: 50px;
   padding-bottom: 119px;
 
   @include media-breakpoint-down(md) {
@@ -35,6 +35,7 @@
       display: flex;
       align-items: center;
     }
+
   }
   
 
@@ -80,7 +81,6 @@
   }
 
   .home-content {
-
     &.entering,
     &.entered {
       h1,

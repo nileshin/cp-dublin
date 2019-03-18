@@ -27,10 +27,7 @@ class HomeHeader extends Component {
       offset: (() => {
         if (!this.homeImg.current || !this.headline.current)
           return state.offset;
-        return (
-          this.homeImg.current.clientHeight / 2 -
-          this.headline.current.clientHeight / 2
-        );
+        return 100;
       })(),
     }));
 
