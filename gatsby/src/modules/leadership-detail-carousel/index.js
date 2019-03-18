@@ -14,13 +14,18 @@ class LeadershipDetailCarousel extends Component {
     this.sliderLeader = React.createRef();
     this.state = {
       activeLeader: this.props.leadership_slides[0].name,
+      buttonStyle: {},
     };
   }
   componentDidMount() {
     if (typeof window === 'undefined') return;
     this.updateSliderLeaderHeight(this.state.activeLeader);
 
-    window.addEventListener('resize', this.updateButtonStyle, passiveIfSupported);
+    window.addEventListener(
+      'resize',
+      this.updateButtonStyle,
+      passiveIfSupported
+    );
     this.updateButtonStyle();
   }
   componentWillUnmount() {
@@ -48,10 +53,13 @@ class LeadershipDetailCarousel extends Component {
       }),
       () => {
         setTimeout(() => {
-          this.setState(state => ({
-            ...state,
-            activeLeader: newName,
-          }));
+          this.setState(
+            state => ({
+              ...state,
+              activeLeader: newName,
+            }),
+            this.getButtonStyle
+          );
         }, ANIMATION_TIME);
       }
     );
@@ -77,19 +85,27 @@ class LeadershipDetailCarousel extends Component {
     if (typeof window === 'undefined') return {};
 
     if (window.innerWidth < 768 && this.sliderLeader.current) {
-      const currentImage = this.sliderLeader.current.querySelector('.slider-leader__item.entered img.cover');
+      const currentImage = this.sliderLeader.current.querySelector(
+        '.slider-leader__item.entered img.cover'
+      );
       if (currentImage) {
-        return { top:`${currentImage.height}px` }
+        this.setState(state => ({
+          ...state,
+          buttonStyle: { top: `${currentImage.height}px` },
+        }));
       }
     }
-
-    return {};
-  }
-  updateButtonStyle = debounce(() => { this.forceUpdate(); }, 150, {leading: true});
+  };
+  updateButtonStyle = debounce(
+    () => {
+      this.getButtonStyle();
+    },
+    150,
+    { leading: true }
+  );
   render() {
     const { leadership_slides: slides } = this.props;
-    const { activeLeader } = this.state;
-    const buttonStyle = this.getButtonStyle();
+    const { activeLeader, buttonStyle } = this.state;
     return (
       <section className="leaders">
         <div className="container">
@@ -124,8 +140,10 @@ class LeadershipDetailCarousel extends Component {
                   Previous
                 </button>
                 {slides.map(slide => {
-                  const image =
-                    get(slide, 'image.localFile.childImageSharp.original.src');
+                  const image = get(
+                    slide,
+                    'image.localFile.childImageSharp.original.src'
+                  );
                   return (
                     <Transition
                       in={slide.name === activeLeader}

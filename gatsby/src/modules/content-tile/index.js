@@ -10,13 +10,13 @@ class ContentTile extends Component {
       <section className="latest bg-dark bg-img page-sec">
         <Img
           fluid={image.localFile.childImageSharp.fluid}
-          className="content-tile-bg"
+          className="content-tile-bg cover"
           alt={image.alt_text}
           style={{ position: 'absolute' }}
         />
         <div className="container">
           <div className="row">
-            <div className="col-10 col-md-6">
+            <div className="col-8 col-md-6">
               <h4 className="eyebrow">{eyebrow}</h4>
               <h2>
                 {headline.trim().replace(/\.$/, '')}

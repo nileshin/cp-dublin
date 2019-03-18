@@ -172,7 +172,18 @@ export const homeHeaderFragment = graphql`
       target
     }
     image {
-      ...WpMediaFragmentFluid
+      alt_text
+      media_details {
+        width
+        height
+      }
+      localFile {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid_tracedSVG
+          }
+        }
+      }
     }
   }
 `;

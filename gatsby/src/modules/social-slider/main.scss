@@ -1,6 +1,4 @@
-
-
-@import "../_global/scss/vendor/bootstrap-mixins.scss";
+@import '../_global/scss/vendor/bootstrap-mixins.scss';
 @import '../_global/scss/variables.scss';
 
 .juicer-container {
@@ -17,14 +15,14 @@
     margin: 0 0 0 auto !important;
 
     &.juicer-feed .feed-item {
-      width:240px !important;
+      width: 240px !important;
     }
 
     .j-text {
-      display:grid;
+      display: grid;
       grid-template-rows: 0fr 4fr 1fr;
       color: #fafafa;
-      background-color:rgba(58, 58, 58, 0.9) !important;
+      background-color: rgba(58, 58, 58, 0.9) !important;
 
       .j-meta {
         margin-left: 0;
@@ -44,4 +42,5 @@
 
 .social-slider {
   margin-bottom: 130px;
+  overflow: hidden;
 }

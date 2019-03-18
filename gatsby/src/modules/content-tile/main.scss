@@ -1,4 +1,4 @@
-@import "../_global/scss/vendor/bootstrap-mixins.scss";
+@import '../_global/scss/vendor/bootstrap-mixins.scss';
 @import '../_global/scss/variables.scss';
 
 .latest {
@@ -22,6 +22,14 @@
   @include media-breakpoint-down(sm) {
     padding-top: 98px;
     padding-bottom: 98px;
+  }
+
+  @include media-breakpoint-down(xs) {
+    .content-tile-bg {
+      width: calc(100% + 60px);
+      height: auto;
+      min-height: 100%;
+    }
   }
 
   h2 {
