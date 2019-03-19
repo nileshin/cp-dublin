@@ -1,6 +1,10 @@
 @import '../_global/scss/vendor/bootstrap-mixins.scss';
 @import '../_global/scss/variables.scss';
 
+section.overflow-hidden{
+  overflow:hidden;
+}
+
 .latest {
   padding-top: 230px;
   padding-bottom: 230px;
