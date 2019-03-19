@@ -122,7 +122,6 @@ module.exports = {
       resolve: `gatsby-plugin-robots-txt`,
       options: {
         resolveEnv: () => {
-          console.log('env is ' + process.env.PANTHEON_ENV);
           if (process.env.PANTHEON_ENV === 'live') return 'production';
           return 'dev';
         },
