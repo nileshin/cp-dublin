@@ -10,6 +10,7 @@ section.overflow-hidden{
   padding-bottom: 230px;
   position: relative;
 
+
   .content-tile-bg {
     position: absolute;
     top: 0;
@@ -30,9 +31,18 @@ section.overflow-hidden{
 
   @include media-breakpoint-down(xs) {
     .content-tile-bg {
-      width: calc(100% + 60px);
+      width: calc(100% + 120px);
       height: auto;
       min-height: 100%;
+      left: -120px;
+    }
+  }
+  @media (max-width: 340px) {
+    .content-tile-bg {
+      width: calc(100% + 80px);
+      height: auto;
+      min-height: 100%;
+      left: -80px;
     }
   }
 
