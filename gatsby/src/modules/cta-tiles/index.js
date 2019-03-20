@@ -24,7 +24,7 @@ const renderTile = (tile, htmlTitles) => {
         {image && (
           <Img
             fluid={image}
-            className="cta-tile__img bg-img"
+            className="cta-tile__img bg-img cover"
             style={{ position: 'absolute' }}
           />
         )}

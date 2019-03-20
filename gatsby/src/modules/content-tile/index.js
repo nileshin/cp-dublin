@@ -7,7 +7,7 @@ class ContentTile extends Component {
   render() {
     const { eyebrow, headline, supportive_text, cta, image } = this.props;
     return (
-      <section className="latest bg-dark bg-img page-sec">
+      <section className="latest bg-dark bg-img page-sec overflow-hidden">
         <Img
           fluid={image.localFile.childImageSharp.fluid}
           className="content-tile-bg cover"

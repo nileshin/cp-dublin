@@ -24,7 +24,7 @@ module.exports = {
     title: `Connelly Partners`,
     description: `An Integrated Agency`,
     author: `@connellyagency`,
-    siteUrl: `https://www.connellypartners.com`
+    siteUrl: `https://www.connellypartners.com`,
   },
   developMiddleware: app => {
     app.use(
@@ -58,7 +58,10 @@ module.exports = {
       resolve: `gatsby-plugin-sass`,
       options: {
         postCssPlugins: [
-          autoprefixer({ browsers: ['last 2 versions', '> 1%', 'ie 11'], grid:true }),
+          autoprefixer({
+            browsers: ['last 2 versions', '> 1%', 'ie 11'],
+            grid: true,
+          }),
         ],
       },
     },
@@ -114,7 +117,24 @@ module.exports = {
         includeInDevelopment: false,
       },
     },
-    `gatsby-plugin-sitemap`
+    `gatsby-plugin-sitemap`,
+    {
+      resolve: `gatsby-plugin-robots-txt`,
+      options: {
+        resolveEnv: () => {
+          if (process.env.PANTHEON_ENV === 'live') return 'production';
+          return 'dev';
+        },
+        env: {
+          dev: {
+            policy: [{ userAgent: '*', disallow: ['/'] }],
+          },
+          production: {
+            policy: [{ userAgent: '*', allow: '/' }],
+          },
+        },
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',

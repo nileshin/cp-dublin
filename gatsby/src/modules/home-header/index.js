@@ -27,10 +27,7 @@ class HomeHeader extends Component {
       offset: (() => {
         if (!this.homeImg.current || !this.headline.current)
           return state.offset;
-        return (
-          this.homeImg.current.clientHeight / 2 -
-          this.headline.current.clientHeight / 2
-        );
+        return 100;
       })(),
     }));
 
@@ -70,7 +67,7 @@ class HomeHeader extends Component {
         <div className="container">
 
           <div className="row">
-            <div className="col-md-6 order-md-2">
+            <div className="col-md-6 order-md-2 image">
               <div className="home-banner-img" ref={this.homeImg}>
                 
                 <figure>
@@ -83,7 +80,7 @@ class HomeHeader extends Component {
               </div>
             </div>
             <div
-              className="col-md-6"
+              className="col-md-6 text"
               style={{ alignSelf: center_content ? 'center' : 'inherit' }}
             >
               <Transition in={headerActivated} timeout={ANIMATION_TIME}>
