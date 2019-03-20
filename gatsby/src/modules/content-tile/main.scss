@@ -1,10 +1,15 @@
 @import '../_global/scss/vendor/bootstrap-mixins.scss';
 @import '../_global/scss/variables.scss';
 
+section.overflow-hidden{
+  overflow:hidden;
+}
+
 .latest {
   padding-top: 230px;
   padding-bottom: 230px;
   position: relative;
+
 
   .content-tile-bg {
     position: absolute;
@@ -26,9 +31,18 @@
 
   @include media-breakpoint-down(xs) {
     .content-tile-bg {
-      width: calc(100% + 60px);
+      width: calc(100% + 120px);
       height: auto;
       min-height: 100%;
+      left: -120px;
+    }
+  }
+  @media (max-width: 340px) {
+    .content-tile-bg {
+      width: calc(100% + 80px);
+      height: auto;
+      min-height: 100%;
+      left: -80px;
     }
   }
 
