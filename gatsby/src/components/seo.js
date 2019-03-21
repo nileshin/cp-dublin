@@ -28,7 +28,7 @@ const SEO = ({
       },
       {
         property: `og:image`,
-        content: og_image && og_image.localFile ? og_image.localFile.publicURL : og_image,
+        content: og_image && og_image.localFile && og_image.localFile.publicURL ? og_image.localFile.publicURL : og_image,
       },
       {
         property: `og:description`,
@@ -48,7 +48,7 @@ const SEO = ({
       },
       {
         name: `twitter:image`,
-        content: tw_image && tw_image.localFiles && tw_image.localFiles.publicURL ? tw_image.localFiles.publicURL : tw_image,
+        content: tw_image && tw_image.localFile && tw_image.localFile.publicURL ? tw_image.localFile.publicURL : tw_image,
       },
       {
         name: `twitter:description`,
