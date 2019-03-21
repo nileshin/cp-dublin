@@ -34,6 +34,7 @@ class MainNavDisplay extends Component {
     if (typeof window === 'undefined') return;
     window.addEventListener('scroll', this.handleScroll, passiveIfSupported);
     window.addEventListener('resize', this.handleScroll, passiveIfSupported);
+    this._checkMenuState();
   }
   componentWillUnmount() {
     if (typeof window === 'undefined') return;
@@ -63,7 +64,21 @@ class MainNavDisplay extends Component {
       }));
     }
   };
+  _checkMenuState = e =>{
+    if($(".enumenu_container .menu-icon").hasClass("active")){
+      this.setState(state => ({
+        ...state,
+        open: true
+      }));
+    } else{
+      this.setState(state => ({
+        ...state,
+        open: false
+      }));
+    }
+  }
   _onMainMenuFocus = e => {
+    this._checkMenuState();
     if(!this.state.open){
       this.setState(state => ({
         ...state,
@@ -74,6 +89,7 @@ class MainNavDisplay extends Component {
     }
   };
   _onSocialMenuFocus = e =>{
+    this._checkMenuState();
     if(this.state.open){
       this.setState(state => ({
         ...state,
