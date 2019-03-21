@@ -98,10 +98,18 @@ export const yoastMetadataFragment = graphql`
       yoast_social {
         og_title: yoast_wpseo_opengraph_title
         og_description: yoast_wpseo_opengraph_description
-        og_image: yoast_wpseo_opengraph_image
+        og_image: yoast_wpseo_opengraph_image {
+          localFile {
+            publicURL
+          }
+        }
         tw_title: yoast_wpseo_twitter_title
         tw_description: yoast_wpseo_twitter_description
-        tw_image: yoast_wpseo_twitter_image
+        tw_image: yoast_wpseo_twitter_image {
+          localFile {
+            publicURL
+          }
+        }
       }
     }
   }
@@ -115,10 +123,18 @@ export const yoastMetadataFragment = graphql`
       yoast_social {
         og_title: yoast_wpseo_opengraph_title
         og_description: yoast_wpseo_opengraph_description
-        og_image: yoast_wpseo_opengraph_image
+        og_image: yoast_wpseo_opengraph_image {
+          localFile {
+            publicURL
+          }
+        }
         tw_title: yoast_wpseo_twitter_title
         tw_description: yoast_wpseo_twitter_description
-        tw_image: yoast_wpseo_twitter_image
+        tw_image: yoast_wpseo_twitter_image {
+          localFile {
+            publicURL
+          }
+        }
       }
     }
   }
