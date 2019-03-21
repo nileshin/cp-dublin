@@ -27,6 +27,7 @@ class MainNavDisplay extends Component {
       footerOverlap: false,
       footerHeight: 0,
       windowHeight: 0,
+      open: false
     };
   }
   componentDidMount() {
@@ -62,7 +63,27 @@ class MainNavDisplay extends Component {
       }));
     }
   };
+  _onMainMenuFocus = e => {
+    if(!this.state.open){
+      this.setState(state => ({
+        ...state,
+        open: true
+      }));
+      $(".enumenu_container .menu-icon").trigger("click");
+      
+    }
+  };
+  _onSocialMenuFocus = e =>{
+    if(this.state.open){
+      this.setState(state => ({
+        ...state,
+        open: false
+      }));
+      $(".enumenu_container .menu-icon").trigger("click");
+    }  
+  };
   render() {
+    const { open } = this.state;
     const { menu } = this.props.menuData;
     const [node] = this.props.optionsData;
     const {
@@ -93,9 +114,9 @@ class MainNavDisplay extends Component {
                 key={nav_item.wordpress_id}
               >
                 {nav_item.post_object && nav_item.type !== 'custom' ? (
-                  <Link to={nav_item.url}>{nav_item.title}</Link>
+                  <Link to={nav_item.url} onFocus={this._onMainMenuFocus}>{nav_item.title}</Link>
                 ) : (
-                  <a href={nav_item.url} title={nav_item.title}>
+                  <a href={nav_item.url} title={nav_item.title} onFocus={this._onFocus} >
                     {nav_item.title}
                   </a>
                 )}
@@ -119,6 +140,7 @@ class MainNavDisplay extends Component {
                       title={network}
                       target={link.target || '_blank'}
                       rel="noopener noreferrer"
+                      onFocus={this._onSocialMenuFocus}
                     >
                       {NetworkLogo ? <NetworkLogo /> : network}
                     </a>

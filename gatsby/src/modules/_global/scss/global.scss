@@ -22,6 +22,17 @@
     }
   }
 }
+//Dealing with keyboard accessibility
+a:focus { border: 2px dotted $brand-secondary-alt; 
+  &:hover{
+    border: none;
+  }
+  &:active{
+    border: none;
+  }
+}
+a:focus-visible { border: 2px dotted $brand-secondary-alt; }
+
 
 // WebbyMonks global.scss below
 body {
