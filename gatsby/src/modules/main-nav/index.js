@@ -99,7 +99,6 @@ class MainNavDisplay extends Component {
     }  
   };
   render() {
-    const { open } = this.state;
     const { menu } = this.props.menuData;
     const [node] = this.props.optionsData;
     const {
@@ -117,6 +116,7 @@ class MainNavDisplay extends Component {
 
     return (
       <header className="site-header">
+        <a href="#maincontent" style={{display: 'none'}}>Skip to main content</a> 
         <div className="logo">
           <Link to="/" title="Connelly Partners">
             <img src={ConnellyLogo} alt="Connelly Partners" />

@@ -8,7 +8,7 @@ class Header extends Component {
   render() {
     const { page_name, image } = this.props;
     return (
-      <section className="page-banner bg-img">
+      <section id="maincontent" className="page-banner bg-img">
         <Img
           fluid={get(image, 'localFile.childImageSharp.fluid')}
           className="header-bg-img"
