@@ -9,11 +9,13 @@ class Header extends Component {
     const { page_name, image } = this.props;
     return (
       <section id="maincontent" className="page-banner bg-img">
-        <Img
-          fluid={get(image, 'localFile.childImageSharp.fluid')}
-          className="header-bg-img"
-          style={{ position: 'absolute' }}
-        />
+        {get(image, 'localfile.childImageSharp.fluid') && (
+          <Img
+            fluid={get(image, 'localFile.childImageSharp.fluid') || ''}
+            className="header-bg-img"
+            style={{ position: 'absolute' }}
+          />
+        )}
         <div className="container">
           <h1>{page_name}</h1>
         </div>

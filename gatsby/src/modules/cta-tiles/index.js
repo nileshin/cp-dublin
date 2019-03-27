@@ -10,7 +10,7 @@ const renderTile = (tile, htmlTitles) => {
     className: 'col-md-6 cta-tile-wrapper',
     title: tile.cta.title,
   };
-  const image = get(tile, 'image.localFile.childImageSharp.fluid');
+  const image = get(tile, 'image.localFile.childImageSharp.fluid') || '';
 
   const tileBody = (
     <>

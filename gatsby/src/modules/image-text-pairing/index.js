@@ -17,7 +17,7 @@ class ImageTextPairing extends Component {
               <div className="col-md-6 content-alt__img">
                 <figure>
                   <Img
-                    fluid={image.localFile.childImageSharp.fluid}
+                    fluid={image.localFile.childImageSharp.fluid || ''}
                     alt={image.alt_text}
                   />
                 </figure>
