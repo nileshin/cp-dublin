@@ -9,7 +9,7 @@ class Header extends Component {
     const { page_name, image } = this.props;
     return (
       <section id="maincontent" className="page-banner bg-img">
-        {get(image, 'localfile.childImageSharp.fluid') && (
+        {get(image, 'localFile.childImageSharp.fluid') && (
           <Img
             fluid={get(image, 'localFile.childImageSharp.fluid') || ''}
             className="header-bg-img"
