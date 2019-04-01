@@ -125,46 +125,57 @@ class PeopleGrid extends Component {
               </li>
             ))}
           </ul>
-          <Transition
-            in={!transitioning}
-            timeout={ANIMATION_TIME}
-          >
+          <Transition in={!transitioning} timeout={ANIMATION_TIME}>
             {listTransitionState => {
-              const pageStartIndex = (page - 1) * (postsPerPage);
+              const pageStartIndex = (page - 1) * postsPerPage;
               return (
                 <div className={`people-list ${listTransitionState}`}>
                   {people.map((personNode, i) => {
                     const person = personNode.node;
                     const transitionDelay = (() => {
                       if (transitioning) return '0s';
-                      return i >= pageStartIndex ? `${ANIMATION_DELAY_FACTOR * (i-pageStartIndex)}s` : `0s`;
+                      return i >= pageStartIndex
+                        ? `${ANIMATION_DELAY_FACTOR * (i - pageStartIndex)}s`
+                        : `0s`;
                     })();
-                    const photo = get(person, 'featured_media.localFile.childImageSharp.fluid');
-                    const alt_photo = get(person, 'acf.alternate_photo.localFile.childImageSharp.fluid');
+                    const photo = get(
+                      person,
+                      'featured_media.localFile.childImageSharp.fluid'
+                    );
+                    const alt_photo = get(
+                      person,
+                      'acf.alternate_photo.localFile.childImageSharp.fluid'
+                    );
+                    const alt_photo_publicURL = get(
+                      person,
+                      'acf.alternate_photo.localFile.publicURL'
+                    );
+                    const isWeb =
+                      person.acf.name.toLowerCase().indexOf('eric webster') >=
+                      0;
                     return (
                       <Transition
                         in={!transitioning}
                         timeout={ANIMATION_TIME}
                         appear={true}
-                        key={`${person.acf.name}-${i}`}  onEnter={node => node.scrollTop}
+                        key={`${person.acf.name}-${i}`}
+                        onEnter={node => node.scrollTop}
                       >
                         {personTransitionState => {
                           return (
                             <div
                               className={`people-list__item filter-item ${personTransitionState}`}
-                              style={{transitionDelay}}
+                              style={{ transitionDelay }}
                             >
                               <figure>
-                                {
-                                  photo &&  (
-                                    <Img
-                                  fluid={photo}
-                                  alt={person.acf.name}
-                                  fadeIn={true}
-                                  critical={true}
-                                />
-                                  )
-                                }
+                                {photo && (
+                                  <Img
+                                    fluid={photo}
+                                    alt={person.acf.name}
+                                    fadeIn={true}
+                                    critical={true}
+                                  />
+                                )}
                               </figure>
                               <div className="people-list__details">
                                 <h5>{person.acf.name}</h5>
@@ -172,13 +183,25 @@ class PeopleGrid extends Component {
                                   {person.acf.title}
                                 </small>
                               </div>
-                              <figure className="alternate">
-                                  {
-                                    alt_photo && (
-                                      <Img fluid={alt_photo} alt={person.acf.name + '_hover'} critical={true} />
-                                    )
-                                  }
-                                  
+                              <figure
+                                className={`alternate ${isWeb ? 'zoom' : ''}`}
+                              >
+                                {alt_photo && !isWeb && (
+                                  <Img
+                                    fluid={alt_photo}
+                                    alt={person.acf.name + '_hover'}
+                                    critical={true}
+                                  />
+                                )}
+                                {(isWeb ||
+                                  (!alt_photo && alt_photo_publicURL)) && (
+                                  <div className="alt-container">
+                                    <img
+                                      src={alt_photo_publicURL}
+                                      alt={person.acf.name + '_hover'}
+                                    />
+                                  </div>
+                                )}
                               </figure>
                             </div>
                           );
@@ -187,16 +210,27 @@ class PeopleGrid extends Component {
                     );
                   })}
                   {hasNextPage && (
-                    <div className={`people-list__item filter-load ${listTransitionState}`} style={{transitionDelay: transitioning ? '0s' : `${ANIMATION_DELAY_FACTOR * postsPerPage}s`}}>
-                    <a
-                      href="#load-more"
-                      onClick={this.nextPage}
-                      className="load-more"
+                    <div
+                      className={`people-list__item filter-load ${listTransitionState}`}
+                      style={{
+                        transitionDelay: transitioning
+                          ? '0s'
+                          : `${ANIMATION_DELAY_FACTOR * postsPerPage}s`,
+                      }}
                     >
-                      <span className="load-more-text">load more</span>
-                      <img src={load_more} alt="" className="load-more-icon" />
-                    </a>
-                  </div>
+                      <a
+                        href="#load-more"
+                        onClick={this.nextPage}
+                        className="load-more"
+                      >
+                        <span className="load-more-text">load more</span>
+                        <img
+                          src={load_more}
+                          alt=""
+                          className="load-more-icon"
+                        />
+                      </a>
+                    </div>
                   )}
                 </div>
               );
@@ -224,6 +258,7 @@ const PeopleGridWrapper = () => (
                 title
                 alternate_photo {
                   localFile {
+                    publicURL
                     childImageSharp {
                       fluid {
                         ...GatsbyImageSharpFluid_noBase64
@@ -234,6 +269,7 @@ const PeopleGridWrapper = () => (
               }
               featured_media {
                 localFile {
+                  publicURL
                   childImageSharp {
                     fluid {
                       ...GatsbyImageSharpFluid_noBase64

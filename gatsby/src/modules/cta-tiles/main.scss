@@ -11,14 +11,14 @@
     overflow: hidden;
 
     [class^="col-"] {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 0 105px;
+      // display: flex;
+      // flex-direction: column;
+      // align-items: center;
+      // justify-content: center;
+      // padding: 0 105px;
 
       @include media-breakpoint-down(sm) {
-        align-items: flex-start;
+        // align-items: flex-start;
         display: block;
         padding: 0 16%;
       }
@@ -46,11 +46,13 @@
   &-tile {
     padding-top: 3.65vw;
     padding-bottom: 3.65vw;
+    max-width: 60%;
+    margin: 0 auto;
 
     @include media-breakpoint-down(md) {
       padding-top: 4.55vw;
       padding-bottom: 4.25vw;
-      padding: 4.55vw 21.1% 4.25vw;
+      // padding: 4.55vw 21.1% 4.25vw;
     }
 
     @include media-breakpoint-down(sm) {
