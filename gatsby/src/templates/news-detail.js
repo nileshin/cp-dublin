@@ -32,7 +32,7 @@ class NewsDetail extends Component {
                     <BackArrowIcon alt="Back to News" class="icn" /> Back to
                     News
                   </Link>
-                  <h2>{title}</h2>
+                  <h2 dangerouslySetInnerHTML={{__html: `${title}`}} />
                   <time className="news-date" datetime={date}>
                     {formatDate(date)}
                   </time>
