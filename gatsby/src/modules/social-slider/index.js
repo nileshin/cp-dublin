@@ -56,6 +56,7 @@ class SocialSlider extends Component {
             className="juicer-feed"
             data-feed-id="cpinsta"
             data-slick={JSON.stringify(this.slickOptions)}
+            data-interval="0"
           />
         </div>
       </div>
