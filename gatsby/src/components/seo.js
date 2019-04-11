@@ -28,7 +28,7 @@ const SEO = ({
       },
       {
         property: `og:image`,
-        content: og_image && og_image.localFile ? og_image.localFile.publicURL : og_image,
+        content: og_image && og_image.localFile && og_image.localFile.publicURL ? og_image.localFile.publicURL : og_image,
       },
       {
         property: `og:description`,
@@ -48,7 +48,7 @@ const SEO = ({
       },
       {
         name: `twitter:image`,
-        content: tw_image && tw_image.localFiles && tw_image.localFiles.publicURL ? tw_image.localFiles.publicURL : tw_image,
+        content: tw_image && tw_image.localFile && tw_image.localFile.publicURL ? tw_image.localFile.publicURL : tw_image,
       },
       {
         name: `twitter:description`,
@@ -98,10 +98,18 @@ export const yoastMetadataFragment = graphql`
       yoast_social {
         og_title: yoast_wpseo_opengraph_title
         og_description: yoast_wpseo_opengraph_description
-        og_image: yoast_wpseo_opengraph_image
+        og_image: yoast_wpseo_opengraph_image {
+          localFile {
+            publicURL
+          }
+        }
         tw_title: yoast_wpseo_twitter_title
         tw_description: yoast_wpseo_twitter_description
-        tw_image: yoast_wpseo_twitter_image
+        tw_image: yoast_wpseo_twitter_image {
+          localFile {
+            publicURL
+          }
+        }
       }
     }
   }
@@ -115,10 +123,18 @@ export const yoastMetadataFragment = graphql`
       yoast_social {
         og_title: yoast_wpseo_opengraph_title
         og_description: yoast_wpseo_opengraph_description
-        og_image: yoast_wpseo_opengraph_image
+        og_image: yoast_wpseo_opengraph_image {
+          localFile {
+            publicURL
+          }
+        }
         tw_title: yoast_wpseo_twitter_title
         tw_description: yoast_wpseo_twitter_description
-        tw_image: yoast_wpseo_twitter_image
+        tw_image: yoast_wpseo_twitter_image {
+          localFile {
+            publicURL
+          }
+        }
       }
     }
   }

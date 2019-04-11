@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import HomeHeader from '../modules/home-header';
 import { graphql } from 'gatsby';
-import SEO from '../components/seo';
 
 class NotFound extends Component {
   render() {

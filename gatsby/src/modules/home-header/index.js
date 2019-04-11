@@ -63,7 +63,7 @@ class HomeHeader extends Component {
           };
     return (
       
-      <section className="home-banner page-sec">
+      <section id="maincontent" className="home-banner page-sec">
         <div className="container">
 
           <div className="row">

@@ -47,7 +47,8 @@ const addTenure = entities => {
 
 const fixSeoImages = entities => {
   return deepMap(entities, (value, key) => {
-    if (key === 'og_image' || key === 'tw_image') {
+    if (key === 'og_image' || key === 'tw_image' || key === 'yoast_wpseo_opengraph_image' || key === 'yoast_wpseo_twitter_image') {
+      if (value) console.log(`\tUpdating [${key}] which has value: [${value}]`);
       value = {
         localFile: {
           publicURL: value

@@ -31,7 +31,7 @@ const renderTiles = filteredList => {
         <div className="container">
           <div className="row">
             <figure className="work-tile__img col-6">
-              <img src={get(tile, 'image.localFile.childImageSharp.original.src')} alt="" className="cover" />
+              <img src={get(tile, 'image.localFile.childImageSharp.original.src') || ''} alt="" className="cover" />
             </figure>
             <div className="work-tile__details col-6">
               <span className="work-tile__client">{client_name}</span>

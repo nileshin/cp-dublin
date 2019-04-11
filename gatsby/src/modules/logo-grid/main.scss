@@ -78,8 +78,9 @@
       justify-content: center;
       align-items: center;
 
-      @include media-breakpoint-down(md) {
-        max-width: 88%;
+      @include media-breakpoint-down(lg) {
+        max-width: 80%;
+        max-height: 80%;
       }
     }
 
