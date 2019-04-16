@@ -5,6 +5,7 @@
 .content-blob {
   display: flex;
   position: relative; 
+  margin-bottom: 70px;
 
   @include media-breakpoint-down(sm) {
     padding-bottom: 180px;
