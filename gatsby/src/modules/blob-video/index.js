@@ -75,7 +75,7 @@ class BlobVideo extends Component {
           </pre>
         </div>
         <div className="container">
-          <div className="col-md-6">
+          <div className="col-md-6" style={{ paddingBottom: '7px'}}>
             <h4 className="eyebrow">{eyebrow}</h4>
             <h2
               dangerouslySetInnerHTML={{

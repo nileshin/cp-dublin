@@ -5,10 +5,10 @@
 .content-blob {
   display: flex;
   position: relative; 
-  margin-bottom: 70px;
 
   @include media-breakpoint-down(sm) {
     padding-bottom: 180px;
+    margin-bottom: 70px;
   }
 
   @include media-breakpoint-down(xs) {
@@ -224,7 +224,9 @@
     height: 64px;
     margin-top: 0;
     top: 89px;
-    left: 89px;
+    left: calc((-100vw + 279px));
+    margin-left: calc(50vw - 32px);
+    margin-right: calc(50vw + 32px);
   }
 
   .vid-active & {
