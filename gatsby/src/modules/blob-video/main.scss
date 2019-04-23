@@ -6,14 +6,20 @@
   display: flex;
   position: relative; 
 
-  @include media-breakpoint-down(sm) {
+  @media (max-width: 768px) {
     padding-bottom: 180px;
+    margin-bottom: 290px;
+  }
+
+  @media (max-width: 560px) {
+    padding-bottom: 220px;
+    margin-bottom: 140px;
+  }
+
+  @media (max-width: 414px) {
     margin-bottom: 70px;
   }
 
-  @include media-breakpoint-down(xs) {
-    padding-bottom: 220px;
-  }
   .container {
     min-height: 800px;
     display: flex;
@@ -42,6 +48,21 @@
     }
   }
 
+  @media (max-height: 414px) {
+    padding-bottom: 0;
+    margin-bottom: 70px;
+
+    .container {
+      min-height: 800px;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    & .col-md-6{
+      max-width: 50%;
+    }
+  }
+
   blockquote {
     font-size: 36px;
     line-height: 1.05555556;
@@ -49,6 +70,11 @@
     margin-bottom: 50px;
 
     @include media-breakpoint-down(md) {
+      font-size: 28px;
+      line-height: 1.08;
+    }
+
+    @media (max-height: 414px) {
       font-size: 28px;
       line-height: 1.08;
     }
@@ -85,10 +111,29 @@
   }
 
   @include media-breakpoint-down(sm) {
+    height: calc(334px * 1.65);
+    width: calc(279px * 1.65);
+    transform: translateY(40px);
+  }
+
+  @media (max-width: 560px) {
+    height: calc(334px * 1.2);
+    width: calc(279px * 1.2);
+    transform: translateY(70px);
+  }
+
+  @media (max-width: 414px) {
     top: auto;
     bottom: 0;
-    transform: none;
     height: 334px;
+    width: 279px;
+    transform: none;
+  }
+
+  @media (max-height: 414px) {
+    width: 279px;
+    height: 800px;
+    transform: translateY(-50%);
   }
 
   &:before {
@@ -111,12 +156,27 @@
 
     @include media-breakpoint-down(md) {
       width: 279px;
-      background-image: url(../_global/images/oval_t.svg);
+      background-image: url(../_global/images/oval_md.svg);
     }
 
     @include media-breakpoint-down(sm) {
+      width: calc(279px * 1.65);
+      background-image: url(../_global/images/oval_sm.svg);
+    }
+
+    @media (max-width: 560px) {
+      width: calc(279px * 1.2);
+      background-image: url(../_global/images/oval_sm.svg);
+    }
+
+    @media (max-width: 414px) {
       width: 279px;
-      background-image: url(../_global/images/oval_m.svg);
+      background-image: url(../_global/images/oval_sm.svg);
+    }
+
+    @media (max-height: 414px) {
+      width: 279px;
+      background-image: url(../_global/images/oval_md.svg);
     }
   }
 
@@ -174,6 +234,9 @@
   }
 
   div.react-player {
+    & > div{
+      background-color: white !important;
+    }
   }
 
   iframe {
@@ -194,6 +257,8 @@
     opacity: 0;
     cursor: pointer;
     transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    -webkit-filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
+    filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
 
     @include media-breakpoint-down(sm) {
       width: 50px;
@@ -201,8 +266,19 @@
       right: 16px;
       display: flex;
       align-items: center;
-      
     }
+
+    // @media (max-height: 414px) {
+    //   top: 25%;
+    // }
+
+    // @media (max-height: 375px) {
+    //   top: 27%;
+    // }
+
+    // @media (max-height: 320px) {
+    //   top: 31%;
+    // }
   }
 }
 
@@ -219,7 +295,27 @@
   transition: left 0.3s ease-in-out, margin-left 0.3s ease-in-out;
   z-index: 5;
 
-  @include media-breakpoint-down(sm) {
+  @media (max-width: 767px) {
+    width: 64px;
+    height: 64px;
+    margin-top: 0;
+    top: calc(89px * 1.65);
+    left: calc((-100vw + calc(279px * 1.65)));
+    margin-left: calc(50vw - 32px);
+    margin-right: calc(50vw + 32px);
+  }
+
+  @media (max-width: 560px) {
+    width: 64px;
+    height: 64px;
+    margin-top: 0;
+    top: calc(89px * 1.2);
+    left: calc((-100vw + calc(279px * 1.2)));
+    margin-left: calc(50vw - 32px);
+    margin-right: calc(50vw + 32px);
+  }
+
+  @media (max-width: 414px) {
     width: 64px;
     height: 64px;
     margin-top: 0;
@@ -227,6 +323,14 @@
     left: calc((-100vw + 279px));
     margin-left: calc(50vw - 32px);
     margin-right: calc(50vw + 32px);
+  }
+
+  @media (max-height: 414px) {
+    width: 90px;
+    height: 90px;
+    margin: -45px 0;
+    top: 50%;
+    left: 80px;
   }
 
   .vid-active & {
@@ -252,6 +356,12 @@
       margin-left: -6px;
       margin-top: -10px;
     }
+
+    @media (max-height: 414px) {
+      border-width: 16px 0 16px 26px;
+      margin-left: -10px;
+      margin-top: -16px;
+    }
   }
 
   &:after {
@@ -275,6 +385,13 @@
       height: 78px;
       margin-left: -39px;
       margin-top: -39px;
+    }
+
+    @media (max-height: 414px) {
+      width: 110px;
+      height: 110px;
+      margin-left: -55px;
+      margin-top: -55px;
     }
   }
 
