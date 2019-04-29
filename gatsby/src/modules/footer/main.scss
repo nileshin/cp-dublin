@@ -89,11 +89,11 @@
 
 .footer-nav {
   @include media-breakpoint-down(md) {
-    margin-bottom: 52px;
+    margin-bottom: 20px;
   }
 
   @include media-breakpoint-down(sm) {
-    margin-bottom: 85px;
+    margin-bottom: 20px;
   }
 }
 
@@ -146,6 +146,34 @@
     path {
       fill: currentColor;
       transition: fill 0.3s ease-in-out;
+    }
+  }
+}
+
+.privacy-link {
+  text-align: center;
+  margin-top: 8%;
+  font-family: $font-family-sans-serif-alt;font-size: 18px;
+  font-style: italic;
+  line-height: 1.23;
+
+  a {
+    font-family: $font-family-sans-serif-alt;
+    font-weight: 700;
+  }
+
+  @include media-breakpoint-down(md) {
+    margin-top: 0;
+    margin-bottom: 52px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    margin-bottom: 85px;
+    margin-top: 0;
+    text-align: left;
+
+    & > span {
+      display: none;
     }
   }
 }
