@@ -5,21 +5,6 @@
 .content-blob {
   display: flex;
   position: relative; 
-  padding-top: 120px;
-
-  @media (max-width: 768px) {
-    padding-bottom: 180px;
-    margin-bottom: 290px;
-  }
-
-  @media (max-width: 560px) {
-    padding-bottom: 220px;
-    margin-bottom: 140px;
-  }
-
-  @media (max-width: 414px) {
-    margin-bottom: 70px;
-  }
 
   .container {
     min-height: 800px;
@@ -34,8 +19,27 @@
     }
   }
 
+  @media (max-width: 767px) {
+    padding-bottom: 180px;
+    margin-bottom: 290px;
+    .container {
+      justify-content: initial;
+    }
+    & .col-md-6 {
+      padding-top: 120px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    padding-bottom: 220px;
+    margin-bottom: 140px;
+  }
+
+  @media (max-width: 414px) {
+    margin-bottom: 70px;
+  }
+
   @include media-breakpoint-down(sm) {
-    padding-top: 30px;
     padding-bottom: 210px;
 
     .container {
@@ -59,6 +63,7 @@
     }
 
     & .col-md-6{
+      padding-top: 120px;
       max-width: 50%;
     }
   }
