@@ -25,8 +25,6 @@ class QuoteBlobVideoModule extends Component {
   onResize = () => {
     if (!this.state.playing) {
       this.fillBlobWithVideo();
-      clearTimeout(this.resizeFinished);
-      this.resizeFinished = setTimeout(() => this.fillBlobWithVideo(), 950);
     }
   };
   fillBlobWithVideo() {
