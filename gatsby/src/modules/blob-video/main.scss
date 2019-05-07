@@ -5,6 +5,7 @@
 .content-blob {
   display: flex;
   position: relative; 
+  padding-top: 120px;
 
   @media (max-width: 768px) {
     padding-bottom: 180px;
@@ -29,12 +30,12 @@
 
     @include media-breakpoint-down(sm) {
       min-height: auto;
-      padding-top: 120px;
       padding-bottom: 180px;
     }
   }
 
   @include media-breakpoint-down(sm) {
+    padding-top: 30px;
     padding-bottom: 210px;
 
     .container {
@@ -43,7 +44,7 @@
 
     &.quote-blob {
       .container {
-        min-height: 801px;
+        min-height: 800px;
       }
     }
   }
@@ -53,8 +54,7 @@
     margin-bottom: 70px;
 
     .container {
-      min-height: 800px;
-      padding-top: 0;
+      min-height: 500px;
       padding-bottom: 0;
     }
 
@@ -132,7 +132,7 @@
 
   @media (max-height: 414px) {
     width: 279px;
-    height: 800px;
+    height: 334px;
     transform: translateY(-50%);
   }
 
@@ -176,7 +176,7 @@
 
     @media (max-height: 414px) {
       width: 279px;
-      background-image: url(../_global/images/oval_md.svg);
+      background-image: url(../_global/images/oval_sm.svg);
     }
   }
 
@@ -194,6 +194,11 @@
     border-radius: 0;
     width: 100%;
     margin-left: 0;
+
+    @media (max-height: 414px) {
+      height: 800px;
+      top: 80%;
+    }
 
     .stop {
       visibility: visible;
@@ -267,18 +272,6 @@
       display: flex;
       align-items: center;
     }
-
-    // @media (max-height: 414px) {
-    //   top: 25%;
-    // }
-
-    // @media (max-height: 375px) {
-    //   top: 27%;
-    // }
-
-    // @media (max-height: 320px) {
-    //   top: 31%;
-    // }
   }
 }
 
@@ -329,7 +322,7 @@
     width: 90px;
     height: 90px;
     margin: -45px 0;
-    top: 50%;
+    top: 40%;
     left: 80px;
   }
 
