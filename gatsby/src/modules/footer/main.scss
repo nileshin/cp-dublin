@@ -159,7 +159,10 @@
 
   a {
     font-family: $font-family-sans-serif-alt;
-    font-weight: 700;
+
+     span {
+       font-weight: 700;
+     }
   }
 
   @include media-breakpoint-down(md) {
