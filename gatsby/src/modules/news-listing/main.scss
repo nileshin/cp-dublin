@@ -288,9 +288,11 @@
     display: flex;
     align-items: center;
     margin-top: -87px;
+    min-height: 250px;
 
     @include media-breakpoint-down(sm) {
       margin-top: 14px;
+      min-height: 0;
     }
   }
 
