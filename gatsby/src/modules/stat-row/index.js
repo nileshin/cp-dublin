@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 import { slugify } from '../../utils';
+import blob from '../_global/images/bg-blob.svg';
+import blob2 from '../_global/images/load-more.svg';
+// import Snap from 'snapsvg';
 import './main.scss';
 
 class StatRow extends Component {
+  componentDidMount() {
+    // const svg = document.getElementById('blob');
+    // const s = Snap(svg);
+  }
+
   render() {
     const { stats, options: { hasBlob, hasColors } = {} } = this.props;
     return (
@@ -13,6 +21,8 @@ class StatRow extends Component {
         }`}
       >
         <div className="container stat-row-container">
+          <img src={blob} alt={"blob"} />
+          <img src={blob2} />
           {stats.map(({ stat_title }, i) => {
             return (
               <div className="row stat__head" data-stat-index={i} key={stat_title}>

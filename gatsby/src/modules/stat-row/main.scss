@@ -136,7 +136,7 @@
         }
       }
 
-      &:before {
+      &:before, &:after {
         content: '';
         position: absolute;
         top: -193px;
@@ -156,6 +156,38 @@
         @include media-breakpoint-down(md) {
           top: -149px;
           left: -461px;
+        }
+      }
+
+      &:before {
+        animation: aniOne 1s linear infinite alternate;
+
+        @keyframes aniOne {
+          from{
+            // transform:translate(0, -15px) scale(1) rotate(15deg);
+            transform:translate(0, -5%);
+          }
+          to{
+            // transform:translate(0, -30px) scale(1.07) rotate(18deg);
+            transform:translate(0, 5%);
+          }
+        }
+      }
+
+      &:after {
+        animation: aniTwo 1s linear infinite alternate-reverse;
+        z-index: -1;
+
+        @keyframes aniTwo {
+          from{
+            // top: 0px;
+            transform:translate(-5%);
+            // transform:translate(-5px, -15px) scale(1.07) rotate(15deg);
+          }
+          to{
+            transform:translate(5%);
+            // transform:translate(20px, 5px) scale(1) rotate(13deg);
+          }
         }
       }
     }
@@ -179,7 +211,8 @@
 
     &.has-blob {
       position: static;
-      .container:before {
+      .container:before,
+      .container:after {
         display: block;
 
         @include media-breakpoint-down(sm) {
