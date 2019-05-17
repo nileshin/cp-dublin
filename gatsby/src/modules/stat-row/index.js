@@ -1,15 +1,37 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 import { slugify } from '../../utils';
-import blob from '../_global/images/bg-blob.svg';
-import blob2 from '../_global/images/load-more.svg';
-import Snap from 'snapsvg';
+import 'snapsvg';
+// import mina from 'snapsvg';
 import './main.scss';
 
 class StatRow extends Component {
   componentDidMount() {
-    // const svg = document.getElementById('blob');
-    // const s = Snap(svg);
+    const Snap = window.Snap;
+    const mina = window.mina;
+    if (Snap) {
+
+      const blobby = Snap.select('#blob');
+      const blobby2 = Snap.select('#blob2');
+      const blobby3 = Snap.select('#blob3');
+      const blobbypoints = blobby.node.getAttribute('d');
+      const blobbypoints2 = blobby2.node.getAttribute('d');
+      const blobbypoints3 = blobby3.node.getAttribute('d');
+
+      const toBlobby = function() {
+        blobby.animate({ d: blobbypoints }, 2000, mina.easeinout, toBlobby2);
+      }
+
+      const toBlobby2 = function() {
+        blobby.animate({ d: blobbypoints2 }, 2000, mina.easeinout, toBlobby3);
+      }
+
+      const toBlobby3 = function() {
+        blobby.animate({ d: blobbypoints3 }, 2000, mina.easeinout, toBlobby);
+      }
+
+      toBlobby();
+    }
   }
 
   render() {
@@ -21,8 +43,33 @@ class StatRow extends Component {
         }`}
       >
         <div className="container stat-row-container">
-          <img src={blob} alt={"blob"} />
-          <img src={blob2} />
+          <svg width="489px" height="591px" viewBox="0 0 489 591" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <g id="FinalPages" stroke="none" stroke-width="1" fill="none" fillRule="evenodd">
+                <g id="D.People" transform="translate(0.000000, -2153.000000)" fill="#393E46" fillRule="nonzero">
+                    <g id="Leadership" transform="translate(-140.000000, 1157.000000)">
+                        <path id="blob" d="M245.86719,1549.17838 C364.930362,1437.76606 628.938825,1452.1717 628.938825,1290.52576 C628.938825,1128.87982 542.205607,977.512689 370.535473,997.839895 C198.86534,1018.1671 63.6387013,1143.79503 10.1307994,1324.559 C-43.3771025,1505.32297 126.804018,1660.5907 245.86719,1549.17838 Z"></path>
+                    </g>
+                </g>
+            </g>
+          </svg>
+          <svg width="477px" height="449px" viewBox="0 0 477 449" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <g id="FinalPages" stroke="none" stroke-width="1" fill="none" fillRule="evenodd">
+                <g id="D.People" transform="translate(0.000000, -2224.000000)" fill="#393E46" fillRule="nonzero">
+                    <g id="Leadership" transform="translate(-140.000000, 1157.000000)">
+                        <path id="blob2" opacity="0" d="M289.513424,1488.12278 C411.566054,1426.91973 550.5,1504.4 600.298197,1392.14433 C650.096394,1279.88867 582,1121.56429 445,1077 C308,1032.43571 77.7668765,1150.17142 24.2589746,1330.93539 C-29.2489273,1511.69936 167.460795,1549.32583 289.513424,1488.12278 Z"></path>
+                    </g>
+                </g>
+            </g>
+          </svg>
+          <svg width="489px" height="414px" viewBox="0 0 489 414" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <g id="FinalPages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="D.People" transform="translate(0.000000, -2255.000000)" fill="#393E46" fill-rule="nonzero">
+                    <g id="Leadership" transform="translate(-140.000000, 1157.000000)">
+                        <path id="blob3" opacity="0" d="M263.344983,1470.09589 C366.575421,1386.67146 550.5,1528.25566 600.298197,1416 C650.096394,1303.74434 642.75,1155.03557 505.75,1110.47128 C368.75,1065.90698 77.7668765,1150.17142 24.2589746,1330.93539 C-29.2489273,1511.69936 160.114544,1553.52032 263.344983,1470.09589 Z"></path>
+                    </g>
+                </g>
+            </g>
+          </svg>
           {stats.map(({ stat_title }, i) => {
             return (
               <div className="row stat__head" data-stat-index={i} key={stat_title}>
