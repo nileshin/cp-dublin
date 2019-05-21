@@ -5,7 +5,6 @@ import Transition from 'react-transition-group/Transition';
 import Blob from '../../components/blob';
 import shuffle from 'lodash.shuffle';
 import get from 'lodash.get';
-import 'snapsvg';
 import './main.scss';
 
 const PEOPLE_FILTERS = {
