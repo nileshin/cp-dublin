@@ -13,7 +13,7 @@ class Blob extends Component {
         if (Snap) {
             this.animateBlobStates(Snap, mina);
         }
-      }
+    }
     
     animateBlobStates(Snap, mina) {
         let blob = Snap.select('#' + this.props.blobToBeDisplayed);
