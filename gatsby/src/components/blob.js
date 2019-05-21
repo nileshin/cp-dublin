@@ -11,11 +11,11 @@ class Blob extends Component {
         const Snap = window.Snap;
         const mina = window.mina;
         if (Snap) {
-            this.animateBlobStates(Snap, mina);
+            this.animateBlobPhases(Snap, mina);
         }
     }
     
-    animateBlobStates(Snap, mina) {
+    animateBlobPhases(Snap, mina) {
         let blob = Snap.select('#' + this.props.blobToBeDisplayed);
         if (blob.type === "svg") blob = Snap.select('#' + this.props.blobToBeDisplayed + ' > path');
         const blobPath = blob.node.getAttribute('d');
