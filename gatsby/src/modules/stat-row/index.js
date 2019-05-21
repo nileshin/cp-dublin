@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 import { slugify } from '../../utils';
 import Blob from '../../components/blob';
-import 'snapsvg';
 import './main.scss';
 
 class StatRow extends Component {
