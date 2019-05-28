@@ -24,7 +24,7 @@ class Layout extends Component {
           <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.22.0/polyfill.js"></script>
         </Helmet>
         <MainNav />
-        <div role="main">{this.props.children}</div>
+        <div role="main" id="maincontent" name="maincontent">{this.props.children}</div>
         <Footer />
         <CookieConsent
           location="bottom"
