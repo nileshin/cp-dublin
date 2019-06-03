@@ -31,5 +31,8 @@
 [context.ewebster]
   environment = { PANTHEON_ENV = "dev" }
 
-[content."grid-update"]
+[context."grid-update"]
+  environment = { PANTHEON_ENV = "dev" }
+
+[context."blob-animation"]
   environment = { PANTHEON_ENV = "dev" }
