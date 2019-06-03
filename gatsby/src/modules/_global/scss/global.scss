@@ -23,7 +23,7 @@
   }
 }
 //Dealing with keyboard accessibility
-a:focus { border: 2px dotted $brand-secondary-alt; 
+a:focus, button:focus { border: 2px dotted $brand-secondary-alt; 
   &:hover{
     border: none;
   }
@@ -31,7 +31,7 @@ a:focus { border: 2px dotted $brand-secondary-alt;
     border: none;
   }
 }
-a:focus-visible { border: 2px dotted $brand-secondary-alt; }
+a:focus-visible, button:focus-visible { border: 2px dotted $brand-secondary-alt; }
 
 
 // WebbyMonks global.scss below
@@ -377,7 +377,7 @@ address {
   }
 }
 
-a {
+a, button {
   color: $brand-secondary;
   text-decoration: none;
   -webkit-transition: color 0.25s ease-in-out,
