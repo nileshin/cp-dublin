@@ -11,7 +11,7 @@ import { ReactComponent as PlusIcon } from '../_global/images/icon-plus.svg';
 class CapabilitiesTiles extends Component {
   state = {
     popupOpen: false,
-    activeCapabilityIndex: null,
+    activeCapabilityIndex: null
   };
   activateCapability = e => {
     const target = e.currentTarget;
@@ -44,23 +44,38 @@ class CapabilitiesTiles extends Component {
   };
   componentDidMount() {
     if (document) {
-      document.body.addEventListener('click', e => {
-        if (
-          e.target.classList.contains('pop-up') ||
-          e.target.classList.contains('pop-up__wrap')
-        ) {
-          this.closeActiveCapability();
-          return;
-        }
-      });
+      document.body.addEventListener('click', this.handleClick);
+      document.body.addEventListener('keyup', this.handleKeyUp);
     }
   }
+  componentWillUnmount() {
+    if (document) {
+      document.body.removeEventListener('click', this.handleClick);
+      document.body.removeEventListener('keyup', this.handleKeyUp);
+    }
+  }
+  handleClick = e => {
+    if (
+      e.target.classList.contains('pop-up') ||
+      e.target.classList.contains('pop-up__wrap')
+    ) {
+      this.closeActiveCapability();
+      return;
+    }
+  };
+  handleKeyUp = e => {
+    console.log('keyup', e.which);
+    if (e.which === 9 || e.key === 'Tab' || e.code === 'Tab') {
+      this.closeActiveCapability();
+      return;
+    }
+  };
   render() {
     const { title, services_and_capabilities_pdf, capabilities } = this.props;
     const { activeCapabilityIndex: activeCapIdx, popupOpen } = this.state;
     const activeCap = activeCapIdx ? capabilities[activeCapIdx] : null;
     return (
-      <section className="capabilities-sec">
+      <section className="capabilities-sec" id="capabilities-tiles">
         <div className="container">
           <div className="row">
             <div className="col-6">
@@ -87,8 +102,8 @@ class CapabilitiesTiles extends Component {
             <div className="capabilities col-12">
               {capabilities.map((capability, index) => (
                 <div className="capabilities__item" key={index}>
-                  <h3
-                    className="capabilities__title pop-up__btn"
+                  <button
+                    className="capabilities__title pop-up__btn cap_header"
                     data-href={'#capabilities__details-' + index}
                     onClick={this.activateCapability}
                     data-capability-index={index}
@@ -99,7 +114,7 @@ class CapabilitiesTiles extends Component {
                       }}
                     />
                     <PlusIcon alt="plus" className="icn" />
-                  </h3>
+                  </button>
                   <div
                     dangerouslySetInnerHTML={{
                       __html: capability.sub_capabilities,

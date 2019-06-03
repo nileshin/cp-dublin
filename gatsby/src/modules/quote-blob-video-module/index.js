@@ -19,23 +19,24 @@ class QuoteBlobVideoModule extends Component {
     this.player = React.createRef();
   }
   componentDidMount() {
-    this.calcAspectRatio();
+    this.fillBlobWithVideo();
     window.addEventListener('resize', this.onResize);
   }
   onResize = () => {
-    this.calcAspectRatio();
-    clearTimeout(this.resizeFinished);
-    this.resizeFinished = setTimeout(() => this.calcAspectRatio(), 950);
+    if (!this.state.playing) {
+      this.fillBlobWithVideo();
+    }
   };
-  calcAspectRatio() {
-    const getHeight = (window.innerWidth * 1080) / 1920;
-    const getWidth = (1920 * window.innerHeight) / 1080;
-    if (getHeight < window.innerHeight) {
-      $('.blob iframe, .blob .react-player').width(getWidth);
-      $('.blob iframe, .blob .react-player').height(window.innerHeight);
+  fillBlobWithVideo() {
+    $('.blob iframe, .blob .react-player').width('1422');
+    $('.blob iframe, .blob .react-player').height('800');
+  }
+  toggleFullScreen() {
+    if (!this.state.playing) {
+      $('.blob iframe, .blob .react-player').width('100vw');
+      $('.blob iframe, .blob .react-player').height('100vh');
     } else {
-      $('.blob iframe, .blob .react-player').width(window.innerWidth);
-      $('.blob iframe, .blob .react-player').height(getHeight);
+      this.fillBlobWithVideo();
     }
   }
   extractVideoSRC(embed) {
@@ -124,6 +125,7 @@ class QuoteBlobVideoModule extends Component {
     );
   }
   _beginPlaying = event => {
+    this.toggleFullScreen();
     this.setState(state => ({
       ...state,
       playing: true,
@@ -132,6 +134,7 @@ class QuoteBlobVideoModule extends Component {
   };
 
   _stopPlaying = event => {
+    this.toggleFullScreen();
     this.setState(state => ({
       ...state,
       playing: false,
@@ -139,7 +142,7 @@ class QuoteBlobVideoModule extends Component {
     }));
   };
   _onReady = event => {
-    this.calcAspectRatio();
+    this.fillBlobWithVideo();
     this.setState(state => ({
       ...state,
       videoReady: true,

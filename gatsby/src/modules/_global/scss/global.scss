@@ -23,7 +23,7 @@
   }
 }
 //Dealing with keyboard accessibility
-a:focus { border: 2px dotted $brand-secondary-alt; 
+a:focus, button:focus { border: 2px dotted $brand-secondary-alt; 
   &:hover{
     border: none;
   }
@@ -31,7 +31,7 @@ a:focus { border: 2px dotted $brand-secondary-alt;
     border: none;
   }
 }
-a:focus-visible { border: 2px dotted $brand-secondary-alt; }
+a:focus-visible, button:focus-visible { border: 2px dotted $brand-secondary-alt; }
 
 
 // WebbyMonks global.scss below
@@ -238,6 +238,12 @@ h2 {
       line-height: 0.8;
       letter-spacing: -1.8px;
     }
+
+    @media (max-height: 414px) {
+      font-size: 52px;
+      line-height: 0.77;
+      letter-spacing: -2.75px;
+    }
   }
 }
 
@@ -371,7 +377,7 @@ address {
   }
 }
 
-a {
+a, button {
   color: $brand-secondary;
   text-decoration: none;
   -webkit-transition: color 0.25s ease-in-out,
