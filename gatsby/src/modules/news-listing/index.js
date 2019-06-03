@@ -3,7 +3,6 @@ import { StaticQuery, graphql, Link } from 'gatsby';
 import { htmlentities, formatDate } from '../../utils';
 import DefiantlyHumanCallOut from '../defiantly-human-call-out';
 import './main.scss';
-import load_more from '../_global/images/load-more.svg';
 import { ReactComponent as NewTabIcon } from '../_global/images/icon-new-tab.svg';
 import NewsletterCapture from '../newsletter-capture';
 import { Transition } from 'react-transition-group';

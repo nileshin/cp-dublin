@@ -17,3 +17,9 @@ export const onPreRouteUpdate = () => {
     }
   }
 }
+
+export const onRouteUpdate = () => {
+  if (window && window.document) {
+    document.getElementById("___gatsby").focus();
+  }
+}

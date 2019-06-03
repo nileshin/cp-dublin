@@ -64,7 +64,6 @@ class CapabilitiesTiles extends Component {
     }
   };
   handleKeyUp = e => {
-    console.log('keyup', e.which);
     if (e.which === 9 || e.key === 'Tab' || e.code === 'Tab') {
       this.closeActiveCapability();
       return;
