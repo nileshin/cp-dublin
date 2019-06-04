@@ -36,6 +36,7 @@ export const slugify = s => {
 
 export const formatDate = date_obj => {
   let date = date_obj;
+  if (!date) return '';
   if (typeof date_obj === 'string') {
     date = new Date(date_obj);
   }
