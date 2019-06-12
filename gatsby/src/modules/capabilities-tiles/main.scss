@@ -100,7 +100,27 @@
     padding-top: 17px;
     margin-top: 68px;
 
-    &:hover h3{
+    .cap_header {
+      font-weight: bold;
+      display: block;
+      appearance: none;
+      border: 2px dotted transparent;
+      background: none;
+      color: $white-alt;
+      width: 100%;
+      text-align: left;
+      padding: 0;
+
+      &:focus {
+        border: 2px dotted $brand-secondary-alt; 
+      }
+
+      &:focus-visible {
+        border: 2px dotted $brand-secondary-alt; 
+      }
+    }
+
+    &:hover .cap_header{
       color: $brand-secondary  
     }
     
