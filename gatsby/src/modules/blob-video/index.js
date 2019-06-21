@@ -110,8 +110,17 @@ class BlobVideo extends Component {
               loop={true}
             />
 
-            <div className="vid-thumb" onClick={this._beginPlaying} />
-            <span className="stop" onClick={this._stopPlaying}>
+            <div 
+              className="vid-thumb" 
+              tabIndex="0" 
+              onClick={this._beginPlaying} 
+              onKeyDown={this._beginPlaying} 
+            />
+            <span 
+              className="stop" 
+              tabIndex="0"
+              onClick={this._stopPlaying}
+              onKeyDown={this._stopPlaying}>
               <Hamburger alt="" />
             </span>
           </div>
@@ -120,21 +129,29 @@ class BlobVideo extends Component {
     );
   }
   _beginPlaying = event => {
-    this.toggleFullScreen();
-    this.setState(state => ({
-      ...state,
-      playing: true,
-      volume: 1,
-    }));
+    if (event.keyCode && event.keyCode != 13) {
+      return;
+    } else {
+      this.toggleFullScreen();
+      this.setState(state => ({
+        ...state,
+        playing: true,
+        volume: 1,
+      }));
+    }
   };
 
   _stopPlaying = event => {
-    this.toggleFullScreen();
-    this.setState(state => ({
-      ...state,
-      playing: false,
-      volume: 0,
-    }));
+    if (event.keyCode && event.keyCode != 13) {
+      return;
+    } else {
+      this.toggleFullScreen();
+      this.setState(state => ({
+        ...state,
+        playing: false,
+        volume: 0,
+      }));
+    }
   };
   _onReady = event => {
     this.fillBlobWithVideo();
