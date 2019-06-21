@@ -171,7 +171,7 @@ class JobListingsDisplay extends Component {
                               alt="open in new tab"
                               viewBox="0 0 18 18"
                             />
-                            {url_title || DEFAULT_URL_TITLE}
+                            <span>{url_title || DEFAULT_URL_TITLE}</span>
                           </a>
                         </div>
                       </article>

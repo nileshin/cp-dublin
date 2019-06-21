@@ -123,6 +123,9 @@
       }
 
       &:hover, &:focus {
+        & span{
+          color: gold;
+        }
         &:after {
           left: calc(100% + 30px);
         }
