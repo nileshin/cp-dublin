@@ -3,10 +3,10 @@ import { StaticQuery, graphql, Link } from 'gatsby';
 import { htmlentities, formatDate } from '../../utils';
 import DefiantlyHumanCallOut from '../defiantly-human-call-out';
 import './main.scss';
-import load_more from '../_global/images/load-more.svg';
 import { ReactComponent as NewTabIcon } from '../_global/images/icon-new-tab.svg';
 import NewsletterCapture from '../newsletter-capture';
 import { Transition } from 'react-transition-group';
+import Blob from '../../components/blob';
 
 const renderPost = ({ node: post }, i = 0, state = {}) => {
   const filterType = post.acf.internal_external;
@@ -14,7 +14,7 @@ const renderPost = ({ node: post }, i = 0, state = {}) => {
   const postClassName = post.acf.featured ? 'featured' : '';
   const url =
     filterType === 'external' ? post.acf.external_link : `/news/${post.slug}`;
-  const pageStartIndex = ((state.page - 1) * state.postsPerPage) - 4;
+  const pageStartIndex = (state.page - 1) * state.postsPerPage - 4;
   const postStyle = {
     transitionDelay: `${i > pageStartIndex ? 0.03 * (i - pageStartIndex) : 0}s`,
   };
@@ -165,7 +165,7 @@ class NewsListingDisplay extends Component {
       featuredPost,
       currentFilter,
       postsPerPage,
-      page
+      page,
     } = this.state;
     const filteredPosts = unfilteredPosts.filter(({ node: post }) => {
       if (post.acf.date && new Date(post.acf.date) < this.postDateCutoff) {
@@ -225,10 +225,10 @@ class NewsListingDisplay extends Component {
                   onClick={this.nextPage}
                 >
                   <span className="load-more-text">load more</span>
-                  <img
-                    src={load_more}
-                    alt="load-more"
-                    className="load-more-icon"
+                  <Blob
+                    blobToBeDisplayed="loadMoreBlob"
+                    phaseTwoPath="M2.46072 38.5c-9.4891 30.67173 23.34516 61.17297 56.73841 57.79179 33.39325-3.38119 69.80343-22.89571 69.80343-54.33692 0-31.44121-16.02906-52.90044-55.35187-35.74628C34.32788 23.36275 11.94982 7.82827 2.46072 38.5z"
+                    phaseThreePath="M11 81.14913c17.27754 11.87968 27.3554-13.62828 60.35897-9.11246 33.00358 4.51581 47.40417-2.58216 47.40417-34.02337 0-31.44121-43.57646-48.33539-82.89928-31.18123C-3.45894 23.98623-6.27754 69.26944 11 81.14913z"
                   />
                 </a>
               </div>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import Transition from 'react-transition-group/Transition';
-import load_more from '../_global/images/load-more.svg';
+import Blob from '../../components/blob';
 import shuffle from 'lodash.shuffle';
 import get from 'lodash.get';
 import './main.scss';
@@ -38,6 +38,7 @@ class PeopleGrid extends Component {
       };
     });
   }
+
   changeFilter = e => {
     e.preventDefault();
     const newFilter = e.currentTarget.getAttribute('title');
@@ -224,10 +225,10 @@ class PeopleGrid extends Component {
                         className="load-more"
                       >
                         <span className="load-more-text">load more</span>
-                        <img
-                          src={load_more}
-                          alt=""
-                          className="load-more-icon"
+                        <Blob
+                          blobToBeDisplayed="loadMoreBlob"
+                          phaseTwoPath="M2.46072 38.5c-9.4891 30.67173 23.34516 61.17297 56.73841 57.79179 33.39325-3.38119 69.80343-22.89571 69.80343-54.33692 0-31.44121-16.02906-52.90044-55.35187-35.74628C34.32788 23.36275 11.94982 7.82827 2.46072 38.5z"
+                          phaseThreePath="M11 81.14913c17.27754 11.87968 27.3554-13.62828 60.35897-9.11246 33.00358 4.51581 47.40417-2.58216 47.40417-34.02337 0-31.44121-43.57646-48.33539-82.89928-31.18123C-3.45894 23.98623-6.27754 69.26944 11 81.14913z"
                         />
                       </a>
                     </div>

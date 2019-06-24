@@ -136,18 +136,11 @@
         }
       }
 
-      &:before {
-        content: '';
+      & > svg {
         position: absolute;
         top: -193px;
         left: -330px;
         width: 629px;
-        height: 591px;
-        background-image: url(../_global/images/bg-blob.svg);
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center center;
-        display: none;
 
         @include media-breakpoint-down(lg) {
           left: -410px;
@@ -179,7 +172,8 @@
 
     &.has-blob {
       position: static;
-      .container:before {
+      .container:before,
+      .container:after {
         display: block;
 
         @include media-breakpoint-down(sm) {

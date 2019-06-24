@@ -56,7 +56,7 @@ const renderFooterMenu = ({ menu }, optionsData) => {
                 ))}
               </ul>
             </nav>
-            <div class="privacy-link">
+            <div className="privacy-link">
               <Link to="/privacy-policy">View our <span>Privacy Policy</span></Link>
             </div>
           </div>
