@@ -86,6 +86,12 @@ In addition to triggering builds based on code pushes, builds can also be trigge
 
 The webhooks that trigger these are in the Netlify dashboard (under "Build & deploy") and you can use whatever tools you like to ping these URLs (Postman, IFTTT, etc.)
 
+### Skipping Builds
+
+You can have Netlify skip the build by including `[skip ci]` in your latest commit message. 
+
+You can also do `git commit --allow-empty -m "[skip ci]"` to make an empty commit if you have already committed all your changes.
+
 ## Build Errors
 
 Common sources for build errors:
