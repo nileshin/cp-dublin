@@ -57,7 +57,7 @@ export const statRow = graphql`
     }
   }
 
-  fragment StatRowFragment on statRow_13 {
+  fragment StatRowFragment on statRow_14 {
     stats {
       stat_title
       stat_number

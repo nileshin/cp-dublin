@@ -69,7 +69,6 @@ class HomeHeader extends Component {
           <div className="row">
             <div className="col-md-6 order-md-2 image">
               <div className="home-banner-img" ref={this.homeImg}>
-                
                 <figure>
                   <Img
                     fluid={get(image, 'localFile.childImageSharp.fluid')}
