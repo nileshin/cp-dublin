@@ -6,6 +6,7 @@ import TraditionalCarousel from '../modules/traditional-carousel';
 import WorkDetailIntro from '../modules/work-detail-intro';
 import StatLongFactRow from '../modules/stat-long-fact-row';
 import RichMediaHeader from '../modules/rich-media-header';
+import StatRow from '../modules/stat-row';
 import get from 'lodash.get';
 import CTATiles from '../modules/cta-tiles';
 import './work-detail.scss';
@@ -88,6 +89,14 @@ class WorkDetail extends Component {
                     />
                   );
                 }
+                case 'WordPressAcf_stat_row': {
+                  return (
+                    <StatRow
+                      {...module_content.stat_row}
+                      key={module_content.id}
+                    />
+                  );
+                }
                 case 'WordPressAcf_rte': {
                   return (
                     <section
@@ -159,6 +168,12 @@ export const query = graphql`
             id
             stat_long_fact_row {
               ...StatLongFactRowFragment
+            }
+          }
+          ... on WordPressAcf_stat_row {
+            id
+            stat_row {
+              ...StatRowFragmentWorkDetail
             }
           }
           ... on WordPressAcf_rte {
