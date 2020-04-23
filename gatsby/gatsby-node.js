@@ -5,7 +5,7 @@
  */
 const path = require('path');
 const fs = require('fs');
-
+console.log('Starting Gatsby, build config last updated on 4/23/2020.');
 // You can delete this file if you're not using it
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
