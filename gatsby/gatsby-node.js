@@ -28,12 +28,14 @@ exports.createPages = ({ graphql, actions }) => {
     )
       .then(result => {
         if (result.errors) {
+          console.log("XXXXXX -- error on: PAGENAME");
           console.error(result.errors);
           reject(result.errors);
         }
 
         const pageTemplate = path.resolve('./src/templates/page.js');
         result.data.allWordpressPage.edges.forEach(({ node: page }) => {
+          console.log("building page:", page.slug);
           if (fs.existsSync(path.resolve(`./src/pages/${page.slug}.js`))) {
             return;
           }
@@ -71,14 +73,16 @@ exports.createPages = ({ graphql, actions }) => {
       })
       .then(result => {
         if (result.errors) {
+          console.log("XXXXXX -- error on: PAGENAME");
           console.error(result.errors);
           reject(result.errors);
         }
-
+        
         const workDetailTemplate = path.resolve(
           './src/templates/work-detail.js'
         );
         result.data.allWordpressWpWork.edges.forEach(({ node: page }) => {
+          console.log("building work:", page.slug);
           if (fs.existsSync(path.resolve(`./src/pages/${page.slug}.js`))) {
             return;
           }
@@ -109,10 +113,16 @@ exports.createPages = ({ graphql, actions }) => {
         `);
       })
       .then(result => {
+        if (result.errors) {
+          console.log("XXXXXX -- error on: PAGENAME");
+          console.error(result.errors);
+          reject(result.errors);
+        }
         const newsDetailTemplate = path.resolve(
           './src/templates/news-detail.js'
         );
         result.data.allWordpressPost.edges.forEach(({ node: page }) => {
+          console.log("building news:", page.slug);
           if (page.acf.internal_external !== 'internal') return;
           createPage({
             path: `/news/${page.slug}`,

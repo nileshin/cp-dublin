@@ -49,18 +49,4 @@ class StatRow extends Component {
 
 export default StatRow;
 
-export const statRow = graphql`
-  fragment StatRowFragmentWorkDetail on statRow_11 {
-    stats {
-      stat_title
-      stat_number
-    }
-  }
 
-  fragment StatRowFragment on statRow_13 {
-    stats {
-      stat_title
-      stat_number
-    }
-  }
-`;
