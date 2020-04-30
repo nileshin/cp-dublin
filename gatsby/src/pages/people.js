@@ -58,7 +58,10 @@ export const peopleQuery = graphql`
         }
         stat_row {
           stat_row {
-            ...StatRowFragment
+            stats {
+              stat_title
+              stat_number
+            }
           }
         }
         people_grid_header {
