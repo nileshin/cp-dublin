@@ -1,33 +1,11 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 import { stripTags } from '../../utils';
-import axios from 'axios';
 import './main.scss';
 
 import { ReactComponent as NewTabIcon } from '../_global/images/icon-new-tab.svg';
 import { ReactComponent as DownloadIcon } from '../_global/images/icon-dwnld.svg';
 import { ReactComponent as LoadingIcon } from '../_global/images/loading.svg';
-import { ReactComponent as BrokenClouds } from '../_global/images/weather_icons/BrokenClouds.svg';
-import { ReactComponent as ClearSky } from '../_global/images/weather_icons/ClearSky.svg';
-import { ReactComponent as FewClouds } from '../_global/images/weather_icons/FewClouds.svg';
-import { ReactComponent as Mist } from '../_global/images/weather_icons/Mist.svg';
-import { ReactComponent as Rain } from '../_global/images/weather_icons/Rain.svg';
-import { ReactComponent as ScatteredClouds } from '../_global/images/weather_icons/ScattredClouds.svg';
-import { ReactComponent as ShowerRain } from '../_global/images/weather_icons/ShowerRain.svg';
-import { ReactComponent as Snow } from '../_global/images/weather_icons/Snow.svg';
-import { ReactComponent as Thunderstorm } from '../_global/images/weather_icons/Thunderstorm.svg';
-
-const WEATHER_ICONS = {
-  '04': BrokenClouds,
-  '01': ClearSky,
-  '02': FewClouds,
-  '50': Mist,
-  '10': Rain,
-  '03': ScatteredClouds,
-  '09': ShowerRain,
-  '13': Snow,
-  '11': Thunderstorm,
-};
 
 class ContactCards extends Component {
   state = {
@@ -35,71 +13,6 @@ class ContactCards extends Component {
       boston: null,
       dublin: null,
     },
-  };
-  componentDidMount() {
-    axios
-      .get('/.netlify/functions/getCityData')
-      .then(response => {
-        this.setState(state => {
-          return {
-            ...state,
-            cityData: {
-              boston: response.data.bostonData,
-              dublin: response.data.dublinData,
-            },
-          };
-        });
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
-  renderCityData = cityName => {
-    if (this.state.cityData[cityName]) {
-      const city = this.state.cityData[cityName];
-      const Icon = WEATHER_ICONS[city.condition.icon];
-      const time = (() => {
-        const parts = city.time.split(' ');
-        return (
-          <>
-            {parts[0]}
-            <small>{parts[1]}</small>
-          </>
-        );
-      })();
-
-      return (
-        <>
-          <li className="contact__time" key={`time__${cityName}`}>
-            {time}
-          </li>
-          <li className="contact__weather" key={`weather__${cityName}`}>
-            {Icon && (
-              <Icon
-                className="icn"
-                alt={city.condition.condition || 'weather'}
-                viewBox="0 0 24 24"
-              />
-            )}
-            <span dangerouslySetInnerHTML={{ __html: `${Math.floor(city.temp)}&deg;` }} />
-            <span className="unit">{city.unit}</span>
-          </li>
-        </>
-      );
-    }
-
-    // Oops, no data yet. The function needs to churn a bit.
-    // Function code: /gatsby/functions/getCityData.js
-    return (
-      <>
-        <li className="contact__time inactive" key={`time__${cityName}`}>
-          <LoadingIcon viewBox="0 0 100 100" />
-        </li>
-        <li className="contact__weather inactive" key={`weather__${cityName}`}>
-          <LoadingIcon viewBox="0 0 100 100" />
-        </li>
-      </>
-    );
   };
   render() {
     const { contact_cards_repeater: cards } = this.props;
@@ -146,20 +59,6 @@ class ContactCards extends Component {
                           />
                         </a>
                       </div>
-                      <ul className="contact__card-info">
-                        {this.renderCityData(card.location.toLowerCase())}
-                        <li className="contact__download">
-                          <a
-                            href={card.capabilities_pdf.url.localFile.publicURL}
-                            title="Download factsheet"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Download Factsheet{' '}
-                            <DownloadIcon alt="download" className="icn" />
-                          </a>
-                        </li>
-                      </ul>
                       <div className="contact-brief">
                         <div className="contact-brief__text">
                           <h3 className="alt">Want to brief us?</h3>
@@ -190,17 +89,6 @@ class ContactCards extends Component {
                           </a>
                         </div>
                       </div>
-                      <div className="contact__download resp">
-                        <a
-                          href={card.capabilities_pdf.url.localFile.publicURL}
-                          title="Download factsheet"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Download factsheet.{' '}
-                          <DownloadIcon className="icn" alt="download" />
-                        </a>
-                      </div>
                     </div>
                   </div>
                 );
@@ -223,13 +111,6 @@ export const contactCardsFragment = graphql`
       address
       google_maps_link
       phone
-      capabilities_pdf {
-        url {
-          localFile {
-            publicURL
-          }
-        }
-      }
       contact_info {
         name
         title

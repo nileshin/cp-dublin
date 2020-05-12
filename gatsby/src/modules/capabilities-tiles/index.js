@@ -85,19 +85,6 @@ class CapabilitiesTiles extends Component {
               />
             </div>
 
-            <div className="col-6">
-              <a
-                href={services_and_capabilities_pdf.url.localFile.publicURL}
-                title="Download Capabilities PDF"
-                className="btn-pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Download Capabilities PDF{' '}
-                <DownloadIcon className="svg-convert icn" alt="download" />
-              </a>
-            </div>
-
             <div className="capabilities col-12">
               {capabilities.map((capability, index) => (
                 <div className="capabilities__item" key={index}>
@@ -165,13 +152,6 @@ export default CapabilitiesTiles;
 export const capabilitiesTilesFragment = graphql`
   fragment CapabilitiesTilesFragment on capabilitiesTiles_8 {
     title
-    services_and_capabilities_pdf {
-      url {
-        localFile {
-          publicURL
-        }
-      }
-    }
     capabilities {
       name
       sub_capabilities
