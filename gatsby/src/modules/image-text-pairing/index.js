@@ -15,14 +15,12 @@ class ImageTextPairing extends Component {
           <div className="container">
             <div className="row">
               <div className="col-md-6 content-alt__img">
-                {image && image.localFile && (
-                  <figure>
-                    <Img
-                      fluid={image.localFile.childImageSharp.fluid || ''}
-                      alt={image.alt_text}
-                    />
-                  </figure>
-                )}
+                <figure>
+                  <Img
+                    fluid={image.localFile.childImageSharp.fluid || ''}
+                    alt={image.alt_text}
+                  />
+                </figure>
               </div>
               <div className="col-md-6">
                 <div className="content-alt__text">

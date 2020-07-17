@@ -8,14 +8,12 @@ class PressModule extends Component {
     const { eyebrow, title, cta, image } = this.props;
     return (
       <section className="press bg-img page-sec">
-        {image && image.localFile && (
-          <Img
-            fluid={image.localFile.childImageSharp.fluid}
-            className="content-tile-bg"
-            alt={image.alt_text}
-            style={{ position: 'absolute' }}
-          />
-        )}
+        <Img
+          fluid={image.localFile.childImageSharp.fluid}
+          className="content-tile-bg"
+          alt={image.alt_text}
+          style={{ position: 'absolute' }}
+        />
         <div className="container">
           <div className="row">
             <div className="col-md-10">

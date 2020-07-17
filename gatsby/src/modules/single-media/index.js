@@ -71,9 +71,7 @@ class SingleMedia extends Component {
               {
                 video__image ? (
                   <>
-                    {this.props.video.video_thumbnail && this.props.video.video_thumbnail.localFile && (
-                      <img src={get(this.props, 'video.video_thumbnail.localFile.childImageSharp.fluid.src')} alt={get(this.props, 'video.video_thumbnail.alt_text')} className="cover" />
-                    )}
+                    <img src={get(this.props, 'video.video_thumbnail.localFile.childImageSharp.fluid.src')} alt={get(this.props, 'video.video_thumbnail.alt_text')} className="cover" />
                     {/* eslint-disable-next-line */}
                     <a href="#play-video" title="Play" className={`play ${playing ? 'deactivated' : ''}`} onClick={this.playClicked} />
                     <ReactPlayer 
@@ -91,9 +89,7 @@ class SingleMedia extends Component {
                   </>
                 ) : (
                   <>
-                    {image.localFile &&
-                      <img src={get(image, 'localFile.childImageSharp.fluid.src')} alt={image && image.alt_text} className="cover" />
-                    }
+                    <img src={get(image, 'localFile.childImageSharp.fluid.src')} alt={image && image.alt_text} className="cover" />
                   </>
                 )
               }

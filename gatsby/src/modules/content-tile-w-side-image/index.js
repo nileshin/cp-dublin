@@ -34,14 +34,12 @@ class ContentTileWithSideImage extends Component {
                 )}
               </div>
               <div className="col-md-6 intro-work__img">
-                {image && image.localFile && (
-                  <figure>
-                    <Img
-                      fluid={image.localFile.childImageSharp.fluid || ''}
-                      alt={image.alt_text}
-                    />
-                  </figure>
-                )}
+                <figure>
+                  <Img
+                    fluid={image.localFile.childImageSharp.fluid || ''}
+                    alt={image.alt_text}
+                  />
+                </figure>
               </div>
             </div>
           </div>

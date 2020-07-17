@@ -14,7 +14,6 @@ class HomeHeader extends Component {
     this.state = {
       headerActivated: props.suppress_animations,
       offset: 0,
-      randomImageIndex: Math.floor(Math.random() * Math.floor(props.image_gallery.length))
     };
 
     this.homeImg = React.createRef();
@@ -51,11 +50,10 @@ class HomeHeader extends Component {
       supportive_copy,
       cta,
       image,
-      image_gallery,
       center_content,
       suppress_animations,
     } = this.props;
-    const { headerActivated, offset, randomImageIndex } = this.state;
+    const { headerActivated, offset } = this.state;
     const headlineStyle =
       headerActivated || suppress_animations
         ? {}
@@ -63,10 +61,6 @@ class HomeHeader extends Component {
             transform: `translate3d(0, ${offset}px, 0)`,
             transition: 'transform 0s linear',
           };
-    const randomizedImage = (() => {
-      return image_gallery[randomImageIndex];
-    })();
-
     return (
       
       <section id="maincontent" className="home-banner page-sec">
@@ -75,15 +69,13 @@ class HomeHeader extends Component {
           <div className="row">
             <div className="col-md-6 order-md-2 image">
               <div className="home-banner-img" ref={this.homeImg}>
-                {randomizedImage.localFile && 
-                  <figure>
-                    <Img
-                      fluid={get(randomizedImage, 'localFile.childImageSharp.fluid')}
-                      alt="home-banner"
-                      style={{ maxWidth: randomizedImage.media_details.width}}
-                    />
-                  </figure>
-                }
+                <figure>
+                  <Img
+                    fluid={get(image, 'localFile.childImageSharp.fluid')}
+                    alt="home-banner"
+                    style={{ maxWidth: image.media_details.width}}
+                  />
+                </figure>
               </div>
             </div>
             <div
@@ -152,20 +144,6 @@ export const homeHeaderFragment = graphql`
       target
     }
     image {
-      alt_text
-      media_details {
-        width
-        height
-      }
-      localFile {
-        childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid_tracedSVG
-          }
-        }
-      }
-    }
-    image_gallery {
       alt_text
       media_details {
         width
