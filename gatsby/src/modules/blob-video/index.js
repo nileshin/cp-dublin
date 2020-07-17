@@ -159,10 +159,10 @@ class BlobVideo extends Component {
       ...state,
       videoReady: true,
     }));
-    // console.log('playing');
+    console.log('playing');
   };
   _onPlay = event => {
-    // console.log('playing');
+    console.log('playing');
   };
   _onEnded = event => {
     this.setState(state => ({

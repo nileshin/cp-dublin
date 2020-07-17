@@ -12,8 +12,8 @@ const ANIMATION_TIME = 400;
 
 class JobListingsDisplay extends Component {
   state = {
-    currentFilter: window && window.location.hash ? window.location.hash.substring(1) : 'all',
-    transitioning: false, 
+    currentFilter: 'boston',
+    transitioning: false,
     screen_size: 'sm',
   };
   updateFilter = e => {
@@ -75,12 +75,11 @@ class JobListingsDisplay extends Component {
       allWordpressWpJobLocation: { edges: locations },
     } = this.props;
     const { currentFilter, transitioning, screen_size } = this.state;
-    const filteredJobs = currentFilter === 'all' ? jobs : 
-      jobs.filter(
-        ({ node: job }) =>
-          Array.isArray(job.job_location) &&
-          job.job_location[0].slug === currentFilter
-      );
+    const filteredJobs = jobs.filter(
+      ({ node: job }) =>
+        Array.isArray(job.job_location) &&
+        job.job_location[0].slug === currentFilter
+    );
 
     // these values come from CP30-42
     const description_cutoffs = {
@@ -94,21 +93,6 @@ class JobListingsDisplay extends Component {
         <div className="container">
           <h3 className="alt">Jobs in</h3>
           <ul className="tabs">
-            <li
-              className={`tab ${
-                `all` === currentFilter ? 'tab--active' : ''
-              }`}
-              key={`all`}
-            >
-              <a
-                href={`#all`}
-                title={`all`}
-                onClick={this.updateFilter}
-                data-location={`all`}
-              >
-                All
-              </a>
-            </li>
             {locations.map(({ node: location }) => (
               <li
                 className={`tab ${
