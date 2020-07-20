@@ -12,7 +12,7 @@ const ANIMATION_TIME = 400;
 
 class JobListingsDisplay extends Component {
   state = {
-    currentFilter: typeof window !== 'undefined' && window.location.hash ? window.location.hash.substring(1) : 'all',
+    currentFilter: 'all',
     transitioning: false,
     screen_size: 'sm',
   };
@@ -63,9 +63,20 @@ class JobListingsDisplay extends Component {
       screen_size,
     }));
   };
+  setFilterBasedOnHash = () => {
+    if (window.location.hash) {
+      this.setState(
+        state => ({
+          ...state,
+          currentFilter: window.location.hash.substring(1)
+        })
+      )
+    }
+  }
   componentDidMount() {
     if (typeof window === 'undefined') return;
 
+    this.setFilterBasedOnHash();
     window.addEventListener('resize', debounce(this.updateScreenSize, 100));
     this.updateScreenSize();
   }
