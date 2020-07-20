@@ -14,17 +14,22 @@ class HomeHeader extends Component {
     this.state = {
       headerActivated: props.suppress_animations,
       offset: 0,
-      randomImageIndex: props.image_gallery 
-        ? Math.floor(Math.random() * Math.floor(props.image_gallery.length))
-        : 0
+      randomImageIndex: null
     };
 
     this.homeImg = React.createRef();
     this.headline = React.createRef();
   }
+  setRandomImageIndex = (props) => {
+    this.setState(state => ({
+      ...state,
+      randomImageIndex: Math.floor(Math.random() * Math.floor(props.image_gallery.length))
+    }))
+  }
   componentDidMount() {
     if (typeof window === 'undefined') return;
 
+    this.setRandomImageIndex(this.props)
     this.setState(state => ({
       ...state,
       offset: (() => {
@@ -66,7 +71,7 @@ class HomeHeader extends Component {
             transition: 'transform 0s linear',
           };
     const randomizedImage = (() => {
-      return image_gallery ? image_gallery[randomImageIndex] : false;
+      return image_gallery && randomImageIndex ? image_gallery[randomImageIndex] : false;
     })();
 
     return (
