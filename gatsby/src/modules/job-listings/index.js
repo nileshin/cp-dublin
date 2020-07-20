@@ -12,7 +12,7 @@ const ANIMATION_TIME = 400;
 
 class JobListingsDisplay extends Component {
   state = {
-    currentFilter: window && window.location.hash ? window.location.hash.substring(1) : 'all',
+    currentFilter: typeof window !== 'undefined' && window.location.hash ? window.location.hash.substring(1) : 'all',
     transitioning: false,
     screen_size: 'sm',
   };
