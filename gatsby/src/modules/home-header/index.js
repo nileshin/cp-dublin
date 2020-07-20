@@ -14,7 +14,9 @@ class HomeHeader extends Component {
     this.state = {
       headerActivated: props.suppress_animations,
       offset: 0,
-      randomImageIndex: Math.floor(Math.random() * Math.floor(props.image_gallery.length))
+      randomImageIndex: props.image_gallery 
+        ? Math.floor(Math.random() * Math.floor(props.image_gallery.length))
+        : 0
     };
 
     this.homeImg = React.createRef();
