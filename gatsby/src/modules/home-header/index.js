@@ -66,7 +66,7 @@ class HomeHeader extends Component {
             transition: 'transform 0s linear',
           };
     const randomizedImage = (() => {
-      return image_gallery[randomImageIndex];
+      return image_gallery ? image_gallery[randomImageIndex] : false;
     })();
 
     return (
@@ -77,7 +77,7 @@ class HomeHeader extends Component {
           <div className="row">
             <div className="col-md-6 order-md-2 image">
               <div className="home-banner-img" ref={this.homeImg}>
-                {randomizedImage.localFile && 
+                {randomizedImage && randomizedImage.localFile && 
                   <figure>
                     <Img
                       fluid={get(randomizedImage, 'localFile.childImageSharp.fluid')}
