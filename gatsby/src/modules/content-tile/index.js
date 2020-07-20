@@ -8,12 +8,14 @@ class ContentTile extends Component {
     const { eyebrow, headline, supportive_text, cta, image } = this.props;
     return (
       <section className="latest bg-dark bg-img page-sec overflow-hidden">
-        <Img
-          fluid={image.localFile.childImageSharp.fluid}
-          className="content-tile-bg cover"
-          alt={image.alt_text}
-          style={{ position: 'absolute' }}
-        />
+        {image && image.localFile && (
+          <Img
+            fluid={image.localFile.childImageSharp.fluid}
+            className="content-tile-bg cover"
+            alt={image.alt_text}
+            style={{ position: 'absolute' }}
+          />
+        )}
         <div className="container">
           <div className="row">
             <div className="col-8 col-md-6">
