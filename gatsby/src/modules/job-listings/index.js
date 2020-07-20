@@ -94,22 +94,22 @@ class JobListingsDisplay extends Component {
         <div className="container">
           <h3 className="alt">Jobs in</h3>
           <ul className="tabs">
-            {locations.map(({ node: location }) => (
-              <li
-                className={`tab ${
-                  `all` === currentFilter ? 'tab--active' : ''
-                }`}
-                key={`all`}
+            <li
+              className={`tab ${
+                `all` === currentFilter ? 'tab--active' : ''
+              }`}
+              key={`all`}
+            >
+              <a
+                href={`#all`}
+                title={`all`}
+                onClick={this.updateFilter}
+                data-location={`all`}
               >
-                <a
-                  href={`#all`}
-                  title={`all`}
-                  onClick={this.updateFilter}
-                  data-location={`all`}
-                >
-                  All
-                </a>
-              </li>
+                All
+              </a>
+            </li>
+            {locations.map(({ node: location }) => (
               <li
                 className={`tab ${
                   location.slug === currentFilter ? 'tab--active' : ''
