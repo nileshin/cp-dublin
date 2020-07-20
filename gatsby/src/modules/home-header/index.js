@@ -14,22 +14,30 @@ class HomeHeader extends Component {
     this.state = {
       headerActivated: props.suppress_animations,
       offset: 0,
-      randomImageIndex: null
+      randomImage: null
     };
 
     this.homeImg = React.createRef();
     this.headline = React.createRef();
   }
-  setRandomImageIndex = (props) => {
+  setRandomImage = (props) => {
+    //for some reason some images are queried without localfiles
+    //open issue: https://github.com/gatsbyjs/gatsby/issues/12559
+    //this code ensures we only display images with localfiles...hopefully it exists
+    const imageGalleryWithLocalFiles = props.image_gallery.filter(image => image.localFile);
+    if (!imageGalleryWithLocalFiles.length) return;
+    const randomImageIndex = Math.floor(Math.random() * Math.floor(imageGalleryWithLocalFiles.length));
+    const randomizedImage = imageGalleryWithLocalFiles[randomImageIndex];
+
     this.setState(state => ({
       ...state,
-      randomImageIndex: Math.floor(Math.random() * Math.floor(props.image_gallery.length))
+      randomImage: randomizedImage
     }))
   }
   componentDidMount() {
     if (typeof window === 'undefined') return;
 
-    this.setRandomImageIndex(this.props)
+    this.setRandomImage(this.props)
     this.setState(state => ({
       ...state,
       offset: (() => {
@@ -59,10 +67,9 @@ class HomeHeader extends Component {
       cta,
       image,
       center_content,
-      image_gallery,
       suppress_animations,
     } = this.props;
-    const { headerActivated, offset, randomImageIndex } = this.state;
+    const { headerActivated, offset, randomImage } = this.state;
     const headlineStyle =
       headerActivated || suppress_animations
         ? {}
@@ -70,9 +77,6 @@ class HomeHeader extends Component {
             transform: `translate3d(0, ${offset}px, 0)`,
             transition: 'transform 0s linear',
           };
-    const randomizedImage = (() => {
-      return image_gallery && randomImageIndex ? image_gallery[randomImageIndex] : false;
-    })();
 
     return (
       
@@ -82,12 +86,12 @@ class HomeHeader extends Component {
           <div className="row">
             <div className="col-md-6 order-md-2 image">
               <div className="home-banner-img" ref={this.homeImg}>
-                {randomizedImage && randomizedImage.localFile && 
+                {randomImage && 
                   <figure>
                     <Img
-                      fluid={get(randomizedImage, 'localFile.childImageSharp.fluid')}
+                      fluid={get(randomImage, 'localFile.childImageSharp.fluid')}
                       alt="home-banner"
-                      style={{ maxWidth: randomizedImage.media_details.width}}
+                      style={{ maxWidth: randomImage.media_details.width}}
                     />
                   </figure>
                 }
