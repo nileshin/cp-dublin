@@ -49,7 +49,7 @@ exports.createPages = ({ graphql, actions }) => {
           }
           createPage({
             path: `/${page.slug}/`,
-            component: page.wordpress_parent === 2370 ? landingPageTemplate : pageTemplate,
+            component: page.wordpress_parent === 2279 ? landingPageTemplate : pageTemplate,
             context: {
               id: page.id,
             },
