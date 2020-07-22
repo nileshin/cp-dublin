@@ -41,7 +41,7 @@ exports.createPages = ({ graphql, actions }) => {
           if (fs.existsSync(path.resolve(`./src/pages/${page.slug}.js`))) {
             return;
           }
-          if (page.slug === 'home') {
+          if (page.slug === 'home' || page.slug === 'landing-pages') {
             // The slug for the homepage is "home", which doesn't match "index"
             // So we need this special check
             // All other page slugs / ${page}.js names should match as a rule.
