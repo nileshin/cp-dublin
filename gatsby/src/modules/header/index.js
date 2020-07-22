@@ -7,6 +7,7 @@ import get from 'lodash.get';
 class Header extends Component {
   render() {
     const { page_name, image } = this.props;
+    if (!page_name && !image) return false;
     return (
       <section id="maincontent" className="page-banner bg-img">
         {get(image, 'localFile.childImageSharp.fluid') && (
