@@ -20,6 +20,7 @@ exports.createPages = ({ graphql, actions }) => {
                 slug
                 status
                 template
+                wordpress_parent
               }
             }
           }
@@ -34,6 +35,7 @@ exports.createPages = ({ graphql, actions }) => {
         }
 
         const pageTemplate = path.resolve('./src/templates/page.js');
+        const landingPageTemplate = path.resolve('./src/templates/landing-pages.js');
         result.data.allWordpressPage.edges.forEach(({ node: page }) => {
           console.log("building page:", page.slug);
           if (fs.existsSync(path.resolve(`./src/pages/${page.slug}.js`))) {
@@ -47,7 +49,7 @@ exports.createPages = ({ graphql, actions }) => {
           }
           createPage({
             path: `/${page.slug}/`,
-            component: pageTemplate,
+            component: page.wordpress_parent === 2370 ? landingPageTemplate : pageTemplate,
             context: {
               id: page.id,
             },

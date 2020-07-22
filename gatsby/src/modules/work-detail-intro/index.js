@@ -48,7 +48,7 @@ class WorkDetailIntro extends Component {
 export default WorkDetailIntro;
 
 export const workDetailIntroFragment = graphql`
-  fragment WorkDetailIntroFragment on workDetailIntro_5 {
+  fragment WorkDetailIntroFragment on workDetailIntro_11 {
     title
     body_copy
     image {
