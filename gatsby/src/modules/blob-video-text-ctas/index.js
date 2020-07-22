@@ -46,7 +46,8 @@ class BlobVideoWithTextCTAs extends Component {
   }
 
   render() {
-    const { eyebrow, headline, supportive_text, video_embed_code } = this.props;
+    const { eyebrow, headline, supportive_text, video_embed_code, text_link_ctas } = this.props;
+    console.log(text_link_ctas)
     const youtubeOpts = {
       playerVars: {
         autoplay: 1,
@@ -88,6 +89,12 @@ class BlobVideoWithTextCTAs extends Component {
                 __html: supportive_text,
               }}
             />
+            {text_link_ctas.length && text_link_ctas.map(ele => {
+              const cta = ele.text_link_cta;
+              return (
+                <a key={cta.title} href={cta.url} target={cta.target}>{cta.title}</a>
+              )
+            })}
           </div>
           <div
             className={
@@ -180,5 +187,12 @@ export const blobVideoWithTextCTAsFragment = graphql`
     eyebrow
     headline
     supportive_text
+    text_link_ctas {
+      text_link_cta {
+        title
+        url
+        target
+      }
+    }
   }
 `;

@@ -9,7 +9,6 @@ import LogoGrid from '../modules/logo-grid';
 class LandingPages extends Component {
   render() {
     const { data: { wordpressPage: page, wordpressPage: { acf } } } = this.props;
-    console.log(page)
 
     return (
       <>
