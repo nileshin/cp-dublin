@@ -79,7 +79,7 @@ class StatLongFactRow extends Component {
 export default StatLongFactRow;
 
 export const statLongFactRowFragment = graphql`
-  fragment StatLongFactRowFragment on statLongFactRow_11 {
+  fragment StatLongFactRowFragment on statLongFactRow_8 {
     statistic {
       stat_title
       stat_number_unit

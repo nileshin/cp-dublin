@@ -12,14 +12,14 @@ function findAncestor (el, cls) {
   return el;
 }
 
-const WORK_FILTERS = {
-  ALL: 'featured',
-  BOSTON: 'boston',
-  DUBLIN: 'dublin',
-};
+// const WORK_FILTERS = {
+//   ALL: 'featured',
+//   BOSTON: 'boston',
+//   DUBLIN: 'dublin',
+// };
 
-const renderTiles = filteredList => {
-  return filteredList.work_tiles.tiles.map((tile, index) => {
+const renderTiles = currentList => {
+  return currentList.map((tile, index) => {
     let { project_title, client_name } = tile.override_fields || {};
     if (!project_title) project_title = get(tile, 'acf.rich_media_header.rich_media_header.project_title') || '';
     if (!client_name) client_name = get(tile, 'acf.client_name') || '';
@@ -27,7 +27,7 @@ const renderTiles = filteredList => {
     const direction = index % 2 === 0 ? 'left' : 'right';
     const angleType = index % 4 === 0 || index % 4 === 1 ? 'connected' : 'reverse';
     return (
-      <Link to={`/${post_type}/${slug}`} title={project_title} className={`work-tile filter-item ${direction} ${angleType}`} data-filter-content={filteredList.filter_name} key={slug}>
+      <Link to={`/${post_type}/${slug}`} title={project_title} className={`work-tile filter-item ${direction} ${angleType}`} key={slug}>
         <div className="container">
           <div className="row">
             <figure className="work-tile__img col-6">
@@ -45,11 +45,10 @@ const renderTiles = filteredList => {
   })
 }
 
-// NB: This module represents all work, and will handle filtering as well.
 class WorkTiles extends Component {
-  state = {
-    currentFilter: WORK_FILTERS.ALL,
-  };
+  // state = {
+  //   currentFilter: WORK_FILTERS.ALL,
+  // };
   componentDidMount() {
     if (typeof window === 'undefined') return;
     window.addEventListener('scroll', this.handleScroll, passiveIfSupported)
@@ -69,21 +68,22 @@ class WorkTiles extends Component {
       if (parent) parent.classList.add('visible');
     }
   }
-  updateFilter = e => {
-    e.preventDefault();
-    const newFilter = e.currentTarget.dataset.filterName;
-    if (Object.values(WORK_FILTERS).indexOf(newFilter.toLowerCase()) < 0) {
-      console.warn(`Tried to switch to ${newFilter}, which isn't valid.`);
-      return;
-    }
-    this.setState(state => ({
-      ...state,
-      currentFilter: newFilter.toLowerCase()
-    }))
-  }
+  // updateFilter = e => {
+  //   e.preventDefault();
+  //   const newFilter = e.currentTarget.dataset.filterName;
+  //   if (Object.values(WORK_FILTERS).indexOf(newFilter.toLowerCase()) < 0) {
+  //     console.warn(`Tried to switch to ${newFilter}, which isn't valid.`);
+  //     return;
+  //   }
+  //   this.setState(state => ({
+  //     ...state,
+  //     currentFilter: newFilter.toLowerCase()
+  //   }))
+  // }
   render() {
-    const currentFilter = this.state.currentFilter.toLowerCase() === 'all' ? 'featured' : this.state.currentFilter.toLowerCase();
-    const currentList = this.props.filtered_tiles.find(list => list.filter_name.toLowerCase() === currentFilter);
+    // const currentFilter = this.state.currentFilter.toLowerCase() === 'all' ? 'featured' : this.state.currentFilter.toLowerCase();
+    // const currentList = this.props.filtered_tiles.find(list => list.filter_name.toLowerCase() === currentFilter);
+    const currentList = this.props.tiles;
     return (
       <>
         <section className="work filter-wrap">
@@ -95,7 +95,7 @@ class WorkTiles extends Component {
                   Work
                 </h2>
               </div>
-              <div className="col-md-7">
+              {/* <div className="col-md-7">
                 <ul className="filter">
                   {Object.values(WORK_FILTERS).map(value => (
                     <li key={value}>
@@ -113,7 +113,7 @@ class WorkTiles extends Component {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="filter-content-wrap">
@@ -127,33 +127,28 @@ class WorkTiles extends Component {
 
 export default WorkTiles;
 
-export const workTilesFragment = graphql`
-  fragment WorkTilesFragment on workTiles_7 {
-    filtered_tiles {
-      filter_name
-      work_tiles {
-        tiles {
-          work_piece {
-            post_name
-            post_type
-            acf {
-              client_name
-              rich_media_header {
-                rich_media_header {
-                  project_title
-                }
-              }
+export const workTilesNoFilterFragment = graphql`
+  fragment WorkTilesNoFilterFragment on workTiles_7 {
+    tiles {
+      work_piece {
+        post_name
+        post_type
+        acf {
+          client_name
+          rich_media_header {
+            rich_media_header {
+              project_title
             }
           }
-          cta_text
-          override_fields {
-            client_name
-            project_title
-          }
-          image {
-            ...WpMediaFragment
-          }
         }
+      }
+      cta_text
+      override_fields {
+        client_name
+        project_title
+      }
+      image {
+        ...WpMediaFragment
       }
     }
   }

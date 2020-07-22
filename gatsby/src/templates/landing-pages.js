@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import SEO from '../components/seo';
 import Header from '../modules/header';
 import BlobVideoWithTextCTAs from '../modules/blob-video-text-ctas';
-import WorkTiles from '../modules/work-tiles';
+import WorkTilesNoFilter from '../modules/work-tiles-no-filter';
 import LogoGrid from '../modules/logo-grid';
 
 class LandingPages extends Component {
@@ -17,7 +17,7 @@ class LandingPages extends Component {
         <section className={`category-landing page-${page.slug}`}>
           <Header {...acf.header.header} />
           <BlobVideoWithTextCTAs {...acf.blob_video_w_text_ctas.blob_video_w_text_ctas} />
-          {/* <WorkTiles {...acf.work_tiles} /> */}
+          <WorkTilesNoFilter {...acf.work_tiles} />
           <LogoGrid {...acf.logo_grid.logo_grid} />
         </section>
       </>
@@ -46,7 +46,7 @@ export const query = graphql`
           }
         }
         work_tiles {
-         ...WorkTilesFragment 
+         ...WorkTilesNoFilterFragment 
         }
         logo_grid {
           logo_grid {

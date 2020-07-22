@@ -107,7 +107,7 @@ class SingleMedia extends Component {
 export default SingleMedia;
 
 export const singleMediaFragment = graphql`
-  fragment SingleMediaFragment on singleMedia_11 {
+  fragment SingleMediaFragment on singleMedia_8 {
     video__image
     video {
       video_embed_code
