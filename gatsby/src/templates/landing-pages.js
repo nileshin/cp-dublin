@@ -16,7 +16,7 @@ class LandingPages extends Component {
         <section className={`category-landing page-${page.slug}`}>
           <Header {...acf.header.header} />
           <BlobVideoWithTextCTAs {...acf.blob_video_w_text_ctas.blob_video_w_text_ctas} />
-          <WorkTilesNoFilter {...acf.work_tiles} />
+          <WorkTilesNoFilter {...acf.work_tiles.work_tiles} />
           <LogoGrid {...acf.logo_grid.logo_grid} />
         </section>
       </>
@@ -28,7 +28,7 @@ export default LandingPages;
 
 export const query = graphql`
   query {
-    wordpressPage(wordpress_parent: {eq: 2370}) {
+    wordpressPage(wordpress_parent: {eq: 2279}) {
       id
       wordpress_id
       slug
@@ -45,7 +45,9 @@ export const query = graphql`
           }
         }
         work_tiles {
-         ...WorkTilesNoFilterFragment 
+          work_tiles {
+            ...WorkTilesNoFilterFragment 
+          }
         }
         logo_grid {
           logo_grid {

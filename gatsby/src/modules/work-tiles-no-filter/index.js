@@ -128,7 +128,7 @@ class WorkTiles extends Component {
 export default WorkTiles;
 
 export const workTilesNoFilterFragment = graphql`
-  fragment WorkTilesNoFilterFragment on workTiles_7 {
+  fragment WorkTilesNoFilterFragment on workTiles_11 {
     tiles {
       work_piece {
         post_name

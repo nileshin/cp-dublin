@@ -47,7 +47,6 @@ class BlobVideoWithTextCTAs extends Component {
 
   render() {
     const { eyebrow, headline, supportive_text, video_embed_code, text_link_ctas } = this.props;
-    console.log(text_link_ctas)
     const youtubeOpts = {
       playerVars: {
         autoplay: 1,
