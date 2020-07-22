@@ -11,43 +11,42 @@ import get from 'lodash.get';
 import CTATiles from '../modules/cta-tiles';
 import './work-detail.scss';
 
-const getCtaProps = (work, cta_title) => {
-  if (!work) return {};
+// const getCtaProps = (work, cta_title) => {
+//   if (!work) return {};
 
-  return {
-    headline: work.title,
-    cta: {
-      title: cta_title,
-      url: `/work/${work.slug}`,
-      target: '',
-    },
-    image: get(work, 'acf.prevnext_image'),
-  };
-};
+//   return {
+//     headline: work.title,
+//     cta: {
+//       title: cta_title,
+//       url: `/work/${work.slug}`,
+//       target: '',
+//     },
+//     image: get(work, 'acf.prevnext_image'),
+//   };
+// };
 
-class WorkDetail extends Component {
+class CaseStudy extends Component {
   render() {
     const {
       data: { wordpressWpWork: work, allWordpressWpWork: allWork },
     } = this.props;
 
-    const allUncategorizedWork = allWork.edges.filter(work => work.node.work_category.some(cat => cat === 38))
-    const workIndex = allUncategorizedWork.findIndex(
-      ({ node: w }) => w.id === work.id
-    );
-    const prevWork =
-      workIndex > 0
-        ? allUncategorizedWork[workIndex - 1].node
-        : allUncategorizedWork[allUncategorizedWork.length - 1].node;
-    const nextWork =
-      workIndex < allUncategorizedWork.length - 1
-        ? allUncategorizedWork[workIndex + 1].node
-        : allUncategorizedWork[0].node;
+    // const workIndex = allWork.edges.findIndex(
+    //   ({ node: w }) => w.id === work.id
+    // );
+    // const prevWork =
+    //   workIndex > 0
+    //     ? allWork.edges[workIndex - 1].node
+    //     : allWork.edges[allWork.edges.length - 1].node;
+    // const nextWork =
+    //   workIndex < allWork.edges.length - 1
+    //     ? allWork.edges[workIndex + 1].node
+    //     : allWork.edges[0].node;
 
-    const cta_tiles_props = {
-      left_cta: getCtaProps(prevWork, 'Previous'),
-      right_cta: getCtaProps(nextWork, 'Next'),
-    };
+    // const cta_tiles_props = {
+    //   left_cta: getCtaProps(prevWork, 'Previous'),
+    //   right_cta: getCtaProps(nextWork, 'Next'),
+    // };
 
     return (
       <>
@@ -124,14 +123,14 @@ class WorkDetail extends Component {
                 }
               }
             })}
-          <CTATiles {...cta_tiles_props} htmlTitles />
+          {/* <CTATiles {...cta_tiles_props} htmlTitles /> */}
         </section>
       </>
     );
   }
 }
 
-export default WorkDetail;
+export default CaseStudy;
 
 export const query = graphql`
   query($id: String!) {
@@ -190,20 +189,6 @@ export const query = graphql`
           id
           title
           slug
-          work_category
-          acf {
-            prevnext_image {
-              alt_text
-              localFile {
-                publicURL
-                childImageSharp {
-                  fluid(maxWidth: 1440, quality: 100) {
-                    ...GatsbyImageSharpFluid_tracedSVG
-                  }
-                }
-              }
-            }
-          }
         }
       }
     }
