@@ -3,9 +3,9 @@ import Img from 'gatsby-image';
 import { graphql } from 'gatsby';
 // import { nominalTypeHack } from 'prop-types';
 
-import './main.scss';
+import '../work-detail-intro/main.scss';
 
-class WorkDetailIntro extends Component {
+class CaseStudyIntro extends Component {
   render() {
     const { title, body_copy, image } = this.props;
 
@@ -45,10 +45,10 @@ class WorkDetailIntro extends Component {
   }
 }
 
-export default WorkDetailIntro;
+export default CaseStudyIntro;
 
-export const workDetailIntroFragment = graphql`
-  fragment WorkDetailIntroFragment on workDetailIntro_6 {
+export const caseStudyIntroFragment = graphql`
+  fragment CaseStudyIntroFragment on workDetailIntro_7 {
     title
     body_copy
     image {

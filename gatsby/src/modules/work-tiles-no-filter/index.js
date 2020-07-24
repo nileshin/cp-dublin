@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { graphql, Link } from 'gatsby';
 import { passiveIfSupported } from '../../utils';
-import './main.scss';
+import '../work-tiles/main.scss';
 import get from 'lodash.get';
 
 
@@ -83,7 +83,7 @@ class WorkTiles extends Component {
   render() {
     // const currentFilter = this.state.currentFilter.toLowerCase() === 'all' ? 'featured' : this.state.currentFilter.toLowerCase();
     // const currentList = this.props.filtered_tiles.find(list => list.filter_name.toLowerCase() === currentFilter);
-    const currentList = this.props.tiles;
+    // const currentList = this.props.tiles;
     return (
       <>
         <section className="work filter-wrap">
@@ -117,7 +117,7 @@ class WorkTiles extends Component {
             </div>
           </div>
           <div className="filter-content-wrap">
-            {renderTiles(currentList)}
+            {/* {renderTiles(currentList)} */}
           </div>
         </section>
       </>
@@ -127,29 +127,29 @@ class WorkTiles extends Component {
 
 export default WorkTiles;
 
-export const workTilesNoFilterFragment = graphql`
-  fragment WorkTilesNoFilterFragment on workTiles_11 {
-    tiles {
-      work_piece {
-        post_name
-        post_type
-        acf {
-          client_name
-          rich_media_header {
-            rich_media_header {
-              project_title
-            }
-          }
-        }
-      }
-      cta_text
-      override_fields {
-        client_name
-        project_title
-      }
-      image {
-        ...WpMediaFragment
-      }
-    }
-  }
-`;
+// export const workTilesNoFilterFragment = graphql`
+//   fragment WorkTilesNoFilterFragment on workTiles_7 {
+//     tiles {
+//       work_piece {
+//         post_name
+//         post_type
+//         acf {
+//           client_name
+//           rich_media_header {
+//             rich_media_header {
+//               project_title
+//             }
+//           }
+//         }
+//       }
+//       cta_text
+//       override_fields {
+//         client_name
+//         project_title
+//       }
+//       image {
+//         ...WpMediaFragment
+//       }
+//     }
+//   }
+// `;

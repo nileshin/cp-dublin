@@ -113,6 +113,31 @@ export const yoastMetadataFragment = graphql`
       }
     }
   }
+  fragment YoastMetadataFragmentCaseStudies on wordpress__wp_case_studies {
+    yoast_meta {
+      title: yoast_wpseo_title
+      description: yoast_wpseo_metadesc
+      canonical: yoast_wpseo_canonical
+    }
+    cp_meta {
+      yoast_social {
+        og_title: yoast_wpseo_opengraph_title
+        og_description: yoast_wpseo_opengraph_description
+        og_image: yoast_wpseo_opengraph_image {
+          localFile {
+            publicURL
+          }
+        }
+        tw_title: yoast_wpseo_twitter_title
+        tw_description: yoast_wpseo_twitter_description
+        tw_image: yoast_wpseo_twitter_image {
+          localFile {
+            publicURL
+          }
+        }
+      }
+    }
+  }
   fragment YoastMetadataFragmentNews on wordpress__POST {
     yoast_meta {
       title: yoast_wpseo_title

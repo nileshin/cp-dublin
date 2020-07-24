@@ -128,7 +128,7 @@ class WorkTiles extends Component {
 export default WorkTiles;
 
 export const workTilesFragment = graphql`
-  fragment WorkTilesFragment on workTiles_10 {
+  fragment WorkTilesFragment on workTiles_7 {
     filtered_tiles {
       filter_name
       work_tiles {

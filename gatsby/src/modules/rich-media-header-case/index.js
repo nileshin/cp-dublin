@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import Img from 'gatsby-image';
 import { graphql } from 'gatsby';
 
-import './main.scss';
+import '../rich-media-header/main.scss';
 
-class RichMediaHeader extends Component {
+class RichMediaHeaderCase extends Component {
   render() {
     const { lightdark_mode, project_title, image, client_name } = this.props;
     return (
@@ -37,10 +37,10 @@ class RichMediaHeader extends Component {
   }
 }
 
-export default RichMediaHeader;
+export default RichMediaHeaderCase;
 
-export const RichMediaHeaderFragment = graphql`
-  fragment RichMediaHeaderFragment on richMediaHeader_21 {
+export const RichMediaHeaderCaseFragment = graphql`
+  fragment RichMediaHeaderCaseFragment on richMediaHeader_23 {
     rich_media_header {
       lightdark_mode
       client_name

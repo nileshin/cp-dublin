@@ -41,7 +41,7 @@ exports.createPages = ({ graphql, actions }) => {
           if (fs.existsSync(path.resolve(`./src/pages/${page.slug}.js`))) {
             return;
           }
-          if (page.slug === 'home' || page.slug === 'landing-pages') {
+          if (page.slug === 'home') {
             // The slug for the homepage is "home", which doesn't match "index"
             // So we need this special check
             // All other page slugs / ${page}.js names should match as a rule.
@@ -49,7 +49,7 @@ exports.createPages = ({ graphql, actions }) => {
           }
           createPage({
             path: `/${page.slug}/`,
-            component: page.wordpress_parent === 2279 ? landingPageTemplate : pageTemplate,
+            component: pageTemplate,
             context: {
               id: page.id,
             },
@@ -134,6 +134,92 @@ exports.createPages = ({ graphql, actions }) => {
           createPage({
             path: `/news/${page.slug}`,
             component: newsDetailTemplate,
+            context: {
+              id: page.id,
+            },
+          });
+        });
+      })
+      .then(() => {
+        return graphql(`
+          {
+            allWordpressWpLandingPages {
+              edges {
+                node {
+                  id
+                  wordpress_id
+                  slug
+                  type
+                  status
+                }
+              }
+            }
+          }
+        `);
+      })
+      .then(result => {
+        if (result.errors) {
+          console.log("XXXXXX -- error on: PAGENAME");
+          console.error(result.errors);
+          reject(result.errors);
+        }
+
+        const landingPageTemplate = path.resolve(
+          './src/templates/landing-pages.js'
+        );
+
+        result.data.allWordpressWpLandingPages.edges.forEach(({ node: page }) => {
+          console.log("building landing pages:", page.slug);
+          if (fs.existsSync(path.resolve(`./src/pages/${page.slug}.js`))) {
+            return;
+          }
+
+          createPage({
+            path: `/${page.type}/${page.slug}/`,
+            component: landingPageTemplate,
+            context: {
+              id: page.id,
+            },
+          });
+        });
+      })
+      .then(() => {
+        return graphql(`
+          {
+            allWordpressWpCaseStudies {
+              edges {
+                node {
+                  id
+                  wordpress_id
+                  slug
+                  type
+                  status
+                }
+              }
+            }
+          }
+        `);
+      })
+      .then(result => {
+        if (result.errors) {
+          console.log("XXXXXX -- error on: PAGENAME");
+          console.error(result.errors);
+          reject(result.errors);
+        }
+        
+        const caseStudyTemplate = path.resolve(
+          './src/templates/case-study.js'
+        );
+
+        result.data.allWordpressWpCaseStudies.edges.forEach(({ node: page }) => {
+          console.log("building case studies:", page.slug);
+          if (fs.existsSync(path.resolve(`./src/pages/${page.slug}.js`))) {
+            return;
+          }
+
+          createPage({
+            path: `/${page.type}/${page.slug}/`,
+            component: caseStudyTemplate,
             context: {
               id: page.id,
             },
