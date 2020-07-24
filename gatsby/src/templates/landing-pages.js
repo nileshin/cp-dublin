@@ -2,22 +2,65 @@ import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 import SEO from '../components/seo';
 import Header from '../modules/header';
-// import BlobVideoWithTextCTAs from '../modules/blob-video-text-ctas';
+import BlobVideoWithTextCTAs from '../modules/blob-video-text-ctas';
 import WorkTilesNoFilter from '../modules/work-tiles-no-filter';
 import LogoGrid from '../modules/logo-grid';
+import ContentTileWithSideImage from '../modules/content-tile-w-side-image';
 
 class LandingPages extends Component {
   render() {
-    // const { data: { wordpressPage: page, wordpressPage: { acf } } } = this.props;
+    const { data: { wordpressWpLandingPages: page, wordpressWpLandingPages: { acf } } } = this.props;
+
 
     return (
       <>
-        {/* <SEO {...page.yoast_meta} {...page.cp_meta.yoast_social} /> */}
-        <section className={`category-landing page-`}>
-          {/* <Header {...acf.header.header} />
-          <BlobVideoWithTextCTAs {...acf.blob_video_w_text_ctas.blob_video_w_text_ctas} />
-          <WorkTilesNoFilter {...acf.work_tiles.work_tiles} />
-          <LogoGrid {...acf.logo_grid.logo_grid} /> */}
+        <SEO {...page.yoast_meta} {...page.cp_meta.yoast_social} />
+        <section className={`category-landing page-${page.slug}`}>
+          {acf.landing_page_content_landing_pages.length && 
+            acf.landing_page_content_landing_pages.map(field => {
+              switch (field.__typename) {
+                case 'WordPressAcf_header': {
+                  return (
+                    <Header 
+                      {...field.header} 
+                      key={field.id} 
+                    />
+                  );
+                }
+                case 'WordPressAcf_blob_video_w_text_ctas': {
+                  return (
+                    <BlobVideoWithTextCTAs 
+                      {...field.blob_video_w_text_ctas} 
+                      key={field.id} 
+                    />
+                  );                
+                }
+                case 'WordPressAcf_case_tiles': {
+                  return (
+                    <WorkTilesNoFilter 
+                      {...field.case_tiles} 
+                      key={field.id} 
+                    />
+                  );
+                }
+                case 'WordPressAcf_logo_grid': {
+                  return (
+                    <LogoGrid 
+                      {...field.logo_grid} 
+                      key={field.id} 
+                    />
+                  );
+                }
+                case 'WordPressAcf_text__image_module': {
+                  return (
+                    <ContentTileWithSideImage 
+                      {...field.content_tile_w_side_image} 
+                      key={field.id} 
+                    />
+                  );
+                }
+              }
+          })}
         </section>
       </>
     );
@@ -48,7 +91,7 @@ export const query = graphql`
               ...BlobVideoWithTextCTAsFragment
             }
           }
-          ... on WordPressAcf_work_tiles {
+          ... on WordPressAcf_case_tiles {
             id
             case_tiles {
               ...WorkTilesNoFilterFragment 

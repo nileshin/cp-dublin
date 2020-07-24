@@ -84,18 +84,14 @@ exports.createPages = ({ graphql, actions }) => {
         const workDetailTemplate = path.resolve(
           './src/templates/work-detail.js'
         );
-        const caseStudyTemplate = path.resolve(
-          './src/templates/case-study.js'
-        );
         result.data.allWordpressWpWork.edges.forEach(({ node: page }) => {
           console.log("building work:", page.slug);
           if (fs.existsSync(path.resolve(`./src/pages/${page.slug}.js`))) {
             return;
           }
-          const isUncategorized = page.work_category.some(cat => cat === 38);
           createPage({
             path: `/${page.type}/${page.slug}/`,
-            component: isUncategorized ? workDetailTemplate : caseStudyTemplate,
+            component: workDetailTemplate,
             context: {
               id: page.id,
             },

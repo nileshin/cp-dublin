@@ -20,6 +20,7 @@ const WORK_FILTERS = {
 
 const renderTiles = filteredList => {
   return filteredList.work_tiles.tiles.map((tile, index) => {
+    console.log(tile)
     let { project_title, client_name } = tile.override_fields || {};
     if (!project_title) project_title = get(tile, 'acf.rich_media_header.rich_media_header.project_title') || '';
     if (!client_name) client_name = get(tile, 'acf.client_name') || '';
