@@ -43,4 +43,14 @@ export const logoGridFragment = graphql`
       }
     }
   }
+  fragment LogoGridFragmentCase on logoGrid_8 {
+    logos {
+      alt
+      url {
+        localFile {
+          publicURL
+        }
+      }
+    }
+  }
 `

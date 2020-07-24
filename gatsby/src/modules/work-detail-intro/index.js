@@ -55,4 +55,11 @@ export const workDetailIntroFragment = graphql`
       ...WpMediaFragmentFluid1440
     }
   }
+  fragment CaseStudyIntroFragment on workDetailIntro_7 {
+    title
+    body_copy
+    image {
+      ...WpMediaFragmentFluid1440
+    }
+  }
 `;

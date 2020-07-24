@@ -54,7 +54,26 @@ class ContentTileWithSideImage extends Component {
 export default ContentTileWithSideImage;
 
 export const contentTileWithSideImageFragment = graphql`
-  fragment ContentTileWithSideImageFragment on contentTileWSideImage_8 {
+  fragment ContentTileWithSideImageFragment on contentTileWSideImage_10 {
+    eyebrow
+    headline
+    supportive_text
+    cta {
+      title
+      url
+      target
+    }
+    image {
+      localFile {
+        childImageSharp {
+          fluid(quality: 100) {
+            ...GatsbyImageSharpFluid_tracedSVG
+          }
+        }
+      }
+    }
+  }
+  fragment ContentTileWithSideImageFragmentCase on contentTileWSideImage_8 {
     eyebrow
     headline
     supportive_text

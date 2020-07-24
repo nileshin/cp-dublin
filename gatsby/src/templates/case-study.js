@@ -3,9 +3,9 @@ import { graphql } from 'gatsby';
 import SEO from '../components/seo';
 import SingleMedia from '../modules/single-media';
 import TraditionalCarousel from '../modules/traditional-carousel';
-import CaseStudyIntro from '../modules/case-study-intro';
+import WorkDetailIntro from '../modules/work-detail-intro';
 import StatLongFactRow from '../modules/stat-long-fact-row';
-import RichMediaHeaderCase from '../modules/rich-media-header-case';
+import RichMediaHeader from '../modules/rich-media-header';
 import StatRow from '../modules/stat-row';
 import get from 'lodash.get';
 import CTATiles from '../modules/cta-tiles';
@@ -53,7 +53,7 @@ class CaseStudy extends Component {
         <SEO {...work.yoast_meta} {...work.cp_meta.yoast_social} />
 
         <section className={`work-detail ${work.slug}`}>
-          <RichMediaHeaderCase {...work.acf.rich_media_header.rich_media_header} />
+          <RichMediaHeader {...work.acf.rich_media_header.rich_media_header} />
           {work.acf.case_study_content_case_studies &&
             work.acf.case_study_content_case_studies.map((module_content, i) => {
               switch (module_content.__typename) {
@@ -75,7 +75,7 @@ class CaseStudy extends Component {
                 }
                 case 'WordPressAcf_case_study_intro': {
                   return (
-                    <CaseStudyIntro
+                    <WorkDetailIntro
                       {...module_content.work_detail_intro}
                       key={module_content.id}
                     />

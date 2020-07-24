@@ -28,7 +28,13 @@ class Header extends Component {
 export default Header;
 
 export const headerFragment = graphql`
-  fragment HeaderFragment on header_8 {
+  fragment HeaderFragment on header_10 {
+    page_name
+    image {
+      ...WpMediaFragmentFluid1440
+    }
+  }
+  fragment HeaderFragmentCase on header_8 {
     page_name
     image {
       ...WpMediaFragmentFluid1440

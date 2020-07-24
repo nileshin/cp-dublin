@@ -51,4 +51,15 @@ export const RichMediaHeaderFragment = graphql`
       }
     }
   }
+  fragment RichMediaHeaderCaseFragment on richMediaHeader_23 {
+    rich_media_header {
+      lightdark_mode
+      client_name
+      project_title
+      client_name
+      image {
+        ...WpMediaFragmentFluid1440
+      }
+    }
+  }
 `;
