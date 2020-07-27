@@ -9,8 +9,11 @@ import ContentTileWithSideImage from '../modules/content-tile-w-side-image';
 
 class LandingPages extends Component {
   render() {
-    const { data: { wordpressWpLandingPages: page, wordpressWpLandingPages: { acf } } } = this.props;
-
+    const { data: { 
+            wordpressWpLandingPages: page, 
+            wordpressWpLandingPages: { acf },
+            allWordpressWpCaseStudies: allCaseStudies
+          } } = this.props;
 
     return (
       <>
@@ -38,7 +41,8 @@ class LandingPages extends Component {
                 case 'WordPressAcf_case_tiles': {
                   return (
                     <WorkTilesNoFilter 
-                      {...field.case_tiles} 
+                      {...field.case_tiles}
+                      allCaseStudies={allCaseStudies}
                       key={field.id} 
                     />
                   );
@@ -107,6 +111,21 @@ export const query = graphql`
             id
             logo_grid {
               ...LogoGridFragmentCase
+            }
+          }
+        }
+      }
+    }
+    allWordpressWpCaseStudies {
+      edges {
+        node {
+          wordpress_id
+          acf {
+            client_name
+            rich_media_header {
+              rich_media_header {
+                project_title
+              }
             }
           }
         }
