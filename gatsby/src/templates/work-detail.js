@@ -31,18 +31,17 @@ class WorkDetail extends Component {
       data: { wordpressWpWork: work, allWordpressWpWork: allWork },
     } = this.props;
 
-    const allUncategorizedWork = allWork.edges.filter(work => work.node.work_category.some(cat => cat === 38))
-    const workIndex = allUncategorizedWork.findIndex(
+    const workIndex = allWork.edges.findIndex(
       ({ node: w }) => w.id === work.id
     );
     const prevWork =
       workIndex > 0
-        ? allUncategorizedWork[workIndex - 1].node
-        : allUncategorizedWork[allUncategorizedWork.length - 1].node;
+        ? allWork.edges[workIndex - 1].node
+        : allWork.edges[allWork.edges.length - 1].node;
     const nextWork =
-      workIndex < allUncategorizedWork.length - 1
-        ? allUncategorizedWork[workIndex + 1].node
-        : allUncategorizedWork[0].node;
+      workIndex < allWork.edges.length - 1
+        ? allWork.edges[workIndex + 1].node
+        : allWork.edges[0].node;
 
     const cta_tiles_props = {
       left_cta: getCtaProps(prevWork, 'Previous'),
@@ -190,7 +189,6 @@ export const query = graphql`
           id
           title
           slug
-          work_category
           acf {
             prevnext_image {
               alt_text

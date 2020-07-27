@@ -5,7 +5,7 @@ import ReactPlayer from 'react-player';
 
 import { ReactComponent as Hamburger } from '../_global/images/hamburger-close.svg';
 import $ from 'jquery';
-import './main.scss';
+import '../blob-video/main.scss';
 
 class BlobVideoWithTextCTAs extends Component {
   constructor(props) {
@@ -181,7 +181,7 @@ class BlobVideoWithTextCTAs extends Component {
 export default BlobVideoWithTextCTAs;
 
 export const blobVideoWithTextCTAsFragment = graphql`
-  fragment BlobVideoWithTextCTAsFragment on blobVideoWTextCtas_8 {
+  fragment BlobVideoWithTextCTAsFragment on blobVideoWTextCtas_2 {
     video_embed_code
     eyebrow
     headline

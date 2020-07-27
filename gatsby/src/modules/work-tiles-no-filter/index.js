@@ -1,29 +1,20 @@
 import React, { Component } from 'react';
 import { graphql, Link } from 'gatsby';
 import { passiveIfSupported } from '../../utils';
-import './main.scss';
+import '../work-tiles/main.scss';
 import get from 'lodash.get';
 
-
-// finding a node's ancestor of a certain class
-// https://stackoverflow.com/questions/22119673/find-the-closest-ancestor-element-that-has-a-specific-class
 function findAncestor (el, cls) {
   while ((el = el.parentElement) && !el.classList.contains(cls));
   return el;
 }
 
-// const WORK_FILTERS = {
-//   ALL: 'featured',
-//   BOSTON: 'boston',
-//   DUBLIN: 'dublin',
-// };
-
 const renderTiles = currentList => {
   return currentList.map((tile, index) => {
     let { project_title, client_name } = tile.override_fields || {};
-    if (!project_title) project_title = get(tile, 'acf.rich_media_header.rich_media_header.project_title') || '';
-    if (!client_name) client_name = get(tile, 'acf.client_name') || '';
-    const { post_type, post_name:slug } = tile.work_piece || {}
+    if (!project_title) project_title = get(tile, 'case_piece.acf.rich_media_header.rich_media_header.project_title') || '';
+    if (!client_name) client_name = get(tile, 'case_piece.acf.client_name') || '';
+    const { post_type, post_name:slug } = tile.case_piece || {}
     const direction = index % 2 === 0 ? 'left' : 'right';
     const angleType = index % 4 === 0 || index % 4 === 1 ? 'connected' : 'reverse';
     return (
@@ -46,9 +37,6 @@ const renderTiles = currentList => {
 }
 
 class WorkTiles extends Component {
-  // state = {
-  //   currentFilter: WORK_FILTERS.ALL,
-  // };
   componentDidMount() {
     if (typeof window === 'undefined') return;
     window.addEventListener('scroll', this.handleScroll, passiveIfSupported)
@@ -68,22 +56,20 @@ class WorkTiles extends Component {
       if (parent) parent.classList.add('visible');
     }
   }
-  // updateFilter = e => {
-  //   e.preventDefault();
-  //   const newFilter = e.currentTarget.dataset.filterName;
-  //   if (Object.values(WORK_FILTERS).indexOf(newFilter.toLowerCase()) < 0) {
-  //     console.warn(`Tried to switch to ${newFilter}, which isn't valid.`);
-  //     return;
-  //   }
-  //   this.setState(state => ({
-  //     ...state,
-  //     currentFilter: newFilter.toLowerCase()
-  //   }))
-  // }
+
   render() {
-    // const currentFilter = this.state.currentFilter.toLowerCase() === 'all' ? 'featured' : this.state.currentFilter.toLowerCase();
-    // const currentList = this.props.filtered_tiles.find(list => list.filter_name.toLowerCase() === currentFilter);
-    const currentList = this.props.tiles;
+    let currentList = this.props.tiles;
+    const allCaseStudies = this.props.allCaseStudies.edges;
+    const updatedListWithACF = (() => {
+      return currentList.map(tile => {
+        const wp_id = tile.case_piece.wordpress_id;
+        const caseStudy = allCaseStudies.find(caseStudy => caseStudy.node.wordpress_id === wp_id);
+        tile.case_piece.acf = caseStudy.node.acf;
+
+        return tile;
+      })
+    })();
+
     return (
       <>
         <section className="work filter-wrap">
@@ -95,29 +81,10 @@ class WorkTiles extends Component {
                   Work
                 </h2>
               </div>
-              {/* <div className="col-md-7">
-                <ul className="filter">
-                  {Object.values(WORK_FILTERS).map(value => (
-                    <li key={value}>
-                      <a
-                        href={`#${value}`}
-                        title={value}
-                        onClick={this.updateFilter}
-                        data-filter-name={value}
-                        className={
-                          this.state.currentFilter === value ? 'active' : ''
-                        }
-                      >
-                        {value}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div> */}
             </div>
           </div>
           <div className="filter-content-wrap">
-            {renderTiles(currentList)}
+            {renderTiles(updatedListWithACF)}
           </div>
         </section>
       </>
@@ -128,19 +95,12 @@ class WorkTiles extends Component {
 export default WorkTiles;
 
 export const workTilesNoFilterFragment = graphql`
-  fragment WorkTilesNoFilterFragment on workTiles_11 {
+  fragment WorkTilesNoFilterFragment on caseTiles_2 {
     tiles {
-      work_piece {
+      case_piece {
         post_name
         post_type
-        acf {
-          client_name
-          rich_media_header {
-            rich_media_header {
-              project_title
-            }
-          }
-        }
+        wordpress_id
       }
       cta_text
       override_fields {

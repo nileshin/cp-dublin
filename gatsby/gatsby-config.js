@@ -98,6 +98,8 @@ module.exports = {
           `**/*/categories`,
           `**/*/jobs`,
           `**/*/job-location`,
+          `**/*/landing-pages`,
+          `**/*/case-studies`,
           `**/cp/v1/menus`,
         ],
         baseUrl: wordpressURL,

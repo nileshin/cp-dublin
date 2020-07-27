@@ -21,8 +21,8 @@ const WORK_FILTERS = {
 const renderTiles = filteredList => {
   return filteredList.work_tiles.tiles.map((tile, index) => {
     let { project_title, client_name } = tile.override_fields || {};
-    if (!project_title) project_title = get(tile, 'acf.rich_media_header.rich_media_header.project_title') || '';
-    if (!client_name) client_name = get(tile, 'acf.client_name') || '';
+    if (!project_title) project_title = get(tile, 'work_piece.acf.rich_media_header.rich_media_header.project_title') || '';
+    if (!client_name) client_name = get(tile, 'work_piece.acf.client_name') || '';
     const { post_type, post_name:slug } = tile.work_piece || {}
     const direction = index % 2 === 0 ? 'left' : 'right';
     const angleType = index % 4 === 0 || index % 4 === 1 ? 'connected' : 'reverse';
@@ -128,7 +128,7 @@ class WorkTiles extends Component {
 export default WorkTiles;
 
 export const workTilesFragment = graphql`
-  fragment WorkTilesFragment on workTiles_10 {
+  fragment WorkTilesFragment on workTiles_7 {
     filtered_tiles {
       filter_name
       work_tiles {

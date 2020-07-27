@@ -33,7 +33,17 @@ export default LogoGrid;
 
 // NB: need to get publicURL because svg's aren't processed by ImageSharp.
 export const logoGridFragment = graphql`
-  fragment LogoGridFragment on logoGrid_8 {
+  fragment LogoGridFragment on logoGrid_10 {
+    logos {
+      alt
+      url {
+        localFile {
+          publicURL
+        }
+      }
+    }
+  }
+  fragment LogoGridFragmentCase on logoGrid_8 {
     logos {
       alt
       url {

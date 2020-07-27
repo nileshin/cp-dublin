@@ -28,7 +28,7 @@ import './work-detail.scss';
 class CaseStudy extends Component {
   render() {
     const {
-      data: { wordpressWpWork: work, allWordpressWpWork: allWork },
+      data: { wordpressWpCaseStudies: work },
     } = this.props;
 
     // const workIndex = allWork.edges.findIndex(
@@ -54,8 +54,8 @@ class CaseStudy extends Component {
 
         <section className={`work-detail ${work.slug}`}>
           <RichMediaHeader {...work.acf.rich_media_header.rich_media_header} />
-          {work.acf.work_detail_content_work &&
-            work.acf.work_detail_content_work.map((module_content, i) => {
+          {work.acf.case_study_content_case_studies &&
+            work.acf.case_study_content_case_studies.map((module_content, i) => {
               switch (module_content.__typename) {
                 case 'WordPressAcf_single_media': {
                   return (
@@ -73,7 +73,7 @@ class CaseStudy extends Component {
                     />
                   );
                 }
-                case 'WordPressAcf_work_detail_intro': {
+                case 'WordPressAcf_case_study_intro': {
                   return (
                     <WorkDetailIntro
                       {...module_content.work_detail_intro}
@@ -134,17 +134,17 @@ export default CaseStudy;
 
 export const query = graphql`
   query($id: String!) {
-    wordpressWpWork(id: { eq: $id }) {
+    wordpressWpCaseStudies(id: { eq: $id }) {
       id
       title
       slug
-      ...YoastMetadataFragmentWork
+      ...YoastMetadataFragmentCaseStudies
       acf {
         client_name
         rich_media_header {
-          ...RichMediaHeaderFragment
+          ...RichMediaHeaderCaseFragment
         }
-        work_detail_content_work {
+        case_study_content_case_studies {
           __typename
           ... on WordPressAcf_single_media {
             id
@@ -158,10 +158,10 @@ export const query = graphql`
               ...TraditionalCarouselFragment
             }
           }
-          ... on WordPressAcf_work_detail_intro {
+          ... on WordPressAcf_case_study_intro {
             id
             work_detail_intro {
-              ...WorkDetailIntroFragment
+              ...CaseStudyIntroFragment
             }
           }
           ... on WordPressAcf_stat_long_fact_row {
@@ -180,15 +180,6 @@ export const query = graphql`
             id
             rte_body
           }
-        }
-      }
-    }
-    allWordpressWpWork {
-      edges {
-        node {
-          id
-          title
-          slug
         }
       }
     }
