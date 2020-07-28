@@ -14,14 +14,30 @@ class HomeHeader extends Component {
     this.state = {
       headerActivated: props.suppress_animations,
       offset: 0,
+      randomImage: null
     };
 
     this.homeImg = React.createRef();
     this.headline = React.createRef();
   }
+  setRandomImage = (props) => {
+    //for some reason some images are queried without localfiles
+    //open issue: https://github.com/gatsbyjs/gatsby/issues/12559
+    //this code ensures we only display images with localfiles...hopefully it exists
+    const imageGalleryWithLocalFiles = props.image_gallery.filter(image => image.localFile);
+    if (!imageGalleryWithLocalFiles.length) return;
+    const randomImageIndex = Math.floor(Math.random() * Math.floor(imageGalleryWithLocalFiles.length));
+    const randomizedImage = imageGalleryWithLocalFiles[randomImageIndex];
+
+    this.setState(state => ({
+      ...state,
+      randomImage: randomizedImage
+    }))
+  }
   componentDidMount() {
     if (typeof window === 'undefined') return;
 
+    this.setRandomImage(this.props)
     this.setState(state => ({
       ...state,
       offset: (() => {
@@ -53,7 +69,7 @@ class HomeHeader extends Component {
       center_content,
       suppress_animations,
     } = this.props;
-    const { headerActivated, offset } = this.state;
+    const { headerActivated, offset, randomImage } = this.state;
     const headlineStyle =
       headerActivated || suppress_animations
         ? {}
@@ -61,6 +77,7 @@ class HomeHeader extends Component {
             transform: `translate3d(0, ${offset}px, 0)`,
             transition: 'transform 0s linear',
           };
+
     return (
       
       <section id="maincontent" className="home-banner page-sec">
@@ -69,13 +86,15 @@ class HomeHeader extends Component {
           <div className="row">
             <div className="col-md-6 order-md-2 image">
               <div className="home-banner-img" ref={this.homeImg}>
-                <figure>
-                  <Img
-                    fluid={get(image, 'localFile.childImageSharp.fluid')}
-                    alt="home-banner"
-                    style={{ maxWidth: image.media_details.width}}
-                  />
-                </figure>
+                {randomImage && 
+                  <figure>
+                    <Img
+                      fluid={get(randomImage, 'localFile.childImageSharp.fluid')}
+                      alt="home-banner"
+                      style={{ maxWidth: randomImage.media_details.width}}
+                    />
+                  </figure>
+                }
               </div>
             </div>
             <div
@@ -143,7 +162,7 @@ export const homeHeaderFragment = graphql`
       url
       target
     }
-    image {
+    image_gallery {
       alt_text
       media_details {
         width
@@ -166,20 +185,6 @@ export const homeHeaderFragment = graphql`
       title
       url
       target
-    }
-    image {
-      alt_text
-      media_details {
-        width
-        height
-      }
-      localFile {
-        childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid_tracedSVG
-          }
-        }
-      }
     }
   }
 `;

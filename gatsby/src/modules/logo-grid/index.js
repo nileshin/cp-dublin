@@ -16,7 +16,13 @@ class LogoGrid extends Component {
                 logos.map((logo, i) => (
                   <li className="client" key={i}>
                     <figure>
-                      <img src={get(logo, 'url.localFile.publicURL') || ''} alt={logo.alt} />
+                      <img 
+                        src={
+                          get(logo, 'url.localFile.publicURL') ||
+                          get(logo, 'localFile.publicURL') ||
+                          ''
+                        } 
+                        alt={logo.alt || logo.alt_text} />
                     </figure>
                   </li>
                 ))
@@ -33,13 +39,21 @@ export default LogoGrid;
 
 // NB: need to get publicURL because svg's aren't processed by ImageSharp.
 export const logoGridFragment = graphql`
-  fragment LogoGridFragment on logoGrid_8 {
+  fragment LogoGridFragment on logoGrid_10 {
     logos {
       alt
       url {
         localFile {
           publicURL
         }
+      }
+    }
+  }
+  fragment LogoGridFragmentCase on logoGrid_8 {
+    logos {
+      alt_text
+      localFile {
+        publicURL
       }
     }
   }

@@ -34,12 +34,14 @@ class ContentTileWithSideImage extends Component {
                 )}
               </div>
               <div className="col-md-6 intro-work__img">
-                <figure>
-                  <Img
-                    fluid={image.localFile.childImageSharp.fluid || ''}
-                    alt={image.alt_text}
-                  />
-                </figure>
+                {image && image.localFile && (
+                  <figure>
+                    <Img
+                      fluid={image.localFile.childImageSharp.fluid || ''}
+                      alt={image.alt_text}
+                    />
+                  </figure>
+                )}
               </div>
             </div>
           </div>
@@ -52,7 +54,26 @@ class ContentTileWithSideImage extends Component {
 export default ContentTileWithSideImage;
 
 export const contentTileWithSideImageFragment = graphql`
-  fragment ContentTileWithSideImageFragment on contentTileWSideImage_8 {
+  fragment ContentTileWithSideImageFragment on contentTileWSideImage_10 {
+    eyebrow
+    headline
+    supportive_text
+    cta {
+      title
+      url
+      target
+    }
+    image {
+      localFile {
+        childImageSharp {
+          fluid(quality: 100) {
+            ...GatsbyImageSharpFluid_tracedSVG
+          }
+        }
+      }
+    }
+  }
+  fragment ContentTileWithSideImageFragmentCase on contentTileWSideImage_8 {
     eyebrow
     headline
     supportive_text

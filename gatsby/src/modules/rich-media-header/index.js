@@ -40,7 +40,18 @@ class RichMediaHeader extends Component {
 export default RichMediaHeader;
 
 export const RichMediaHeaderFragment = graphql`
-  fragment RichMediaHeaderFragment on richMediaHeader_15 {
+  fragment RichMediaHeaderFragment on richMediaHeader_21 {
+    rich_media_header {
+      lightdark_mode
+      client_name
+      project_title
+      client_name
+      image {
+        ...WpMediaFragmentFluid1440
+      }
+    }
+  }
+  fragment RichMediaHeaderCaseFragment on richMediaHeader_23 {
     rich_media_header {
       lightdark_mode
       client_name

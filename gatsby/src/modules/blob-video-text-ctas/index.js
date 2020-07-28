@@ -5,8 +5,9 @@ import ReactPlayer from 'react-player';
 
 import { ReactComponent as Hamburger } from '../_global/images/hamburger-close.svg';
 import $ from 'jquery';
+import '../blob-video/main.scss';
 
-class QuoteBlobVideoModule extends Component {
+class BlobVideoWithTextCTAs extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -45,14 +46,7 @@ class QuoteBlobVideoModule extends Component {
   }
 
   render() {
-    const {
-      video_embed_code,
-      eyebrow,
-      quote,
-      author,
-      author_title,
-      supportive_copy,
-    } = this.props;
+    const { eyebrow, headline, supportive_text, video_embed_code, text_link_ctas } = this.props;
     const youtubeOpts = {
       playerVars: {
         autoplay: 1,
@@ -74,25 +68,32 @@ class QuoteBlobVideoModule extends Component {
     };
     this.extractVideoSRC(video_embed_code);
     return (
-      <section className="content-blob quote-blob">
-        {/* <div>
-        Quote Blob Video Module
-        <pre><code>{JSON.stringify(this.props, null, 1)}</code></pre>
-      </div> */}
+      <section className="content-blob">
+        <div style={{ display: 'none' }}>
+          BlobVideo
+          <pre>
+            <code>{JSON.stringify(this.props, null, 1)}</code>
+          </pre>
+        </div>
         <div className="container">
           <div className="col-md-6">
             <h4 className="eyebrow">{eyebrow}</h4>
-            <blockquote>
-              <p>{quote}</p>
-              <cite>
-                {author} <small>{author_title}</small>
-              </cite>
-            </blockquote>
-            <div
+            <h2
               dangerouslySetInnerHTML={{
-                __html: supportive_copy,
+                __html: headline,
               }}
             />
+            <div
+              dangerouslySetInnerHTML={{
+                __html: supportive_text,
+              }}
+            />
+            {text_link_ctas.length && text_link_ctas.map(ele => {
+              const cta = ele.text_link_cta;
+              return (
+                <a className="cta" key={cta.title} href={cta.url} target={cta.target}>{cta.title}</a>
+              )
+            })}
           </div>
           <div
             className={
@@ -102,6 +103,7 @@ class QuoteBlobVideoModule extends Component {
           >
             <ReactPlayer
               url={this.MediaObj}
+              // playing={this.state.playing}
               className="react-player"
               config={{
                 youtube: youtubeOpts,
@@ -111,7 +113,6 @@ class QuoteBlobVideoModule extends Component {
               onPlay={this._onPlay}
               onEnded={this._onEnded}
               onReady={this._onReady}
-              ref={this.player}
               loop={true}
             />
 
@@ -177,15 +178,20 @@ class QuoteBlobVideoModule extends Component {
   };
 }
 
-export default QuoteBlobVideoModule;
+export default BlobVideoWithTextCTAs;
 
-export const quoteBlobVideoModuleFragment = graphql`
-  fragment QuoteBlobVideoModuleFragment on quoteBlobVideoModule_8 {
+export const blobVideoWithTextCTAsFragment = graphql`
+  fragment BlobVideoWithTextCTAsFragment on blobVideoWTextCtas_2 {
     video_embed_code
     eyebrow
-    quote
-    author
-    author_title
-    supportive_copy
+    headline
+    supportive_text
+    text_link_ctas {
+      text_link_cta {
+        title
+        url
+        target
+      }
+    }
   }
 `;

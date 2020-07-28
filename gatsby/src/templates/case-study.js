@@ -11,42 +11,42 @@ import get from 'lodash.get';
 import CTATiles from '../modules/cta-tiles';
 import './work-detail.scss';
 
-const getCtaProps = (work, cta_title) => {
-  if (!work) return {};
+// const getCtaProps = (work, cta_title) => {
+//   if (!work) return {};
 
-  return {
-    headline: work.title,
-    cta: {
-      title: cta_title,
-      url: `/work/${work.slug}`,
-      target: '',
-    },
-    image: get(work, 'acf.prevnext_image'),
-  };
-};
+//   return {
+//     headline: work.title,
+//     cta: {
+//       title: cta_title,
+//       url: `/work/${work.slug}`,
+//       target: '',
+//     },
+//     image: get(work, 'acf.prevnext_image'),
+//   };
+// };
 
-class WorkDetail extends Component {
+class CaseStudy extends Component {
   render() {
     const {
-      data: { wordpressWpWork: work, allWordpressWpWork: allWork },
+      data: { wordpressWpCaseStudies: work },
     } = this.props;
 
-    const workIndex = allWork.edges.findIndex(
-      ({ node: w }) => w.id === work.id
-    );
-    const prevWork =
-      workIndex > 0
-        ? allWork.edges[workIndex - 1].node
-        : allWork.edges[allWork.edges.length - 1].node;
-    const nextWork =
-      workIndex < allWork.edges.length - 1
-        ? allWork.edges[workIndex + 1].node
-        : allWork.edges[0].node;
+    // const workIndex = allWork.edges.findIndex(
+    //   ({ node: w }) => w.id === work.id
+    // );
+    // const prevWork =
+    //   workIndex > 0
+    //     ? allWork.edges[workIndex - 1].node
+    //     : allWork.edges[allWork.edges.length - 1].node;
+    // const nextWork =
+    //   workIndex < allWork.edges.length - 1
+    //     ? allWork.edges[workIndex + 1].node
+    //     : allWork.edges[0].node;
 
-    const cta_tiles_props = {
-      left_cta: getCtaProps(prevWork, 'Previous'),
-      right_cta: getCtaProps(nextWork, 'Next'),
-    };
+    // const cta_tiles_props = {
+    //   left_cta: getCtaProps(prevWork, 'Previous'),
+    //   right_cta: getCtaProps(nextWork, 'Next'),
+    // };
 
     return (
       <>
@@ -54,8 +54,8 @@ class WorkDetail extends Component {
 
         <section className={`work-detail ${work.slug}`}>
           <RichMediaHeader {...work.acf.rich_media_header.rich_media_header} />
-          {work.acf.work_detail_content_work &&
-            work.acf.work_detail_content_work.map((module_content, i) => {
+          {work.acf.case_study_content_case_studies &&
+            work.acf.case_study_content_case_studies.map((module_content, i) => {
               switch (module_content.__typename) {
                 case 'WordPressAcf_single_media': {
                   return (
@@ -73,7 +73,7 @@ class WorkDetail extends Component {
                     />
                   );
                 }
-                case 'WordPressAcf_work_detail_intro': {
+                case 'WordPressAcf_case_study_intro': {
                   return (
                     <WorkDetailIntro
                       {...module_content.work_detail_intro}
@@ -123,28 +123,28 @@ class WorkDetail extends Component {
                 }
               }
             })}
-          <CTATiles {...cta_tiles_props} htmlTitles />
+          {/* <CTATiles {...cta_tiles_props} htmlTitles /> */}
         </section>
       </>
     );
   }
 }
 
-export default WorkDetail;
+export default CaseStudy;
 
 export const query = graphql`
   query($id: String!) {
-    wordpressWpWork(id: { eq: $id }) {
+    wordpressWpCaseStudies(id: { eq: $id }) {
       id
       title
       slug
-      ...YoastMetadataFragmentWork
+      ...YoastMetadataFragmentCaseStudies
       acf {
         client_name
         rich_media_header {
-          ...RichMediaHeaderFragment
+          ...RichMediaHeaderCaseFragment
         }
-        work_detail_content_work {
+        case_study_content_case_studies {
           __typename
           ... on WordPressAcf_single_media {
             id
@@ -158,10 +158,10 @@ export const query = graphql`
               ...TraditionalCarouselFragment
             }
           }
-          ... on WordPressAcf_work_detail_intro {
+          ... on WordPressAcf_case_study_intro {
             id
             work_detail_intro {
-              ...WorkDetailIntroFragment
+              ...CaseStudyIntroFragment
             }
           }
           ... on WordPressAcf_stat_long_fact_row {
@@ -179,28 +179,6 @@ export const query = graphql`
           ... on WordPressAcf_rte {
             id
             rte_body
-          }
-        }
-      }
-    }
-    allWordpressWpWork {
-      edges {
-        node {
-          id
-          title
-          slug
-          acf {
-            prevnext_image {
-              alt_text
-              localFile {
-                publicURL
-                childImageSharp {
-                  fluid(maxWidth: 1440, quality: 100) {
-                    ...GatsbyImageSharpFluid_tracedSVG
-                  }
-                }
-              }
-            }
           }
         }
       }
