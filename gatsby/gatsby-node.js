@@ -67,7 +67,6 @@ exports.createPages = ({ graphql, actions }) => {
                   slug
                   status
                   type
-                  work_category
                 }
               }
             }
@@ -169,9 +168,20 @@ exports.createPages = ({ graphql, actions }) => {
           if (fs.existsSync(path.resolve(`./src/pages/${page.slug}.js`))) {
             return;
           }
+          if (page.slug === 'sample-dont-delete') {
+            return;
+          }
 
           createPage({
-            path: `/${page.type}/${page.slug}/`,
+            path: `/${page.slug}/`,
+            component: landingPageTemplate,
+            context: {
+              id: page.id,
+            },
+          });
+
+          createPage({
+            path: `/work/${page.slug}/`,
             component: landingPageTemplate,
             context: {
               id: page.id,
@@ -210,6 +220,9 @@ exports.createPages = ({ graphql, actions }) => {
         result.data.allWordpressWpCaseStudies.edges.forEach(({ node: page }) => {
           console.log("building case studies:", page.slug);
           if (fs.existsSync(path.resolve(`./src/pages/${page.slug}.js`))) {
+            return;
+          }
+          if (page.slug === 'sample-dont-delete') {
             return;
           }
 
