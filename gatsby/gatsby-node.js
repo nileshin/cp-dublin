@@ -67,7 +67,6 @@ exports.createPages = ({ graphql, actions }) => {
                   slug
                   status
                   type
-                  work_category
                 }
               }
             }
@@ -171,7 +170,15 @@ exports.createPages = ({ graphql, actions }) => {
           }
 
           createPage({
-            path: `/${page.type}/${page.slug}/`,
+            path: `/${page.slug}/`,
+            component: landingPageTemplate,
+            context: {
+              id: page.id,
+            },
+          });
+
+          createPage({
+            path: `/work/${page.slug}/`,
             component: landingPageTemplate,
             context: {
               id: page.id,

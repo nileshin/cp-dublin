@@ -162,20 +162,6 @@ export const homeHeaderFragment = graphql`
       url
       target
     }
-    image {
-      alt_text
-      media_details {
-        width
-        height
-      }
-      localFile {
-        childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid_tracedSVG
-          }
-        }
-      }
-    }
     image_gallery {
       alt_text
       media_details {
@@ -199,20 +185,6 @@ export const homeHeaderFragment = graphql`
       title
       url
       target
-    }
-    image {
-      alt_text
-      media_details {
-        width
-        height
-      }
-      localFile {
-        childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid_tracedSVG
-          }
-        }
-      }
     }
   }
 `;

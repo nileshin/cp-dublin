@@ -16,7 +16,13 @@ class LogoGrid extends Component {
                 logos.map((logo, i) => (
                   <li className="client" key={i}>
                     <figure>
-                      <img src={get(logo, 'url.localFile.publicURL') || ''} alt={logo.alt} />
+                      <img 
+                        src={
+                          get(logo, 'url.localFile.publicURL') ||
+                          get(logo, 'localFile.publicURL') ||
+                          ''
+                        } 
+                        alt={logo.alt || logo.alt_text} />
                     </figure>
                   </li>
                 ))
@@ -45,11 +51,9 @@ export const logoGridFragment = graphql`
   }
   fragment LogoGridFragmentCase on logoGrid_8 {
     logos {
-      alt
-      url {
-        localFile {
-          publicURL
-        }
+      alt_text
+      localFile {
+        publicURL
       }
     }
   }
