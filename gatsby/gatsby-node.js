@@ -20,6 +20,7 @@ exports.createPages = ({ graphql, actions }) => {
                 slug
                 status
                 template
+                wordpress_parent
               }
             }
           }
@@ -34,6 +35,7 @@ exports.createPages = ({ graphql, actions }) => {
         }
 
         const pageTemplate = path.resolve('./src/templates/page.js');
+        const landingPageTemplate = path.resolve('./src/templates/landing-pages.js');
         result.data.allWordpressPage.edges.forEach(({ node: page }) => {
           console.log("building page:", page.slug);
           if (fs.existsSync(path.resolve(`./src/pages/${page.slug}.js`))) {
@@ -127,6 +129,106 @@ exports.createPages = ({ graphql, actions }) => {
           createPage({
             path: `/news/${page.slug}`,
             component: newsDetailTemplate,
+            context: {
+              id: page.id,
+            },
+          });
+        });
+      })
+      .then(() => {
+        return graphql(`
+          {
+            allWordpressWpLandingPages {
+              edges {
+                node {
+                  id
+                  wordpress_id
+                  slug
+                  type
+                  status
+                }
+              }
+            }
+          }
+        `);
+      })
+      .then(result => {
+        if (result.errors) {
+          console.log("XXXXXX -- error on: PAGENAME");
+          console.error(result.errors);
+          reject(result.errors);
+        }
+
+        const landingPageTemplate = path.resolve(
+          './src/templates/landing-pages.js'
+        );
+
+        result.data.allWordpressWpLandingPages.edges.forEach(({ node: page }) => {
+          console.log("building landing pages:", page.slug);
+          if (fs.existsSync(path.resolve(`./src/pages/${page.slug}.js`))) {
+            return;
+          }
+          if (page.slug === 'sample-dont-delete') {
+            return;
+          }
+
+          createPage({
+            path: `/${page.slug}/`,
+            component: landingPageTemplate,
+            context: {
+              id: page.id,
+            },
+          });
+
+          createPage({
+            path: `/work/${page.slug}/`,
+            component: landingPageTemplate,
+            context: {
+              id: page.id,
+            },
+          });
+        });
+      })
+      .then(() => {
+        return graphql(`
+          {
+            allWordpressWpCaseStudies {
+              edges {
+                node {
+                  id
+                  wordpress_id
+                  slug
+                  type
+                  status
+                }
+              }
+            }
+          }
+        `);
+      })
+      .then(result => {
+        if (result.errors) {
+          console.log("XXXXXX -- error on: PAGENAME");
+          console.error(result.errors);
+          reject(result.errors);
+        }
+        
+        const caseStudyTemplate = path.resolve(
+          './src/templates/case-study.js'
+        );
+
+        result.data.allWordpressWpCaseStudies.edges.forEach(({ node: page }) => {
+          console.log("building case studies:", page.slug);
+          if (fs.existsSync(path.resolve(`./src/pages/${page.slug}.js`))) {
+            return;
+          }
+          if (page.slug === 'sample-dont-delete') {
+            return;
+          }
+
+          createPage({
+            path: `/${page.type}/${page.slug}/`,
+            component: caseStudyTemplate,
             context: {
               id: page.id,
             },

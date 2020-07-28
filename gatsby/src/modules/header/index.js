@@ -7,6 +7,7 @@ import get from 'lodash.get';
 class Header extends Component {
   render() {
     const { page_name, image } = this.props;
+    if (!page_name && !image) return false;
     return (
       <section id="maincontent" className="page-banner bg-img">
         {get(image, 'localFile.childImageSharp.fluid') && (
@@ -27,7 +28,13 @@ class Header extends Component {
 export default Header;
 
 export const headerFragment = graphql`
-  fragment HeaderFragment on header_8 {
+  fragment HeaderFragment on header_10 {
+    page_name
+    image {
+      ...WpMediaFragmentFluid1440
+    }
+  }
+  fragment HeaderFragmentCase on header_8 {
     page_name
     image {
       ...WpMediaFragmentFluid1440
