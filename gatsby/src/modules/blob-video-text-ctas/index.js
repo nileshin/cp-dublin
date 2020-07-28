@@ -91,7 +91,7 @@ class BlobVideoWithTextCTAs extends Component {
             {text_link_ctas.length && text_link_ctas.map(ele => {
               const cta = ele.text_link_cta;
               return (
-                <a className="text-cta" key={cta.title} href={cta.url} target={cta.target}>{cta.title}</a>
+                <a className="cta" key={cta.title} href={cta.url} target={cta.target}>{cta.title}</a>
               )
             })}
           </div>
