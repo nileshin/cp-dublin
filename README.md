@@ -88,7 +88,7 @@ The webhooks that trigger these are in the Netlify dashboard (under "Build & dep
 
 ### Skipping Builds
 
-You can have Netlify skip the build by including `[skip ci]` in your latest commit message. 
+You can have Netlify skip the build by including `[skip ci]` in your latest commit message.
 
 You can also do `git commit --allow-empty -m "[skip ci]"` to make an empty commit if you have already committed all your changes.
 
