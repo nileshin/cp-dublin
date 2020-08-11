@@ -13,7 +13,7 @@ const branch_name = (() => {
   return branch_name;
 })();
 
-const pantheon_environment_url = `${branch_name}-cp-com-3.pantheonsite.io`;
+const pantheon_environment_url = `${branch_name}-cp-dublin.pantheonsite.io`;
 const netlify_url = `cp-com-3.netlify.com`;
 
 module.exports = {
