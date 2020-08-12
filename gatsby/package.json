@@ -55,11 +55,11 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
+    "build": "gatsby build && netlify-lambda build functions",
+    "build:lando": "USE_LANDO=true gatsby build",
+    "build:functions": "netlify-lambda build functions",
     "develop": "gatsby develop",
     "start": "npm run develop",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
     "format": "prettier --write \"src/**/*.js\"",
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\"",
     "functions": "netlify-lambda serve functions"
