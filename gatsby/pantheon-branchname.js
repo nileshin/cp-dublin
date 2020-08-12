@@ -14,11 +14,11 @@ const branch_name = (() => {
 })();
 
 const pantheon_environment_url = `${branch_name}-cp-dublin.pantheonsite.io`;
-const netlify_url = `cp-com-3.netlify.com`;
+const netlify_url = `stupefied-meitner-c26bf5.netlify.com`;
 
 module.exports = {
   branch_name,
   pantheon_environment_url,
   netlify_url,
-  lando_environment_url: 'cpcom3.lndo.site'
+  lando_environment_url: 'cpdublincom3.lndo.site'
 }
