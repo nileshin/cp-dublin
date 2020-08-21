@@ -6,6 +6,7 @@ import './main.scss';
 class ContentTile extends Component {
   render() {
     const { eyebrow, headline, supportive_text, cta, image } = this.props;
+    console.log(image)
     return (
       <section className="latest bg-dark bg-img page-sec overflow-hidden">
         {image && image.localFile && (

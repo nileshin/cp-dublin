@@ -5,17 +5,29 @@ import './main.scss';
 
 class PressModule extends Component {
   render() {
-    const { eyebrow, title, cta, image } = this.props;
+    const { eyebrow, title, cta, image, defaultImage } = this.props;
     return (
       <section className="press bg-img page-sec">
-        {image && image.localFile && (
-          <Img
-            fluid={image.localFile.childImageSharp.fluid}
-            className="content-tile-bg"
-            alt={image.alt_text}
-            style={{ position: 'absolute' }}
-          />
-        )}
+        {image && image.localFile && 
+          (
+            <Img
+              fluid={image.localFile.childImageSharp.fluid}
+              className="content-tile-bg"
+              alt={image.alt_text}
+              style={{ position: 'absolute' }}
+            />
+          )
+        }
+        {!image && defaultImage && defaultImage.localFile &&
+          (
+            <Img
+              fluid={defaultImage.localFile.childImageSharp.fluid}
+              className="content-tile-bg default"
+              alt={defaultImage.alt_text}
+              style={{ position: 'absolute' }}
+            />
+          )
+        }
         <div className="container">
           <div className="row">
             <div className="col-md-10">

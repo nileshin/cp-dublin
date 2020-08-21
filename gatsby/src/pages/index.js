@@ -29,6 +29,7 @@ const Home = ({ data }) => {
               <PressModule
                 {...module_content.press_module}
                 key={module_content.id}
+                defaultImage={page.acf.default_latest_press_image}
               />
             );
           }
@@ -72,6 +73,9 @@ export const query = graphql`
           cta_tiles {
             ...CTATileFragment
           }
+        }
+        default_latest_press_image {
+          ...WpMediaFragmentFluid1440
         }
       }
     }

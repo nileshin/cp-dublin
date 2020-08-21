@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 import './main.scss';
 
-const MAILCHIMP_URL =
-  'https://connellypartners.us12.list-manage.com/subscribe/post?u=115a5c8d429a9d02213aad39d&amp;id=f8472f72cf';
+const MAILCHIMP_URL = 'https://connellypartners.us12.list-manage.com/subscribe/post?u=115a5c8d429a9d02213aad39d&amp;id=78c1b02ba7';
 
 class NewsletterCapture extends Component {
   render() {
