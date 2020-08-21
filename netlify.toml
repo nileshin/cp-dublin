@@ -3,7 +3,7 @@
 [build]
   base = "gatsby/"
   publish = "gatsby/public"
-  command = "gatsby develop"
+  command = "npm run build"
   environment = { PANTHEON_ENV = "dev" }
   functions = "gatsby/functions/dist"
 
